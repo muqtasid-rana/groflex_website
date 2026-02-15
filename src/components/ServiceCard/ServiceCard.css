@@ -1,0 +1,140 @@
+/* ===========================
+   SERVICE CARD — Glassmorphic Dark
+   =========================== */
+.service-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl) var(--space-lg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+/* Subtle top-edge highlight */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    pointer-events: none;
+}
+
+/* Bottom gradient accent bar */
+.service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #6366f1, #a78bfa);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-smooth);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(99, 102, 241, 0.25);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(37, 99, 235, 0.08);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Icon area */
+.service-card__illustration {
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+.service-card__icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(99, 102, 241, 0.12) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    position: relative;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.service-card__icon-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.06);
+    border-radius: 50%;
+    top: -8px;
+    right: -12px;
+    opacity: 0.5;
+}
+
+.service-card:hover .service-card__icon-wrapper {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    transform: scale(1.05);
+    border-color: transparent;
+    box-shadow: 0 0 24px rgba(37, 99, 235, 0.3);
+}
+
+.service-card__icon {
+    font-size: 1.5rem;
+    color: #3b82f6;
+    transition: color var(--transition-base);
+}
+
+.service-card:hover .service-card__icon {
+    color: #ffffff;
+}
+
+/* Text */
+.service-card__title {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+.service-card__desc {
+    font-size: var(--fs-body-sm);
+    color: rgba(255, 255, 255, 0.5);
+    line-height: var(--lh-relaxed);
+    flex: 1;
+}
+
+/* Arrow */
+.service-card__arrow {
+    margin-top: var(--space-lg);
+    color: #3b82f6;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all var(--transition-base);
+}
+
+.service-card:hover .service-card__arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Group styling */
+.services__group-icon {
+    margin-right: var(--space-sm);
+    color: #3b82f6;
+}
