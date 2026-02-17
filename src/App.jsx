@@ -21,8 +21,8 @@ export default function App() {
       <Portfolio />
       <Testimonial />
       <Quote
-        text="Design is not just what it looks like and feels like. Design is how it works."
-        author="Steve Jobs"
+        author="Founder Groflex"
+        text="We consider a project successful when it delivers real results and a strong return on investment for the client."
       />
       <CTA />
       <Contact />

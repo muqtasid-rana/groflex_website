@@ -1,6 +1,8 @@
 import { whyChooseUs } from '../../data/siteData';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Button from '../../components/Button/Button';
+import team from '../../assets/team.png';
+import client from '../../assets/client.png';
 import './WhyChooseUs.css';
 
 export default function WhyChooseUs() {
@@ -17,15 +19,15 @@ export default function WhyChooseUs() {
             <div className="container">
                 <SectionHeading
                     tag="Why Choose Us"
-                    title="Why Leading Brands Trust Groflex"
-                    subtitle="We don't just build products — we build partnerships that drive lasting impact."
+                    title="Why People Trust Groflex"
+                    subtitle="We don't just build products, we build partnerships that drive lasting impact."
                     align="center"
                 />
                 {/* ---- Block 1: Image left + Text & Feature cards right ---- */}
                 <div className="why-choose__block why-choose__block--top">
                     <div className="why-choose__image-col">
-                        <div className="why-choose__image why-choose__image--collab">
-                            <div className="why-choose__image-overlay" />
+                        <div className="why-choose__image">
+                            <img src={team} alt="team" />
                         </div>
                     </div>
                     <div className="why-choose__content-col">
@@ -67,7 +69,7 @@ export default function WhyChooseUs() {
                             seamless journey.
                         </p>
 
-                        <Button variant="primary" size="md" href="#contact" className="why-choose__cta">
+                        <Button variant="primary" size="md" href="https://calendly.com/mmuqtasidrana/30min" className="why-choose__cta" target="_blank" rel="noopener noreferrer">
                             Let&apos;s talk
                         </Button>
 
@@ -81,8 +83,8 @@ export default function WhyChooseUs() {
                         </div>
                     </div>
                     <div className="why-choose__image-col">
-                        <div className="why-choose__image why-choose__image--meeting">
-                            <div className="why-choose__image-overlay" />
+                        <div className="why-choose__image">
+                            <img src={client} alt="client" />
                         </div>
                     </div>
                 </div>

@@ -2,27 +2,29 @@ import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import './Testimonial.css';
 
 const testimonials = [
+
     {
         id: 1,
-        quote: 'Groflex completely transformed our brand. Their attention to detail and design sensibility is unmatched. We saw a 40% increase in engagement within the first month.',
-        name: 'Sarah Mitchell',
-        role: 'CEO, Finova Technologies',
-        initials: 'SM',
-    },
-    {
-        id: 2,
-        quote: 'Working with Groflex felt like having an in-house team. They understood our vision from day one and delivered a product that exceeded every expectation.',
-        name: 'James Rodriguez',
-        role: 'Founder, HealthSync',
-        initials: 'JR',
+        quote: 'The best thing about working with Groflex has been that their work was always transparent, we were continuously updated about the progress of the project.',
+        name: 'Inayat Khan',
+        role: 'Founder, Inayat Motors',
+        initials: 'IK',
     },
     {
         id: 3,
-        quote: 'The team at Groflex doesn\'t just build software — they build solutions. Their strategic thinking and technical expertise made all the difference for our platform.',
-        name: 'Priya Sharma',
-        role: 'CTO, EduLearn',
-        initials: 'PS',
+        quote: 'They delivered exactly the aesthetic I had in mind for my bikes. I couldn’t be happier. They delivered the project way before the deadline. Love it. ',
+        name: 'James Rodriguez',
+        role: 'Founder, RPM Dynamics',
+        initials: 'JR',
     },
+    {
+        id: 2,
+        quote: 'Groflex team made the best design for our website. They are very professional and delivered the project on time.',
+        name: 'Neo Smith',
+        role: 'CEO, Pocket Watcher',
+        initials: 'NS',
+    },
+
 ];
 
 export default function Testimonial() {

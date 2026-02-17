@@ -29,60 +29,16 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
     position: relative;
-    background-size: cover;
-    background-position: center;
 }
 
-/* Decorative CSS gradient placeholders for team photos */
-.why-choose__image--collab {
-    background:
-        linear-gradient(135deg, #e8eef8 0%, #d0ddf0 40%, #c7d2e8 100%);
-    background-image:
-        radial-gradient(circle 60px at 30% 45%, rgba(37, 99, 235, 0.12) 0%, transparent 70%),
-        radial-gradient(circle 40px at 65% 35%, rgba(99, 102, 241, 0.1) 0%, transparent 70%),
-        radial-gradient(circle 50px at 50% 70%, rgba(37, 99, 235, 0.08) 0%, transparent 70%),
-        linear-gradient(135deg, #e8eef8 0%, #d0ddf0 40%, #c7d2e8 100%);
+.why-choose__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.why-choose__image--collab::before {
-    content: '\f0c0';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    color: rgba(37, 99, 235, 0.15);
-}
-
-.why-choose__image--meeting {
-    background:
-        linear-gradient(135deg, #e0e8f5 0%, #dde5f2 40%, #d0ddf0 100%);
-    background-image:
-        radial-gradient(circle 70px at 60% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 70%),
-        radial-gradient(circle 45px at 30% 60%, rgba(99, 102, 241, 0.08) 0%, transparent 70%),
-        linear-gradient(135deg, #e0e8f5 0%, #dde5f2 40%, #d0ddf0 100%);
-}
-
-.why-choose__image--meeting::before {
-    content: '\f2b5';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    color: rgba(37, 99, 235, 0.15);
-}
-
-.why-choose__image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 60%, rgba(15, 23, 42, 0.04) 100%);
-    border-radius: inherit;
-}
+/* Removed decorative gradients and ::before icons as requested */
 
 /* ---- Content column ---- */
 .why-choose__content-col {

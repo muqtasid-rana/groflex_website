@@ -2,6 +2,13 @@
 // Site Data — Groflex Agency
 // ============================================================
 
+import incorp from '../assets/incorp.png';
+import hybrid from '../assets/hybrid.jpeg';
+import inayat from '../assets/inayat.png';
+import pocketwatcher from '../assets/pocketwatcher finance.jpeg';
+import rpmm from '../assets/rpmm.png';
+import testolz from '../assets/testolz.jpeg';
+
 export const navLinks = [
   { label: 'Home', href: '#' },
   { label: 'About', href: '#about' },
@@ -71,7 +78,7 @@ export const whyChooseUs = [
     id: 1,
     icon: 'fa-solid fa-users-gear',
     title: 'Team of Experts',
-    description: 'Our 35+ member team includes senior designers, engineers, and strategists with 8+ years of industry experience.',
+    description: 'Our expert team members includes senior designers, engineers, and strategists with years of industry experience.',
   },
   {
     id: 2,
@@ -108,51 +115,81 @@ export const whyChooseUs = [
 export const projects = [
   {
     id: 1,
-    title: 'Finova Banking Platform',
-    category: 'Fintech',
-    tags: ['React', 'Node.js', 'Figma'],
+    title: 'Incorpo - Recruitement SaaS Product',
+    category: 'HR Tech',
+    description: 'A comprehensive SaaS platform streamlining the recruitment process for modern HR teams.',
+    caseStudy: {
+      problem: 'Manual hiring processes were slow and error-prone.',
+      solution: 'Automated candidate screening and interview scheduling.',
+      impact: 'Reduced time-to-hire by 40%, saving $50k/year.',
+    },
     color: '#1e3a5f',
-    image: null,
+    image: incorp,
   },
   {
     id: 2,
-    title: 'HealthSync Dashboard',
-    category: 'Healthcare',
-    tags: ['Vue.js', 'Python', 'AWS'],
+    title: 'Hybrid MediaWorks Website',
+    category: 'Digital Media',
+    description: 'A dynamic corporate website showcasing media services with high-impact visuals.',
+    caseStudy: {
+      problem: 'Outdated website failed to capture brand energy.',
+      solution: 'Created an immersive, video-first digital experience.',
+      impact: 'Increased client inquiries by 65% in 3 months.',
+    },
     color: '#1a4731',
-    image: null,
+    image: hybrid,
   },
   {
     id: 3,
-    title: 'ShopWave E-Commerce',
-    category: 'E-Commerce',
-    tags: ['Next.js', 'Stripe', 'Tailwind'],
+    title: 'Inayat Motors - Bike Shop Management System',
+    category: 'Inventory System',
+    description: 'A custom management system for tracking inventory, sales, and customer data.',
+    caseStudy: {
+      problem: 'Inventory tracking was disorganized and paper-based.',
+      solution: 'Built a centralized digital dashboard for real-time tracking.',
+      impact: 'Prevented stockouts and increased sales volume by 25%.',
+    },
     color: '#44337a',
-    image: null,
+    image: inayat,
   },
   {
     id: 4,
-    title: 'EduLearn Platform',
-    category: 'EdTech',
-    tags: ['React', 'Firebase', 'Material UI'],
+    title: 'Pocket Watcher - Fintech',
+    category: 'Fintech',
+    description: 'A personal finance tracker helping users manage budgets and investments on the go.',
+    caseStudy: {
+      problem: 'Users struggled to track daily micro-expenses.',
+      solution: 'Developed a mobile-first expense logger with smart categories.',
+      impact: 'Grew active user base to 10k+ within first month.',
+    },
     color: '#7b341e',
-    image: null,
+    image: pocketwatcher,
   },
   {
     id: 5,
-    title: 'TravelBuddy App',
-    category: 'Travel',
-    tags: ['Flutter', 'Node.js', 'MongoDB'],
+    title: 'RPM Dynamics - Bike shop website',
+    category: 'E-Commerce',
+    description: 'An online store and brand showcase for high-performance bike parts and accessories.',
+    caseStudy: {
+      problem: 'Low conversion rate on mobile devices.',
+      solution: 'Optimized mobile checkout and product visualization.',
+      impact: 'Boosted mobile conversion rate by 150%.',
+    },
     color: '#234e52',
-    image: null,
+    image: rpmm,
   },
   {
     id: 6,
-    title: 'SaaSFlow Management',
-    category: 'SaaS',
-    tags: ['Angular', 'Django', 'PostgreSQL'],
+    title: 'Testolz - Software Company Website',
+    category: 'Corporate',
+    description: 'A professional web presence for a software company highlighting services and portfolio.',
+    caseStudy: {
+      problem: 'Difficulty in showcasing complex service offerings.',
+      solution: 'Designed interactive service maps and case study layouts.',
+      impact: 'Secured 3 major enterprise contracts post-launch.',
+    },
     color: '#322659',
-    image: null,
+    image: testolz,
   },
 ];
 
@@ -195,8 +232,8 @@ export const processSteps = [
 ];
 
 export const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com', icon: 'fa-brands fa-instagram' },
+  { label: 'Instagram', href: 'https://instagram.com/groflex_co', icon: 'fa-brands fa-instagram' },
   { label: 'LinkedIn', href: 'https://linkedin.com', icon: 'fa-brands fa-linkedin-in' },
   { label: 'Facebook', href: 'https://facebook.com', icon: 'fa-brands fa-facebook-f' },
-  { label: 'WhatsApp', href: 'https://wa.me/', icon: 'fa-brands fa-whatsapp' },
+  { label: 'WhatsApp', href: 'https://wa.me/+923359528776', icon: 'fa-brands fa-whatsapp' },
 ];

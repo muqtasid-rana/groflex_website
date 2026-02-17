@@ -38,7 +38,7 @@ export default function Navbar() {
                 </nav>
 
                 <div className="navbar__actions">
-                    <Button variant="primary" size="sm" href="#contact">
+                    <Button variant="primary" size="sm" href="https://calendly.com/mmuqtasidrana/30min" target="_blank" rel="noopener noreferrer">
                         Let's Talk
                     </Button>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
                                 {link.label}
                             </a>
                         ))}
-                        <Button variant="primary" size="md" href="#contact" onClick={() => setMobileMenuOpen(false)}>
+                        <Button variant="primary" size="md" href="https://calendly.com/mmuqtasidrana/30min" onClick={() => setMobileMenuOpen(false)} target="_blank" rel="noopener noreferrer">
                             Let's Talk
                         </Button>
                     </nav>

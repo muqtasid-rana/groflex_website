@@ -20,6 +20,13 @@
     overflow: hidden;
 }
 
+.project-card__img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .project-card__overlay {
     position: absolute;
     inset: 0;
@@ -74,18 +81,51 @@
     line-height: 1.3;
 }
 
-.project-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+.project-card__desc {
+    font-size: var(--fs-body-sm);
+    color: var(--color-text-muted);
+    line-height: var(--lh-relaxed);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.project-card__tag {
-    font-size: 0.75rem;
-    font-weight: var(--fw-medium);
+.project-card__case-study {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.project-card__cs-item {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.project-card__cs-label {
+    font-weight: var(--fw-bold);
     color: var(--color-primary);
-    background: var(--color-primary-ghost);
-    padding: 0.25rem 0.7rem;
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(37, 99, 235, 0.1);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+.project-card__cs-text {
+    color: var(--color-text);
+}
+
+.project-card__cs-label--impact {
+    color: #10b981;
+    /* Green for positive impact */
+}
+
+.project-card__cs-text--impact {
+    font-weight: var(--fw-medium);
 }

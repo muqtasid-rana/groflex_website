@@ -8,19 +8,20 @@ export default function Button({
     onClick,
     type = 'button',
     className = '',
+    ...props
 }) {
     const classes = `btn btn--${variant} btn--${size} ${className}`.trim();
 
     if (href) {
         return (
-            <a href={href} className={classes} onClick={onClick}>
+            <a href={href} className={classes} onClick={onClick} {...props}>
                 {children}
             </a>
         );
     }
 
     return (
-        <button type={type} className={classes} onClick={onClick}>
+        <button type={type} className={classes} onClick={onClick} {...props}>
             {children}
         </button>
     );

@@ -27,7 +27,7 @@ export default function Hero() {
                     </p>
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
-                        <Button variant="primary" size="lg" href="#contact" className="hero__cta-btn">
+                        <Button variant="primary" size="lg" href="https://calendly.com/mmuqtasidrana/30min" className="hero__cta-btn" target="_blank" rel="noopener noreferrer">
                             <i className="fa-solid fa-calendar-check"></i>
                             Book a Free Consultation Call
                         </Button>

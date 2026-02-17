@@ -13,14 +13,6 @@ export default function About() {
                     align="center"
                 />
 
-                <div className="about__description">
-                    <p className="about__text">
-                        Founded with the belief that great design meets robust engineering,
-                        Groflex has grown into a trusted partner for startups and enterprises
-                        across the globe. We combine creativity with technical excellence to
-                        deliver digital products that make a difference.
-                    </p>
-                </div>
 
                 <div className="about__video">
                     <div className="about__video-wrapper">
