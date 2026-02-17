@@ -73,14 +73,7 @@ export default function WhyChooseUs() {
                             Let&apos;s talk
                         </Button>
 
-                        <div className="why-choose__stats">
-                            {stats.map((stat, i) => (
-                                <div key={i} className="why-choose__stat">
-                                    <span className="why-choose__stat-number">{stat.number}</span>
-                                    <span className="why-choose__stat-label">{stat.label}</span>
-                                </div>
-                            ))}
-                        </div>
+
                     </div>
                     <div className="why-choose__image-col">
                         <div className="why-choose__image">

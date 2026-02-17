@@ -1,26 +1,45 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Button from '../../components/Button/Button';
 import './Contact.css';
 
+const EMAILJS_SERVICE_ID = 'service_hnb5hs6';
+const EMAILJS_TEMPLATE_ID = 'template_9q8nfdx';
+const EMAILJS_PUBLIC_KEY = 'uvpyAU7zlrphbVVGE';
+
 export default function Contact() {
+    const formRef = useRef();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
     });
-    const [submitted, setSubmitted] = useState(false);
+    const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
     const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 3000);
-        setFormData({ name: '', email: '', message: '' });
+        setStatus('sending');
+
+        try {
+            await emailjs.sendForm(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                formRef.current,
+                EMAILJS_PUBLIC_KEY
+            );
+            setStatus('sent');
+            setFormData({ name: '', email: '', message: '' });
+            setTimeout(() => setStatus('idle'), 4000);
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 4000);
+        }
     };
 
     return (
@@ -46,29 +65,25 @@ export default function Contact() {
                                     <div className="contact__detail-icon"><i className="fa-solid fa-envelope"></i></div>
                                     <div>
                                         <span className="contact__detail-label">Email Us</span>
-                                        <a href="mailto:hello@groflex.io" className="contact__detail-value">hello@groflex.io</a>
+                                        <a href="mailto:groflex.co@gmail.com" className="contact__detail-value">groflex.co@gmail.com</a>
                                     </div>
                                 </div>
                                 <div className="contact__detail-item">
                                     <div className="contact__detail-icon"><i className="fa-solid fa-phone"></i></div>
                                     <div>
                                         <span className="contact__detail-label">Call Us</span>
-                                        <span className="contact__detail-value">+1 (555) 123-4567</span>
+                                        <span className="contact__detail-value">+923359528776</span>
                                     </div>
                                 </div>
                                 <div className="contact__detail-item">
-                                    <div className="contact__detail-icon"><i className="fa-solid fa-location-dot"></i></div>
-                                    <div>
-                                        <span className="contact__detail-label">Visit Us</span>
-                                        <span className="contact__detail-value">San Francisco, CA 94102</span>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="contact__form-wrapper">
-                        <form className="contact__form" onSubmit={handleSubmit}>
+                        <form ref={formRef} className="contact__form" onSubmit={handleSubmit}>
                             <h3 className="contact__form-title">Send a Message</h3>
 
                             <div className="contact__field">
@@ -113,8 +128,8 @@ export default function Contact() {
                                 />
                             </div>
 
-                            <Button type="submit" variant="primary" size="lg" className="contact__btn">
-                                {submitted ? (<><i className="fa-solid fa-check"></i> Message Sent</>) : (<><i className="fa-solid fa-paper-plane"></i> Send Message</>)}
+                            <Button type="submit" variant="primary" size="lg" className="contact__btn" disabled={status === 'sending'}>
+                                {status === 'sending' ? (<><i className="fa-solid fa-spinner fa-spin"></i> Sending...</>) : status === 'sent' ? (<><i className="fa-solid fa-check"></i> Message Sent!</>) : status === 'error' ? (<><i className="fa-solid fa-exclamation-triangle"></i> Failed — Try Again</>) : (<><i className="fa-solid fa-paper-plane"></i> Send Message</>)}
                             </Button>
                         </form>
                     </div>

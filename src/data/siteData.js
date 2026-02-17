@@ -194,10 +194,10 @@ export const projects = [
 ];
 
 export const stats = [
-  { id: 1, number: 150, suffix: '+', label: 'Projects Delivered' },
+  { id: 1, number: 20, suffix: '+', label: 'Projects Delivered' },
   { id: 2, number: 98, suffix: '%', label: 'Client Satisfaction' },
-  { id: 3, number: 8, suffix: '+', label: 'Years Experience' },
-  { id: 4, number: 35, suffix: '+', label: 'Team Members' },
+  { id: 3, number: 5, suffix: '+', label: 'Years Experience' },
+  { id: 4, number: 15, suffix: '+', label: 'Team Members' },
 ];
 
 export const processSteps = [
