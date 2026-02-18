@@ -17,7 +17,7 @@ export default function About() {
                 <div className="about__video">
                     <div className="about__video-wrapper">
                         <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            src="https://www.youtube.com/embed/QdXUOngKZiY?si=pIlQqNeg6w7YVg1P"
                             title="Groflex — Who We Are"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
