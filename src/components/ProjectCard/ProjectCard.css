@@ -52,11 +52,13 @@
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(4px);
-    transition: background var(--transition-fast);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
 }
 
 .project-card:hover .project-card__view-btn:hover {
     background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 .project-card__content {
@@ -90,42 +92,52 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: var(--space-md);
 }
 
-.project-card__case-study {
-    margin-top: var(--space-md);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border-light);
-    display: flex;
-    flex-direction: column;
+/* ---- Prominent CTA Button ---- */
+.project-card__cta-btn {
+    display: inline-flex;
+    align-items: center;
     gap: 0.5rem;
-}
-
-.project-card__cs-item {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-}
-
-.project-card__cs-label {
+    font-family: var(--font-heading);
+    font-size: var(--fs-body-sm);
     font-weight: var(--fw-bold);
     color: var(--color-primary);
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
+    background: none;
+    border: none;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    transition: color var(--transition-fast), gap var(--transition-fast);
+    position: relative;
 }
 
-.project-card__cs-text {
-    color: var(--color-text);
+.project-card__cta-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0.3rem;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width var(--transition-smooth);
 }
 
-.project-card__cs-label--impact {
-    color: #10b981;
-    /* Green for positive impact */
+.project-card__cta-btn:hover::after {
+    width: calc(100% - 1.5rem);
 }
 
-.project-card__cs-text--impact {
-    font-weight: var(--fw-medium);
+.project-card__cta-btn:hover {
+    color: var(--color-primary-dark);
+    gap: 0.75rem;
+}
+
+.project-card__cta-btn svg {
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.project-card__cta-btn:hover svg {
+    transform: translateX(3px);
 }

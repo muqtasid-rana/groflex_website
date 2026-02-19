@@ -9,17 +9,20 @@ import Testimonial from './sections/Testimonial/Testimonial';
 import Quote from './sections/Quote/Quote';
 import CTA from './sections/CTA/CTA';
 import Contact from './sections/Contact/Contact';
+import AgencyComparison from './sections/AgencyComparison/AgencyComparison';
 
 export default function App() {
   return (
     <Layout>
       <Hero />
-      <About />
-      <Services />
-      <WhyChooseUs />
-      <Process />
       <Portfolio />
+      <Services />
+      <Process />
+      <AgencyComparison />
       <Testimonial />
+
+      <About />
+      <WhyChooseUs />
       <Quote
         author="Founder Groflex"
         text="We consider a project successful when it delivers real results and a strong return on investment for the client."
@@ -29,3 +32,4 @@ export default function App() {
     </Layout>
   );
 }
+

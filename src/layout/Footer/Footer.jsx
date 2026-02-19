@@ -47,16 +47,13 @@ export default function Footer() {
                         <ul className="footer__links footer__links--contact">
                             <li>
                                 <i className="fa-solid fa-envelope"></i>
-                                <a href="mailto:hello@groflex.com">hello@groflex.com</a>
+                                <a href="mailto:groflex.co@gmail.com">groflex.co@gmail.com</a>
                             </li>
                             <li>
                                 <i className="fa-solid fa-phone"></i>
-                                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                                <a href="tel:+1234567890">+92 335 9528776</a>
                             </li>
-                            <li>
-                                <i className="fa-solid fa-location-dot"></i>
-                                <span>New York, NY</span>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
