@@ -19,7 +19,7 @@ export default function CTA() {
                         Transform your vision into a digital reality. Partner with a team that cares about your success as much as you do.
                     </p>
                     <div className="cta__actions">
-                        <Button variant="white" size="lg" href="https://calendly.com/mmuqtasidrana/30min" className="cta__main-btn" target="_blank" rel="noopener noreferrer">
+                        <Button variant="white" size="lg" href="https://form.typeform.com/to/eh6mbf1u" className="cta__main-btn" target="_blank" rel="noopener noreferrer">
                             Book a free consultation call
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14M12 5l7 7-7 7" />

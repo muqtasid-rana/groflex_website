@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
                             seamless journey.
                         </p>
 
-                        <Button variant="primary" size="md" href="https://calendly.com/mmuqtasidrana/30min" className="why-choose__cta" target="_blank" rel="noopener noreferrer">
+                        <Button variant="primary" size="md" href="https://form.typeform.com/to/eh6mbf1u" className="why-choose__cta" target="_blank" rel="noopener noreferrer">
                             Let&apos;s talk
                         </Button>
 

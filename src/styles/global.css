@@ -36,7 +36,7 @@ h4,
 h5,
 h6 {
     font-family: var(--font-heading);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     line-height: var(--lh-tight);
     color: var(--color-text);
 }

@@ -16,18 +16,17 @@ export default function Hero() {
                     <br />
 
                     <h1 className="hero__title animate-in animate-in-delay-1">
-                        We Build <span className="hero__title-accent">Digital</span><br />
-                        Experiences<br />
-                        That Matter
+                        AI-Accelerated Design & Development
+                        <span className="hero__title-sub">60% Faster & No Traditional Agency Costs!</span>
                     </h1>
 
                     <p className="hero__subtitle animate-in animate-in-delay-2">
-                        From concept to launch, Groflex delivers premium software solutions
-                        and design systems for ambitious brands ready to make their mark.
+                        We combine elite design thinking with AI-powered workflows to build
+                        high-performance websites and apps faster and more efficiently than traditional agencies.
                     </p>
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
-                        <Button variant="primary" size="lg" href="https://calendly.com/mmuqtasidrana/30min" className="hero__cta-btn" target="_blank" rel="noopener noreferrer">
+                        <Button variant="primary" size="lg" href="https://form.typeform.com/to/eh6mbf1u" className="hero__cta-btn" target="_blank" rel="noopener noreferrer">
                             <i className="fa-solid fa-calendar-check"></i>
                             Book a Free Consultation Call
                         </Button>

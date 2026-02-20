@@ -54,7 +54,7 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     color: var(--color-white);
     font-family: var(--font-heading);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     font-size: var(--fs-h3);
     display: flex;
     align-items: center;
@@ -142,7 +142,7 @@
 
 .process__step-title {
     font-size: var(--fs-h4);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     color: var(--color-white);
     margin-bottom: var(--space-sm);
 }
@@ -160,7 +160,7 @@
     display: block;
     font-family: var(--font-heading);
     font-size: var(--fs-h2);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     color: var(--color-white);
     margin-bottom: var(--space-xs);
 }

@@ -15,7 +15,7 @@
     display: block;
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     color: var(--color-white);
     margin-bottom: var(--space-md);
     letter-spacing: -0.02em;

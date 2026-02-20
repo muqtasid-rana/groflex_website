@@ -1,40 +1,33 @@
-import { useEffect, useRef } from 'react';
-import './CaseStudyModal.css';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { projects } from '../../data/siteData';
+import './CaseStudyPage.css';
 
-export default function CaseStudyModal({ project, onClose }) {
-    const scrollPosRef = useRef(0);
+export default function CaseStudyPage() {
+    const { id } = useParams();
+    const project = projects.find((p) => String(p.id) === id);
 
     useEffect(() => {
-        scrollPosRef.current = window.scrollY;
-        document.body.style.overflow = 'hidden';
-        const handleEsc = (e) => {
-            if (e.key === 'Escape') onClose();
-        };
-        window.addEventListener('keydown', handleEsc);
-        return () => {
-            document.body.style.overflow = '';
-            window.removeEventListener('keydown', handleEsc);
-            window.scrollTo({ top: scrollPosRef.current, behavior: 'instant' });
-        };
-    }, [onClose]);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, [id]);
 
-    if (!project) return null;
+    if (!project) {
+        return (
+            <div className="cs-page">
+                <div className="cs-page__band cs-page__band--light">
+                    <div className="cs-page__container cs-page__container--center">
+                        <h2>Project not found</h2>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     const { title, category, caseStudy, color, image } = project;
     const { overview, challenge, approach, solution, results, testimonial, timeline } = caseStudy;
 
     return (
         <div className="cs-page">
-            {/* Top Bar */}
-            <div className="cs-page__topbar">
-                <button className="cs-page__back" onClick={onClose}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                    Back to Projects
-                </button>
-            </div>
-
             {/* Hero Banner — Full Width */}
             <div className="cs-page__hero" style={{ backgroundColor: color }}>
                 {image && <img src={image} alt={title} className="cs-page__hero-img" />}

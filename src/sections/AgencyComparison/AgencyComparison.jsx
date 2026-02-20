@@ -6,8 +6,8 @@ const comparisonRows = [
     {
         label: 'Project Cost',
         icon: 'fa-solid fa-money-bill-wave',
-        others: '$5,000 – $50,000+',
-        groflex: 'Starting at $1,500',
+        others: '$2,000 – $50,000+',
+        groflex: '1/3 the cost',
     },
     {
         label: 'Delivery Time',
@@ -148,7 +148,7 @@ export default function AgencyComparison() {
                     <Button
                         variant="primary"
                         size="lg"
-                        href="https://calendly.com/mmuqtasidrana/30min"
+                        href="https://form.typeform.com/to/eh6mbf1u"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

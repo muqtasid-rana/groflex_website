@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Hero from './sections/Hero/Hero';
 import About from './sections/About/About';
@@ -10,17 +11,17 @@ import Quote from './sections/Quote/Quote';
 import CTA from './sections/CTA/CTA';
 import Contact from './sections/Contact/Contact';
 import AgencyComparison from './sections/AgencyComparison/AgencyComparison';
+import CaseStudyPage from './pages/CaseStudyPage/CaseStudyPage';
 
-export default function App() {
+function HomePage() {
   return (
-    <Layout>
+    <>
       <Hero />
       <Portfolio />
       <Services />
-      <Process />
       <AgencyComparison />
+      <Process />
       <Testimonial />
-
       <About />
       <WhyChooseUs />
       <Quote
@@ -29,7 +30,17 @@ export default function App() {
       />
       <CTA />
       <Contact />
-    </Layout>
+    </>
   );
 }
 
+export default function App() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/case-study/:id" element={<CaseStudyPage />} />
+      </Routes>
+    </Layout>
+  );
+}

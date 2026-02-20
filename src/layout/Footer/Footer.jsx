@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { socialLinks, services } from '../../data/siteData';
 import './Footer.css';
 
@@ -7,7 +8,7 @@ export default function Footer() {
             <div className="container">
                 <div className="footer__grid">
                     <div className="footer__brand">
-                        <a href="#" className="footer__logo">Groflex</a>
+                        <Link to="/" className="footer__logo">Groflex</Link>
                         <p className="footer__desc">
                             A premium software and design agency building world-class digital products for ambitious brands.
                         </p>
@@ -24,10 +25,10 @@ export default function Footer() {
                         <h4 className="footer__heading">Services</h4>
                         <ul className="footer__links">
                             {services.design.slice(0, 3).map((s) => (
-                                <li key={s.id}><a href="#services">{s.title}</a></li>
+                                <li key={s.id}><a href="/#services">{s.title}</a></li>
                             ))}
                             {services.development.slice(0, 2).map((s) => (
-                                <li key={s.id}><a href="#services">{s.title}</a></li>
+                                <li key={s.id}><a href="/#services">{s.title}</a></li>
                             ))}
                         </ul>
                     </div>
@@ -35,10 +36,10 @@ export default function Footer() {
                     <div className="footer__column">
                         <h4 className="footer__heading">Company</h4>
                         <ul className="footer__links">
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#work">Our Work</a></li>
-                            <li><a href="#process">Process</a></li>
-                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="/#about">About Us</a></li>
+                            <li><a href="/#work">Our Work</a></li>
+                            <li><a href="/#process">Process</a></li>
+                            <li><a href="/#contact">Contact</a></li>
                         </ul>
                     </div>
 

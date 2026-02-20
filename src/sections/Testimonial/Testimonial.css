@@ -90,7 +90,7 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-heading);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     font-size: 0.9rem;
     color: var(--color-white);
     flex-shrink: 0;
