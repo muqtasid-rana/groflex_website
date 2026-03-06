@@ -53,9 +53,14 @@ export default function Navbar() {
     }, [location.pathname, navigate]);
 
     return (
-        <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+        <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${mobileMenuOpen ? 'navbar--menu-open' : ''}`}>
             <div className="container navbar__container">
-                <Link to="/">
+                <Link to="/" onClick={(e) => {
+                    if (location.pathname === '/') {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }}>
                     <img className='navbar__logo' src={logo} alt="" />
                 </Link>
                 <nav className="navbar__nav">

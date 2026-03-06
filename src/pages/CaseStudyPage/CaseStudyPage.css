@@ -93,18 +93,51 @@
     position: relative;
 }
 
-.cs-page__band--light {
+.cs-page__band--content {
     background: var(--color-bg);
     padding: var(--space-4xl) 0;
+    position: relative;
 }
 
-.cs-page__band--dark {
-    background: var(--color-dark-bg);
-    padding: var(--space-4xl) 0;
+/* Subtle separator between content bands */
+.cs-page__band--content+.cs-page__band--content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(80%, var(--max-width));
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border-light), transparent);
+}
+
+/* Decorative accent bar (left edge) */
+.cs-page__section-accent {
+    position: absolute;
+    top: var(--space-4xl);
+    left: 0;
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+    border-radius: 0 4px 4px 0;
+}
+
+/* Section step number (large faded numeral) */
+.cs-page__section-num {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(99, 102, 241, 0.06));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.04em;
+    user-select: none;
 }
 
 .cs-page__band--gradient {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 50%, #7c3aed 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #2118c4 50%, #f163e3 100%);
     padding: var(--space-4xl) 0;
     position: relative;
 }
@@ -191,15 +224,13 @@
     display: grid;
     grid-template-columns: 1fr 1.6fr;
     gap: var(--space-3xl);
-    align-items: start;
+    align-items: center;
 }
 
 .cs-page__col-label {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    position: sticky;
-    top: 80px;
 }
 
 .cs-page__col-tag {
@@ -213,7 +244,7 @@
 }
 
 .cs-page__col-tag--accent {
-    color: #a78bfa;
+    color: #7c3aed;
 }
 
 .cs-page__col-tag--white {
@@ -227,18 +258,10 @@
     line-height: var(--lh-tight);
 }
 
-.cs-page__col-title--light {
-    color: white;
-}
-
 .cs-page__text {
     font-size: var(--fs-body-lg);
     color: var(--color-text-secondary);
     line-height: 1.85;
-}
-
-.cs-page__text--light {
-    color: var(--color-text-on-dark-muted);
 }
 
 /* ===================
@@ -399,10 +422,13 @@
         font-size: var(--fs-h2);
     }
 
-    .cs-page__band--light,
-    .cs-page__band--dark,
+    .cs-page__band--content,
     .cs-page__band--gradient {
         padding: var(--space-2xl) 0;
+    }
+
+    .cs-page__section-accent {
+        display: none;
     }
 
     .cs-page__band--cta {

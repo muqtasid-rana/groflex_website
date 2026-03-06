@@ -16,6 +16,10 @@
     border-bottom: 1px solid var(--color-border-light);
 }
 
+.navbar--menu-open {
+    background-color: #ffffff;
+}
+
 .navbar__container {
     display: flex;
     align-items: center;
@@ -137,7 +141,7 @@
 .navbar__mobile-menu {
     position: fixed;
     inset: 0;
-    background: var(--color-bg);
+    background: #ffffff;
     z-index: 1000;
     padding: 6rem var(--container-padding) var(--space-xl);
     display: flex;

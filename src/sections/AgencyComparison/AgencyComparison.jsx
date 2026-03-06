@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from 'react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Button from '../../components/Button/Button';
 import './AgencyComparison.css';
@@ -62,7 +63,26 @@ const highlights = [
     },
 ];
 
+function useScrollVisible(threshold = 0.15) {
+    const ref = useRef(null);
+    const [visible, setVisible] = useState(false);
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const obs = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); } },
+            { threshold }
+        );
+        obs.observe(el);
+        return () => obs.disconnect();
+    }, [threshold]);
+    return [ref, visible];
+}
+
 export default function AgencyComparison() {
+    const [tableRef, tableVisible] = useScrollVisible(0.1);
+    const [highlightsRef, highlightsVisible] = useScrollVisible(0.15);
+
     return (
         <section id="why-us" className="section agency-compare">
             <div className="agency-compare__bg-glow" />
@@ -74,7 +94,7 @@ export default function AgencyComparison() {
                 />
 
                 {/* Comparison Table */}
-                <div className="agency-compare__table">
+                <div ref={tableRef} className={`agency-compare__table agency-compare__slide ${tableVisible ? 'agency-compare__slide--visible' : ''}`}>
                     {/* Table Header */}
                     <div className="agency-compare__table-header">
                         <div className="agency-compare__th agency-compare__th--feature" />
@@ -97,7 +117,7 @@ export default function AgencyComparison() {
                         <div
                             className="agency-compare__row"
                             key={row.label}
-                            style={{ animationDelay: `${i * 0.08}s` }}
+                            style={{ transitionDelay: tableVisible ? `${i * 0.06}s` : '0s' }}
                         >
                             <div className="agency-compare__cell agency-compare__cell--feature">
                                 <span className="agency-compare__row-icon">
@@ -122,12 +142,12 @@ export default function AgencyComparison() {
                 </div>
 
                 {/* Highlight Cards */}
-                <div className="agency-compare__highlights">
+                <div ref={highlightsRef} className="agency-compare__highlights">
                     {highlights.map((h, i) => (
                         <div
-                            className="agency-compare__highlight-card"
+                            className={`agency-compare__highlight-card agency-compare__slide ${highlightsVisible ? 'agency-compare__slide--visible' : ''}`}
                             key={h.label}
-                            style={{ animationDelay: `${0.2 + i * 0.12}s` }}
+                            style={{ transitionDelay: highlightsVisible ? `${i * 0.12}s` : '0s' }}
                         >
                             <div className="agency-compare__highlight-icon">
                                 <i className={h.icon}></i>

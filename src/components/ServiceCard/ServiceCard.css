@@ -11,8 +11,15 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
-    will-change: transform;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, box-shadow var(--transition-base), border-color var(--transition-base);
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.service-card--visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Subtle top-edge highlight */
@@ -115,21 +122,6 @@
     color: rgba(255, 255, 255, 0.5);
     line-height: var(--lh-relaxed);
     flex: 1;
-}
-
-/* Arrow */
-.service-card__arrow {
-    margin-top: var(--space-lg);
-    color: #3b82f6;
-    font-size: 0.9rem;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all var(--transition-base);
-}
-
-.service-card:hover .service-card__arrow {
-    opacity: 1;
-    transform: translateX(0);
 }
 
 /* Group styling */

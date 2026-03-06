@@ -10,12 +10,11 @@ import rpmm from '../assets/rpmm.png';
 import testolz from '../assets/testolz.jpeg';
 
 export const navLinks = [
-  { label: 'Home', href: '#' },
-  { label: 'About', href: '#about' },
-  { label: 'Case Studies', href: '#work' },
+  { label: 'Our Work', href: '#work' },
   { label: 'Services', href: '#services' },
+  { label: 'About Us', href: '#why-us' },
   { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact Us', href: '#contact' },
 ];
 
 export const services = {
@@ -41,8 +40,8 @@ export const services = {
     {
       id: 'd4',
       icon: 'fa-solid fa-mobile-screen-button',
-      title: 'App Design',
-      description: 'Designing mobile experiences that are intuitive, beautiful, and aligned with platform-specific guidelines.',
+      title: 'App/Web Design',
+      description: 'Designing mobile and web experiences that are intuitive, beautiful, and aligned with platform-specific guidelines.',
     },
   ],
   development: [
@@ -60,15 +59,15 @@ export const services = {
     },
     {
       id: 'v3',
-      icon: 'fa-solid fa-server',
-      title: 'Backend & APIs',
-      description: 'Robust backend architectures and RESTful APIs that power your applications at scale.',
+      icon: 'fa-solid fa-layer-group',
+      title: 'SaaS Application',
+      description: 'Custom SaaS platforms that scale with your business, featuring secure authentication, subscription management, and automated workflows.',
     },
     {
       id: 'v4',
-      icon: 'fa-solid fa-cloud',
-      title: 'Cloud & DevOps',
-      description: 'Cloud infrastructure, CI/CD pipelines, and deployment automation for enterprise reliability.',
+      icon: 'fa-solid fa-gears',
+      title: 'Software Development',
+      description: 'Custom software solutions tailored to your business needs, with clean code, scalable architecture, and long-term support.',
     },
   ],
 };

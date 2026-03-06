@@ -49,35 +49,37 @@ export default function CaseStudyPage() {
                 </div>
             </div>
 
-            {/* Overview — Light */}
-            <div className="cs-page__band cs-page__band--light">
+            {/* Overview */}
+            <div className="cs-page__band cs-page__band--content">
                 <div className="cs-page__container">
                     <div className="cs-page__label">Overview</div>
                     <p className="cs-page__lead">{overview}</p>
                 </div>
             </div>
 
-            {/* Challenge — Dark */}
-            <div className="cs-page__band cs-page__band--dark">
+            {/* Challenge */}
+            <div className="cs-page__band cs-page__band--content">
+                <div className="cs-page__section-accent" />
                 <div className="cs-page__container">
                     <div className="cs-page__two-col">
                         <div className="cs-page__col-label">
-                            <span className="cs-page__col-tag">The Problem</span>
-                            <h2 className="cs-page__col-title cs-page__col-title--light">The Challenge</h2>
+                            <span className="cs-page__section-num">01</span>
+                            <h2 className="cs-page__col-title">The Challenge</h2>
                         </div>
                         <div className="cs-page__col-text">
-                            <p className="cs-page__text cs-page__text--light">{challenge}</p>
+                            <p className="cs-page__text">{challenge}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Approach — Light */}
-            <div className="cs-page__band cs-page__band--light">
+            {/* Approach */}
+            <div className="cs-page__band cs-page__band--content">
+                <div className="cs-page__section-accent" />
                 <div className="cs-page__container">
                     <div className="cs-page__two-col">
                         <div className="cs-page__col-label">
-                            <span className="cs-page__col-tag">Our Strategy</span>
+                            <span className="cs-page__section-num">02</span>
                             <h2 className="cs-page__col-title">Our Approach</h2>
                         </div>
                         <div className="cs-page__col-text">
@@ -87,22 +89,23 @@ export default function CaseStudyPage() {
                 </div>
             </div>
 
-            {/* Solution — Dark */}
-            <div className="cs-page__band cs-page__band--dark">
+            {/* Solution */}
+            <div className="cs-page__band cs-page__band--content">
+                <div className="cs-page__section-accent" />
                 <div className="cs-page__container">
                     <div className="cs-page__two-col">
                         <div className="cs-page__col-label">
-                            <span className="cs-page__col-tag cs-page__col-tag--accent">What We Built</span>
-                            <h2 className="cs-page__col-title cs-page__col-title--light">The Solution</h2>
+                            <span className="cs-page__section-num">03</span>
+                            <h2 className="cs-page__col-title">The Solution</h2>
                         </div>
                         <div className="cs-page__col-text">
-                            <p className="cs-page__text cs-page__text--light">{solution}</p>
+                            <p className="cs-page__text">{solution}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Results — Gradient */}
+            {/* Results */}
             {results && results.length > 0 && (
                 <div className="cs-page__band cs-page__band--gradient">
                     <div className="cs-page__container cs-page__container--center">
@@ -120,9 +123,9 @@ export default function CaseStudyPage() {
                 </div>
             )}
 
-            {/* Testimonial — Light */}
+            {/* Testimonial */}
             {testimonial && (
-                <div className="cs-page__band cs-page__band--light">
+                <div className="cs-page__band cs-page__band--content">
                     <div className="cs-page__container cs-page__container--narrow">
                         <div className="cs-page__testimonial">
                             <blockquote className="cs-page__quote">&ldquo;{testimonial.quote}&rdquo;</blockquote>
@@ -135,7 +138,7 @@ export default function CaseStudyPage() {
                 </div>
             )}
 
-            {/* CTA — Dark */}
+            {/* CTA */}
             <div className="cs-page__band cs-page__band--cta">
                 <div className="cs-page__container cs-page__container--center">
                     <h3 className="cs-page__cta-title">Ready to Build Something Like This?</h3>

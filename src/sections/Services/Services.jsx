@@ -24,8 +24,8 @@ export default function Services() {
                         <div className="services__group-line" />
                     </div>
                     <div className="services__grid">
-                        {services.design.map((s) => (
-                            <ServiceCard key={s.id} {...s} />
+                        {services.design.map((s, i) => (
+                            <ServiceCard key={s.id} {...s} index={i} />
                         ))}
                     </div>
                 </div>
@@ -39,8 +39,8 @@ export default function Services() {
                         <div className="services__group-line" />
                     </div>
                     <div className="services__grid">
-                        {services.development.map((s) => (
-                            <ServiceCard key={s.id} {...s} />
+                        {services.development.map((s, i) => (
+                            <ServiceCard key={s.id} {...s} index={i} />
                         ))}
                     </div>
                 </div>
