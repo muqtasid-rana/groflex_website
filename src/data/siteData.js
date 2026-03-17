@@ -309,8 +309,8 @@ export const processSteps = [
 ];
 
 export const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com/groflex_co', icon: 'fa-brands fa-instagram' },
-  { label: 'LinkedIn', href: 'https://linkedin.com', icon: 'fa-brands fa-linkedin-in' },
-  { label: 'Facebook', href: 'https://facebook.com', icon: 'fa-brands fa-facebook-f' },
+  { label: 'Instagram', href: 'https://instagram.com/groflex.co', icon: 'fa-brands fa-instagram' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/groflex-co', icon: 'fa-brands fa-linkedin-in' },
+  // { label: 'Facebook', href: 'https://facebook.com', icon: 'fa-brands fa-facebook-f' },
   { label: 'WhatsApp', href: 'https://wa.me/+923359528776', icon: 'fa-brands fa-whatsapp' },
 ];
