@@ -2,6 +2,7 @@ import '@/styles/tokens.css';
 import '@/styles/animations.css';
 import '@/styles/global.css';
 import SiteLayout from '@/layout/SiteLayout';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: 'Groflex — Software & Design Agency',
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <SiteLayout>{children}</SiteLayout>
+        <Analytics />
       </body>
     </html>
   );
