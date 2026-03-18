@@ -1,4 +1,4 @@
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import './Testimonial.css';
 
 const testimonials = [

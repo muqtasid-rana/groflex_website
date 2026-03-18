@@ -1,8 +1,8 @@
-import { whyChooseUs } from '../../data/siteData';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import Button from '../../components/Button/Button';
-import team from '../../assets/team.png';
-import client from '../../assets/client.png';
+import { whyChooseUs } from '@/data/siteData';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
+import Button from '@/components/Button/Button';
+import team from '@/assets/team.png';
+import client from '@/assets/client.png';
 import './WhyChooseUs.css';
 
 export default function WhyChooseUs() {
@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
                 <div className="why-choose__block why-choose__block--top">
                     <div className="why-choose__image-col">
                         <div className="why-choose__image">
-                            <img src={team} alt="team" />
+                            <img src={team.src} alt="team" />
                         </div>
                     </div>
                     <div className="why-choose__content-col">
@@ -77,7 +77,7 @@ export default function WhyChooseUs() {
                     </div>
                     <div className="why-choose__image-col">
                         <div className="why-choose__image">
-                            <img src={client} alt="client" />
+                            <img src={client.src} alt="client" />
                         </div>
                     </div>
                 </div>

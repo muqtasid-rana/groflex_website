@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+'use client';
+
 import { useEffect } from 'react';
-import { projects } from '../../data/siteData';
+import { projects } from '@/data/siteData';
 import './CaseStudyPage.css';
 
-export default function CaseStudyPage() {
-    const { id } = useParams();
+export default function CaseStudyPage({ id }) {
     const project = projects.find((p) => String(p.id) === id);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function CaseStudyPage() {
         <div className="cs-page">
             {/* Hero Banner — Full Width */}
             <div className="cs-page__hero" style={{ backgroundColor: color }}>
-                {image && <img src={image} alt={title} className="cs-page__hero-img" />}
+                {image && <img src={image.src || image} alt={title} className="cs-page__hero-img" />}
                 <div className="cs-page__hero-gradient" />
                 <div className="cs-page__hero-content">
                     <span className="cs-page__hero-category">{category}</span>

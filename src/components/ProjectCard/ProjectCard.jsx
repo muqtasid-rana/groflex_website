@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import './ProjectCard.css';
 
 export default function ProjectCard({ id, title, category, description, color, image }) {
@@ -6,10 +6,10 @@ export default function ProjectCard({ id, title, category, description, color, i
         <div className="project-card">
             <div className="project-card__image" style={{ backgroundColor: color }}>
                 {image ? (
-                    <img src={image} alt={title} className="project-card__img-cover" />
+                    <img src={image.src || image} alt={title} className="project-card__img-cover" />
                 ) : null}
                 <div className="project-card__overlay">
-                    <Link to={`/case-study/${id}`} className="project-card__view-btn">
+                    <Link href={`/case-study/${id}`} className="project-card__view-btn">
                         View Case Study
                     </Link>
                 </div>
@@ -18,7 +18,7 @@ export default function ProjectCard({ id, title, category, description, color, i
                 <span className="project-card__category">{category}</span>
                 <h4 className="project-card__title">{title}</h4>
                 <p className="project-card__desc">{description}</p>
-                <Link to={`/case-study/${id}`} className="project-card__cta-btn">
+                <Link href={`/case-study/${id}`} className="project-card__cta-btn">
                     View Case Study
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />

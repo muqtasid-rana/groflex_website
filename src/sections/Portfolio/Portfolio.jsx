@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { projects } from '../../data/siteData';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import Link from 'next/link';
+import { projects } from '@/data/siteData';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
+import ProjectCard from '@/components/ProjectCard/ProjectCard';
 import './Portfolio.css';
 
 export default function Portfolio() {

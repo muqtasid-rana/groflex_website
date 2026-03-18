@@ -1,6 +1,6 @@
-import { services } from '../../data/siteData';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import ServiceCard from '../../components/ServiceCard/ServiceCard';
+import { services } from '@/data/siteData';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
+import ServiceCard from '@/components/ServiceCard/ServiceCard';
 import './Services.css';
 
 export default function Services() {

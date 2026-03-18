@@ -1,5 +1,7 @@
+'use client';
+
 import { useEffect } from 'react';
-import About from '../../sections/About/About';
+import About from '@/sections/About/About';
 
 export default function AboutPage() {
     useEffect(() => {

@@ -1,15 +1,18 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { navLinks } from '../../data/siteData';
-import Button from '../../components/Button/Button';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { navLinks } from '@/data/siteData';
+import Button from '@/components/Button/Button';
 import './Navbar.css';
-import logo from '../../assets/logo.png';
+import logo from '@/assets/logo.png';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const location = useLocation();
-    const navigate = useNavigate();
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,56 +27,59 @@ export default function Navbar() {
         return () => { document.body.style.overflow = ''; };
     }, [mobileMenuOpen]);
 
-    // Handle nav link clicks: if on a sub-page, navigate home first then scroll
     const handleNavClick = useCallback((e, href) => {
-        // "Home" link with just '#'
         if (href === '#') {
-            if (location.pathname !== '/') {
+            if (pathname !== '/') {
                 e.preventDefault();
-                navigate('/');
+                router.push('/');
             }
             return;
         }
 
-        // Hash link like '#services'
         if (href.startsWith('#')) {
             const hash = href;
-            if (location.pathname !== '/') {
-                // We're on a sub-page — navigate home, then scroll to section
+            if (pathname !== '/') {
                 e.preventDefault();
-                navigate('/');
-                // Wait for home page to render, then scroll to the section
+                router.push('/');
                 setTimeout(() => {
                     const el = document.querySelector(hash);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             }
-            // If already on home, let the browser handle the hash scroll naturally
         }
-    }, [location.pathname, navigate]);
+    }, [pathname, router]);
+
+    const isBlogPage = pathname.startsWith('/blog');
+    const isScrolledState = scrolled || isBlogPage;
 
     return (
-        <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${mobileMenuOpen ? 'navbar--menu-open' : ''}`}>
+        <header className={`navbar ${isScrolledState ? 'navbar--scrolled' : ''} ${mobileMenuOpen ? 'navbar--menu-open' : ''}`}>
             <div className="container navbar__container">
-                <Link to="/" onClick={(e) => {
-                    if (location.pathname === '/') {
+                <Link href="/" onClick={(e) => {
+                    if (pathname === '/') {
                         e.preventDefault();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }}>
-                    <img className='navbar__logo' src={logo} alt="" />
+                    <img className='navbar__logo' src={logo.src} alt="Groflex" />
                 </Link>
                 <nav className="navbar__nav">
                     <ul className="navbar__list">
                         {navLinks.map((link) => (
                             <li key={link.label} className="navbar__item">
-                                <a
-                                    href={link.href}
-                                    className="navbar__link"
-                                    onClick={(e) => handleNavClick(e, link.href)}
-                                >
-                                    {link.label}
-                                </a>
+                                {link.href.startsWith('/') ? (
+                                    <Link href={link.href} className="navbar__link">
+                                        {link.label}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={link.href}
+                                        className="navbar__link"
+                                        onClick={(e) => handleNavClick(e, link.href)}
+                                    >
+                                        {link.label}
+                                    </a>
+                                )}
                             </li>
                         ))}
                     </ul>
@@ -98,17 +104,28 @@ export default function Navbar() {
                 <div className={`navbar__mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
                     <nav className="navbar__mobile-nav">
                         {navLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
-                                className="navbar__mobile-link"
-                                onClick={(e) => {
-                                    handleNavClick(e, link.href);
-                                    setMobileMenuOpen(false);
-                                }}
-                            >
-                                {link.label}
-                            </a>
+                            link.href.startsWith('/') ? (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className="navbar__mobile-link"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {link.label}
+                                </Link>
+                            ) : (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    className="navbar__mobile-link"
+                                    onClick={(e) => {
+                                        handleNavClick(e, link.href);
+                                        setMobileMenuOpen(false);
+                                    }}
+                                >
+                                    {link.label}
+                                </a>
+                            )
                         ))}
                         <Button variant="primary" size="md" href="https://form.typeform.com/to/eh6mbf1u" onClick={() => setMobileMenuOpen(false)} target="_blank" rel="noopener noreferrer">
                             Let's Talk

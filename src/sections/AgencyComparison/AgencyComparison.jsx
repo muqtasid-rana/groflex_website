@@ -1,13 +1,15 @@
+'use client';
+
 import { useRef, useEffect, useState } from 'react';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import Button from '../../components/Button/Button';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
+import Button from '@/components/Button/Button';
 import './AgencyComparison.css';
 
 const comparisonRows = [
     {
         label: 'Project Cost',
         icon: 'fa-solid fa-money-bill-wave',
-        others: '$2,000 – $50,000+',
+        others: '$30,000 – $50,000+',
         groflex: '1/3 the cost',
     },
     {

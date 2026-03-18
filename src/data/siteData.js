@@ -2,18 +2,19 @@
 // Site Data — Groflex Agency
 // ============================================================
 
-import incorp from '../assets/incorp.png';
-import hybrid from '../assets/hybrid.jpeg';
-import inayat from '../assets/inayat.png';
-import pocketwatcher from '../assets/pocketwatcher finance.jpeg';
-import rpmm from '../assets/rpmm.png';
-import testolz from '../assets/testolz.jpeg';
+import incorp from '@/assets/incorp.png';
+import hybrid from '@/assets/hybrid.jpeg';
+import inayat from '@/assets/inayat.png';
+import pocketwatcher from '@/assets/pocketwatcher finance.jpeg';
+import rpmm from '@/assets/rpmm.png';
+import testolz from '@/assets/testolz.jpeg';
 
 export const navLinks = [
   { label: 'Our Work', href: '#work' },
   { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#why-us' },
   { label: 'Process', href: '#process' },
+  { label: 'Blog', href: '#blog' },
   { label: 'Contact Us', href: '#contact' },
 ];
 

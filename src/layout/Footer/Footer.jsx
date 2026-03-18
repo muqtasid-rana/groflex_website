@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
-import { socialLinks, services } from '../../data/siteData';
+'use client';
+
+import Link from 'next/link';
+import { socialLinks, services } from '@/data/siteData';
 import './Footer.css';
 
 export default function Footer() {
@@ -8,7 +10,7 @@ export default function Footer() {
             <div className="container">
                 <div className="footer__grid">
                     <div className="footer__brand">
-                        <Link to="/" className="footer__logo">Groflex</Link>
+                        <Link href="/" className="footer__logo">Groflex</Link>
                         <p className="footer__desc">
                             A premium software and design agency building world-class digital products for ambitious brands.
                         </p>
@@ -39,6 +41,7 @@ export default function Footer() {
                             <li><a href="/#about">About Us</a></li>
                             <li><a href="/#work">Our Work</a></li>
                             <li><a href="/#process">Process</a></li>
+                            <li><Link href="/blog">Blog</Link></li>
                             <li><a href="/#contact">Contact</a></li>
                         </ul>
                     </div>
@@ -52,9 +55,8 @@ export default function Footer() {
                             </li>
                             <li>
                                 <i className="fa-solid fa-phone"></i>
-                                <a href="tel:+1234567890">+92 335 9528776</a>
+                                <a href="tel:+923359528776">+92 335 9528776</a>
                             </li>
-
                         </ul>
                     </div>
                 </div>

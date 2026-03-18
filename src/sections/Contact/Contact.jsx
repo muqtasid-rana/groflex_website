@@ -1,7 +1,9 @@
+'use client';
+
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import Button from '../../components/Button/Button';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
+import Button from '@/components/Button/Button';
 import './Contact.css';
 
 const EMAILJS_SERVICE_ID = 'service_hnb5hs6';

@@ -1,13 +1,15 @@
-import bannerImg from '../../assets/banner.webp';
-import Button from '../../components/Button/Button';
-import { socialLinks } from '../../data/siteData';
+'use client';
+
+import bannerImg from '@/assets/banner.webp';
+import Button from '@/components/Button/Button';
+import { socialLinks } from '@/data/siteData';
 import './Hero.css';
 
 export default function Hero() {
     return (
         <section className="hero">
             <div className="hero__bg">
-                <img src={bannerImg} alt="" className="hero__bg-img" />
+                <img src={bannerImg.src} alt="" className="hero__bg-img" />
             </div>
             <div className="hero__bg-overlay" />
 

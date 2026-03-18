@@ -1,6 +1,8 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
-import { stats, processSteps } from '../../data/siteData';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
+import { stats, processSteps } from '@/data/siteData';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import './Process.css';
 
 function Counter({ target, suffix = '' }) {

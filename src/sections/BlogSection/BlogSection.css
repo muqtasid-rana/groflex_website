@@ -1,0 +1,158 @@
+/* =========================================
+   BLOG SECTION — Horizontal Scroll
+   ========================================= */
+
+.blog-section {
+  overflow: visible;
+}
+
+/* Scrollable area */
+.blog-section__scroll-area {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-soft) transparent;
+  padding-bottom: var(--space-md);
+}
+
+.blog-section__scroll-area::-webkit-scrollbar {
+  height: 6px;
+}
+
+.blog-section__scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blog-section__scroll-area::-webkit-scrollbar-thumb {
+  background: var(--color-primary-soft);
+  border-radius: 10px;
+}
+
+.blog-section__scroll-area::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* Track: horizontal row of cards */
+.blog-section__track {
+  display: flex;
+  gap: var(--space-xl);
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  width: max-content;
+  margin: 0 auto; /* Centers the track when there are few cards */
+}
+
+/* Card */
+.blog-section__card {
+  flex: 0 0 360px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.blog-section__card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Card image */
+.blog-section__card-img {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-bg-muted);
+}
+
+.blog-section__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.blog-section__card:hover .blog-section__card-img img {
+  transform: scale(1.05);
+}
+
+.blog-section__card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-text-muted);
+  opacity: 0.3;
+}
+
+/* Card body */
+.blog-section__card-body {
+  padding: var(--space-lg) var(--space-xl) var(--space-xl);
+}
+
+.blog-section__card-date {
+  display: block;
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-xs);
+}
+
+.blog-section__card-title {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-section__card-excerpt {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.blog-section__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+  transition: gap var(--transition-fast);
+}
+
+.blog-section__card-link:hover {
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-section__card {
+    flex: 0 0 300px;
+  }
+
+  .blog-section__card-img {
+    height: 170px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-section__card {
+    flex: 0 0 270px;
+  }
+}

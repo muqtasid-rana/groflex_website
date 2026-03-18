@@ -1,4 +1,4 @@
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
+import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import './About.css';
 
 export default function About() {
