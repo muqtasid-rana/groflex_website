@@ -86,8 +86,8 @@ export default function Navbar() {
                 </nav>
 
                 <div className="navbar__actions">
-                    <Button variant="primary" size="sm" href="https://form.typeform.com/to/eh6mbf1u" target="_blank" rel="noopener noreferrer">
-                        Let's Talk
+                    <Button variant="primary" size="sm" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }}>
+                        Book Call
                     </Button>
 
                     <button
@@ -127,8 +127,8 @@ export default function Navbar() {
                                 </a>
                             )
                         ))}
-                        <Button variant="primary" size="md" href="https://form.typeform.com/to/eh6mbf1u" onClick={() => setMobileMenuOpen(false)} target="_blank" rel="noopener noreferrer">
-                            Let's Talk
+                        <Button variant="primary" size="md" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }} onClick={() => setMobileMenuOpen(false)}>
+                            Book Call
                         </Button>
                     </nav>
                 </div>

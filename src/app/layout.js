@@ -3,6 +3,7 @@ import '@/styles/animations.css';
 import '@/styles/global.css';
 import SiteLayout from '@/layout/SiteLayout';
 import { Analytics } from "@vercel/analytics/next";
+import Script from 'next/script';
 
 export const metadata = {
   title: 'Groflex — Software & Design Agency',
@@ -24,6 +25,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-R5XNDZ1D7P" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-R5XNDZ1D7P');
+          `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

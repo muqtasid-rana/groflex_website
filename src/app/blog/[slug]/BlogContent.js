@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getAllBlogs } from '@/lib/blogs';
+import { tallyFormConfig } from '@/data/siteData';
 
 export default function BlogContent({ blog }) {
   const [similarBlogs, setSimilarBlogs] = useState([]);
@@ -57,17 +58,19 @@ export default function BlogContent({ blog }) {
             <p className="blog-detail__cta-text">
               Partner with a team that cares about your success as much as you do.
             </p>
-            <a
-              href="https://form.typeform.com/to/eh6mbf1u"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
               className="blog-detail__cta-btn"
+              data-tally-open={tallyFormConfig.formId}
+              data-tally-layout={tallyFormConfig.layout}
+              data-tally-width={tallyFormConfig.width}
+              data-tally-hide-title={tallyFormConfig.hideTitle}
+              data-tally-auto-close={tallyFormConfig.autoClose}
             >
               Book a free consultation
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </div>

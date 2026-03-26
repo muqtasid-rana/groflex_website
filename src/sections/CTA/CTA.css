@@ -94,6 +94,47 @@
     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2) !important;
 }
 
+/* CTA Subline — value proposition */
+.cta__subline {
+    font-size: var(--fs-body);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: var(--lh-relaxed);
+    margin-top: var(--space-lg);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CTA Urgency — scarcity badge */
+.cta__urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-bold, 700);
+    color: #ffffff;
+    background: rgba(239, 68, 68, 0.85);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    padding: 0.4rem 1.15rem;
+    border-radius: var(--radius-full);
+    animation: ctaUrgencyPulse 2.5s ease-in-out infinite;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+@keyframes ctaUrgencyPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
 /* Social links */
 .cta__socials {
     display: flex;
@@ -145,5 +186,9 @@
 
     .cta__main-btn {
         max-width: 100%;
+    }
+
+    .cta__subline {
+        font-size: var(--fs-body-sm);
     }
 }

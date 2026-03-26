@@ -1,7 +1,16 @@
 import Button from '@/components/Button/Button';
+import { tallyFormConfig } from '@/data/siteData';
 import './CTA.css';
 
+function getDailySpotsLeft() {
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    return (seed % 4) + 1; // 1-4
+}
+
 export default function CTA() {
+    const spotsLeft = getDailySpotsLeft();
+
     return (
         <section className="section cta">
             <div className="cta__bg-shapes">
@@ -19,12 +28,18 @@ export default function CTA() {
                         Transform your vision into a digital reality. Partner with a team that cares about your success as much as you do.
                     </p>
                     <div className="cta__actions">
-                        <Button variant="white" size="lg" href="https://form.typeform.com/to/eh6mbf1u" className="cta__main-btn" target="_blank" rel="noopener noreferrer">
-                            Book a free consultation call
+                        <Button variant="white" size="lg" tallyConfig={tallyFormConfig} className="cta__main-btn">
+                            Get Your Free Video Website Audit
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                         </Button>
+                        <p className="cta__subline">
+                            We'll show you exactly what's killing your conversions, personal video delivered in 48hrs
+                        </p>
+                        <span className="cta__urgency">
+                            Only 5 audits per week · {spotsLeft} spots left this week
+                        </span>
                     </div>
 
                 </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { projects } from '@/data/siteData';
+import { projects, tallyFormConfig } from '@/data/siteData';
 import './CaseStudyPage.css';
 
 export default function CaseStudyPage({ id }) {
@@ -143,17 +143,19 @@ export default function CaseStudyPage({ id }) {
                 <div className="cs-page__container cs-page__container--center">
                     <h3 className="cs-page__cta-title">Ready to Build Something Like This?</h3>
                     <p className="cs-page__cta-sub">Let&apos;s discuss how we can deliver similar results for your business — faster and at a fraction of the cost.</p>
-                    <a
-                        href="https://form.typeform.com/to/eh6mbf1u"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <button
                         className="cs-page__cta-btn"
+                        data-tally-open={tallyFormConfig.formId}
+                        data-tally-layout={tallyFormConfig.layout}
+                        data-tally-width={tallyFormConfig.width}
+                        data-tally-hide-title={tallyFormConfig.hideTitle}
+                        data-tally-auto-close={tallyFormConfig.autoClose}
                     >
                         Book a Free Consultation
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

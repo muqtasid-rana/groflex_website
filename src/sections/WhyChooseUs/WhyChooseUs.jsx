@@ -1,4 +1,4 @@
-import { whyChooseUs } from '@/data/siteData';
+import { whyChooseUs, tallyFormConfig } from '@/data/siteData';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import Button from '@/components/Button/Button';
 import team from '@/assets/team.png';
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
                             seamless journey.
                         </p>
 
-                        <Button variant="primary" size="md" href="https://form.typeform.com/to/eh6mbf1u" className="why-choose__cta" target="_blank" rel="noopener noreferrer">
+                        <Button variant="primary" size="md" tallyConfig={tallyFormConfig} className="why-choose__cta">
                             Let&apos;s talk
                         </Button>
 

@@ -122,7 +122,7 @@ export default function Contact() {
                                     id="contact-message"
                                     name="message"
                                     className="contact__input contact__textarea"
-                                    placeholder="Tell us about your project..."
+                                    placeholder="How can we help you?..."
                                     rows="5"
                                     value={formData.message}
                                     onChange={handleChange}

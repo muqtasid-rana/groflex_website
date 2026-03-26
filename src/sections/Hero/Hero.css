@@ -143,11 +143,14 @@
 .hero__cta-btn {
     width: 100%;
     max-width: 400px;
-    font-size: var(--fs--lg) !important;
+    font-size: 1.05rem !important;
+    padding: 0.65rem 2.5rem !important;
     border-radius: 200px !important;
-    gap: var(--space-sm) !important;
-    background: linear-gradient(135deg, #2563eb 0%, #2118c4 50%, #f163e3 100%) !important;
-    border: 1px solid rgba(14, 37, 212, 0.4) !important;
+    gap: 4px !important;
+    flex-direction: column !important;
+    white-space: normal !important;
+    background: linear-gradient(225deg, #df1de9 0%, #1e3a8a 30%, #1e40af 60%, #1d4ed8 100%) !important;
+    border: 1px solid rgba(30, 64, 175, 0.5) !important;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease !important;
@@ -179,6 +182,31 @@
     }
 }
 
+/* Urgency sub-line inside CTA button */
+.hero__cta-btn-urgency {
+    display: block;
+    font-size: 0.65em;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+    margin-bottom: 0;
+    text-transform: none;
+    animation: urgencyBlink 2s ease-in-out infinite;
+}
+
+@keyframes urgencyBlink {
+
+    0%,
+    100% {
+        color: #ffffff;
+    }
+
+    50% {
+        color: #fca5a5;
+    }
+}
+
 .hero__cta-btn:hover {
     transform: translateY(-3px) !important;
     box-shadow:
@@ -186,6 +214,43 @@
         0 0 80px rgba(99, 102, 241, 0.25),
         0 8px 32px rgba(0, 0, 0, 0.4) !important;
     border-color: rgba(139, 143, 255, 0.6) !important;
+}
+
+/* CTA Subline — value proposition */
+.hero__cta-subline {
+    font-size: var(--fs-body);
+    color: rgba(255, 255, 255, 0.55);
+    line-height: var(--lh-relaxed);
+    margin-top: var(--space-lg);
+    max-width: 460px;
+}
+
+/* CTA Urgency — scarcity badge */
+.hero__cta-urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-semibold);
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius-full);
+    animation: urgencyPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes urgencyPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
 }
 
 /* Social links */
@@ -258,6 +323,11 @@
 
     .hero__cta-btn {
         max-width: 100%;
+    }
+
+    .hero__cta-subline {
+        font-size: var(--fs-body-sm);
+        text-align: center;
     }
 
     .hero__socials {

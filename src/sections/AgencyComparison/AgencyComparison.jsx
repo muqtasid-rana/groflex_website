@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import Button from '@/components/Button/Button';
+import { tallyFormConfig } from '@/data/siteData';
 import './AgencyComparison.css';
 
 const comparisonRows = [
@@ -170,11 +171,9 @@ export default function AgencyComparison() {
                     <Button
                         variant="primary"
                         size="lg"
-                        href="https://form.typeform.com/to/eh6mbf1u"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        tallyConfig={tallyFormConfig}
                     >
-                        Get a Free Quote
+                        Claim Free Website Audit
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>

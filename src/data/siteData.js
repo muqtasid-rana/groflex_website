@@ -13,7 +13,6 @@ export const navLinks = [
   { label: 'Our Work', href: '#work' },
   { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#why-us' },
-  { label: 'Process', href: '#process' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact Us', href: '#contact' },
 ];
@@ -315,3 +314,12 @@ export const socialLinks = [
   // { label: 'Facebook', href: 'https://facebook.com', icon: 'fa-brands fa-facebook-f' },
   { label: 'WhatsApp', href: 'https://wa.me/+923359528776', icon: 'fa-brands fa-whatsapp' },
 ];
+
+// ---- Tally.so Form Config (single source of truth for all audit CTAs) ----
+export const tallyFormConfig = {
+  formId: '5BLG8d',
+  layout: 'modal',
+  width: 676,
+  hideTitle: 1,
+  autoClose: 2500,
+};
