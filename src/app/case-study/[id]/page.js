@@ -5,8 +5,9 @@ export function generateStaticParams() {
   return projects.map((p) => ({ id: String(p.id) }));
 }
 
-export function generateMetadata({ params }) {
-  const project = projects.find((p) => String(p.id) === params.id);
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const project = projects.find((p) => String(p.id) === id);
   if (!project) return { title: 'Project Not Found' };
   return {
     title: `${project.title} — Groflex Case Study`,
@@ -18,6 +19,7 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function CaseStudyRoute({ params }) {
-  return <CaseStudyPage id={params.id} />;
+export default async function CaseStudyRoute({ params }) {
+  const { id } = await params;
+  return <CaseStudyPage id={id} />;
 }

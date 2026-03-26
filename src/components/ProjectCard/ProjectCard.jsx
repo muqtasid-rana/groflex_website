@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import './ProjectCard.css';
 
 export default function ProjectCard({ id, title, category, description, color, image }) {
@@ -6,7 +7,7 @@ export default function ProjectCard({ id, title, category, description, color, i
         <div className="project-card">
             <div className="project-card__image" style={{ backgroundColor: color }}>
                 {image ? (
-                    <img src={image.src || image} alt={title} className="project-card__img-cover" />
+                    <Image src={image} fill sizes="(max-width: 768px) 100vw, 50vw" alt={title} className="project-card__img-cover" />
                 ) : null}
                 <div className="project-card__overlay">
                     <Link href={`/case-study/${id}`} className="project-card__view-btn">

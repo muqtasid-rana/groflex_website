@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { navLinks } from '@/data/siteData';
 import Button from '@/components/Button/Button';
@@ -61,7 +62,7 @@ export default function Navbar() {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }}>
-                    <img className='navbar__logo' src={logo.src} alt="Groflex" />
+                    <Image className='navbar__logo' src={logo} width={80} height={80} alt="Groflex" priority />
                 </Link>
                 <nav className="navbar__nav">
                     <ul className="navbar__list">

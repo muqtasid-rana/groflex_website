@@ -109,6 +109,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: gradientShift 6s ease-in-out infinite;
+    will-change: background-position;
 }
 
 @keyframes gradientShift {
@@ -156,12 +157,12 @@
     transition: all 0.3s ease !important;
 }
 
-/* Shimmer sweep */
+/* Shimmer sweep — GPU-composited via transform */
 .hero__cta-btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg,
@@ -170,15 +171,16 @@
             transparent 100%);
     animation: shimmer 3s ease-in-out infinite;
     pointer-events: none;
+    will-change: transform;
 }
 
 @keyframes shimmer {
     0% {
-        left: -100%;
+        transform: translateX(-100%);
     }
 
     100% {
-        left: 200%;
+        transform: translateX(200%);
     }
 }
 
@@ -199,11 +201,11 @@
 
     0%,
     100% {
-        color: #ffffff;
+        opacity: 1;
     }
 
     50% {
-        color: #fca5a5;
+        opacity: 0.6;
     }
 }
 

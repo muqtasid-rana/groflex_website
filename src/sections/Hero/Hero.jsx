@@ -1,6 +1,7 @@
 'use client';
 
 import bannerImg from '@/assets/banner.webp';
+import Image from 'next/image';
 import Button from '@/components/Button/Button';
 import { socialLinks, tallyFormConfig } from '@/data/siteData';
 import './Hero.css';
@@ -17,7 +18,7 @@ export default function Hero() {
     return (
         <section className="hero">
             <div className="hero__bg">
-                <img src={bannerImg.src} alt="" className="hero__bg-img" />
+                <Image src={bannerImg} fill sizes="100vw" alt="" className="hero__bg-img" priority />
             </div>
             <div className="hero__bg-overlay" />
 
@@ -25,7 +26,7 @@ export default function Hero() {
                 <div className="hero__text">
                     <br />
 
-                    <h1 className="hero__title animate-in animate-in-delay-1">
+                    <h1 className="hero__title">
                         AI-Accelerated Design & Development
                         <span className="hero__title-sub">Reduce 60% time & cost in design & development with AI</span>
                     </h1>
