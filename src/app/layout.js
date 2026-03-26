@@ -5,6 +5,8 @@ import SiteLayout from '@/layout/SiteLayout';
 import { Analytics } from "@vercel/analytics/next";
 import Script from 'next/script';
 
+export const viewport = 'width=device-width, initial-scale=1';
+
 export const metadata = {
   metadataBase: new URL('https://www.groflex.co'),
   title: 'Groflex — Software & Design Agency',
@@ -14,7 +16,6 @@ export const metadata = {
     icon: '/favicon.png',
     apple: '/favicon.png',
   },
-  viewport: 'width=device-width, initial-scale=1',
   alternates: {
     canonical: '/',
   },
