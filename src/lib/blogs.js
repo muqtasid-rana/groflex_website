@@ -11,9 +11,20 @@ import {
   orderBy,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db } from './firebase';
 
 const BLOGS_COLLECTION = 'blogs';
+
+/**
+ * Lazy-initialize Firestore to avoid loading Firebase on every page visit.
+ * Firebase SDK (90KB+) was previously loaded eagerly, blocking the critical path.
+ */
+let _db = null;
+async function getDb() {
+  if (_db) return _db;
+  const { db } = await import('./firebase');
+  _db = db;
+  return _db;
+}
 
 /**
  * Serialize Firestore Timestamp fields to ISO strings
@@ -32,6 +43,7 @@ function serializeBlog(docSnap) {
  * Get all published blogs, ordered by date descending
  */
 export async function getAllBlogs() {
+  const db = await getDb();
   const q = query(
     collection(db, BLOGS_COLLECTION),
     orderBy('date', 'desc')
@@ -44,6 +56,7 @@ export async function getAllBlogs() {
  * Get a single blog by its slug
  */
 export async function getBlogBySlug(slug) {
+  const db = await getDb();
   const q = query(
     collection(db, BLOGS_COLLECTION),
     where('slug', '==', slug)
@@ -57,6 +70,7 @@ export async function getBlogBySlug(slug) {
  * Get a single blog by its Firestore document ID
  */
 export async function getBlogById(id) {
+  const db = await getDb();
   const docRef = doc(db, BLOGS_COLLECTION, id);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) return null;
@@ -67,6 +81,7 @@ export async function getBlogById(id) {
  * Create a new blog post
  */
 export async function createBlog(data) {
+  const db = await getDb();
   const docRef = await addDoc(collection(db, BLOGS_COLLECTION), {
     ...data,
     createdAt: serverTimestamp(),
@@ -79,6 +94,7 @@ export async function createBlog(data) {
  * Update an existing blog post
  */
 export async function updateBlog(id, data) {
+  const db = await getDb();
   const docRef = doc(db, BLOGS_COLLECTION, id);
   await updateDoc(docRef, {
     ...data,
@@ -90,6 +106,7 @@ export async function updateBlog(id, data) {
  * Delete a blog post
  */
 export async function deleteBlog(id) {
+  const db = await getDb();
   const docRef = doc(db, BLOGS_COLLECTION, id);
   await deleteDoc(docRef);
 }

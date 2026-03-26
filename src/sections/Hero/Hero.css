@@ -104,25 +104,25 @@
     letter-spacing: 0;
     font-weight: var(--fw-medium);
     background: linear-gradient(90deg, #3b82f6, #818cf8, #e879f9, #f472b6, #818cf8, #3b82f6);
-    background-size: 300% 100%;
+    background-size: 100% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 6s ease-in-out infinite;
-    will-change: background-position;
+    animation: hueShift 6s ease-in-out infinite;
+    will-change: filter;
 }
 
-@keyframes gradientShift {
+@keyframes hueShift {
     0% {
-        background-position: 0% 50%;
+        filter: hue-rotate(0deg);
     }
 
     50% {
-        background-position: 100% 50%;
+        filter: hue-rotate(45deg);
     }
 
     100% {
-        background-position: 0% 50%;
+        filter: hue-rotate(0deg);
     }
 }
 

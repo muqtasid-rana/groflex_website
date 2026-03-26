@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Script from 'next/script';
 
 export const metadata = {
+  metadataBase: new URL('https://www.groflex.co'),
   title: 'Groflex — Software & Design Agency',
   description:
     'Groflex is a premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
@@ -13,18 +14,74 @@ export const metadata = {
     icon: '/favicon.png',
     apple: '/favicon.png',
   },
+  viewport: 'width=device-width, initial-scale=1',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Groflex — Software & Design Agency',
     description:
       'Groflex is a premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
     type: 'website',
+    url: 'https://www.groflex.co',
+    siteName: 'Groflex',
+    images: [
+      {
+        url: '/favicon.png',
+        width: 512,
+        height: 512,
+        alt: 'Groflex Logo',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary',
+    title: 'Groflex — Software & Design Agency',
+    description:
+      'Premium software and design agency delivering world-class digital products for enterprise clients.',
+    images: ['/favicon.png'],
+  },
+};
+
+// JSON-LD Structured Data for Google Knowledge Panel & rich results
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Groflex',
+  url: 'https://www.groflex.co',
+  logo: 'https://www.groflex.co/favicon.png',
+  description:
+    'Premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
+  email: 'groflex.co@gmail.com',
+  telephone: '+923359528776',
+  sameAs: [
+    'https://instagram.com/groflex.co',
+    'https://linkedin.com/company/groflex-co',
+    'https://wa.me/+923359528776',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'PK',
+  },
+  knowsAbout: [
+    'Web Design',
+    'Web Development',
+    'Mobile App Development',
+    'UI/UX Design',
+    'Branding',
+    'AI-powered Development',
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-R5XNDZ1D7P" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
