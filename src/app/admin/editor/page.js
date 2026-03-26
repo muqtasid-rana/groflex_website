@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState, useMemo, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { createBlog, updateBlog, getBlogById } from '@/lib/blogs';
-import { storage } from '@/lib/firebase';
+import { storage } from '@/lib/firebase-admin';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import dynamic from 'next/dynamic';
 

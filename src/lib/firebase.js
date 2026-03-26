@@ -1,7 +1,13 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { getStorage } from 'firebase/storage';
+
+/**
+ * Lightweight Firebase init — only Firestore.
+ * Auth and Storage are NOT initialized here to avoid loading
+ * auth/iframe.js (90KB) on public pages.
+ *
+ * For Auth/Storage, use firebase-admin.js (admin routes only).
+ */
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'YOUR_API_KEY',
@@ -15,5 +21,4 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
+export { app };
