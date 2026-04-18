@@ -2,6 +2,8 @@ import { getAllBlogs } from '@/lib/blogs';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://groflex.co';
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap() {
   // Static pages
   const staticPages = [
@@ -33,9 +35,9 @@ export default async function sitemap() {
     const blogs = await getAllBlogs();
     blogPages = blogs.map((blog) => ({
       url: `${SITE_URL}/blog/${blog.slug}`,
-      lastModified: blog.updatedAt?.toDate?.() || new Date(blog.date || Date.now()),
+      lastModified: blog.updatedAt ? new Date(blog.updatedAt) : new Date(blog.date || Date.now()),
       changeFrequency: 'weekly',
-      priority: 0.6,
+      priority: 0.8,
     }));
   } catch (e) {
     console.error('Sitemap: failed to fetch blogs', e);
