@@ -1,7 +1,6 @@
 import '@/styles/tokens.css';
 import '@/styles/animations.css';
 import '@/styles/global.css';
-import SiteLayout from '@/layout/SiteLayout';
 import { Analytics } from "@vercel/analytics/next";
 import Script from 'next/script';
 
@@ -97,7 +96,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&display=swap"
           rel="stylesheet"
         />
         {/* FontAwesome — deferred to avoid render-blocking */}
@@ -125,7 +124,7 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body>
-        <SiteLayout>{children}</SiteLayout>
+        {children}
         <Analytics />
       </body>
     </html>

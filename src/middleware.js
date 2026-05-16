@@ -20,7 +20,7 @@ const CSP_DIRECTIVES = [
   // Fonts: self + Google Fonts + FontAwesome font files
   "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:",
   // Connect: API calls to Firebase, GA, Tally, EmailJS, Vercel
-  "connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://www.google-analytics.com https://analytics.google.com https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://tally.so https://*.tally.so https://api.emailjs.com https://va.vercel-scripts.com https://vercel.live wss://*.firebaseio.com",
+  "connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://www.google-analytics.com https://analytics.google.com https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://tally.so https://*.tally.so https://api.emailjs.com https://api.openai.com https://va.vercel-scripts.com https://vercel.live wss://*.firebaseio.com",
   // Frames: Tally.so popups + Firebase Auth
   "frame-src 'self' https://tally.so https://*.tally.so https://*.firebaseapp.com https://accounts.google.com",
   // Workers

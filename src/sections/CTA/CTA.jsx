@@ -1,5 +1,4 @@
-import Button from '@/components/Button/Button';
-import { tallyFormConfig } from '@/data/siteData';
+import Link from 'next/link';
 import './CTA.css';
 
 function getDailySpotsLeft() {
@@ -28,17 +27,17 @@ export default function CTA() {
                         Transform your vision into a digital reality. Partner with a team that cares about your success as much as you do.
                     </p>
                     <div className="cta__actions">
-                        <Button variant="white" size="lg" tallyConfig={tallyFormConfig} className="cta__main-btn">
-                            Get Your Free Video Website Audit
+                        <Link href="/gameplan" className="btn btn--white btn--lg cta__main-btn">
+                            Get Your Free GAMEPLAN
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M8 5v14l11-7z" />
+                                <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
-                        </Button>
+                        </Link>
                         <p className="cta__subline">
-                            We'll show you exactly what's killing your conversions, personal video delivered in 48hrs
+                            A 60-second quiz that gives you a brutally honest 90-day roadmap for your business.
                         </p>
                         <span className="cta__urgency">
-                            Only 5 audits per week · {spotsLeft} spots left this week
+                            Built for founders · {spotsLeft} free reports left today
                         </span>
                     </div>
 

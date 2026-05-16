@@ -2,8 +2,8 @@
 
 import bannerImg from '@/assets/banner.webp';
 import Image from 'next/image';
-import Button from '@/components/Button/Button';
-import { socialLinks, tallyFormConfig } from '@/data/siteData';
+import Link from 'next/link';
+import { socialLinks } from '@/data/siteData';
 import './Hero.css';
 
 function getDailySpotsLeft() {
@@ -37,14 +37,14 @@ export default function Hero() {
                     </p> */}
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
-                        <Button variant="primary" size="lg" tallyConfig={tallyFormConfig} className="hero__cta-btn">
-                            Claim Your Free Website Audit
-                            <p className="hero__cta-btn-urgency">(Only 5 audits per week - {spotsLeft} left)</p>
-                        </Button>
+                        <Link href="/gameplan" className="btn btn--primary btn--lg hero__cta-btn">
+                            Get Your Free GAMEPLAN
+                            <p className="hero__cta-btn-urgency">(60-second quiz · personalised 90-day roadmap)</p>
+                        </Link>
                         <p className="hero__cta-subline">
 
 
-                            We'll show you exactly what's killing your conversions, personal video by team delivered in 48hrs
+                            Brutally honest diagnosis of your stage and a no-fluff 90-day plan, delivered instantly.
                         </p>
 
                     </div>

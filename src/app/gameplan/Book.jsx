@@ -1,0 +1,384 @@
+'use client';
+
+import { forwardRef } from 'react';
+import { STAGE_LIST, STAGES, CONSTRAINTS } from './stageContent';
+
+const FOOTER_URL = 'groflex.co';
+
+// ============================================================
+// Book — the 6-page magazine the user scrolls through and prints
+// ============================================================
+const Book = forwardRef(function Book({ stage, ai, userName }, ref) {
+  const next = nextStage(stage.id);
+  return (
+    <div className="gp-book" ref={ref}>
+      <Cover stage={stage} userName={userName} />
+      <PageTruth stage={stage} ai={ai} />
+      <PageFocus stage={stage} ai={ai} />
+      <PageHowTo stage={stage} ai={ai} />
+      <PageBottomLine stage={stage} ai={ai} next={next} />
+      <PageNextStage stage={stage} next={next} ai={ai} />
+    </div>
+  );
+});
+
+export default Book;
+
+// ============================================================
+// PAGE 1 — Cover
+// ============================================================
+function Cover({ stage, userName }) {
+  return (
+    <article className="gp-page gp-page--cover" data-page="1">
+      <PageFrame n={1}>
+        <div className="gp-cover__top">
+          <span className="gp-cover__eyebrow">Your $10M Brand</span>
+          <h1 className="gp-cover__title">GAMEPLAN</h1>
+          {userName && <p className="gp-cover__owner">Prepared for {userName}</p>}
+        </div>
+
+        <div className="gp-cover__here">
+          <span className="gp-cover__here-label">
+            <span className="gp-cover__here-play" aria-hidden="true">▶</span>
+            You are here:
+          </span>
+          <h2 className="gp-cover__here-stage">
+            {stage.code}: <span className="gp-pink">{stage.name}</span>
+          </h2>
+          <StageProgressLine current={stage.id} />
+        </div>
+
+        <div className="gp-cover__breakdown">
+          <span className="gp-mini-label">The Breakdown</span>
+          <p className="gp-cover__breakdown-text">
+            6 constraints &nbsp;·&nbsp; 6 to graduate &nbsp;·&nbsp; already done
+          </p>
+        </div>
+
+        <div className="gp-cover__all">
+          <span className="gp-mini-label">All 8 Stages</span>
+          <div className="gp-cover__grid">
+            {STAGE_LIST.map((s) => {
+              const isCurrent = s.id === stage.id;
+              const isDone = stageIndex(s.id) < stageIndex(stage.id);
+              return (
+                <div
+                  key={s.id}
+                  className={
+                    'gp-cover__cell' +
+                    (isCurrent ? ' gp-cover__cell--current' : '') +
+                    (isDone ? ' gp-cover__cell--done' : '')
+                  }
+                >
+                  <span className="gp-cover__cell-code">{s.code}</span>
+                  <span className="gp-cover__cell-name">{s.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+function StageProgressLine({ current }) {
+  const idx = stageIndex(current);
+  return (
+    <div className="gp-progress-line" aria-hidden="true">
+      {STAGE_LIST.map((s, i) => (
+        <div
+          key={s.id}
+          className={
+            'gp-progress-line__dot' +
+            (i < idx ? ' gp-progress-line__dot--done' : '') +
+            (i === idx ? ' gp-progress-line__dot--current' : '')
+          }
+        />
+      ))}
+      <div
+        className="gp-progress-line__fill"
+        style={{ width: `${(idx / 7) * 100}%` }}
+      />
+    </div>
+  );
+}
+
+// ============================================================
+// PAGE 2 — "The Truth Is..." + 6 constraint cards
+// ============================================================
+function PageTruth({ stage, ai }) {
+  const cs = ai?.constraints || {};
+  return (
+    <article className="gp-page gp-page--truth" data-page="2">
+      <PageFrame n={2}>
+        <header className="gp-truth__header">
+          <span className="gp-mini-label">At {stage.code}</span>
+          <h2 className="gp-truth__headline">{stage.headline}</h2>
+          <p className="gp-truth__body">{stage.truth}</p>
+          <div className="gp-truth__challenge">
+            <span className="gp-mini-label">The biggest challenge</span>
+            <span className="gp-truth__challenge-tag">{stage.biggestChallenge}</span>
+          </div>
+        </header>
+
+        <div className="gp-constraints">
+          {CONSTRAINTS.map((c) => (
+            <div className="gp-constraint" key={c.id}>
+              <span className="gp-constraint__label">{c.label}</span>
+              <p className="gp-constraint__pain">
+                {cs[c.id]?.pain || '—'}
+              </p>
+            </div>
+          ))}
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+// ============================================================
+// PAGE 3 — Your Focus (bar chart + Problem / Cause / When Solved)
+// ============================================================
+function PageFocus({ stage, ai }) {
+  const focus = ai?.focus || {};
+  const cs = ai?.constraints || {};
+  const focusArea = focus.area || 'identity';
+  const focusLabel = CONSTRAINTS.find((c) => c.id === focusArea)?.label || 'identity';
+
+  return (
+    <article className="gp-page gp-page--focus" data-page="3">
+      <PageFrame n={3}>
+        <header className="gp-focus__header">
+          <h2 className="gp-focus__title">YOUR FOCUS</h2>
+          <p className="gp-focus__sub">
+            should be on <em className="gp-pink">{focusLabel.toLowerCase()}</em>
+          </p>
+        </header>
+
+        <div className="gp-bars">
+          {CONSTRAINTS.map((c) => {
+            const score = clampScore(cs[c.id]?.score);
+            const isFocus = c.id === focusArea;
+            return (
+              <div
+                key={c.id}
+                className={'gp-bar' + (isFocus ? ' gp-bar--focus' : '')}
+              >
+                <span className="gp-bar__label">{c.label.toUpperCase()}</span>
+                <div className="gp-bar__track">
+                  <Segments count={10} filled={Math.round(score / 10)} severity={severityFromScore(score)} isFocus={isFocus} />
+                </div>
+                <span className="gp-bar__pct">{score}%</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="gp-focus__blocks">
+          <div className="gp-focus__block">
+            <span className="gp-mini-label">The Problem</span>
+            <p>{focus.problem || '—'}</p>
+          </div>
+          <div className="gp-focus__block">
+            <span className="gp-mini-label">The Cause</span>
+            <p>{focus.cause || '—'}</p>
+          </div>
+          <div className="gp-focus__block gp-focus__block--solved">
+            <span className="gp-mini-label">When Solved</span>
+            <p>{focus.whenSolved || '—'}</p>
+          </div>
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+function Segments({ count, filled, severity, isFocus }) {
+  return (
+    <div className="gp-segments">
+      {Array.from({ length: count }).map((_, i) => (
+        <span
+          key={i}
+          className={
+            'gp-seg' +
+            (i < filled ? ` gp-seg--on gp-seg--${severity}` : '') +
+            (isFocus && i < filled ? ' gp-seg--focus' : '')
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
+// ============================================================
+// PAGE 4 — How To Succeed (priority grid)
+// ============================================================
+function PageHowTo({ stage, ai }) {
+  const cs = ai?.constraints || {};
+  const ordered = [...CONSTRAINTS].sort((a, b) => {
+    const pa = cs[a.id]?.priority ?? 99;
+    const pb = cs[b.id]?.priority ?? 99;
+    return pa - pb;
+  });
+  return (
+    <article className="gp-page gp-page--howto" data-page="4">
+      <PageFrame n={4}>
+        <header className="gp-howto__header">
+          <h2 className="gp-howto__title">HOW TO SUCCEED</h2>
+          <p className="gp-howto__sub">
+            Priorities ranked. What to do first, what to ignore for now.
+          </p>
+        </header>
+
+        <div className="gp-priorities">
+          {ordered.map((c, i) => {
+            const data = cs[c.id] || {};
+            const priority = data.priority ?? i + 1;
+            const cls =
+              priority === 1
+                ? 'gp-priority--p1'
+                : priority <= 3
+                ? 'gp-priority--p2'
+                : 'gp-priority--p3';
+            const marker =
+              priority === 1 ? '✓' : priority <= 3 ? '!' : '✕';
+            return (
+              <div key={c.id} className={`gp-priority ${cls}`}>
+                <div className="gp-priority__head">
+                  <span className="gp-priority__name">{c.label}</span>
+                  <span className="gp-priority__marker">{marker}</span>
+                </div>
+                <span className="gp-priority__level">Priority level {priority}</span>
+                <p className="gp-priority__body">{data.howTo || '—'}</p>
+              </div>
+            );
+          })}
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+// ============================================================
+// PAGE 5 — The Bottom Line
+// ============================================================
+function PageBottomLine({ stage, ai, next }) {
+  return (
+    <article className="gp-page gp-page--bottom" data-page="5">
+      <PageFrame n={5}>
+        <header className="gp-bottom__header">
+          <h2 className="gp-bottom__title">THE BOTTOM LINE</h2>
+          <p className="gp-bottom__sub">{stage.bottomLineSub}</p>
+        </header>
+
+        <div className="gp-bottom__body">
+          <p className="gp-bottom__lead">{stage.bottomLine}</p>
+          {ai?.bottomLine && <p className="gp-bottom__personal">{ai.bottomLine}</p>}
+        </div>
+
+        <div className="gp-bottom__cta">
+          <button
+            type="button"
+            className="gp-btn gp-btn--magenta gp-btn--xl"
+            data-tally-open="kd5KV1"
+            data-tally-layout="modal"
+            data-tally-width="676"
+            data-tally-hide-title="1"
+            data-tally-auto-close="2500"
+          >
+            Explore Our Partnership
+            <span aria-hidden="true">→</span>
+          </button>
+          <p className="gp-bottom__cta-foot">Book a 1:1 call with the Groflex team.</p>
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+// ============================================================
+// PAGE 6 — This is coming in your next stage
+// ============================================================
+function PageNextStage({ stage, next, ai }) {
+  const teaser = (ai?.nextStageTeaser) || stage.nextStageTeaser;
+  return (
+    <article className="gp-page gp-page--next" data-page="6">
+      <PageFrame n={6}>
+        <header className="gp-next__header">
+          <span className="gp-mini-label">This is coming in your next stage</span>
+          <h2 className="gp-next__stage">
+            {next ? `${next.code}: ${next.name}` : 'You’ve reached the top of the map'}
+          </h2>
+        </header>
+
+        <p className="gp-next__teaser">{teaser}</p>
+
+        {next && (
+          <div className="gp-next__line">
+            <StageProgressLine current={next.id} />
+          </div>
+        )}
+
+        <div className="gp-next__cta">
+          <button
+            type="button"
+            className="gp-btn gp-btn--ghost-light"
+            data-tally-open="kd5KV1"
+            data-tally-layout="modal"
+            data-tally-width="676"
+            data-tally-hide-title="1"
+            data-tally-auto-close="2500"
+          >
+            Build the next stage with us →
+          </button>
+        </div>
+      </PageFrame>
+    </article>
+  );
+}
+
+// ============================================================
+// Page frame — border, page number, wordmark footer
+// ============================================================
+function PageFrame({ n, children }) {
+  return (
+    <div className="gp-page__frame">
+      <div className="gp-page__corner gp-page__corner--tl">
+        <span className="gp-mark">GAMEPLAN</span>
+      </div>
+      <div className="gp-page__corner gp-page__corner--tr">
+        <span className="gp-page__num">Page {n} / 6</span>
+      </div>
+      <div className="gp-page__inner">{children}</div>
+      <div className="gp-page__corner gp-page__corner--bl">
+        <span className="gp-page__foot">{FOOTER_URL}</span>
+      </div>
+      <div className="gp-page__corner gp-page__corner--br">
+        <span className="gp-page__foot">© Groflex</span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// Helpers
+// ============================================================
+function stageIndex(id) {
+  return STAGE_LIST.findIndex((s) => s.id === id);
+}
+function nextStage(id) {
+  const i = stageIndex(id);
+  if (i < 0 || i >= STAGE_LIST.length - 1) return null;
+  return STAGE_LIST[i + 1];
+}
+function clampScore(s) {
+  const n = Number(s);
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(100, Math.round(n)));
+}
+function severityFromScore(s) {
+  if (s >= 60) return 'good';
+  if (s >= 30) return 'mid';
+  return 'low';
+}

@@ -2,8 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
-import Button from '@/components/Button/Button';
-import { tallyFormConfig } from '@/data/siteData';
+import Link from 'next/link';
 import './AgencyComparison.css';
 
 const comparisonRows = [
@@ -168,16 +167,12 @@ export default function AgencyComparison() {
                     <p className="agency-compare__cta-text">
                         Stop overpaying for slow results. Get premium quality at startup-friendly pricing.
                     </p>
-                    <Button
-                        variant="primary"
-                        size="lg"
-                        tallyConfig={tallyFormConfig}
-                    >
-                        Claim Free Website Audit
+                    <Link href="/gameplan" className="btn btn--primary btn--lg">
+                        Get Your Free GAMEPLAN
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
-                    </Button>
+                    </Link>
                 </div>
             </div>
         </section>

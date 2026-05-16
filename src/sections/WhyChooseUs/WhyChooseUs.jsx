@@ -1,6 +1,6 @@
-import { whyChooseUs, tallyFormConfig } from '@/data/siteData';
+import { whyChooseUs } from '@/data/siteData';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
-import Button from '@/components/Button/Button';
+import Link from 'next/link';
 import team from '@/assets/team.png';
 import client from '@/assets/client.png';
 import './WhyChooseUs.css';
@@ -69,9 +69,9 @@ export default function WhyChooseUs() {
                             seamless journey.
                         </p>
 
-                        <Button variant="primary" size="md" tallyConfig={tallyFormConfig} className="why-choose__cta">
-                            Let&apos;s talk
-                        </Button>
+                        <Link href="/gameplan" className="btn btn--primary btn--md why-choose__cta">
+                            Get your free gameplan
+                        </Link>
 
 
                     </div>
