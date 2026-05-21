@@ -1,22 +1,5 @@
 'use client';
 
-// ============================================================
-// THE GAMEPLAN — Groflex lead magnet (magazine version)
-// ------------------------------------------------------------
-// FILL IN:
-//   1. OPENAI_API_KEY  → currently read from NEXT_PUBLIC_OPENAI_API_KEY
-//   2. EmailJS IDs are reused from the Contact form. Make sure
-//      the EMAILJS_TEMPLATE_ID below is a template that emails
-//      the user (uses {{to_email}} / {{email}} as the recipient).
-// ============================================================
-
-const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
-// EmailJS — same IDs as Contact form
-const EMAILJS_SERVICE_ID = 'service_hnb5hs6';
-const EMAILJS_TEMPLATE_ID = 'template_9q8nfdx';
-const EMAILJS_PUBLIC_KEY = 'uvpyAU7zlrphbVVGE';
-
 import { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import {
@@ -24,76 +7,159 @@ import {
   STAGE_LIST,
   CONSTRAINTS,
   DIAGNOSTIC_QUESTIONS,
-  BUSINESS_CATEGORIES,
-  getCategoryMeta,
-  optionLabel,
   routeToStage,
 } from './stageContent';
 import Book from './Book';
 import './gameplan.css';
+import { addSubmission } from '@/lib/gameplans';
 
-const SYSTEM_PROMPT = `You are a direct, no-fluff founder advisor. You write like a senior operator who has built and sold companies — kind but unflinching. No emojis. No "great question" filler. Always address the founder as "you". Short load-bearing sentences. Generic advice that could apply to any founder is a failure state and must be rejected.`;
+const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
-function buildUserPrompt({ stage, blocker, goal, name, category, diagnostic }) {
+// EmailJS — same IDs as Contact form
+const EMAILJS_SERVICE_ID = 'service_hnb5hs6';
+const EMAILJS_TEMPLATE_ID = 'template_9q8nfdx';
+const EMAILJS_PUBLIC_KEY = 'uvpyAU7zlrphbVVGE';
+const ADMIN_NOTIFY_EMAIL = 'mmuqtasidrana@gmail.com';
+
+// ============================================================
+// SYSTEM PROMPT — exactly as specified by the founder
+// ============================================================
+const SYSTEM_PROMPT = `You are a direct, experienced advisor who has worked with dozens of non-technical SaaS and app founders. You have seen every mistake at every stage. You do not give generic advice. You do not motivate or coach. You diagnose and prescribe. Your tone is honest, direct, and specific — like a senior founder giving real talk to someone who needs to hear the truth.
+
+The user has answered 5 questions. Their two open text answers — their specific blocker and their specific 90-day goal — are the most important inputs. Every section you generate must directly reference their specific situation. If they mentioned a number use it. If they mentioned a specific problem name it. If they described a specific goal reference it by name. A response that could apply to any founder is a failure.
+
+The stage determined by questions 1 through 3 gives you the structural template. The open text answers give you the specific content. Never ignore the open text answers. Never generate content that sounds like it was written for someone else.
+
+Always write in second person. Always be specific. Never use the phrase "it seems like" or "you may" — be direct and declarative. Never copy paste the user's words back at them verbatim.`;
+
+function buildUserPrompt({ stage, blocker, goal, name, diagnostic }) {
   return `=== PRIMARY INPUTS (the personalised content MUST be built from these) ===
 Founder's exact words on their biggest blocker:
 """${blocker}"""
 
-Founder's exact words on their 90-day goal:
+Founder's exact words on what winning the next 90 days looks like:
 """${goal}"""
-
-Business category the founder picked: ${category.label} — ${category.sub}
 
 === HOW TO USE THE PRIMARY INPUTS — non-negotiable ===
 - The blocker and the goal above ARE the brief. Treat them like a client brief.
-- Reference SPECIFIC NOUNS, NUMBERS, and PRODUCT TYPES the founder used. If they wrote "SaaS", say SaaS. If they wrote "5 clients" or "$2k retainer", use those exact numbers. If they wrote "I keep redesigning my offer", quote that behaviour back at them.
-- Use vocabulary, metrics, and tactics native to a ${category.label.toLowerCase()} business. For SaaS use MRR/churn/activation, for Service use retainers/utilisation/proposal close-rate, for Retail use AOV/CAC/inventory turn, for Creator use audience-to-buyer rate, for Local use foot-traffic/repeat-rate. Do not give advice that belongs to a different business model.
-- If the blocker mentions pricing, the offer/positioning content carries the most weight. If it mentions hiring, the team content does. If it mentions audience, content/marketing does.
-- Anything you write that could apply to a random founder = failure. Re-read the blocker and goal. Be specific.
+- Reference SPECIFIC NOUNS, NUMBERS, and PRODUCT TYPES the founder used. If they wrote "100 users" or "$5k MRR", use those numbers. If they wrote a specific problem ("nobody is signing up", "churn is killing me"), name it.
+- Never echo the blocker or goal verbatim. Reframe it as a senior advisor would.
+- Audience: a non-technical SaaS / app founder who has built (or is building) a digital product but has NEVER sold anything before. Use vocabulary native to that world: ICP, MRR, churn, activation, onboarding, signups, conversion, retention. Never reference agencies, consultancies, retail, personal branding, content creation, or local business.
 
-=== TEMPLATE CONTEXT (only for tone & structure, NOT for the personalised content) ===
+=== TEMPLATE CONTEXT (tone & structure only — NOT for the personalised content) ===
 Founder name: ${name || 'the founder'}
-Business model: ${category.label}
 Diagnosed stage: ${stage.code} — ${stage.name}
 The biggest challenge tag for this stage: ${stage.biggestChallenge}
-Diagnostic answers (use only to ground revenue/maturity tone):
-  - Revenue/state: ${diagnostic.q1 || 'not given'}
-  - Day-to-day: ${diagnostic.q2 || 'not given'}
-  - What feels most true: ${diagnostic.q3 || 'not given'}
+Diagnostic answers (for grounding only):
+  - Where the product is: ${diagnostic.q1 || 'not given'}
+  - What their day looks like: ${diagnostic.q2 || 'not given'}
+  - What hits closest: ${diagnostic.q3 || 'not given'}
+
+=== THE 6 PILLARS YOU WILL DIAGNOSE ===
+- icp — Ideal Customer Profile: who exactly has this problem badly enough to pay
+- messaging — Messaging: how you describe the problem in their language, not yours
+- pmf — Product-Market Fit: does the product solve the problem well enough that they want it
+- outreach — Outreach: how you actually get in front of the right people, consistently
+- pipeline — Pipeline: a repeatable system that turns strangers into paying users
+- systems — Systems: operations that let the business run without you as the bottleneck
+
+=== BLOCKER → RED PILLAR MAPPING  ===
+Read the founder's blocker and choose the RED pillar that ACTUALLY matches what they said. Honour the literal problem they named unless there is strong evidence in their words that a deeper pillar is the real cause. Examples of how to map common blockers:
+
+- "I can't get in front of people / nobody knows we exist / I tried cold email and got nothing / I'm scared to do outreach / I don't know what channel to use" → RED = outreach
+- "Signups don't convert / users sign up then ghost / nobody activates / churn is high / users say it's confusing" → RED = pmf
+- "My landing page doesn't convert / people don't understand what we do in one sentence / I keep rewriting the homepage / the pitch falls flat" → RED = messaging
+- "I don't know who my customer is / I'm building for everyone / my pitch lands sometimes and not others / I'm pivoting the ICP every month" → RED = icp
+- "Sales are random and unpredictable / I close one deal then dry up for weeks / I can't forecast / no funnel" → RED = pipeline
+- "Everything depends on me / I'm the bottleneck / onboarding is a manual Zoom call / I'm drowning in support" → RED = systems
+
+If the blocker clearly names a pillar (e.g. they literally write "outreach is my problem"), that pillar is RED unless their evidence contradicts itself. Do NOT silently override what they said with ICP just because ICP feels like a deeper layer.
+
+=== WORKED EXAMPLES — note how the RED pillar moves with the blocker ===
+
+Example A — Blocker: "I have a working product but no one is signing up. I've posted on Twitter a few times and got nothing."
+- focus.area = "outreach" (RED). NOT ICP. They have a product and they tried a channel — the issue is distribution muscle, not who the customer is.
+- focus.problem: "The real problem isn't your product — it's that posting on Twitter is not outreach, it's hoping. You haven't picked a channel where your ICP already congregates and gone there directly, one conversation at a time."
+- pillars: outreach=red, messaging=yellow, icp=yellow, pmf=green, pipeline=green, systems=green.
+
+Example B — Blocker: "200 people signed up to my free trial but only 3 use it. I don't get why they leave."
+- focus.area = "pmf" (RED). NOT outreach. They got traffic; the product isn't earning the second session.
+- focus.problem: "Your activation is broken, not your acquisition. 200 signups with 3 active users means the product is not delivering the promised value inside the first session. The first-run experience is where they decide whether you're worth coming back to — and right now you're losing them there."
+- pillars: pmf=red, messaging=yellow, icp=yellow, outreach=green, pipeline=green, systems=green.
+
+Example C — Blocker: "I keep rewriting my landing page. People hit it and bounce. I can't explain what we do in one sentence."
+- focus.area = "messaging" (RED). NOT ICP and NOT outreach.
+- focus.problem: "The page isn't the problem — the lack of a sharp positioning statement is. If you can't describe the product in one sentence, your landing page will keep getting rewritten because each draft is trying to do too many jobs at once."
+- pillars: messaging=red, icp=yellow, pmf=yellow, outreach=green, pipeline=green, systems=green.
+
+Example D — Blocker: "I have a course idea but I don't know who I'm building it for. Everyone tells me I should niche down but I don't know how."
+- focus.area = "icp" (RED). This is when ICP is genuinely the answer.
+- focus.problem: "You don't have an offer problem — you have a ‘who pays for this’ problem. Until you can name a specific person who feels this pain badly enough to swipe a card, every other decision is a guess."
+- pillars: icp=red, messaging=yellow, pmf=yellow, outreach=green, pipeline=green, systems=green.
+
+The pattern: the RED pillar changes with the blocker. ICP is one valid answer, NOT the default answer.
 
 === OUTPUT SHAPE ===
 Return EXACTLY one JSON object — no preamble, no trailing text, no markdown:
 
 {
   "constraints": {
-    "identity":    { "pain": "...", "score": 0, "priority": 0, "howTo": "..." },
-    "positioning": { "pain": "...", "score": 0, "priority": 0, "howTo": "..." },
-    "offer":       { "pain": "...", "score": 0, "priority": 0, "howTo": "..." },
-    "content":     { "pain": "...", "score": 0, "priority": 0, "howTo": "..." },
-    "marketing":   { "pain": "...", "score": 0, "priority": 0, "howTo": "..." },
-    "team":        { "pain": "...", "score": 0, "priority": 0, "howTo": "..." }
+    "icp":       { "status": "red|yellow|green", "reason": "...", "howTo": "..." },
+    "messaging": { "status": "red|yellow|green", "reason": "...", "howTo": "..." },
+    "pmf":       { "status": "red|yellow|green", "reason": "...", "howTo": "..." },
+    "outreach":  { "status": "red|yellow|green", "reason": "...", "howTo": "..." },
+    "pipeline":  { "status": "red|yellow|green", "reason": "...", "howTo": "..." },
+    "systems":   { "status": "red|yellow|green", "reason": "...", "howTo": "..." }
   },
   "focus": {
-    "area": "identity|positioning|offer|content|marketing|team",
+    "area": "icp|messaging|pmf|outreach|pipeline|systems",
     "problem": "...",
     "cause": "...",
     "whenSolved": "..."
   },
+  "personalTruth": "...",
   "bottomLine": "...",
   "nextStageTeaser": "..."
 }
 
-=== FIELD RULES ===
-- constraints[x].pain (30–45 words): Describe the SPECIFIC way that constraint hurts THIS founder given what they wrote in their blocker. Reuse their language. No generic stage-typical commentary.
-- constraints[x].score (0–100): Current STRENGTH of that constraint for this founder (higher = stronger). The weakest score IS the focus area. Make scores reflect the blocker — whichever constraint their blocker is actually about gets the LOWEST score.
-- constraints[x].priority (1–6): Priority 1 = the focus (lowest score). Priorities 2 and 3 = next most leveraged. 4–6 = deferred for now. Each priority must be unique 1–6.
-- constraints[x].howTo (35–55 words): The single most leveraged action for THIS constraint over the next 30 days, written to serve their stated 90-day goal. Specific, concrete, action-oriented. Reference their goal numbers/nouns where it fits.
-- focus.area: MUST be the constraint id with the lowest score.
-- focus.problem (40–60 words): Quote the blocker back at them. Name the visible symptom they keep blaming. Use their exact phrasing where you can.
-- focus.cause (40–60 words): The actual underlying cause — explain why the surface blocker is a symptom of the focus constraint. Reference their words.
-- focus.whenSolved (30–45 words): Start with "Imagine when this is solved…" and paint a future state that explicitly mentions their stated 90-day goal.
-- bottomLine (60–90 words): A closing argument that references BOTH the blocker and the goal verbatim. Lands the punch and earns the partnership CTA without sounding salesy.
-- nextStageTeaser (30–50 words): Preview the next stage. Reference their goal — what unlocks once they hit it.
+=== FIELD RULES — read carefully ===
+
+constraints[x].status (red | yellow | green):
+- red    = this pillar is DIRECTLY related to the blocker the founder described — critical, fix first
+- yellow = this pillar is likely affected but not the core issue right now — needs attention soon
+- green  = no evidence this pillar is broken based on their answers — healthy for now
+Assign these by REASONING from the founder's actual blocker and goal. Not random. Exactly ONE pillar should be red (the focus area). Two or three may be yellow. The rest green.
+
+constraints[x].reason (15–25 words):
+A one-line explanation of WHY this pillar is red, yellow, or green for THIS founder, based on what they wrote. Specific to them.
+
+constraints[x].howTo (35–55 words):
+The single most leveraged action for this pillar over the next 30 days, in service of their stated 90-day goal. Specific, concrete, action-oriented. Reference their goal numbers / nouns where possible.
+
+focus.area:
+MUST be the pillar id whose status is red.
+
+focus.problem (50–70 words):
+This is the most important field. The founder wrote a blocker in their own words. DO NOT echo it back. Reframe it as a sharp analytical insight written by a senior advisor who has diagnosed this exact situation dozens of times before. Name the underlying problem behind the symptom they named — but stay anchored to the pillar that ACTUALLY matches their words (use the BLOCKER → RED PILLAR MAPPING and worked examples above). Do not reflexively reframe every blocker as an ICP problem.
+
+focus.cause (40–60 words):
+Explain WHY the symptom they named is actually a symptom of the deeper problem you just identified. Connect the dots for them. Use their words sparingly and only as evidence.
+
+focus.whenSolved (30–45 words):
+Start with "Imagine when this is solved…" and paint a specific future state that explicitly references their stated 90-day goal.
+
+personalTruth (50–70 words):
+A rewritten "truth" paragraph specifically for this founder. Do NOT write generic stage commentary. Open with a direct observation about their specific blocker. Use SaaS/app vocabulary. Reference what they wrote. Must feel written FOR them, not AT their stage group.
+
+bottomLine (90–130 words, 4–6 sentences):
+The strongest paragraph on the page. Do these three things in order:
+1. Name their specific situation using what they told us (reference the blocker by name).
+2. Identify the exact mistake they are making right now that is keeping them stuck.
+3. Tell them what happens to their product in the next 90 days if they don't fix this — reference their stated 90-day goal by name.
+No generic startup advice. No motivational fluff. Direct, declarative, second person.
+
+nextStageTeaser (30–50 words):
+Preview the next stage. Reference their 90-day goal — what unlocks once they hit it.
 
 Return ONLY the JSON. No code fences.`;
 }
@@ -107,9 +173,8 @@ export default function GameplanClient() {
   const [form, setForm] = useState({
     name: '',
     email: '',
-    category: '',
     q1: '', q1_other: '',
-    q2: [], q2_other: '',
+    q2: '', q2_other: '',
     q3: '', q3_other: '',
     blocker: '',
     goal: '',
@@ -122,22 +187,13 @@ export default function GameplanClient() {
   const [downloading, setDownloading] = useState(false);
   const bookRef = useRef(null);
 
-  // Quiz steps: name, email, category, q1, q2, q3, blocker, goal
-  const totalSteps = 8;
+  // Quiz steps: name, email, q1, q2, q3, blocker, goal
+  const totalSteps = 7;
   const stage = stageId ? STAGES[stageId] : null;
 
   const setField = (k, v) => {
     setForm((p) => ({ ...p, [k]: v }));
     setErrors((p) => ({ ...p, [k]: '' }));
-  };
-
-  const toggleQ2 = (value) => {
-    setForm((p) => {
-      const has = p.q2.includes(value);
-      const next = has ? p.q2.filter((v) => v !== value) : [...p.q2, value];
-      return { ...p, q2: next };
-    });
-    setErrors((p) => ({ ...p, q2: '' }));
   };
 
   const validate = () => {
@@ -147,21 +203,20 @@ export default function GameplanClient() {
       if (!form.email.trim()) e.email = 'Email is required.';
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'That email looks off.';
     }
-    if (step === 2 && !form.category) e.category = 'Pick the closest match.';
-    if (step === 3) {
+    if (step === 2) {
       if (!form.q1) e.q1 = 'Pick one.';
       else if (form.q1 === 'other' && form.q1_other.trim().length < 5) e.q1 = 'Describe your situation in a sentence.';
     }
-    if (step === 4) {
-      if (!form.q2 || form.q2.length === 0) e.q2 = 'Pick at least one — multiple are fine.';
-      else if (form.q2.includes('other') && form.q2_other.trim().length < 5) e.q2 = 'Describe your “Other” pick in a sentence.';
+    if (step === 3) {
+      if (!form.q2) e.q2 = 'Pick one.';
+      else if (form.q2 === 'other' && form.q2_other.trim().length < 5) e.q2 = 'Describe your situation in a sentence.';
     }
-    if (step === 5) {
+    if (step === 4) {
       if (!form.q3) e.q3 = 'Pick one.';
       else if (form.q3 === 'other' && form.q3_other.trim().length < 5) e.q3 = 'Describe your situation in a sentence.';
     }
-    if (step === 6 && form.blocker.trim().length < 10) e.blocker = 'Give us at least one full sentence.';
-    if (step === 7 && form.goal.trim().length < 10) e.goal = 'Tell us what a win looks like.';
+    if (step === 5 && form.blocker.trim().length < 10) e.blocker = 'Give us at least one full sentence.';
+    if (step === 6 && form.goal.trim().length < 10) e.goal = 'Tell us what a win looks like.';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -180,11 +235,10 @@ export default function GameplanClient() {
     const routedId = routeToStage({ q1: form.q1, q2: form.q2, q3: form.q3 });
     setStageId(routedId);
     const routedStage = STAGES[routedId];
-    const category = getCategoryMeta(form.category);
     const diagnostic = {
-      q1: humanAnswer(0, form, form.category),
-      q2: humanAnswer(1, form, form.category),
-      q3: humanAnswer(2, form, form.category),
+      q1: humanAnswer(0, form),
+      q2: humanAnswer(1, form),
+      q3: humanAnswer(2, form),
     };
     try {
       const payload = await callOpenAI({
@@ -192,17 +246,45 @@ export default function GameplanClient() {
         blocker: form.blocker,
         goal: form.goal,
         name: form.name,
-        category,
         diagnostic,
       });
       setAi(payload);
       setPhase('result');
-      // Fire EmailJS in the background
-      sendEmail({ form, stage: routedStage, ai: payload, category })
-        .then(() => setEmailSent(true))
-        .catch((err) => console.error('EmailJS error:', err));
+
+      // Fire-and-forget: save to Firestore + send both emails in parallel.
+      // None of these block the result render.
+      addSubmission({
+        name: form.name,
+        email: form.email,
+        stageId: routedId,
+        stageCode: routedStage.code,
+        stageName: routedStage.name,
+        answers: {
+          q1: form.q1, q1_other: form.q1_other,
+          q2: form.q2, q2_other: form.q2_other,
+          q3: form.q3, q3_other: form.q3_other,
+        },
+        humanAnswers: diagnostic,
+        blocker: form.blocker,
+        goal: form.goal,
+        ai: payload,
+      }).catch((err) => console.error('[GP] Firestore save failed:', err));
+
+      sendEmail({ form, stage: routedStage, ai: payload, toEmail: form.email, isAdmin: false })
+        .then((res) => {
+          console.log('[GP] User email sent:', res?.status, res?.text);
+          setEmailSent(true);
+        })
+        .catch((err) => {
+          console.error('[GP] User EmailJS error:', err?.status, err?.text || err?.message || err);
+          setAiError('We saved your gameplan but couldn’t email it. Take a screenshot — we’ll follow up.');
+        });
+
+      sendEmail({ form, stage: routedStage, ai: payload, toEmail: ADMIN_NOTIFY_EMAIL, isAdmin: true })
+        .then((res) => console.log('[GP] Admin email sent:', res?.status, res?.text))
+        .catch((err) => console.error('[GP] Admin EmailJS error:', err?.status, err?.text || err?.message || err));
     } catch (err) {
-      console.error('OpenAI error:', err);
+      console.error('OpenAI error — using fallback:', err);
       setAi(fallbackAi(routedStage));
       setAiError(
         'We hit a snag generating the personalised parts. The structural diagnosis below is still yours — refresh to retry the personalised sections.'
@@ -211,7 +293,6 @@ export default function GameplanClient() {
     }
   }
 
-  // Smooth scroll to top of result when phase changes
   useEffect(() => {
     if (phase === 'result') {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -221,6 +302,8 @@ export default function GameplanClient() {
   async function handleDownloadPdf() {
     if (!bookRef.current) return;
     setDownloading(true);
+    // Toggle print-mode CSS that locks layout to fixed A4-friendly pixel sizes.
+    bookRef.current.classList.add('gp-book--printing');
     try {
       const mod = await import('html2pdf.js');
       const html2pdf = mod.default || mod;
@@ -231,7 +314,12 @@ export default function GameplanClient() {
           margin: 0,
           filename,
           image: { type: 'jpeg', quality: 0.95 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#F5F5FF' },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#F5F5FF',
+            windowWidth: 794, // A4 width in CSS px at 96dpi (210mm)
+          },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
           pagebreak: { mode: ['css', 'legacy'] },
         })
@@ -240,6 +328,7 @@ export default function GameplanClient() {
       console.error('PDF error:', e);
       alert('Could not generate PDF. Check the console.');
     } finally {
+      bookRef.current?.classList.remove('gp-book--printing');
       setDownloading(false);
     }
   }
@@ -266,7 +355,6 @@ export default function GameplanClient() {
           form={form}
           errors={errors}
           setField={setField}
-          toggleQ2={toggleQ2}
           next={next}
           back={back}
         />
@@ -294,19 +382,20 @@ export default function GameplanClient() {
 // ============================================================
 // QUIZ VIEW
 // ============================================================
-function QuizView({ step, totalSteps, form, errors, setField, toggleQ2, next, back }) {
+function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
   return (
     <section className="gp-quiz">
       <div className="gp-quiz__inner">
         <header className="gp-quiz__header">
-          <span className="gp-eyebrow">The GAMEPLAN</span>
+          <span className="gp-eyebrow">The Founder Gameplan</span>
           <h1 className="gp-quiz__title">
-            Your <em className="gp-pink">$10M Brand</em>
-            <br />Gameplan
+            Your <em className="gp-pink">$10M</em> Founder Gameplan
           </h1>
+          <p className="gp-quiz__tagline">for SaaS and Apps</p>
           <p className="gp-quiz__sub">
-            7 honest questions. We diagnose your stage across 6 constraints and generate
-            a custom playbook for your next 90 days. Takes under 90 seconds.
+            5 honest questions. We diagnose your stage across 6 pillars and generate
+            a custom playbook for your next 90 days. Built for non-technical SaaS &
+            app founders. Takes under 90 seconds.
           </p>
         </header>
 
@@ -341,43 +430,16 @@ function QuizView({ step, totalSteps, form, errors, setField, toggleQ2, next, ba
             </Shell>
           )}
 
-          {step === 2 && (
-            <Shell
-              label="What kind of business are you running (or about to)?"
-              sub="We use this to tailor the language and the playbook to your business model."
-            >
-              <div className="gp-options gp-options--cat">
-                {BUSINESS_CATEGORIES.map((c) => (
-                  <button
-                    key={c.value}
-                    type="button"
-                    className={`gp-option gp-option--cat ${form.category === c.value ? 'gp-option--active' : ''}`}
-                    onClick={() => setField('category', c.value)}
-                    aria-pressed={form.category === c.value}
-                  >
-                    <span className="gp-option__label">{c.label}</span>
-                    <span className="gp-option__sub">{c.sub}</span>
-                  </button>
-                ))}
-              </div>
-              {errors.category && <p className="gp-err">{errors.category}</p>}
-            </Shell>
-          )}
-
-          {(step === 3 || step === 4 || step === 5) && (() => {
-            const q = DIAGNOSTIC_QUESTIONS[step - 3];
-            const isMulti = q.id === 'q2';
-            const sub = step === 3
-              ? 'Question 1 of 3 — we use the trio to diagnose your stage automatically.'
-              : step === 4
-              ? 'Question 2 of 3 — pick all that apply.'
-              : 'Question 3 of 3 — last one.';
+          {(step === 2 || step === 3 || step === 4) && (() => {
+            const q = DIAGNOSTIC_QUESTIONS[step - 2];
+            const sub = step === 2
+              ? 'Question 1 of 3 — we use the trio to diagnose your stage.'
+              : step === 3
+              ? 'Question 2 of 3 — pick the one closest to your reality.'
+              : 'Question 3 of 3 — last one before the open questions.';
             const otherKey = `${q.id}_other`;
-            const isActive = (val) =>
-              isMulti ? form.q2.includes(val) : form[q.id] === val;
-            const onPick = (val) =>
-              isMulti ? toggleQ2(val) : setField(q.id, val);
-            const showOther = isMulti ? form.q2.includes('other') : form[q.id] === 'other';
+            const isActive = (val) => form[q.id] === val;
+            const showOther = form[q.id] === 'other';
             return (
               <Shell label={q.label} sub={sub}>
                 <div className="gp-options">
@@ -385,16 +447,11 @@ function QuizView({ step, totalSteps, form, errors, setField, toggleQ2, next, ba
                     <button
                       key={opt.value}
                       type="button"
-                      className={`gp-option ${isActive(opt.value) ? 'gp-option--active' : ''} ${opt.value === 'other' ? 'gp-option--other' : ''} ${isMulti ? 'gp-option--multi' : ''}`}
-                      onClick={() => onPick(opt.value)}
+                      className={`gp-option ${isActive(opt.value) ? 'gp-option--active' : ''} ${opt.value === 'other' ? 'gp-option--other' : ''}`}
+                      onClick={() => setField(q.id, opt.value)}
                       aria-pressed={isActive(opt.value)}
                     >
-                      {isMulti && (
-                        <span className="gp-option__check" aria-hidden="true">
-                          {isActive(opt.value) ? '✓' : ''}
-                        </span>
-                      )}
-                      <span className="gp-option__label">{optionLabel(opt, form.category)}</span>
+                      <span className="gp-option__label">{opt.label}</span>
                     </button>
                   ))}
                 </div>
@@ -413,12 +470,15 @@ function QuizView({ step, totalSteps, form, errors, setField, toggleQ2, next, ba
             );
           })()}
 
-          {step === 6 && (
-            <Shell label="What's the SINGLE biggest thing blocking you right now?" sub="Be specific. “Marketing” is not an answer.">
+          {step === 5 && (
+            <Shell
+              label="What is the single biggest thing blocking you right now?"
+              sub="Be specific — not 'marketing' or 'sales' but the real problem behind it."
+            >
               <textarea
                 className="gp-input gp-textarea"
                 rows={5}
-                placeholder="e.g. I keep redesigning my offer instead of pitching it to anyone."
+                placeholder="e.g. I built the product 6 months ago, I've had 200 signups but only 3 active users and zero paying customers. I don't know how to reach the right people."
                 value={form.blocker}
                 onChange={(e) => setField('blocker', e.target.value)}
                 autoFocus
@@ -427,12 +487,15 @@ function QuizView({ step, totalSteps, form, errors, setField, toggleQ2, next, ba
             </Shell>
           )}
 
-          {step === 7 && (
-            <Shell label="What does winning the next 90 days look like?" sub="One specific outcome. Revenue, hires, launch — anything, but real.">
+          {step === 6 && (
+            <Shell
+              label="What does winning the next 90 days look like?"
+              sub="Customers, revenue, product milestone — anything specific and real."
+            >
               <textarea
                 className="gp-input gp-textarea"
                 rows={5}
-                placeholder="e.g. Land 5 paying clients on a $2k/month retainer by end of the quarter."
+                placeholder="e.g. 25 paying customers on a $49/mo plan and a repeatable acquisition channel that I can hand off."
                 value={form.goal}
                 onChange={(e) => setField('goal', e.target.value)}
                 autoFocus
@@ -484,7 +547,7 @@ function LoadingView({ name }) {
   const lines = [
     'Reading your answers...',
     'Diagnosing your real stage...',
-    'Scoring 6 constraints across your business...',
+    'Scoring 6 pillars across your business...',
     'Designing your 90-day playbook...',
     'Printing your gameplan...',
   ];
@@ -505,7 +568,7 @@ function LoadingView({ name }) {
 }
 
 // ============================================================
-// RESULT — sticky page nav + the Book
+// RESULT
 // ============================================================
 function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userName, onDownload, downloading }) {
   const [activePage, setActivePage] = useState(1);
@@ -536,7 +599,6 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
 
   return (
     <section className="gp-result">
-      {/* Top utility bar */}
       <div className="gp-result__bar">
         <div className="gp-result__bar-inner">
           <div className="gp-result__bar-left">
@@ -568,7 +630,6 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
       )}
 
       <div className="gp-result__layout">
-        {/* Sticky page nav */}
         <nav className="gp-pagenav" aria-label="Pages">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <button
@@ -582,8 +643,6 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
             </button>
           ))}
         </nav>
-
-        {/* The book */}
         <Book ref={bookRef} stage={stage} ai={ai} userName={userName} />
       </div>
     </section>
@@ -591,10 +650,10 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
 }
 
 // ============================================================
-// OPENAI CALL
+// OPENAI
 // ============================================================
-async function callOpenAI({ stage, blocker, goal, name, category, diagnostic }) {
-  const userPrompt = buildUserPrompt({ stage, blocker, goal, name, category, diagnostic });
+async function callOpenAI({ stage, blocker, goal, name, diagnostic }) {
+  const userPrompt = buildUserPrompt({ stage, blocker, goal, name, diagnostic });
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -614,103 +673,126 @@ async function callOpenAI({ stage, blocker, goal, name, category, diagnostic }) 
   if (!res.ok) throw new Error(`OpenAI ${res.status}: ${await res.text()}`);
   const data = await res.json();
   const raw = data?.choices?.[0]?.message?.content || '{}';
-  const parsed = JSON.parse(raw);
-  return normalizeAi(parsed);
+  return normalizeAi(JSON.parse(raw));
+}
+
+const VALID_STATUS = new Set(['red', 'yellow', 'green']);
+function clampStatus(s) {
+  const v = String(s || '').toLowerCase().trim();
+  return VALID_STATUS.has(v) ? v : 'yellow';
 }
 
 function normalizeAi(p) {
+  const validIds = new Set(CONSTRAINTS.map((c) => c.id));
+  const gptArea = validIds.has(p?.focus?.area) ? p.focus.area : null;
+
   const out = {
     constraints: {},
     focus: {
-      area: p?.focus?.area || 'identity',
+      area: gptArea, // may be null until we resolve below
       problem: p?.focus?.problem || '',
       cause: p?.focus?.cause || '',
       whenSolved: p?.focus?.whenSolved || p?.focus?.when_solved || '',
     },
+    personalTruth: p?.personalTruth || p?.personal_truth || '',
     bottomLine: p?.bottomLine || p?.bottom_line || '',
     nextStageTeaser: p?.nextStageTeaser || p?.next_stage_teaser || '',
   };
   CONSTRAINTS.forEach((c) => {
     const src = p?.constraints?.[c.id] || {};
     out.constraints[c.id] = {
-      pain: src.pain || '',
-      score: clampScore(src.score),
-      priority: clampPriority(src.priority),
+      status: clampStatus(src.status),
+      reason: src.reason || '',
       howTo: src.howTo || src.how_to || '',
     };
   });
-  // Force focus area = lowest score, in case GPT picked a different one
-  let lowest = { id: 'identity', score: 101 };
+
+  // Resolve the focus area. Priority order:
+  //  1) GPT's explicit focus.area, if valid AND it has a real reason/howTo
+  //  2) Whichever pillar GPT marked red (first if multiple)
+  //  3) GPT's focus.area even if its constraint entry is thin
+  //  4) Last resort: the pillar with the most substantive `reason` text
+  // NO hard-coded default to 'icp' anywhere — that was biasing the result.
+  const reds = CONSTRAINTS.filter((c) => out.constraints[c.id]?.status === 'red');
+
+  let resolvedArea = null;
+  if (gptArea && (out.constraints[gptArea]?.reason || out.constraints[gptArea]?.howTo)) {
+    resolvedArea = gptArea;
+  } else if (reds.length > 0) {
+    resolvedArea = reds[0].id;
+  } else if (gptArea) {
+    resolvedArea = gptArea;
+  } else {
+    // Pick the pillar whose `reason` field has the most content — that's
+    // where GPT spent the most thought.
+    let best = CONSTRAINTS[0].id;
+    let bestLen = -1;
+    CONSTRAINTS.forEach((c) => {
+      const len = (out.constraints[c.id]?.reason || '').length;
+      if (len > bestLen) { bestLen = len; best = c.id; }
+    });
+    resolvedArea = best;
+  }
+  out.focus.area = resolvedArea;
+
+  // Force the resolved area to RED, and demote any other reds to yellow so
+  // there is exactly one focus pillar.
   CONSTRAINTS.forEach((c) => {
-    if (out.constraints[c.id].score < lowest.score) {
-      lowest = { id: c.id, score: out.constraints[c.id].score };
+    if (c.id === resolvedArea) {
+      out.constraints[c.id].status = 'red';
+    } else if (out.constraints[c.id]?.status === 'red') {
+      out.constraints[c.id].status = 'yellow';
     }
   });
-  out.focus.area = lowest.id;
-  // Force priority 1 onto the focus area
-  out.constraints[lowest.id].priority = 1;
+
+  // Derive priority from status for the "How to Succeed" page.
+  // 1 = red, 2-3 = yellow, 4-6 = green
+  let yellowRank = 2;
+  let greenRank = 4;
+  CONSTRAINTS.forEach((c) => {
+    const s = out.constraints[c.id].status;
+    if (s === 'red') out.constraints[c.id].priority = 1;
+    else if (s === 'yellow') out.constraints[c.id].priority = yellowRank++;
+    else out.constraints[c.id].priority = greenRank++;
+  });
+
   return out;
 }
 
-function humanAnswer(qIndex, form, category) {
+function humanAnswer(qIndex, form) {
   const key = `q${qIndex + 1}`;
   const q = DIAGNOSTIC_QUESTIONS[qIndex];
-  const otherTxt = (form[`${key}_other`] || '').trim();
-
-  // Q2 is multi-select (array)
-  if (q.id === 'q2') {
-    const arr = Array.isArray(form[key]) ? form[key] : [];
-    if (arr.length === 0) return '';
-    const parts = arr.map((v) => {
-      if (v === 'other') return otherTxt ? `Other (user described): ${otherTxt}` : 'Other';
-      const opt = q.options.find((o) => o.value === v);
-      return opt ? optionLabel(opt, category) : '';
-    }).filter(Boolean);
-    return parts.join(' | ');
-  }
-
-  // Single-select questions
   const val = form[key];
   if (!val) return '';
+  const otherTxt = (form[`${key}_other`] || '').trim();
   if (val === 'other') {
-    return otherTxt ? `Other (user described): ${otherTxt}` : 'Other (no description)';
+    return otherTxt ? `Other (user described): ${otherTxt}` : 'Other';
   }
   const opt = q.options.find((o) => o.value === val);
-  return opt ? optionLabel(opt, category) : '';
-}
-
-function clampScore(n) {
-  const x = Number(n);
-  if (!Number.isFinite(x)) return 0;
-  return Math.max(0, Math.min(100, Math.round(x)));
-}
-function clampPriority(n) {
-  const x = Number(n);
-  if (!Number.isFinite(x)) return 6;
-  return Math.max(1, Math.min(6, Math.round(x)));
+  return opt ? opt.label : '';
 }
 
 function fallbackAi(stage) {
-  // Last-ditch content if GPT call fails. Keeps the page renderable.
   const blank =
     'Personalised text could not be generated. Refresh to retry the AI sections.';
   const constraints = {};
   CONSTRAINTS.forEach((c, i) => {
     constraints[c.id] = {
-      pain: blank,
-      score: 50 - i * 5,
-      priority: i + 1,
+      status: i === 0 ? 'red' : i < 3 ? 'yellow' : 'green',
+      reason: blank,
       howTo: blank,
+      priority: i + 1,
     };
   });
   return {
     constraints,
     focus: {
-      area: 'identity',
+      area: 'icp',
       problem: blank,
       cause: blank,
       whenSolved: 'Imagine when this is solved — refresh to load your personalised view.',
     },
+    personalTruth: stage.truth,
     bottomLine: stage.bottomLine,
     nextStageTeaser: stage.nextStageTeaser,
   };
@@ -719,23 +801,45 @@ function fallbackAi(stage) {
 // ============================================================
 // EMAILJS
 // ============================================================
-async function sendEmail({ form, stage, ai, category }) {
+async function sendEmail({ form, stage, ai, toEmail, isAdmin }) {
   const lines = [];
-  lines.push(`Hi ${form.name},`);
-  lines.push('');
-  lines.push(`Here is your personalised GAMEPLAN — ${stage.code}: ${stage.name}.`);
-  if (category?.label) lines.push(`Business model: ${category.label}`);
-  lines.push('');
+  if (isAdmin) {
+    lines.push(`NEW GAMEPLAN SUBMISSION`);
+    lines.push(`====================================`);
+    lines.push(`Name:  ${form.name}`);
+    lines.push(`Email: ${form.email}`);
+    lines.push(`Stage: ${stage.code} — ${stage.name}`);
+    lines.push('');
+    lines.push(`THEIR ANSWERS`);
+    lines.push(`Q1 (where the product is): ${humanAnswer(0, form)}`);
+    lines.push(`Q2 (what their day looks like): ${humanAnswer(1, form)}`);
+    lines.push(`Q3 (closest to home): ${humanAnswer(2, form)}`);
+    lines.push('');
+    lines.push(`THEIR BIGGEST BLOCKER (own words):`);
+    lines.push(form.blocker);
+    lines.push('');
+    lines.push(`THEIR 90-DAY GOAL (own words):`);
+    lines.push(form.goal);
+    lines.push('');
+    lines.push(`====================================`);
+    lines.push(`AI GAMEPLAN GENERATED FOR THEM`);
+    lines.push(`====================================`);
+  } else {
+    lines.push(`Hi ${form.name},`);
+    lines.push('');
+    lines.push(`Here is your personalised GAMEPLAN — ${stage.code}: ${stage.name}.`);
+    lines.push('');
+  }
   lines.push('THE TRUTH');
-  lines.push(stage.truth);
+  lines.push(ai.personalTruth || stage.truth);
   lines.push('');
   lines.push(`THE BIGGEST CHALLENGE — ${stage.biggestChallenge}`);
   lines.push('');
-  lines.push('CONSTRAINTS AT THIS STAGE');
+  lines.push('PILLAR DIAGNOSTIC');
   CONSTRAINTS.forEach((c) => {
     const cd = ai.constraints[c.id];
-    lines.push(`• ${c.label} (strength ${cd.score}%)`);
-    lines.push(`  ${cd.pain}`);
+    lines.push(`• ${c.label} — ${String(cd.status || '').toUpperCase()}`);
+    lines.push(`  ${cd.reason}`);
   });
   lines.push('');
   const focusLabel = CONSTRAINTS.find((c) => c.id === ai.focus.area)?.label || ai.focus.area;
@@ -754,27 +858,27 @@ async function sendEmail({ form, stage, ai, category }) {
   });
   lines.push('');
   lines.push('THE BOTTOM LINE');
-  lines.push(stage.bottomLine);
-  if (ai.bottomLine) {
-    lines.push('');
-    lines.push(ai.bottomLine);
-  }
+  lines.push(ai.bottomLine || stage.bottomLine);
   lines.push('');
   lines.push('WHAT’S COMING NEXT');
   lines.push(ai.nextStageTeaser || stage.nextStageTeaser);
   lines.push('');
-  lines.push('Book a 1:1 call: https://www.groflex.co/gameplan');
-  lines.push('');
-  lines.push('— The Groflex team');
+  if (!isAdmin) {
+    lines.push('Book your free 10-minute Loom roadmap: https://www.groflex.co/gameplan');
+    lines.push('');
+    lines.push('— The Groflex team');
+  }
   const message = lines.join('\n');
 
+  const recipient = toEmail || form.email;
+  const subjectPrefix = isAdmin ? '[NEW GAMEPLAN] ' : '';
   const params = {
-    to_email: form.email,
-    email: form.email,
-    to_name: form.name,
-    name: form.name,
+    to_email: recipient,
+    email: recipient,
+    to_name: isAdmin ? 'Admin' : form.name,
+    name: isAdmin ? `Admin — ${form.name} just submitted` : form.name,
+    subject: `${subjectPrefix}${stage.code} — ${stage.name} — ${form.name}`,
     stage: `${stage.code} — ${stage.name}`,
-    business_category: category?.label || '',
     user_blocker: form.blocker,
     user_goal: form.goal,
     message,

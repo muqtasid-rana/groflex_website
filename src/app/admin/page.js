@@ -58,6 +58,9 @@ export default function AdminDashboard() {
       <div className="admin-dash__topbar">
         <h1 className="admin-dash__title">Blog Manager</h1>
         <div className="admin-dash__actions-top">
+          <Link href="/admin/gameplans" className="admin-dash__btn admin-dash__btn--ghost">
+            <i className="fa-solid fa-clipboard-list"></i> Gameplans
+          </Link>
           <Link href="/admin/editor" className="admin-dash__btn admin-dash__btn--primary">
             <i className="fa-solid fa-plus"></i> New Post
           </Link>

@@ -1,13 +1,16 @@
 // ============================================================
-// THE GAMEPLAN — 8 stages, Nik framework
+// THE FOUNDER GAMEPLAN — for non-technical SaaS & app founders
+// 8 stages of building a digital product business.
 // Each stage has:
-//   - id, code, name        (e.g. stage0 / STAGE 0 / Decide)
-//   - headline              (the "The Truth Is..." style line)
-//   - bottomLineSub         (subheading for The Bottom Line page)
-//   - biggestChallenge      (uppercase tag)
-//   - truth                 (the long brutal-honest paragraph)
-//   - bottomLine            (closing argument paragraph)
-//   - nextStageTeaser       (1–2 lines previewing the next stage)
+//   - id, code, name
+//   - headline               (the "The Truth Is..." line)
+//   - bottomLineSub          (subheading for The Bottom Line page)
+//   - biggestChallenge       (uppercase tag)
+//   - truth                  (brutal-honest paragraph in SaaS founder language)
+//   - bottomLine             (closing argument — used as a static fallback)
+//   - nextStageTeaser
+// All language assumes the reader has built (or is building) a SaaS / app /
+// digital product and has NEVER sold anything before.
 // ============================================================
 
 export const STAGE_IDS = [
@@ -15,11 +18,11 @@ export const STAGE_IDS = [
 ];
 
 export const STAGE_LIST = [
-  { id: 'stage0', code: 'STAGE 0', name: 'Decide' },
-  { id: 'stage1', code: 'STAGE 1', name: 'Prove' },
-  { id: 'stage2', code: 'STAGE 2', name: 'Build' },
-  { id: 'stage3', code: 'STAGE 3', name: 'Differentiate' },
-  { id: 'stage4', code: 'STAGE 4', name: 'Optimize' },
+  { id: 'stage0', code: 'STAGE 0', name: 'Idea' },
+  { id: 'stage1', code: 'STAGE 1', name: 'Build' },
+  { id: 'stage2', code: 'STAGE 2', name: 'Launch' },
+  { id: 'stage3', code: 'STAGE 3', name: 'Traction' },
+  { id: 'stage4', code: 'STAGE 4', name: 'Scale' },
   { id: 'stage5', code: 'STAGE 5', name: 'Lead' },
   { id: 'stage6', code: 'STAGE 6', name: 'Pivot' },
   { id: 'stage7', code: 'STAGE 7', name: 'Expand' },
@@ -29,350 +32,216 @@ export const STAGES = {
   stage0: {
     id: 'stage0',
     code: 'STAGE 0',
-    name: 'Decide',
+    name: 'Idea',
     headline: 'The Truth Is...',
-    bottomLineSub: 'where it’s all about focus and decision',
-    biggestChallenge: 'STARTING FROM NOTHING',
+    bottomLineSub: 'where it’s all about validating the idea before building',
+    biggestChallenge: 'VALIDATING THE IDEA',
     truth:
-      "You’ve been almost ready for longer than you’d ever admit to anyone. The idea is not the problem. The decision is. While you’re still researching, planning, and waiting for the “right time,” other people with worse ideas are already in the market making mistakes that will turn them into experts.",
+      "You have an idea you can’t stop thinking about, but you haven’t written a line of code or talked to a single potential user. Every week you tell yourself you’ll start, and every week you research one more competitor instead. The problem isn’t the idea. The problem is you haven’t proven anyone actually wants it — and until you do, building anything is gambling.",
     bottomLine:
-      "You’re still standing at the start. Nothing else matters until you decide who you are, who you serve, and what you sell. Pick one. Commit publicly. Everything you build from here gets multiplied by that one decision — or zeroed out by it.",
+      "Right now you have a hypothesis, not a startup. Until you’ve talked to ten people in your ICP and heard them describe this problem in their own words, every line of code you write is a guess. Validate before you build — or you’ll spend six months building something nobody asked for.",
     nextStageTeaser:
-      "Once you’ve decided, the game changes from “what should I build” to “will anyone pay me for this.” Stage 1 is about getting your first paying proof.",
+      "Once you’ve heard real users describe this pain in their own words, the next problem is shaping it into something they’ll actually use. Stage 1 is about building the right MVP — not the prettiest one.",
   },
   stage1: {
     id: 'stage1',
     code: 'STAGE 1',
-    name: 'Prove',
+    name: 'Build',
     headline: 'You Already Know This...',
-    bottomLineSub: 'where it’s all about proof and consistency',
-    biggestChallenge: 'GET PEOPLE TO PAY YOU',
+    bottomLineSub: 'where it’s all about shipping something usable, not perfect',
+    biggestChallenge: 'SHIPPING A USABLE V1',
     truth:
-      "Some days you believe in this more than anything and other days you wonder if you’re wasting your life. You don’t have a clarity problem — you have a proof problem. No website, course, or rebrand will fix it. The only thing that fixes it is a stranger swiping their card.",
+      "You’re deep in the build. You keep adding one more feature before you’ll feel comfortable showing it to anyone. The codebase has gotten complicated and the launch date keeps drifting. The truth is your product doesn’t need more features — it needs a user. The longer you build in private, the further you get from what the market actually wants.",
     bottomLine:
-      "Nobody cares yet. That’s not cruelty, that’s default. Until your offer has put money in the bank from people who didn’t already love you, none of the other constraints are real yet. Get the proof. Then earn the right to optimize anything.",
+      "You don’t have a product problem — you have a courage problem. The build is a way to delay the harder conversation: will anyone pay for this. Cut scope. Ship the ugly version. The market gives you better feedback in one week than six months of solo coding ever will.",
     nextStageTeaser:
-      "Once strangers are paying you, the next problem isn’t demand — it’s delivery. Stage 2 is about building the business behind the offer so it doesn’t collapse under its own weight.",
+      "Once your product is in the wild, the next problem stops being technical and starts being human: getting someone to actually use it. Stage 2 is about your first 10 paying users.",
   },
   stage2: {
     id: 'stage2',
     code: 'STAGE 2',
-    name: 'Build',
+    name: 'Launch',
     headline: 'You Keep Telling Yourself...',
-    bottomLineSub: 'where it’s all about systems over hustle',
-    biggestChallenge: 'BUILDING WITHOUT BREAKING',
+    bottomLineSub: 'where it’s all about getting your first paying users',
+    biggestChallenge: 'GETTING YOUR FIRST 10 USERS',
     truth:
-      "Once I get to the next level it’ll get easier — but every level just adds more weight. Every sale creates more work. Every win creates more obligations. You’re the bottleneck and you know it, but slowing down to fix it feels like losing momentum you can’t afford to lose.",
+      "If I just keep building, someone will eventually find it. But nobody is finding it. The signups you do get don’t come back. You’ve never sold anything to anyone, and the idea of cold-emailing a stranger or sliding into a DM makes you feel like an imposter. Meanwhile the product is sitting there, working, with nobody on the other end.",
     bottomLine:
-      "Right now your business is you, twice. Until the work lives outside your head — written down, repeatable, ownable by someone else — every new client is a tax on your sanity. Stop selling more until you can deliver what you already sold without bleeding.",
+      "Your product isn’t the bottleneck — your willingness to talk to strangers is. A SaaS without a distribution muscle is a hobby. You don’t need ads, content, or a brand yet. You need ten conversations with people who fit your ICP, and an offer they can’t politely refuse.",
     nextStageTeaser:
-      "Once the engine runs without you in every seat, you’ll notice a new problem: you look like everyone else. Stage 3 is about being chosen, not just considered.",
+      "Once you have paying users, a new problem emerges: how do you get them consistently, predictably, without you in every conversation? Stage 3 is about turning random luck into a repeatable pipeline.",
   },
   stage3: {
     id: 'stage3',
     code: 'STAGE 3',
-    name: 'Differentiate',
+    name: 'Traction',
     headline: 'You Keep Telling Yourself...',
-    bottomLineSub: 'where it’s all about being chosen, not compared',
-    biggestChallenge: 'STANDING OUT',
+    bottomLineSub: 'where it’s all about repeatable acquisition, not random wins',
+    biggestChallenge: 'MAKING REVENUE PREDICTABLE',
     truth:
-      "It’s a matter of time, but you work harder than everyone at your level and somehow they’re still growing faster than you. You’ve built a real thing. But in your prospect’s head you’re still a tab they have open next to three competitors who all sound the same.",
+      "You have customers. Real ones. But every new signup feels like a coin flip — you can’t explain why this person bought and the last five didn’t. Revenue is real but random. You can’t plan, can’t hire, can’t forecast. You know you’ve been lucky, and you know you can’t scale luck.",
     bottomLine:
-      "Sameness is the silent killer at this stage. You’re losing deals you should have won because the buyer can’t tell you apart from the next pitch. Identity, positioning and proof of point of view stop being branding exercises and become survival.",
+      "Random revenue isn’t traction — it’s noise that occasionally pays you. Until you can name the channel, the message, and the ICP that consistently produces signups, you’re running a guessing machine. Pick one channel. Beat it into the ground. Repeatability beats reach every time.",
     nextStageTeaser:
-      "Once you’re the obvious choice in your category, the question becomes profitability. Stage 4 is about turning revenue into actual freedom.",
+      "Once acquisition is repeatable, the bottleneck moves from outside the business to inside it: you. Stage 4 is about building the systems that let you grow past your own bandwidth.",
   },
   stage4: {
     id: 'stage4',
     code: 'STAGE 4',
-    name: 'Optimize',
+    name: 'Scale',
     headline: 'It’s Funny Because...',
-    bottomLineSub: 'where it’s all about margin, not motion',
+    bottomLineSub: 'where it’s all about systems and leverage, not hustle',
     biggestChallenge: 'GROWING WITHOUT BREAKING',
     truth:
-      "You smile when people say you’re killing it, knowing they have no idea how close everything is to breaking. Revenue is up. Profit per hour isn’t. The team grew faster than the systems did, and you’re paying for that gap in cash, sleep, and unfinished promises.",
+      "You smile when people say you’re crushing it, knowing how close everything is to falling apart. Support tickets pile up. Onboarding is you on Zoom. Every new customer makes the cracks louder. The product works — the business is the part that’s breaking. You hit a number you used to dream about and somehow you’ve never been more exhausted.",
     bottomLine:
-      "More revenue is no longer the answer. More leverage is. Every additional dollar in the door is costing you more than it should — in time, in cash, in attention. Until you fix margins, hiring, and ops, scaling more just multiplies the leak.",
+      "Scaling a SaaS without systems is just compounding chaos. Every new customer is a tax on you personally — your inbox, your nights, your sanity. Until the work lives outside your head — onboarding, support, sales, even pricing decisions — every new dollar costs more than it earns. Build the machine before you press the gas again.",
     nextStageTeaser:
-      "Once the machine is efficient, the question becomes influence. Stage 5 is about becoming the name people say without prompting in your category.",
+      "Once the machine runs without you in every seat, the question becomes positioning. Stage 5 is about going from ‘a tool in the space’ to the obvious choice in the category.",
   },
   stage5: {
     id: 'stage5',
     code: 'STAGE 5',
     name: 'Lead',
     headline: 'The Crazy Part Is...',
-    bottomLineSub: 'where it’s all about authority and gravity',
-    biggestChallenge: 'KNOWN BUT NOT CHOSEN',
+    bottomLineSub: 'where it’s all about category authority',
+    biggestChallenge: 'OWNING THE CATEGORY',
     truth:
-      "You thought hitting this number would change how you feel, but it didn’t. People know your name. They follow your content. They quote your frameworks. And yet half of them still hire someone louder, simpler, or more confident than you.",
+      "Your product is good. The numbers are good. And yet buyers still compare you to three competitors who do half of what you do. You’ve been so heads-down shipping that you forgot to tell the market who you are. Being the best tool in the room means nothing if nobody can describe why in one sentence.",
     bottomLine:
-      "Being known and being chosen are different sports. You earned the audience — now you have to earn their action. The category is forming around someone. It might as well be you. Stop being a personality. Become a position.",
+      "At this stage product quality stops being a moat — narrative does. The market doesn’t reward the best builder; it rewards the clearest voice. Pick the point of view you want to own. Say it everywhere. Repetition is positioning. Silence is being forgotten.",
     nextStageTeaser:
-      "Once you’re the category leader, the trap is staying too long. Stage 6 is about knowing when to evolve before the market forces it on you.",
+      "Once you own a position, the trap is staying too long. Stage 6 is about evolving the product before the market does it for you.",
   },
   stage6: {
     id: 'stage6',
     code: 'STAGE 6',
     name: 'Pivot',
     headline: 'Here’s The Real Reason...',
-    bottomLineSub: 'where it’s all about reinvention, not repair',
-    biggestChallenge: 'BREAKING THE CYCLE',
+    bottomLineSub: 'where it’s all about evolving before the market forces you to',
+    biggestChallenge: 'KNOWING WHEN TO EVOLVE',
     truth:
-      "Something feels off and you’ve been ignoring it for two quarters. The numbers still look fine on the outside, but you know the engine you built is the wrong engine for where you want to go. The hardest thing you’ll do this year is admit it before the market does.",
+      "Growth has slowed. The dashboards look fine on paper, but you can feel it — the product you built is for who you were two years ago, not where the market is going. You’ve been protecting the version that got you here instead of building the one that’ll take you forward.",
     bottomLine:
-      "Stage 6 is grief, dressed as strategy. You have to bury parts of the business you built to free the version you actually want. The longer you protect the old identity, the more the new one shrinks.",
+      "The hardest part of pivoting isn’t the new direction — it’s admitting the old one is done. Keep one foot in each boat and you drown. Decide what the next version of the product is for, who it’s for, and ship it boldly. Markets don’t wait for founders to grieve.",
     nextStageTeaser:
-      "Once you’ve pivoted, the constraint becomes compound. Stage 7 is about building beyond a single business — multiple bets, shared leverage, an asset stack.",
+      "Once the new direction is locked, the question becomes leverage across multiple bets. Stage 7 is about building beyond a single product.",
   },
   stage7: {
     id: 'stage7',
     code: 'STAGE 7',
     name: 'Expand',
     headline: 'Nobody Wants To Admit...',
-    bottomLineSub: 'where it’s all about leverage across bets',
-    biggestChallenge: 'SCALING THE EMPIRE',
+    bottomLineSub: 'where it’s all about leverage across products and bets',
+    biggestChallenge: 'BUILDING THE PORTFOLIO',
     truth:
-      "Nobody wants to admit that running one good business stopped being interesting two years ago. The challenge isn’t survival anymore — it’s direction. You can spin up almost anything, which means every yes is a slow no to something better.",
+      "Running one good SaaS stopped being interesting a year ago. You can spin up new products, but every yes is a slow no to focus. The danger here isn’t failure — it’s dilution. The temptation is to chase every new idea with the same energy that built the first one, and end up running five mediocre products instead of one extraordinary one.",
     bottomLine:
-      "At this stage your scarcest resource is not money, talent, or time — it’s identity. Every new bet rewrites who you are in the market. Choose what you become next on purpose, or the market will choose for you.",
+      "At this stage your scarcest resource isn’t money or talent — it’s strategic focus. Every new product changes who you are in the market. Choose what you become next on purpose, or the market will decide for you by ignoring all of it.",
     nextStageTeaser:
-      "There’s no next stage on the map. From here it’s legacy: what you build that outlives the founder, the brand, and the original bet.",
+      "There’s no next stage on the map. From here the question becomes legacy — what you build that outlives the original product, the team, and you.",
   },
 };
 
 // ============================================================
-// THE 6 CONSTRAINTS — Nik's framework
+// THE 6 PILLARS — SaaS / app founder framework
+// ICP → Messaging → Product-Market Fit → Outreach → Pipeline → Systems
 // ============================================================
 
 export const CONSTRAINTS = [
-  { id: 'identity',    label: 'Identity' },
-  { id: 'positioning', label: 'Positioning' },
-  { id: 'offer',       label: 'Offer' },
-  { id: 'content',     label: 'Content' },
-  { id: 'marketing',   label: 'Marketing' },
-  { id: 'team',        label: 'Team' },
-];
-
-// ============================================================
-// BUSINESS CATEGORIES — picked before the diagnostic questions.
-// The category re-labels some option text and gets passed into
-// the GPT prompt so the playbook is tailored to the model.
-// ============================================================
-
-export const BUSINESS_CATEGORIES = [
   {
-    value: 'service',
-    label: 'Service Business',
-    sub: 'Agency, consultancy, coaching, freelance — selling your team or expertise.',
+    id: 'icp',
+    label: 'ICP',
+    longLabel: 'Ideal Customer Profile',
+    blurb: 'Who exactly has this problem badly enough to pay you to solve it.',
   },
   {
-    value: 'saas',
-    label: 'Digital Product',
-    sub: 'SaaS, mobile app, software, web tool — code is the product.',
+    id: 'messaging',
+    label: 'Messaging',
+    longLabel: 'Messaging',
+    blurb: 'How you describe the problem and the product in their language, not yours.',
   },
   {
-    value: 'retail',
-    label: 'Retail / E-commerce',
-    sub: 'Physical products, online store, DTC brand — inventory and shipping.',
+    id: 'pmf',
+    label: 'Product-Market Fit',
+    longLabel: 'Product-Market Fit',
+    blurb: 'Whether your product actually solves the problem well enough that they want it.',
   },
   {
-    value: 'creator',
-    label: 'Creator / Content',
-    sub: 'Courses, info products, paid community, paid newsletter.',
+    id: 'outreach',
+    label: 'Outreach',
+    longLabel: 'Outreach',
+    blurb: 'How you actually get in front of the right people, consistently.',
   },
   {
-    value: 'local',
-    label: 'Local / Brick & Mortar',
-    sub: 'Restaurant, salon, gym, clinic, local services — physical location.',
+    id: 'pipeline',
+    label: 'Pipeline',
+    longLabel: 'Pipeline',
+    blurb: 'A repeatable system that turns strangers into paying users.',
   },
   {
-    value: 'other',
-    label: 'Other / Mixed',
-    sub: 'Doesn’t fit neatly — we’ll still tailor it to what you describe.',
+    id: 'systems',
+    label: 'Systems',
+    longLabel: 'Systems',
+    blurb: 'Operations that let the business run without you being the bottleneck.',
   },
 ];
 
-export function getCategoryMeta(value) {
-  return BUSINESS_CATEGORIES.find((c) => c.value === value) || BUSINESS_CATEGORIES[5];
-}
-
 // ============================================================
-// QUIZ — 3 diagnostic questions that auto-route to a stage.
-// Options can have a `labelFor` map keyed by business category so
-// language is tailored to the user's business type.
-// Final stage = round( average of chosen `s` values ), clamped to [0,7].
+// QUIZ — 3 single-select diagnostic questions, all with "Other".
+// Routing: average the chosen `s` values, round, clamp to [0,7].
 // ============================================================
 
 export const DIAGNOSTIC_QUESTIONS = [
   {
     id: 'q1',
-    label: 'What best describes where your business is in revenue terms?',
+    label: 'Where is your SaaS or app right now?',
     options: [
-      {
-        value: 'q1a', s: 0,
-        label: 'Nothing built yet — still deciding what to make',
-        labelFor: {
-          service: 'No service offer built yet — still deciding what to sell',
-          saas: 'No product built yet — still deciding what to build',
-          retail: 'No products sourced yet — still deciding what to sell',
-          creator: 'No paid offer built yet — still deciding the format',
-          local: 'No location yet — still deciding the concept',
-        },
-      },
-      {
-        value: 'q1b', s: 1,
-        label: 'Ready to sell but no revenue yet',
-        labelFor: {
-          service: 'Service packages defined but no clients booked yet',
-          saas: 'MVP / beta is built but not in market yet',
-          retail: 'Inventory is ready but the store isn’t launched',
-          creator: 'Paid offer is built but not promoted yet',
-          local: 'Doors not open yet — pre-launch',
-        },
-      },
-      {
-        value: 'q1c', s: 1,
-        label: 'In market, first few sales — under $2k/month',
-        labelFor: {
-          service: 'First few clients — under $2k/month',
-          saas: 'First few paying users — under $2k MRR',
-          retail: 'First few orders — under $2k/month in sales',
-          creator: 'First few buyers — under $2k/month',
-          local: 'Open, first customers — under $2k/month',
-        },
-      },
-      { value: 'q1d', s: 2, label: '$2k–$10k/month, mostly inconsistent' },
-      { value: 'q1e', s: 3, label: '$10k–$30k/month, fairly consistent' },
-      { value: 'q1f', s: 4, label: '$30k–$80k/month' },
-      { value: 'q1g', s: 5, label: '$80k–$200k/month, strong brand pull' },
-      { value: 'q1h', s: 6, label: 'Revenue is plateauing or shrinking' },
-      { value: 'q1i', s: 7, label: '$200k+/mo, more than one business' },
+      { value: 'q1a', s: 0, label: 'Has idea but haven’t started yet' },
+      { value: 'q1b', s: 0, label: 'Still building the product' },
+      { value: 'q1c', s: 1, label: 'Product is ready but no paying customers yet' },
+      { value: 'q1d', s: 2, label: 'Have some customers but growth is stuck' },
+      { value: 'q1e', s: 4, label: 'Growing but everything feels chaotic' },
       { value: 'other', s: null, label: 'Other — let me describe it' },
     ],
   },
   {
     id: 'q2',
-    label: 'What does most of your day actually look like?',
+    label: 'What does your current day actually look like?',
     options: [
-      { value: 'q2a', s: 0, label: 'Researching, planning, undecided what to build' },
-      {
-        value: 'q2b', s: 1,
-        label: 'Building the offer, prepping for launch',
-        labelFor: {
-          service: 'Designing service packages and price tiers',
-          saas: 'Coding the MVP and shipping features',
-          retail: 'Sourcing inventory and prepping the store',
-          creator: 'Producing my first paid offer (course, cohort, etc.)',
-          local: 'Building out the space and prepping for opening',
-        },
-      },
-      {
-        value: 'q2c', s: 1,
-        label: 'Hunting for the first 10 paying customers',
-        labelFor: {
-          service: 'Pitching for the first 10 paying clients',
-          saas: 'Driving signups and trying to convert the first 10 users',
-          retail: 'Driving traffic for the first 10 orders',
-          creator: 'Promoting the offer to get the first 10 buyers',
-          local: 'Doing outreach to get the first 10 customers in',
-        },
-      },
-      {
-        value: 'q2d', s: 2,
-        label: 'Delivering the work, racing to keep up',
-        labelFor: {
-          service: 'Delivering client work, racing to keep up',
-          saas: 'Supporting users and shipping bug fixes back-to-back',
-          retail: 'Packing orders and handling fulfilment',
-          creator: 'Delivering live calls / Q&As to early students',
-          local: 'Running shifts, doing everything on the floor',
-        },
-      },
-      {
-        value: 'q2e', s: 3,
-        label: 'Watching competitors win the same deals I want',
-        labelFor: {
-          service: 'Watching competitors win the same client deals',
-          saas: 'Watching competitors get the signups I should be getting',
-          retail: 'Watching competitor stores outsell me on the same products',
-          creator: 'Watching other creators get the audience I’m chasing',
-          local: 'Watching the spot down the street stay packed while I’m slow',
-        },
-      },
-      { value: 'q2f', s: 4, label: 'Trying to fix margins, ops, delivery quality' },
-      { value: 'q2g', s: 5, label: 'Posting, speaking, building authority' },
-      { value: 'q2h', s: 6, label: 'Re-thinking the direction of the business' },
-      { value: 'q2i', s: 7, label: 'Splitting attention across multiple ventures' },
+      { value: 'q2a', s: 0, label: 'Thinking, planning' },
+      { value: 'q2b', s: 1, label: 'Adding features and fixing bugs' },
+      { value: 'q2c', s: 1, label: 'Trying to find anyone who will actually use it' },
+      { value: 'q2d', s: 2, label: 'Doing everything manually — sales, support, onboarding' },
+      { value: 'q2e', s: 4, label: 'Putting out fires instead of building' },
       { value: 'other', s: null, label: 'Other — let me describe it' },
     ],
   },
   {
     id: 'q3',
-    label: 'Which sentence feels most painfully true right now?',
+    label: 'Which of these hits closest to home?',
     options: [
-      { value: 'q3a', s: 0, label: 'I haven’t actually started for real yet' },
-      {
-        value: 'q3b', s: 1,
-        label: 'I built it but haven’t sold it',
-        labelFor: {
-          service: 'I designed the offer but haven’t pitched it to anyone',
-          saas: 'I built the product but haven’t put it in front of users',
-          retail: 'I have inventory but haven’t opened the store',
-          creator: 'I made the offer but haven’t promoted it',
-          local: 'I built the space but I’m not open yet',
-        },
-      },
-      { value: 'q3c', s: 1, label: 'I need proof someone will pay me' },
-      { value: 'q3d', s: 2, label: 'Everything still depends on me personally' },
-      {
-        value: 'q3e', s: 3,
-        label: 'I look exactly like my competition',
-        labelFor: {
-          service: 'My offer sounds exactly like every other agency / consultant',
-          saas: 'My product looks exactly like every other tool in the space',
-          retail: 'My brand looks like every other store in this category',
-          creator: 'My content sounds like every other creator in this niche',
-          local: 'My place feels like every other one in the neighbourhood',
-        },
-      },
-      { value: 'q3f', s: 4, label: 'My costs are eating my growth' },
-      { value: 'q3g', s: 5, label: 'People know me but still pick someone louder' },
-      { value: 'q3h', s: 6, label: 'Something fundamental needs to change' },
-      { value: 'q3i', s: 7, label: 'One business isn’t enough anymore' },
+      { value: 'q3a', s: 0, label: 'I don’t know if anyone will actually pay for this' },
+      { value: 'q3b', s: 1, label: 'I have no idea how to find and reach my ideal customers' },
+      { value: 'q3c', s: 2, label: 'I can’t get consistent revenue — it’s completely random' },
+      { value: 'q3d', s: 3, label: 'Everything depends on me personally and I can’t scale' },
       { value: 'other', s: null, label: 'Other — let me describe it' },
     ],
   },
 ];
 
-// Resolve the label for an option given the chosen business category.
-export function optionLabel(option, category) {
-  if (!option) return '';
-  if (category && option.labelFor && option.labelFor[category]) {
-    return option.labelFor[category];
-  }
-  return option.label;
-}
-
-// Route to a stage given the user's answers.
-// Q1 & Q3 are single-select; Q2 is multi-select (array of values).
-// 'Other' answers contribute null and are skipped. If nothing contributes,
-// default to stage 2 (safe middle) — GPT still personalises from the text.
+// Route to a stage. All three questions are single-select now.
+// "Other" contributes null and is skipped. If nothing contributes, default to stage 1.
 export function routeToStage(answers) {
   const sValues = [];
-
   const pickSingle = (qIdx, value) => {
     const opt = DIAGNOSTIC_QUESTIONS[qIdx].options.find((o) => o.value === value);
     if (opt && opt.s !== null) sValues.push(opt.s);
   };
-
   pickSingle(0, answers.q1);
-
-  const q2Arr = Array.isArray(answers.q2) ? answers.q2 : (answers.q2 ? [answers.q2] : []);
-  q2Arr.forEach((v) => pickSingle(1, v));
-
+  pickSingle(1, answers.q2);
   pickSingle(2, answers.q3);
-
-  if (sValues.length === 0) return STAGE_IDS[2];
+  if (sValues.length === 0) return STAGE_IDS[1];
   const avg = sValues.reduce((a, b) => a + b, 0) / sValues.length;
   const idx = Math.max(0, Math.min(7, Math.round(avg)));
   return STAGE_IDS[idx];

@@ -114,6 +114,15 @@ em.gp-pink { font-style: italic; }
   font-style: italic;
   font-weight: 700;
 }
+.gp-quiz__tagline {
+  font-family: var(--gp-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gp-pink);
+  margin: 0 0 1.1rem;
+}
 .gp-quiz__sub {
   max-width: 580px;
   margin: 0 auto;
@@ -860,6 +869,72 @@ em.gp-pink { font-style: italic; }
 .gp-focus__block--solved p { color: var(--gp-navy); font-weight: 500; font-style: italic; }
 .gp-focus__block--solved .gp-mini-label { color: var(--gp-pink); }
 
+/* ----- Pillar status grid (replaces the % bars) ----- */
+.gp-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin: 1.5rem 0 1.75rem;
+}
+.gp-pillar {
+  border: 1.5px solid var(--gp-rule);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  display: flex; flex-direction: column;
+  gap: 0.5rem;
+}
+.gp-pillar__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.6rem;
+}
+.gp-pillar__title { display: flex; align-items: center; gap: 0.55rem; }
+.gp-pillar__dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block;
+}
+.gp-pillar__dot--red    { background: #d9484b; box-shadow: 0 0 0 4px rgba(217, 72, 75, 0.16); }
+.gp-pillar__dot--yellow { background: #e0a800; box-shadow: 0 0 0 4px rgba(224, 168, 0, 0.16); }
+.gp-pillar__dot--green  { background: #1fa971; box-shadow: 0 0 0 4px rgba(31, 169, 113, 0.16); }
+.gp-pillar__label {
+  font-family: var(--gp-sans);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  color: var(--gp-navy);
+}
+.gp-pillar__chip {
+  font-family: var(--gp-sans);
+  font-weight: 800;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  padding: 0.28rem 0.55rem;
+  border-radius: 4px;
+  color: #fff;
+}
+.gp-pillar__chip--red    { background: #d9484b; }
+.gp-pillar__chip--yellow { background: #e0a800; }
+.gp-pillar__chip--green  { background: #1fa971; }
+.gp-pillar__reason {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(7, 0, 82, 0.78);
+}
+.gp-pillar--red {
+  border-color: #d9484b;
+  background: rgba(217, 72, 75, 0.05);
+}
+.gp-pillar--yellow {
+  border-color: rgba(224, 168, 0, 0.55);
+  background: rgba(224, 168, 0, 0.04);
+}
+.gp-pillar--focus {
+  box-shadow: 0 0 0 4px rgba(217, 72, 75, 0.12);
+}
+@media (max-width: 720px) {
+  .gp-pillars { grid-template-columns: 1fr; }
+}
+
 /* ============================================================
    PAGE 4 — How To Succeed
    ============================================================ */
@@ -1002,6 +1077,79 @@ em.gp-pink { font-style: italic; }
   margin-top: 0.8rem;
 }
 
+/* ----- The bold CTA block (replaces the small button on Page 5) ----- */
+.gp-cta {
+  margin-top: auto;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 0%, rgba(240, 12, 200, 0.22), transparent 70%),
+    linear-gradient(135deg, var(--gp-navy), var(--gp-navy-2));
+  color: #fff;
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(7, 0, 82, 0.25);
+}
+.gp-cta__heading {
+  font-family: var(--gp-display);
+  font-weight: 900;
+  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 0.85rem;
+}
+.gp-cta__sub {
+  font-family: var(--gp-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+  margin: 0 auto 1.1rem;
+}
+.gp-cta__urgency {
+  display: inline-block;
+  font-family: var(--gp-sans);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gp-pink);
+  background: rgba(240, 12, 200, 0.14);
+  border: 1px solid rgba(240, 12, 200, 0.45);
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.35rem;
+}
+.gp-cta__btn {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.15rem 1.5rem;
+  background: linear-gradient(135deg, var(--gp-pink), #b30894);
+  color: #fff;
+  font-family: var(--gp-sans);
+  font-weight: 800;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 14px 36px rgba(240, 12, 200, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gp-cta__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 50px rgba(240, 12, 200, 0.6);
+}
+.gp-cta__foot {
+  font-family: var(--gp-sans);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.9rem;
+}
+
 /* ============================================================
    PAGE 6 — Next Stage
    ============================================================ */
@@ -1110,3 +1258,75 @@ em.gp-pink { font-style: italic; }
   page-break-after: always;
   break-after: page;
 }
+
+/* ============================================================
+   PRINT MODE — applied while exporting PDF via html2canvas.
+   Locks layout to fixed A4-friendly px so vw/clamp() don't blow
+   text out of containers, and forces aggressive text wrapping.
+   ============================================================ */
+.gp-book--printing {
+  width: 794px !important;          /* A4 width @ 96dpi = 210mm */
+  max-width: 794px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+.gp-book--printing * {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+.gp-book--printing .gp-page {
+  scroll-margin-top: 0 !important;
+  margin: 0 !important;
+}
+.gp-book--printing .gp-page__frame {
+  min-height: 1100px !important;
+  height: 1100px !important;        /* close to A4 height @ 96dpi (1123) */
+  padding: 36px 44px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+.gp-book--printing .gp-page__inner { padding: 16px 0 !important; }
+
+/* Lock typography to fixed px */
+.gp-book--printing .gp-cover__title       { font-size: 88px !important; line-height: 0.9 !important; }
+.gp-book--printing .gp-cover__here-stage  { font-size: 30px !important; }
+.gp-book--printing .gp-cover__cell-name   { font-size: 13px !important; }
+.gp-book--printing .gp-cover__cell-code   { font-size: 9px !important; }
+.gp-book--printing .gp-truth__headline    { font-size: 38px !important; line-height: 1.05 !important; }
+.gp-book--printing .gp-truth__body        { font-size: 14px !important; line-height: 1.55 !important; }
+.gp-book--printing .gp-constraint         { padding: 12px !important; }
+.gp-book--printing .gp-constraint__label  { font-size: 10px !important; padding: 3px 7px !important; }
+.gp-book--printing .gp-constraint__pain   { font-size: 12px !important; line-height: 1.45 !important; }
+.gp-book--printing .gp-focus__title       { font-size: 52px !important; line-height: 0.95 !important; }
+.gp-book--printing .gp-focus__sub         { font-size: 18px !important; }
+.gp-book--printing .gp-pillars            { gap: 10px !important; margin: 16px 0 !important; }
+.gp-book--printing .gp-pillar             { padding: 12px 14px !important; gap: 6px !important; }
+.gp-book--printing .gp-pillar__label      { font-size: 11px !important; letter-spacing: 0.12em !important; }
+.gp-book--printing .gp-pillar__chip       { font-size: 9px !important; padding: 3px 7px !important; }
+.gp-book--printing .gp-pillar__reason     { font-size: 11.5px !important; line-height: 1.4 !important; }
+.gp-book--printing .gp-focus__blocks      { gap: 10px !important; }
+.gp-book--printing .gp-focus__block       { padding: 12px 14px !important; }
+.gp-book--printing .gp-focus__block p     { font-size: 12px !important; line-height: 1.5 !important; }
+.gp-book--printing .gp-howto__title       { font-size: 42px !important; line-height: 0.95 !important; }
+.gp-book--printing .gp-howto__sub         { font-size: 13px !important; }
+.gp-book--printing .gp-priorities         { gap: 10px !important; }
+.gp-book--printing .gp-priority           { padding: 12px 14px !important; }
+.gp-book--printing .gp-priority__name     { font-size: 11px !important; }
+.gp-book--printing .gp-priority__body     { font-size: 11.5px !important; line-height: 1.45 !important; }
+.gp-book--printing .gp-priority__level    { font-size: 9px !important; }
+.gp-book--printing .gp-bottom__title      { font-size: 42px !important; line-height: 0.95 !important; }
+.gp-book--printing .gp-bottom__sub        { font-size: 16px !important; }
+.gp-book--printing .gp-bottom__lead       { font-size: 16px !important; line-height: 1.5 !important; }
+.gp-book--printing .gp-bottom__body       { margin: 16px auto !important; }
+.gp-book--printing .gp-cta                { padding: 24px 26px !important; }
+.gp-book--printing .gp-cta__heading       { font-size: 30px !important; }
+.gp-book--printing .gp-cta__sub           { font-size: 14px !important; }
+.gp-book--printing .gp-cta__urgency       { font-size: 10px !important; padding: 5px 10px !important; }
+.gp-book--printing .gp-cta__btn           { font-size: 15px !important; padding: 14px 18px !important; }
+.gp-book--printing .gp-cta__foot          { font-size: 11px !important; }
+.gp-book--printing .gp-next__stage        { font-size: 52px !important; line-height: 0.95 !important; }
+.gp-book--printing .gp-next__teaser       { font-size: 16px !important; line-height: 1.5 !important; margin: 24px auto !important; }
+.gp-book--printing .gp-page__corner       { font-size: 9px !important; padding: 6px 10px !important; }
+.gp-book--printing .gp-mark               { font-size: 10px !important; }
+.gp-book--printing .gp-mini-label         { font-size: 10px !important; }

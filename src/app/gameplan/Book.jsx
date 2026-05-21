@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { STAGE_LIST, STAGES, CONSTRAINTS } from './stageContent';
+import { STAGE_LIST, CONSTRAINTS } from './stageContent';
 
 const FOOTER_URL = 'groflex.co';
 
@@ -32,7 +32,7 @@ function Cover({ stage, userName }) {
     <article className="gp-page gp-page--cover" data-page="1">
       <PageFrame n={1}>
         <div className="gp-cover__top">
-          <span className="gp-cover__eyebrow">Your $10M Brand</span>
+          <span className="gp-cover__eyebrow">For non-technical SaaS & app founders</span>
           <h1 className="gp-cover__title">GAMEPLAN</h1>
           {userName && <p className="gp-cover__owner">Prepared for {userName}</p>}
         </div>
@@ -51,12 +51,12 @@ function Cover({ stage, userName }) {
         <div className="gp-cover__breakdown">
           <span className="gp-mini-label">The Breakdown</span>
           <p className="gp-cover__breakdown-text">
-            6 constraints &nbsp;·&nbsp; 6 to graduate &nbsp;·&nbsp; already done
+            6 pillars &nbsp;·&nbsp; diagnosed for your stage &nbsp;·&nbsp; ranked by what to fix first
           </p>
         </div>
 
         <div className="gp-cover__all">
-          <span className="gp-mini-label">All 8 Stages</span>
+          <span className="gp-mini-label">All Stages</span>
           <div className="gp-cover__grid">
             {STAGE_LIST.map((s) => {
               const isCurrent = s.id === stage.id;
@@ -84,6 +84,7 @@ function Cover({ stage, userName }) {
 
 function StageProgressLine({ current }) {
   const idx = stageIndex(current);
+  const total = STAGE_LIST.length;
   return (
     <div className="gp-progress-line" aria-hidden="true">
       {STAGE_LIST.map((s, i) => (
@@ -98,14 +99,14 @@ function StageProgressLine({ current }) {
       ))}
       <div
         className="gp-progress-line__fill"
-        style={{ width: `${(idx / 7) * 100}%` }}
+        style={{ width: `${(idx / (total - 1)) * 100}%` }}
       />
     </div>
   );
 }
 
 // ============================================================
-// PAGE 2 — "The Truth Is..." + 6 constraint cards
+// PAGE 2 — The Truth + the 6 pillar pain cards
 // ============================================================
 function PageTruth({ stage, ai }) {
   const cs = ai?.constraints || {};
@@ -115,7 +116,7 @@ function PageTruth({ stage, ai }) {
         <header className="gp-truth__header">
           <span className="gp-mini-label">At {stage.code}</span>
           <h2 className="gp-truth__headline">{stage.headline}</h2>
-          <p className="gp-truth__body">{stage.truth}</p>
+          <p className="gp-truth__body">{ai?.personalTruth || stage.truth}</p>
           <div className="gp-truth__challenge">
             <span className="gp-mini-label">The biggest challenge</span>
             <span className="gp-truth__challenge-tag">{stage.biggestChallenge}</span>
@@ -127,7 +128,7 @@ function PageTruth({ stage, ai }) {
             <div className="gp-constraint" key={c.id}>
               <span className="gp-constraint__label">{c.label}</span>
               <p className="gp-constraint__pain">
-                {cs[c.id]?.pain || '—'}
+                {cs[c.id]?.reason || c.blurb}
               </p>
             </div>
           ))}
@@ -138,13 +139,13 @@ function PageTruth({ stage, ai }) {
 }
 
 // ============================================================
-// PAGE 3 — Your Focus (bar chart + Problem / Cause / When Solved)
+// PAGE 3 — Your Focus (RYG status indicators + Problem / Cause / When Solved)
 // ============================================================
 function PageFocus({ stage, ai }) {
   const focus = ai?.focus || {};
   const cs = ai?.constraints || {};
-  const focusArea = focus.area || 'identity';
-  const focusLabel = CONSTRAINTS.find((c) => c.id === focusArea)?.label || 'identity';
+  const focusArea = focus.area || 'icp';
+  const focusLabel = CONSTRAINTS.find((c) => c.id === focusArea)?.label || 'your ICP';
 
   return (
     <article className="gp-page gp-page--focus" data-page="3">
@@ -152,24 +153,33 @@ function PageFocus({ stage, ai }) {
         <header className="gp-focus__header">
           <h2 className="gp-focus__title">YOUR FOCUS</h2>
           <p className="gp-focus__sub">
-            should be on <em className="gp-pink">{focusLabel.toLowerCase()}</em>
+            should be on <em className="gp-pink">{focusLabel}</em>
           </p>
         </header>
 
-        <div className="gp-bars">
+        <div className="gp-pillars">
           {CONSTRAINTS.map((c) => {
-            const score = clampScore(cs[c.id]?.score);
+            const data = cs[c.id] || {};
+            const status = data.status || 'yellow';
             const isFocus = c.id === focusArea;
             return (
               <div
                 key={c.id}
-                className={'gp-bar' + (isFocus ? ' gp-bar--focus' : '')}
+                className={
+                  'gp-pillar gp-pillar--' + status +
+                  (isFocus ? ' gp-pillar--focus' : '')
+                }
               >
-                <span className="gp-bar__label">{c.label.toUpperCase()}</span>
-                <div className="gp-bar__track">
-                  <Segments count={10} filled={Math.round(score / 10)} severity={severityFromScore(score)} isFocus={isFocus} />
+                <div className="gp-pillar__head">
+                  <div className="gp-pillar__title">
+                    <span className={'gp-pillar__dot gp-pillar__dot--' + status} aria-hidden="true" />
+                    <span className="gp-pillar__label">{c.label.toUpperCase()}</span>
+                  </div>
+                  <span className={'gp-pillar__chip gp-pillar__chip--' + status}>
+                    {status === 'red' ? 'FIX FIRST' : status === 'yellow' ? 'WATCH' : 'HEALTHY'}
+                  </span>
                 </div>
-                <span className="gp-bar__pct">{score}%</span>
+                <p className="gp-pillar__reason">{data.reason || c.blurb}</p>
               </div>
             );
           })}
@@ -191,23 +201,6 @@ function PageFocus({ stage, ai }) {
         </div>
       </PageFrame>
     </article>
-  );
-}
-
-function Segments({ count, filled, severity, isFocus }) {
-  return (
-    <div className="gp-segments">
-      {Array.from({ length: count }).map((_, i) => (
-        <span
-          key={i}
-          className={
-            'gp-seg' +
-            (i < filled ? ` gp-seg--on gp-seg--${severity}` : '') +
-            (isFocus && i < filled ? ' gp-seg--focus' : '')
-          }
-        />
-      ))}
-    </div>
   );
 }
 
@@ -261,7 +254,7 @@ function PageHowTo({ stage, ai }) {
 }
 
 // ============================================================
-// PAGE 5 — The Bottom Line
+// PAGE 5 — The Bottom Line + the bold CTA
 // ============================================================
 function PageBottomLine({ stage, ai, next }) {
   return (
@@ -273,24 +266,28 @@ function PageBottomLine({ stage, ai, next }) {
         </header>
 
         <div className="gp-bottom__body">
-          <p className="gp-bottom__lead">{stage.bottomLine}</p>
-          {ai?.bottomLine && <p className="gp-bottom__personal">{ai.bottomLine}</p>}
+          <p className="gp-bottom__lead">{ai?.bottomLine || stage.bottomLine}</p>
         </div>
 
-        <div className="gp-bottom__cta">
+        <div className="gp-cta">
+          <h3 className="gp-cta__heading">Let’s Build This Together</h3>
+          <p className="gp-cta__sub">
+            I’ll personally record a free 10-minute Loom walking through your
+            exact roadmap and what to do first.
+          </p>
+          <p className="gp-cta__urgency">I only do 5 of these per week.</p>
           <button
             type="button"
-            className="gp-btn gp-btn--magenta gp-btn--xl"
+            className="gp-cta__btn"
             data-tally-open="kd5KV1"
             data-tally-layout="modal"
             data-tally-width="676"
             data-tally-hide-title="1"
             data-tally-auto-close="2500"
           >
-            Explore Our Partnership
-            <span aria-hidden="true">→</span>
+            Claim My Free Loom →
           </button>
-          <p className="gp-bottom__cta-foot">Book a 1:1 call with the Groflex team.</p>
+          <p className="gp-cta__foot">No pitch. No pressure. Just your roadmap.</p>
         </div>
       </PageFrame>
     </article>
@@ -298,7 +295,7 @@ function PageBottomLine({ stage, ai, next }) {
 }
 
 // ============================================================
-// PAGE 6 — This is coming in your next stage
+// PAGE 6 — Next stage teaser
 // ============================================================
 function PageNextStage({ stage, next, ai }) {
   const teaser = (ai?.nextStageTeaser) || stage.nextStageTeaser;
@@ -339,7 +336,7 @@ function PageNextStage({ stage, next, ai }) {
 }
 
 // ============================================================
-// Page frame — border, page number, wordmark footer
+// Page frame
 // ============================================================
 function PageFrame({ n, children }) {
   return (
@@ -371,14 +368,4 @@ function nextStage(id) {
   const i = stageIndex(id);
   if (i < 0 || i >= STAGE_LIST.length - 1) return null;
   return STAGE_LIST[i + 1];
-}
-function clampScore(s) {
-  const n = Number(s);
-  if (!Number.isFinite(n)) return 0;
-  return Math.max(0, Math.min(100, Math.round(n)));
-}
-function severityFromScore(s) {
-  if (s >= 60) return 'good';
-  if (s >= 30) return 'mid';
-  return 'low';
 }
