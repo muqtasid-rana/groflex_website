@@ -272,10 +272,9 @@ function PageBottomLine({ stage, ai, next }) {
         <div className="gp-cta">
           <h3 className="gp-cta__heading">Let’s Build This Together</h3>
           <p className="gp-cta__sub">
-            I’ll personally record a free 10-minute Loom walking through your
-            exact roadmap and what to do first.
+            Get on a 1:1 call with me — we’ll walk through your exact roadmap
+            and what to do first.
           </p>
-          <p className="gp-cta__urgency">I only do 5 of these per week.</p>
           <button
             type="button"
             className="gp-cta__btn"
@@ -285,9 +284,8 @@ function PageBottomLine({ stage, ai, next }) {
             data-tally-hide-title="1"
             data-tally-auto-close="2500"
           >
-            Claim My Free Loom →
+            Book a 1:1 call →
           </button>
-          <p className="gp-cta__foot">No pitch. No pressure. Just your roadmap.</p>
         </div>
       </PageFrame>
     </article>

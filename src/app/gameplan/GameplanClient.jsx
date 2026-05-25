@@ -13,8 +13,6 @@ import Book from './Book';
 import './gameplan.css';
 import { addSubmission } from '@/lib/gameplans';
 
-const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
 // EmailJS — same IDs as Contact form
 const EMAILJS_SERVICE_ID = 'service_hnb5hs6';
 const EMAILJS_TEMPLATE_ID = 'template_9q8nfdx';
@@ -32,7 +30,7 @@ The stage determined by questions 1 through 3 gives you the structural template.
 
 Always write in second person. Always be specific. Never use the phrase "it seems like" or "you may" — be direct and declarative. Never copy paste the user's words back at them verbatim.`;
 
-function buildUserPrompt({ stage, blocker, goal, name, diagnostic }) {
+function buildUserPrompt({ stage, blocker, goal, name, diagnostic, audience }) {
   return `=== PRIMARY INPUTS (the personalised content MUST be built from these) ===
 Founder's exact words on their biggest blocker:
 """${blocker}"""
@@ -50,10 +48,18 @@ Founder's exact words on what winning the next 90 days looks like:
 Founder name: ${name || 'the founder'}
 Diagnosed stage: ${stage.code} — ${stage.name}
 The biggest challenge tag for this stage: ${stage.biggestChallenge}
+Who they're selling to: ${audience || 'Not specified'}
 Diagnostic answers (for grounding only):
   - Where the product is: ${diagnostic.q1 || 'not given'}
   - What their day looks like: ${diagnostic.q2 || 'not given'}
   - What hits closest: ${diagnostic.q3 || 'not given'}
+  - Who they sell to: ${diagnostic.q4 || 'not given'}
+
+=== AUDIENCE-SPECIFIC LANGUAGE ===
+- If B2B: use vocabulary like decision-maker, buyer, pilot, procurement, contract, ACV, seats, sales cycle, demo, qualified lead.
+- If B2C: use vocabulary like user, signup, activation, daily active, viral loop, retention, app install, paid acquisition, CAC.
+- If unsure: do NOT pretend they have decided. The single biggest pillar issue is often that they haven't committed to one — call that out plainly when it fits the blocker.
+Never use B2B language for a B2C founder or vice versa.
 
 === THE 6 PILLARS YOU WILL DIAGNOSE ===
 - icp — Ideal Customer Profile: who exactly has this problem badly enough to pay
@@ -165,6 +171,22 @@ Return ONLY the JSON. No code fences.`;
 }
 
 // ============================================================
+// Audience context — maps Q4 answer to a description for the prompt
+// ============================================================
+function audienceContext(q4) {
+  switch (q4) {
+    case 'b2b':
+      return 'B2B — selling to businesses / companies';
+    case 'b2c':
+      return 'B2C — selling to individual consumers';
+    case 'unsure':
+      return 'Audience unclear — founder is still figuring out who pays';
+    default:
+      return 'Not specified';
+  }
+}
+
+// ============================================================
 // Component
 // ============================================================
 export default function GameplanClient() {
@@ -174,8 +196,9 @@ export default function GameplanClient() {
     name: '',
     email: '',
     q1: '', q1_other: '',
-    q2: '', q2_other: '',
+    q2: [], q2_other: '',
     q3: '', q3_other: '',
+    q4: '',
     blocker: '',
     goal: '',
   });
@@ -187,12 +210,23 @@ export default function GameplanClient() {
   const [downloading, setDownloading] = useState(false);
   const bookRef = useRef(null);
 
-  // Quiz steps: name, email, q1, q2, q3, blocker, goal
-  const totalSteps = 7;
+  // Quiz steps: name, email, q1, q2, q3, q4 (audience), blocker, goal
+  const totalSteps = 8;
   const stage = stageId ? STAGES[stageId] : null;
 
   const setField = (k, v) => {
     setForm((p) => ({ ...p, [k]: v }));
+    setErrors((p) => ({ ...p, [k]: '' }));
+  };
+
+  // Multi-select toggle (used by Q2)
+  const toggleMulti = (k, value) => {
+    setForm((p) => {
+      const arr = Array.isArray(p[k]) ? p[k] : [];
+      const has = arr.includes(value);
+      const next = has ? arr.filter((v) => v !== value) : [...arr, value];
+      return { ...p, [k]: next };
+    });
     setErrors((p) => ({ ...p, [k]: '' }));
   };
 
@@ -208,15 +242,17 @@ export default function GameplanClient() {
       else if (form.q1 === 'other' && form.q1_other.trim().length < 5) e.q1 = 'Describe your situation in a sentence.';
     }
     if (step === 3) {
-      if (!form.q2) e.q2 = 'Pick one.';
-      else if (form.q2 === 'other' && form.q2_other.trim().length < 5) e.q2 = 'Describe your situation in a sentence.';
+      const q2Arr = Array.isArray(form.q2) ? form.q2 : [];
+      if (q2Arr.length === 0) e.q2 = 'Pick at least one — multiple are fine.';
+      else if (q2Arr.includes('other') && form.q2_other.trim().length < 5) e.q2 = 'Describe your “Other” pick in a sentence.';
     }
     if (step === 4) {
       if (!form.q3) e.q3 = 'Pick one.';
       else if (form.q3 === 'other' && form.q3_other.trim().length < 5) e.q3 = 'Describe your situation in a sentence.';
     }
-    if (step === 5 && form.blocker.trim().length < 10) e.blocker = 'Give us at least one full sentence.';
-    if (step === 6 && form.goal.trim().length < 10) e.goal = 'Tell us what a win looks like.';
+    if (step === 5 && !form.q4) e.q4 = 'Pick one.';
+    if (step === 6 && form.blocker.trim().length < 10) e.blocker = 'Give us at least one full sentence.';
+    if (step === 7 && form.goal.trim().length < 10) e.goal = 'Tell us what a win looks like.';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -239,7 +275,9 @@ export default function GameplanClient() {
       q1: humanAnswer(0, form),
       q2: humanAnswer(1, form),
       q3: humanAnswer(2, form),
+      q4: humanAnswer(3, form),
     };
+    const audience = audienceContext(form.q4);
     try {
       const payload = await callOpenAI({
         stage: routedStage,
@@ -247,6 +285,7 @@ export default function GameplanClient() {
         goal: form.goal,
         name: form.name,
         diagnostic,
+        audience,
       });
       setAi(payload);
       setPhase('result');
@@ -263,7 +302,9 @@ export default function GameplanClient() {
           q1: form.q1, q1_other: form.q1_other,
           q2: form.q2, q2_other: form.q2_other,
           q3: form.q3, q3_other: form.q3_other,
+          q4: form.q4,
         },
+        audience,
         humanAnswers: diagnostic,
         blocker: form.blocker,
         goal: form.goal,
@@ -277,7 +318,6 @@ export default function GameplanClient() {
         })
         .catch((err) => {
           console.error('[GP] User EmailJS error:', err?.status, err?.text || err?.message || err);
-          setAiError('We saved your gameplan but couldn’t email it. Take a screenshot — we’ll follow up.');
         });
 
       sendEmail({ form, stage: routedStage, ai: payload, toEmail: ADMIN_NOTIFY_EMAIL, isAdmin: true })
@@ -287,7 +327,7 @@ export default function GameplanClient() {
       console.error('OpenAI error — using fallback:', err);
       setAi(fallbackAi(routedStage));
       setAiError(
-        'We hit a snag generating the personalised parts. The structural diagnosis below is still yours — refresh to retry the personalised sections.'
+        `We couldn’t generate the personalised parts. Reason: ${err?.message || 'unknown error'}. Refresh to retry.`
       );
       setPhase('result');
     }
@@ -355,6 +395,7 @@ export default function GameplanClient() {
           form={form}
           errors={errors}
           setField={setField}
+          toggleMulti={toggleMulti}
           next={next}
           back={back}
         />
@@ -382,7 +423,7 @@ export default function GameplanClient() {
 // ============================================================
 // QUIZ VIEW
 // ============================================================
-function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
+function QuizView({ step, totalSteps, form, errors, setField, toggleMulti, next, back }) {
   return (
     <section className="gp-quiz">
       <div className="gp-quiz__inner">
@@ -430,16 +471,26 @@ function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
             </Shell>
           )}
 
-          {(step === 2 || step === 3 || step === 4) && (() => {
-            const q = DIAGNOSTIC_QUESTIONS[step - 2];
-            const sub = step === 2
-              ? 'Question 1 of 3 — we use the trio to diagnose your stage.'
+          {(step >= 2 && step <= 5) && (() => {
+            const qIndex = step - 2;
+            const q = DIAGNOSTIC_QUESTIONS[qIndex];
+            const isMulti = !!q.multi;
+            const defaultSub = step === 2
+              ? 'Question 1 of 4 — we use these to diagnose your stage.'
               : step === 3
-              ? 'Question 2 of 3 — pick the one closest to your reality.'
-              : 'Question 3 of 3 — last one before the open questions.';
+              ? 'Question 2 of 4 — pick everything that fits.'
+              : step === 4
+              ? 'Question 3 of 4 — one closest to your reality.'
+              : 'Question 4 of 4 — last one before the open questions.';
+            const sub = q.sub || defaultSub;
             const otherKey = `${q.id}_other`;
-            const isActive = (val) => form[q.id] === val;
-            const showOther = form[q.id] === 'other';
+            const isActive = (val) => isMulti
+              ? Array.isArray(form[q.id]) && form[q.id].includes(val)
+              : form[q.id] === val;
+            const onPick = (val) => isMulti ? toggleMulti(q.id, val) : setField(q.id, val);
+            const showOther = isMulti
+              ? Array.isArray(form[q.id]) && form[q.id].includes('other')
+              : form[q.id] === 'other';
             return (
               <Shell label={q.label} sub={sub}>
                 <div className="gp-options">
@@ -447,10 +498,15 @@ function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
                     <button
                       key={opt.value}
                       type="button"
-                      className={`gp-option ${isActive(opt.value) ? 'gp-option--active' : ''} ${opt.value === 'other' ? 'gp-option--other' : ''}`}
-                      onClick={() => setField(q.id, opt.value)}
+                      className={`gp-option ${isActive(opt.value) ? 'gp-option--active' : ''} ${opt.value === 'other' ? 'gp-option--other' : ''} ${isMulti ? 'gp-option--multi' : ''}`}
+                      onClick={() => onPick(opt.value)}
                       aria-pressed={isActive(opt.value)}
                     >
+                      {isMulti && (
+                        <span className="gp-option__check" aria-hidden="true">
+                          {isActive(opt.value) ? '✓' : ''}
+                        </span>
+                      )}
                       <span className="gp-option__label">{opt.label}</span>
                     </button>
                   ))}
@@ -470,7 +526,7 @@ function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
             );
           })()}
 
-          {step === 5 && (
+          {step === 6 && (
             <Shell
               label="What is the single biggest thing blocking you right now?"
               sub="Be specific — not 'marketing' or 'sales' but the real problem behind it."
@@ -487,7 +543,7 @@ function QuizView({ step, totalSteps, form, errors, setField, next, back }) {
             </Shell>
           )}
 
-          {step === 6 && (
+          {step === 7 && (
             <Shell
               label="What does winning the next 90 days look like?"
               sub="Customers, revenue, product milestone — anything specific and real."
@@ -606,11 +662,6 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
             <span className="gp-result__bar-stage">{stage.code} · {stage.name}</span>
           </div>
           <div className="gp-result__bar-right">
-            {emailSent ? (
-              <span className="gp-sent">✓ Sent to {userEmail}</span>
-            ) : (
-              <span className="gp-sent gp-sent--muted">Sending to {userEmail}…</span>
-            )}
             <button
               type="button"
               className="gp-btn gp-btn--primary"
@@ -652,28 +703,24 @@ function ResultView({ bookRef, stage, ai, aiError, emailSent, userEmail, userNam
 // ============================================================
 // OPENAI
 // ============================================================
-async function callOpenAI({ stage, blocker, goal, name, diagnostic }) {
-  const userPrompt = buildUserPrompt({ stage, blocker, goal, name, diagnostic });
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+async function callOpenAI({ stage, blocker, goal, name, diagnostic, audience }) {
+  const userPrompt = buildUserPrompt({ stage, blocker, goal, name, diagnostic, audience });
+  const res = await fetch('/api/gameplan', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      temperature: 0.75,
-      response_format: { type: 'json_object' },
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userPrompt },
-      ],
+      systemPrompt: SYSTEM_PROMPT,
+      userPrompt,
     }),
   });
-  if (!res.ok) throw new Error(`OpenAI ${res.status}: ${await res.text()}`);
+  if (!res.ok) {
+    let detail = '';
+    try { detail = (await res.json())?.error || ''; } catch {}
+    throw new Error(`Gameplan API ${res.status}: ${detail || res.statusText}`);
+  }
   const data = await res.json();
-  const raw = data?.choices?.[0]?.message?.content || '{}';
-  return normalizeAi(JSON.parse(raw));
+  if (!data?.payload) throw new Error('Gameplan API returned no payload.');
+  return normalizeAi(data.payload);
 }
 
 const VALID_STATUS = new Set(['red', 'yellow', 'green']);
@@ -763,8 +810,22 @@ function humanAnswer(qIndex, form) {
   const key = `q${qIndex + 1}`;
   const q = DIAGNOSTIC_QUESTIONS[qIndex];
   const val = form[key];
-  if (!val) return '';
   const otherTxt = (form[`${key}_other`] || '').trim();
+
+  // Multi-select (array) — Q2
+  if (q.multi) {
+    const arr = Array.isArray(val) ? val : [];
+    if (arr.length === 0) return '';
+    const parts = arr.map((v) => {
+      if (v === 'other') return otherTxt ? `Other (user described): ${otherTxt}` : 'Other';
+      const opt = q.options.find((o) => o.value === v);
+      return opt ? opt.label : '';
+    }).filter(Boolean);
+    return parts.join(' | ');
+  }
+
+  // Single-select
+  if (!val) return '';
   if (val === 'other') {
     return otherTxt ? `Other (user described): ${otherTxt}` : 'Other';
   }
@@ -814,6 +875,7 @@ async function sendEmail({ form, stage, ai, toEmail, isAdmin }) {
     lines.push(`Q1 (where the product is): ${humanAnswer(0, form)}`);
     lines.push(`Q2 (what their day looks like): ${humanAnswer(1, form)}`);
     lines.push(`Q3 (closest to home): ${humanAnswer(2, form)}`);
+    lines.push(`Q4 (audience): ${humanAnswer(3, form)}`);
     lines.push('');
     lines.push(`THEIR BIGGEST BLOCKER (own words):`);
     lines.push(form.blocker);

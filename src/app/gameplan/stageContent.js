@@ -197,24 +197,26 @@ export const DIAGNOSTIC_QUESTIONS = [
     id: 'q1',
     label: 'Where is your SaaS or app right now?',
     options: [
-      { value: 'q1a', s: 0, label: 'Has idea but haven’t started yet' },
-      { value: 'q1b', s: 0, label: 'Still building the product' },
-      { value: 'q1c', s: 1, label: 'Product is ready but no paying customers yet' },
-      { value: 'q1d', s: 2, label: 'Have some customers but growth is stuck' },
+      { value: 'q1a', s: 0, label: 'I have an idea but haven’t built anything yet' },
+      { value: 'q1b', s: 0, label: 'I’m actively building — product isn’t live yet' },
+      { value: 'q1c', s: 1, label: 'Product is live but no paying customers yet' },
+      { value: 'q1d', s: 2, label: 'I have paying customers but growth is stuck' },
       { value: 'q1e', s: 4, label: 'Growing but everything feels chaotic' },
       { value: 'other', s: null, label: 'Other — let me describe it' },
     ],
   },
   {
     id: 'q2',
+    multi: true,
     label: 'What does your current day actually look like?',
+    sub: 'Pick all that apply — multiple are fine.',
     options: [
-      { value: 'q2a', s: 0, label: 'Thinking, planning' },
+      { value: 'q2a', s: 0, label: 'Researching, validating, figuring out the plan' },
       { value: 'q2b', s: 1, label: 'Adding features and fixing bugs' },
-      { value: 'q2c', s: 1, label: 'Trying to find anyone who will actually use it' },
-      { value: 'q2d', s: 2, label: 'Doing everything manually — sales, support, onboarding' },
-      { value: 'q2e', s: 4, label: 'Putting out fires instead of building' },
-      { value: 'other', s: null, label: 'Other — let me describe it' },
+      { value: 'q2c', s: 1, label: 'Figuring out who my ideal customer actually is' },
+      { value: 'q2d', s: 1, label: 'Reaching out to potential customers — I know who they are' },
+      { value: 'q2e', s: 2, label: 'Doing everything manually — sales, support, onboarding' },
+      { value: 'q2f', s: 4, label: 'Putting out fires instead of building' },
     ],
   },
   {
@@ -222,25 +224,41 @@ export const DIAGNOSTIC_QUESTIONS = [
     label: 'Which of these hits closest to home?',
     options: [
       { value: 'q3a', s: 0, label: 'I don’t know if anyone will actually pay for this' },
-      { value: 'q3b', s: 1, label: 'I have no idea how to find and reach my ideal customers' },
-      { value: 'q3c', s: 2, label: 'I can’t get consistent revenue — it’s completely random' },
-      { value: 'q3d', s: 3, label: 'Everything depends on me personally and I can’t scale' },
+      { value: 'q3b', s: 1, label: 'I’m getting interest but nobody is actually paying yet' },
+      { value: 'q3c', s: 1, label: 'I don’t know where my customers are' },
+      { value: 'q3d', s: 2, label: 'I can’t get consistent revenue — it’s completely random' },
+      { value: 'q3e', s: 3, label: 'Everything depends on me and I can’t scale' },
       { value: 'other', s: null, label: 'Other — let me describe it' },
+    ],
+  },
+  {
+    id: 'q4',
+    label: 'Who are you primarily selling to?',
+    sub: 'This shapes the language and tactics in your gameplan.',
+    options: [
+      { value: 'b2b',     s: null, label: 'Businesses — companies pay for this' },
+      { value: 'b2c',     s: null, label: 'Consumers — individuals pay for this' },
+      { value: 'unsure',  s: null, label: 'Still figuring it out' },
     ],
   },
 ];
 
-// Route to a stage. All three questions are single-select now.
+// Route to a stage. Q1 + Q3 are single-select, Q2 is multi-select (array).
 // "Other" contributes null and is skipped. If nothing contributes, default to stage 1.
 export function routeToStage(answers) {
   const sValues = [];
-  const pickSingle = (qIdx, value) => {
+  const pushVal = (qIdx, value) => {
     const opt = DIAGNOSTIC_QUESTIONS[qIdx].options.find((o) => o.value === value);
     if (opt && opt.s !== null) sValues.push(opt.s);
   };
-  pickSingle(0, answers.q1);
-  pickSingle(1, answers.q2);
-  pickSingle(2, answers.q3);
+
+  pushVal(0, answers.q1);
+
+  const q2Arr = Array.isArray(answers.q2) ? answers.q2 : (answers.q2 ? [answers.q2] : []);
+  q2Arr.forEach((v) => pushVal(1, v));
+
+  pushVal(2, answers.q3);
+
   if (sValues.length === 0) return STAGE_IDS[1];
   const avg = sValues.reduce((a, b) => a + b, 0) / sValues.length;
   const idx = Math.max(0, Math.min(7, Math.round(avg)));

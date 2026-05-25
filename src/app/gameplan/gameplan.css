@@ -1289,19 +1289,41 @@ em.gp-pink { font-style: italic; }
 .gp-book--printing .gp-page__inner { padding: 16px 0 !important; }
 
 /* Lock typography to fixed px */
-.gp-book--printing .gp-cover__title       { font-size: 88px !important; line-height: 0.9 !important; }
+.gp-book--printing .gp-cover__title       { font-size: 78px !important; line-height: 1.02 !important; margin: 6px 0 22px !important; }
+.gp-book--printing .gp-cover__owner       { margin-top: 4px !important; }
 .gp-book--printing .gp-cover__here-stage  { font-size: 30px !important; }
 .gp-book--printing .gp-cover__cell-name   { font-size: 13px !important; }
 .gp-book--printing .gp-cover__cell-code   { font-size: 9px !important; }
 .gp-book--printing .gp-truth__headline    { font-size: 38px !important; line-height: 1.05 !important; }
 .gp-book--printing .gp-truth__body        { font-size: 14px !important; line-height: 1.55 !important; }
-.gp-book--printing .gp-constraint         { padding: 12px !important; }
+.gp-book--printing .gp-constraints        {
+  align-items: start !important;
+  grid-auto-rows: min-content !important;
+  margin-top: 16px !important;
+}
+.gp-book--printing .gp-constraint         {
+  padding: 12px !important;
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
 .gp-book--printing .gp-constraint__label  { font-size: 10px !important; padding: 3px 7px !important; }
-.gp-book--printing .gp-constraint__pain   { font-size: 12px !important; line-height: 1.45 !important; }
+.gp-book--printing .gp-constraint__pain   { font-size: 12px !important; line-height: 1.45 !important; margin: 0 !important; }
 .gp-book--printing .gp-focus__title       { font-size: 52px !important; line-height: 0.95 !important; }
 .gp-book--printing .gp-focus__sub         { font-size: 18px !important; }
-.gp-book--printing .gp-pillars            { gap: 10px !important; margin: 16px 0 !important; }
-.gp-book--printing .gp-pillar             { padding: 12px 14px !important; gap: 6px !important; }
+.gp-book--printing .gp-pillars            {
+  gap: 10px !important;
+  margin: 16px 0 !important;
+  align-items: start !important;
+  grid-auto-rows: min-content !important;
+}
+.gp-book--printing .gp-pillar             {
+  padding: 12px 14px !important;
+  gap: 6px !important;
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
 .gp-book--printing .gp-pillar__label      { font-size: 11px !important; letter-spacing: 0.12em !important; }
 .gp-book--printing .gp-pillar__chip       { font-size: 9px !important; padding: 3px 7px !important; }
 .gp-book--printing .gp-pillar__reason     { font-size: 11.5px !important; line-height: 1.4 !important; }
@@ -1310,8 +1332,19 @@ em.gp-pink { font-style: italic; }
 .gp-book--printing .gp-focus__block p     { font-size: 12px !important; line-height: 1.5 !important; }
 .gp-book--printing .gp-howto__title       { font-size: 42px !important; line-height: 0.95 !important; }
 .gp-book--printing .gp-howto__sub         { font-size: 13px !important; }
-.gp-book--printing .gp-priorities         { gap: 10px !important; }
-.gp-book--printing .gp-priority           { padding: 12px 14px !important; }
+.gp-book--printing .gp-priorities         {
+  gap: 10px !important;
+  flex: 0 0 auto !important;
+  align-items: start !important;
+  grid-auto-rows: min-content !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+.gp-book--printing .gp-priority           {
+  padding: 12px 14px !important;
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
 .gp-book--printing .gp-priority__name     { font-size: 11px !important; }
 .gp-book--printing .gp-priority__body     { font-size: 11.5px !important; line-height: 1.45 !important; }
 .gp-book--printing .gp-priority__level    { font-size: 9px !important; }
@@ -1330,3 +1363,36 @@ em.gp-pink { font-style: italic; }
 .gp-book--printing .gp-page__corner       { font-size: 9px !important; padding: 6px 10px !important; }
 .gp-book--printing .gp-mark               { font-size: 10px !important; }
 .gp-book--printing .gp-mini-label         { font-size: 10px !important; }
+
+/* Kill margin-top: auto pushers in print — they create huge empty gaps
+   when the page is a fixed height. Let content flow from the top. */
+.gp-book--printing .gp-constraints,
+.gp-book--printing .gp-focus__blocks,
+.gp-book--printing .gp-priorities,
+.gp-book--printing .gp-cta,
+.gp-book--printing .gp-bottom__cta,
+.gp-book--printing .gp-next__cta,
+.gp-book--printing .gp-cover__all { margin-top: 18px !important; }
+
+/* Cover: keep some breathing room between sections but don't stretch */
+.gp-book--printing .gp-cover__here { margin: 24px auto 18px !important; padding: 18px 12px !important; }
+.gp-book--printing .gp-cover__breakdown { margin: 18px 0 !important; }
+
+/* Tighter, balanced rhythm on the page body */
+.gp-book--printing .gp-truth__header { padding-bottom: 16px !important; margin-bottom: 16px !important; }
+.gp-book--printing .gp-howto__header { padding-bottom: 14px !important; margin-bottom: 14px !important; }
+.gp-book--printing .gp-bottom__header { margin-bottom: 14px !important; }
+.gp-book--printing .gp-focus__header  { margin-bottom: 14px !important; }
+
+/* Let page frame size to content — keeps page break logic happy without
+   forcing an empty trailing zone */
+.gp-book--printing .gp-page__frame {
+  height: auto !important;
+  min-height: 1050px !important;
+}
+
+/* Each .gp-page in printing mode forces a page break after */
+.gp-book--printing .gp-page {
+  page-break-after: always;
+  break-after: page;
+}
