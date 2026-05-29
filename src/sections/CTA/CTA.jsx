@@ -28,7 +28,7 @@ export default function CTA() {
                     </p>
                     <div className="cta__actions">
                         <Link href="/gameplan" className="btn btn--white btn--lg cta__main-btn">
-                            Get Your Free GAMEPLAN
+                            Get Free Founder Gameplan
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
@@ -36,9 +36,7 @@ export default function CTA() {
                         <p className="cta__subline">
                             A 60-second quiz that gives you a brutally honest 90-day roadmap for your business.
                         </p>
-                        <span className="cta__urgency">
-                            Built for founders · {spotsLeft} free reports left today
-                        </span>
+              
                     </div>
 
                 </div>

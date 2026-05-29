@@ -38,13 +38,13 @@ export default function Hero() {
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
                         <Link href="/gameplan" className="btn btn--primary btn--lg hero__cta-btn">
-                            Get Your Free GAMEPLAN
-                            <p className="hero__cta-btn-urgency">(60-second quiz · personalised 90-day roadmap)</p>
+                            Get Free Founders Gameplan
+                            <p className="hero__cta-btn-urgency">(Personalised 90-day roadmap)</p>
                         </Link>
                         <p className="hero__cta-subline">
 
 
-                            Brutally honest diagnosis of your stage and a no-fluff 90-day plan, delivered instantly.
+                           Take a chance, Brutally honest diagnosis of your stage and a 90-day plan, delivered instantly.
                         </p>
 
                     </div>
