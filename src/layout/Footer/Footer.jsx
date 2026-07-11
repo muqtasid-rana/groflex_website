@@ -66,8 +66,8 @@ export default function Footer() {
                         &copy; {new Date().getFullYear()} Groflex. All rights reserved.
                     </p>
                     <div className="footer__bottom-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <Link href="/privacy-policy">Privacy Policy</Link>
+                        <Link href="/terms">Terms &amp; Conditions</Link>
                     </div>
                 </div>
             </div>
