@@ -13,8 +13,17 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
+  // Incorpo's case study moved from the generic template to its own page
+  async redirects() {
+    return [{ source: '/case-study/1', destination: '/case-study/incorpo', permanent: true }];
+  },
+
   // Cache headers for static assets
   async headers() {
+    // Dev chunk names aren't content-hashed, so an immutable header would pin the
+    // browser to stale JS and cause hydration mismatches after every edit
+    if (process.env.NODE_ENV !== 'production') return [];
+
     return [
       {
         // Immutable cache for hashed static assets (JS, CSS, images)

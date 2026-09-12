@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
-import Link from 'next/link';
 import './AgencyComparison.css';
 
 const comparisonRows = [
@@ -44,27 +43,6 @@ const comparisonRows = [
     },
 ];
 
-const highlights = [
-    {
-        value: '1/3',
-        label: 'The Cost',
-        description: 'Pay a fraction of what traditional agencies charge',
-        icon: 'fa-solid fa-piggy-bank',
-    },
-    {
-        value: '10×',
-        label: 'Faster',
-        description: 'AI-powered workflows deliver results in days, not months',
-        icon: 'fa-solid fa-bolt',
-    },
-    {
-        value: '100%',
-        label: 'Quality',
-        description: 'Same premium quality with modern tools and expert team',
-        icon: 'fa-solid fa-gem',
-    },
-];
-
 function useScrollVisible(threshold = 0.15) {
     const ref = useRef(null);
     const [visible, setVisible] = useState(false);
@@ -83,7 +61,6 @@ function useScrollVisible(threshold = 0.15) {
 
 export default function AgencyComparison() {
     const [tableRef, tableVisible] = useScrollVisible(0.1);
-    const [highlightsRef, highlightsVisible] = useScrollVisible(0.15);
 
     return (
         <section id="why-us" className="section agency-compare">
@@ -141,38 +118,6 @@ export default function AgencyComparison() {
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Highlight Cards */}
-                <div ref={highlightsRef} className="agency-compare__highlights">
-                    {highlights.map((h, i) => (
-                        <div
-                            className={`agency-compare__highlight-card agency-compare__slide ${highlightsVisible ? 'agency-compare__slide--visible' : ''}`}
-                            key={h.label}
-                            style={{ transitionDelay: highlightsVisible ? `${i * 0.12}s` : '0s' }}
-                        >
-                            <div className="agency-compare__highlight-icon">
-                                <i className={h.icon}></i>
-                            </div>
-                            <div className="agency-compare__highlight-value">
-                                {h.value} <span>{h.label}</span>
-                            </div>
-                            <p className="agency-compare__highlight-desc">{h.description}</p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* CTA */}
-                <div className="agency-compare__cta">
-                    <p className="agency-compare__cta-text">
-                        Stop overpaying for slow results. Get premium quality at startup-friendly pricing.
-                    </p>
-                    <Link href="/gameplan" className="btn btn--primary btn--lg">
-                        Get Your Free GAMEPLAN
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </Link>
                 </div>
             </div>
         </section>

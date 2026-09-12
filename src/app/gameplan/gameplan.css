@@ -301,13 +301,11 @@ em.gp-pink { font-style: italic; }
 }
 .gp-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .gp-btn--primary {
-  background: linear-gradient(135deg, var(--gp-blue), var(--gp-navy));
+  background: var(--gp-blue);
   color: #fff;
-  box-shadow: 0 10px 26px rgba(43, 92, 230, 0.32);
 }
 .gp-btn--primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(43, 92, 230, 0.4);
+  background: var(--gp-navy);
 }
 .gp-btn--magenta {
   background: linear-gradient(135deg, var(--gp-pink), #b30894);

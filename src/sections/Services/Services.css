@@ -1,12 +1,7 @@
 .services {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(165deg,
-            #060a17 0%,
-            #0a1028 30%,
-            #0d1633 55%,
-            #0a1028 80%,
-            #060a17 100%);
+    background: var(--color-brand-navy);
 }
 
 /* Ambient glow spots */
@@ -17,7 +12,7 @@
     left: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-blue) 12%, transparent) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
 }
@@ -29,7 +24,7 @@
     right: -5%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-magenta) 7%, transparent) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
 }
@@ -77,7 +72,7 @@
 
 .services__group-icon {
     margin-right: var(--space-sm);
-    color: #3b82f6;
+    color: var(--color-brand-blue);
 }
 
 @media (max-width: 1200px) {

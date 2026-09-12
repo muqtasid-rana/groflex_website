@@ -1,0 +1,99 @@
+/* =========================================
+   WORK PAGE
+   ========================================= */
+
+/* Dark so the navbar's light links stay readable before scrolling */
+.work-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-brand-navy);
+  padding: clamp(8rem, 14vw, 11rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.work-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 85% 0%, rgba(43, 92, 230, 0.45), transparent 70%),
+    radial-gradient(ellipse 40% 60% at 100% 100%, rgba(240, 32, 200, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.work-hero .container {
+  position: relative;
+}
+
+.work-hero__tag {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #a5b4fc;
+  margin-bottom: var(--space-md);
+}
+
+.work-hero__title {
+  max-width: 16ch;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+}
+
+.work-hero__lede {
+  max-width: 560px;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.work-page {
+  background: var(--color-bg);
+  padding: clamp(3.5rem, 6vw, 5rem) 0 var(--space-section);
+}
+
+.work-page__subhead {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  margin: clamp(3rem, 6vw, 5rem) 0 var(--space-xl);
+}
+
+.work-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-xl);
+}
+
+/* Fixed card height: on hover the picture compresses to show the details */
+.work-page__grid .work-card {
+  --lines: 3; /* these descriptions run longer than the featured ones */
+  aspect-ratio: 1.1;
+}
+
+@media (max-width: 960px) {
+  .work-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .work-page__grid .work-card {
+    aspect-ratio: auto;
+  }
+
+  .work-page__grid .work-card__media {
+    flex: none;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 600px) {
+  .work-page__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

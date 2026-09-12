@@ -1,9 +1,10 @@
 /* ===========================
-   SERVICE CARD — Glassmorphic Dark
+   SERVICE CARD — on the brand navy
+   Palette: navy #070052 · blue #2B5CE6 · magenta #F020C8 · light #F5F5FF
    =========================== */
 .service-card {
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: color-mix(in srgb, var(--color-brand-blue) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand-light) 9%, transparent);
     border-radius: var(--radius-xl);
     padding: var(--space-xl) var(--space-lg);
     height: 100%;
@@ -11,7 +12,7 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, box-shadow var(--transition-base), border-color var(--transition-base);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, box-shadow var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
     will-change: transform, opacity;
     opacity: 0;
     transform: translateY(40px);
@@ -30,11 +31,11 @@
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-brand-light) 18%, transparent), transparent);
     pointer-events: none;
 }
 
-/* Bottom gradient accent bar */
+/* Bottom accent bar — brand magenta, drawn in on hover */
 .service-card::after {
     content: '';
     position: absolute;
@@ -42,19 +43,16 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #2563eb, #6366f1, #a78bfa);
+    background: var(--color-brand-magenta);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transition-smooth);
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(99, 102, 241, 0.25);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(37, 99, 235, 0.08);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: color-mix(in srgb, var(--color-brand-blue) 45%, transparent);
+    background: color-mix(in srgb, var(--color-brand-blue) 12%, transparent);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .service-card:hover::after {
@@ -71,55 +69,42 @@
     width: 64px;
     height: 64px;
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(99, 102, 241, 0.12) 100%);
+    background: color-mix(in srgb, var(--color-brand-blue) 16%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all var(--transition-base);
     position: relative;
-    border: 1px solid rgba(59, 130, 246, 0.15);
-}
-
-.service-card__icon-wrapper::before {
-    content: '';
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: rgba(59, 130, 246, 0.06);
-    border-radius: 50%;
-    top: -8px;
-    right: -12px;
-    opacity: 0.5;
+    border: 1px solid color-mix(in srgb, var(--color-brand-blue) 30%, transparent);
 }
 
 .service-card:hover .service-card__icon-wrapper {
-    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    background: color-mix(in srgb, var(--color-brand-blue) 26%, transparent);
+    border-color: color-mix(in srgb, var(--color-brand-blue) 50%, transparent);
     transform: scale(1.05);
-    border-color: transparent;
-    box-shadow: 0 0 24px rgba(37, 99, 235, 0.3);
 }
 
 .service-card__icon {
     font-size: 1.5rem;
-    color: #3b82f6;
+    color: var(--color-brand-blue);
     transition: color var(--transition-base);
 }
 
 .service-card:hover .service-card__icon {
-    color: #ffffff;
+    color: var(--color-brand-magenta);
 }
 
 /* Text */
 .service-card__title {
     font-size: var(--fs-h4);
     font-weight: var(--fw-semibold);
-    color: #ffffff;
+    color: var(--color-brand-light);
     margin-bottom: var(--space-sm);
 }
 
 .service-card__desc {
     font-size: var(--fs-body-sm);
-    color: rgba(255, 255, 255, 0.5);
+    color: color-mix(in srgb, var(--color-brand-light) 62%, transparent);
     line-height: var(--lh-relaxed);
     flex: 1;
 }
@@ -127,5 +112,5 @@
 /* Group styling */
 .services__group-icon {
     margin-right: var(--space-sm);
-    color: #3b82f6;
+    color: var(--color-brand-blue);
 }

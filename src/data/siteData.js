@@ -2,19 +2,63 @@
 // Site Data — Groflex Agency
 // ============================================================
 
-import incorp from '@/assets/incorp.png';
+import incorp from '@/assets/incorp.webp';
 import hybrid from '@/assets/hybrid.jpeg';
-import inayat from '@/assets/inayat.png';
+import inayat from '@/assets/inayat.webp';
 import pocketwatcher from '@/assets/pocketwatcher finance.jpeg';
-import rpmm from '@/assets/rpmm.png';
+import rpmm from '@/assets/rpmm.webp';
 import testolz from '@/assets/testolz.jpeg';
+import ashhkaro from '@/assets/ashhkaro4.webp';
+import ashhkaroIcon from '@/assets/ashhkaroicon.webp';
+import slashcure from '@/assets/slashcure/landing.webp';
+import incorpoShowcase from '@/assets/incorpo/hero.jpg';
+import incorpoLanding from '@/assets/incorpo/landingpage-mockup.webp';
+import slashcureShowcase from '@/assets/slashcure/hero.jpg';
+import slashcureLanding from '@/assets/slashcure/slashcurelandingmockup.webp';
 
+// Links with `dropdown` open a mega-menu panel instead of navigating
 export const navLinks = [
-  { label: 'Our Work', href: '#work' },
-  { label: 'Services', href: '#services' },
-  { label: 'About Us', href: '#why-us' },
+  { label: 'Services', dropdown: 'services' },
+  { label: 'Customers', dropdown: 'customers' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact Us', href: '#contact' },
+];
+
+// Customers shown in the navbar dropdown. Set `logo` to an imported image
+// to replace the text wordmark; set `image` for the thumbnail.
+export const navCustomers = [
+  {
+    id: 'ashhkaro',
+    name: 'Ashhkaro',
+    logo: null,
+    image: ashhkaro,
+    description: 'Taking an all-in-one platform for Pakistan from vision to a live Android app.',
+    href: '/case-study/ashhkaro',
+  },
+  {
+    id: 'slashcure',
+    name: 'Slashcure',
+    logo: null,
+    image: slashcure,
+    description: 'Patient records, doctors and hospitals on one secure platform.',
+    href: '/case-study/slashcure',
+  },
+  {
+    id: 'incorpo',
+    name: 'Incorpo',
+    logo: null,
+    image: incorp,
+    description: 'Hiring, payroll, attendance and training on one HR platform.',
+    href: '/case-study/incorpo',
+  },
+  {
+    id: 'brainix',
+    name: 'Brainix',
+    logo: null,
+    image: null,
+    description: 'Case study coming soon.',
+    href: '#work',
+  },
 ];
 
 export const services = {
@@ -114,9 +158,9 @@ export const whyChooseUs = [
 export const projects = [
   {
     id: 1,
-    title: 'Incorpo - Recruitment SaaS Product',
+    title: 'Incorpo - HR Platform',
     category: 'HR Tech',
-    description: 'An open-use SaaS platform built to streamline the recruitment process for companies of all sizes.',
+    description: 'An HR platform that runs hiring, people, attendance, payroll, performance and training on one employee record.',
     caseStudy: {
       overview: 'A client approached us with the vision to build a recruitment SaaS product for the open market — a platform any company could use to streamline their hiring process from job posting to onboarding, without the overhead of building their own tools.',
       challenge: 'Most existing recruitment tools were either expensive enterprise solutions or basic job boards with no workflow automation. There was a clear gap in the market for an affordable, full-featured hiring platform that small and mid-sized companies could adopt instantly.',
@@ -268,6 +312,59 @@ export const projects = [
     color: '#322659',
     image: testolz,
   },
+];
+
+// Work showcase. The home page features the first three (the first one gets
+// the large tile); /work lists everything. `imagePosition` sets the crop focus;
+// `homeImage` / `homeImagePosition` swap in a different picture on the home page only.
+export const work = [
+  {
+    id: 'incorpo',
+    name: 'Incorpo',
+    category: 'HR Tech · SaaS',
+    description: 'An HR platform that runs hiring, attendance, payroll, performance and training on one employee record.',
+    image: incorpoShowcase,
+    imagePosition: '45% 50%',
+    homeImage: incorpoLanding,
+    homeImagePosition: '0% 0%',
+    href: '/case-study/incorpo',
+    color: '#0b1030',
+  },
+  {
+    id: 'ashhkaro',
+    name: 'Ashhkaro',
+    category: 'Mobile App',
+    description: 'Taking an all-in-one platform for Pakistan from product vision to a live Android app.',
+    image: ashhkaro,
+    imagePosition: '75% 50%',
+    homeImage: ashhkaroIcon,
+    homeImagePosition: '50% 50%',
+    href: '/case-study/ashhkaro',
+    color: '#1a0303',
+  },
+  {
+    id: 'slashcure',
+    name: 'Slashcure',
+    category: 'Healthcare',
+    description: 'Patient records, verified doctors and live hospital pages on one secure platform.',
+    image: slashcureShowcase,
+    imagePosition: '75% 50%',
+    homeImage: slashcureLanding,
+    homeImagePosition: '0% 0%',
+    href: '/case-study/slashcure',
+    color: '#1e2a4a',
+  },
+  // Incorpo (id 1) is already featured above
+  ...projects.filter((p) => p.id !== 1).map((p) => ({
+    id: String(p.id),
+    name: p.title.split(' - ')[0],
+    category: p.category,
+    description: p.description,
+    image: p.image,
+    imagePosition: '50% 0%',
+    href: `/case-study/${p.id}`,
+    color: p.color,
+  })),
 ];
 
 export const stats = [

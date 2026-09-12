@@ -14,6 +14,12 @@ export default async function sitemap() {
       priority: 1,
     },
     {
+      url: `${SITE_URL}/work`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: 'daily',
@@ -40,7 +46,7 @@ export default async function sitemap() {
   ];
 
   // Case study pages
-  const caseStudyPages = [1, 2, 3, 4, 5, 6].map((id) => ({
+  const caseStudyPages = [2, 3, 4, 5, 6, 'ashhkaro', 'slashcure', 'incorpo'].map((id) => ({
     url: `${SITE_URL}/case-study/${id}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',

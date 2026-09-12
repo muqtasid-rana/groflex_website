@@ -1,0 +1,77 @@
+/* Browser frame shared by the case studies. Takes its glow from the page's
+   accent (--ak-red in the case-study system), falling back to brand blue. */
+.cs-browser {
+    overflow: hidden;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 40px 80px -30px rgba(0, 0, 0, 0.65),
+        0 18px 50px -28px color-mix(in srgb, var(--ak-red, #2b5ce6) 45%, transparent);
+}
+
+/* On light bands a dark drop shadow reads as dirt; a hairline and a soft shadow instead */
+.ak-band--light .cs-browser {
+    box-shadow:
+        0 0 0 1px var(--ak-line-light, #e3e3e0),
+        0 30px 60px -32px rgba(15, 23, 42, 0.28);
+}
+
+.cs-browser__bar {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+    align-items: center;
+    height: 2.25rem;
+    padding-inline: 0.85rem;
+    background: #eef2f8;
+    border-bottom: 1px solid #dde4ee;
+}
+
+.cs-browser__dots {
+    display: flex;
+    gap: 6px;
+}
+
+.cs-browser__dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cdd5e1;
+}
+
+.cs-browser__url {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    justify-self: center;
+    width: 100%;
+    max-width: 22rem;
+    min-width: 0;
+    height: 1.45rem;
+    padding-inline: 0.75rem;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 0.72rem;
+    color: #5d6b7e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cs-browser__url svg {
+    flex-shrink: 0;
+}
+
+.cs-browser__screen img,
+.cs-browser__screen video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    .cs-browser__bar {
+        grid-template-columns: 2.5rem minmax(0, 1fr) 0.5rem;
+    }
+}

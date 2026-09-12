@@ -1,6 +1,6 @@
 'use client';
 
-import bannerImg from '@/assets/banner.webp';
+import bannerImg from '@/assets/ashhkaro3.jpg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { socialLinks } from '@/data/siteData';
@@ -20,15 +20,14 @@ export default function Hero() {
             <div className="hero__bg">
                 <Image src={bannerImg} fill sizes="100vw" alt="" className="hero__bg-img" priority />
             </div>
-            <div className="hero__bg-overlay" />
 
             <div className="container hero__container">
                 <div className="hero__text">
                     <br />
 
                     <h1 className="hero__title">
-                        AI-Accelerated Design & Development
-                        <span className="hero__title-sub">Reduce 60% time & cost in design & development with AI</span>
+                        We're Building Pakistan's Biggest App
+                        <span className="hero__title-sub">And we want to build something equally ambitious for you.</span>
                     </h1>
                     {/* 
                     <p className="hero__subtitle animate-in animate-in-delay-2">
@@ -37,9 +36,8 @@ export default function Hero() {
                     </p> */}
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
-                        <Link href="/gameplan" className="btn btn--primary btn--lg hero__cta-btn">
-                            Get Free Founders Gameplan
-                            <p className="hero__cta-btn-urgency">(Personalised 90-day roadmap)</p>
+                        <Link href="/case-study/ashhkaro" className="btn btn--primary btn--lg hero__cta-btn">
+                            View Case Study
                         </Link>
                         <p className="hero__cta-subline">
 

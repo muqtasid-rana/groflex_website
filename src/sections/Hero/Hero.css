@@ -1,10 +1,10 @@
 .hero {
-    min-height: 100vh;
+    min-height: 700px;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding-top: 6rem;
+    padding-top: 10rem;
     padding-bottom: var(--space-4xl);
     background: #070b18;
 }
@@ -16,31 +16,12 @@
     z-index: 0;
 }
 
-.hero__bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
-
 .hero__bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center right;
+    object-position: center center;
     display: block;
-}
-
-.hero__bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(105deg,
-            rgba(7, 11, 24, 0.92) 0%,
-            rgba(7, 11, 24, 0.75) 35%,
-            rgba(7, 11, 24, 0.3) 60%,
-            transparent 80%);
 }
 
 .hero__container {
@@ -82,7 +63,7 @@
 }
 
 .hero__title {
-    font-size: var(--fs-display);
+    font-size: clamp(2.25rem, 4vw, 3.6rem);
     font-weight: var(--fw-semibold);
     color: #ffffff;
     margin-bottom: var(--space-xl);
@@ -103,27 +84,7 @@
     margin-top: var(--space-md);
     letter-spacing: 0;
     font-weight: var(--fw-medium);
-    background: linear-gradient(90deg, #3b82f6, #818cf8, #e879f9, #f472b6, #818cf8, #3b82f6);
-    background-size: 100% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: hueShift 6s ease-in-out infinite;
-    will-change: filter;
-}
-
-@keyframes hueShift {
-    0% {
-        filter: hue-rotate(0deg);
-    }
-
-    50% {
-        filter: hue-rotate(45deg);
-    }
-
-    100% {
-        filter: hue-rotate(0deg);
-    }
+    color: #ffffff;
 }
 
 .hero__subtitle {
@@ -142,14 +103,9 @@
 }
 
 .hero__cta-btn {
-    width: 100%;
-    max-width: 400px;
-    font-size: 1.05rem !important;
-    padding: 0.65rem 2.5rem !important;
+    font-size: 0.95rem !important;
+    padding: 0.6rem 1.75rem !important;
     border-radius: 200px !important;
-    gap: 4px !important;
-    flex-direction: column !important;
-    white-space: normal !important;
     background: linear-gradient(225deg, #df1de9 0%, #1e3a8a 30%, #1e40af 60%, #1d4ed8 100%) !important;
     border: 1px solid rgba(30, 64, 175, 0.5) !important;
     position: relative;
@@ -184,38 +140,9 @@
     }
 }
 
-/* Urgency sub-line inside CTA button */
-.hero__cta-btn-urgency {
-    display: block;
-    font-size: 0.65em;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 0.04em;
-    margin-top: 2px;
-    margin-bottom: 0;
-    text-transform: none;
-    animation: urgencyBlink 2s ease-in-out infinite;
-}
-
-@keyframes urgencyBlink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.6;
-    }
-}
-
 .hero__cta-btn:hover {
-    transform: translateY(-3px) !important;
-    box-shadow:
-        0 0 30px rgba(37, 99, 235, 0.5),
-        0 0 80px rgba(99, 102, 241, 0.25),
-        0 8px 32px rgba(0, 0, 0, 0.4) !important;
-    border-color: rgba(139, 143, 255, 0.6) !important;
+    background: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
 }
 
 /* CTA Subline — value proposition */
@@ -302,13 +229,6 @@
         max-width: 550px;
         padding-left: 0;
     }
-
-    .hero__bg-overlay {
-        background: linear-gradient(180deg,
-                rgba(7, 11, 24, 0.92) 0%,
-                rgba(7, 11, 24, 0.8) 50%,
-                rgba(7, 11, 24, 0.5) 100%);
-    }
 }
 
 @media (max-width: 600px) {
@@ -323,10 +243,6 @@
         font-size: clamp(2.25rem, 9vw, 3rem);
     }
 
-    .hero__cta-btn {
-        max-width: 100%;
-    }
-
     .hero__cta-subline {
         font-size: var(--fs-body-sm);
         text-align: center;
@@ -336,12 +252,5 @@
         flex-direction: column;
         align-items: center;
         gap: var(--space-sm);
-    }
-
-    .hero__bg-overlay {
-        background: linear-gradient(180deg,
-                rgba(7, 11, 24, 0.95) 0%,
-                rgba(7, 11, 24, 0.85) 60%,
-                rgba(7, 11, 24, 0.6) 100%);
     }
 }

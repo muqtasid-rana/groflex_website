@@ -1,0 +1,75 @@
+/* Fixed height, so opening a tile's details never moves anything outside the block */
+.work-featured {
+    display: grid;
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    aspect-ratio: 1.9;
+    min-height: 480px;
+}
+
+.work-featured__stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    min-height: 0;
+}
+
+/* Both tiles split the column evenly */
+.work-featured__side {
+    flex: 1 1 0;
+    transition: flex-basis var(--reveal-speed);
+}
+
+/* A basis of twice the details' height leaves the hovered tile exactly --reveal-h taller
+   once the column is shared out, so its own picture keeps its size while its neighbour's
+   picture compresses to make room. */
+@media (hover: hover) {
+    .work-featured__side:hover,
+    .work-featured__side:focus-visible {
+        flex-basis: calc(2 * var(--reveal-h));
+    }
+}
+
+@media (max-width: 960px) {
+    .work-featured {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        aspect-ratio: auto;
+        min-height: 0;
+    }
+
+    .work-featured__main {
+        grid-column: 1 / -1;
+    }
+
+    /* Let the stacked tiles become grid items of their own */
+    .work-featured__stack {
+        display: contents;
+    }
+
+    .work-featured__main .work-card__media {
+        flex: none;
+        aspect-ratio: 16 / 9;
+    }
+
+    .work-featured__side .work-card__media {
+        flex: none;
+        aspect-ratio: 16 / 10;
+    }
+}
+
+@media (max-width: 600px) {
+    .work-featured {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Every tile is full width now, so give them all the same picture height */
+    .work-featured__main .work-card__media {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-featured__side {
+        transition: none;
+    }
+}

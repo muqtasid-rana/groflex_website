@@ -1,5 +1,5 @@
 .testimonial {
-    background: linear-gradient(135deg, #0c1220 0%, #0f172a 40%, #121d33 100%);
+    background: var(--color-brand-navy);
     position: relative;
     overflow: hidden;
 }
