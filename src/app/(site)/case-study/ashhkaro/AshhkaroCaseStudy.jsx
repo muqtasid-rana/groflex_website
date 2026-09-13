@@ -6,7 +6,7 @@ import launchImg from '@/assets/case-studies/ashhkaro/launch.webp';
 import screenHome from '@/assets/case-studies/ashhkaro/screens/home.webp';
 import screenBrowse from '@/assets/case-studies/ashhkaro/screens/browse.webp';
 import screenBusiness from '@/assets/case-studies/ashhkaro/screens/business-details.webp';
-import screenAppointments from '@/assets/case-studies/ashhkaro/screens/appointments.webp';
+import screenListings from '@/assets/case-studies/ashhkaro/screens/listings.webp';
 import screenProperties from '@/assets/case-studies/ashhkaro/screens/properties.webp';
 import screenSell from '@/assets/case-studies/ashhkaro/screens/sell.webp';
 import screenPremium from '@/assets/case-studies/ashhkaro/screens/premium.webp';
@@ -111,7 +111,7 @@ const screenGroups = [
             { label: 'Home', src: screenHome },
             { label: 'Browse', src: screenBrowse },
             { label: 'Business details', src: screenBusiness },
-            { label: 'Appointments', src: screenAppointments },
+            { label: 'Listings', src: screenListings },
         ],
     },
     {
