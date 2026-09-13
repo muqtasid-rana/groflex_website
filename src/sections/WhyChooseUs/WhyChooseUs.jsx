@@ -1,8 +1,8 @@
 import { whyChooseUs } from '@/data/siteData';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import Link from 'next/link';
-import team from '@/assets/team.webp';
-import client from '@/assets/client.webp';
+import team from '@/assets/home/team.webp';
+import client from '@/assets/home/client.webp';
 import './WhyChooseUs.css';
 
 export default function WhyChooseUs() {

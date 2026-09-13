@@ -1,6 +1,6 @@
 'use client';
 
-import bannerImg from '@/assets/ashhkaro3.jpg';
+import bannerImg from '@/assets/home/hero.webp';
 import Image from 'next/image';
 import Link from 'next/link';
 import { socialLinks } from '@/data/siteData';

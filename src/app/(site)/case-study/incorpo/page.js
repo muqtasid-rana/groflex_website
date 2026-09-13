@@ -1,5 +1,5 @@
 import IncorpoCaseStudy from './IncorpoCaseStudy';
-import heroImg from '@/assets/incorpo/hero.jpg';
+import heroImg from '@/assets/case-studies/incorpo/hero.jpg';
 
 const title = 'Incorpo — Groflex Case Study';
 const description =

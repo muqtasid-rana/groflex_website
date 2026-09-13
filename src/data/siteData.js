@@ -2,19 +2,19 @@
 // Site Data — Groflex Agency
 // ============================================================
 
-import incorp from '@/assets/incorp.webp';
-import hybrid from '@/assets/hybrid.jpeg';
-import inayat from '@/assets/inayat.webp';
-import pocketwatcher from '@/assets/pocketwatcher finance.jpeg';
-import rpmm from '@/assets/rpmm.webp';
-import testolz from '@/assets/testolz.jpeg';
-import ashhkaro from '@/assets/ashhkaro4.webp';
-import ashhkaroIcon from '@/assets/ashhkaroicon.webp';
-import slashcure from '@/assets/slashcure/landing.webp';
-import incorpoShowcase from '@/assets/incorpo/hero.jpg';
-import incorpoLanding from '@/assets/incorpo/landingpage-mockup.webp';
-import slashcureShowcase from '@/assets/slashcure/hero.jpg';
-import slashcureLanding from '@/assets/slashcure/slashcurelandingmockup.webp';
+import incorp from '@/assets/projects/incorpo.webp';
+import hybrid from '@/assets/projects/hybrid-mediaworks.webp';
+import inayat from '@/assets/projects/inayat-motors.webp';
+import pocketwatcher from '@/assets/projects/pocket-watcher.webp';
+import rpmm from '@/assets/projects/rpm-dynamics.webp';
+import testolz from '@/assets/projects/testolz.webp';
+import ashhkaro from '@/assets/case-studies/ashhkaro/hero.webp';
+import ashhkaroIcon from '@/assets/case-studies/ashhkaro/icon.webp';
+import slashcure from '@/assets/case-studies/slashcure/landing.webp';
+import incorpoShowcase from '@/assets/case-studies/incorpo/hero.jpg';
+import incorpoLanding from '@/assets/case-studies/incorpo/landing-mockup.webp';
+import slashcureShowcase from '@/assets/case-studies/slashcure/hero.jpg';
+import slashcureLanding from '@/assets/case-studies/slashcure/landing-mockup.webp';
 
 // Links with `dropdown` open a mega-menu panel instead of navigating
 export const navLinks = [

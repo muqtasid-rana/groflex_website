@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import Browser from '@/components/CaseStudy/Browser';
-import heroImg from '@/assets/slashcure/hero.jpg';
-import findDoctorsImg from '@/assets/slashcure/find-doctors.webp';
-import doctorProfileImg from '@/assets/slashcure/doctor-profile.webp';
-import findHospitalsImg from '@/assets/slashcure/find-hospitals.webp';
-import hospitalPageImg from '@/assets/slashcure/hospital-page.webp';
+import heroImg from '@/assets/case-studies/slashcure/hero.jpg';
+import findDoctorsImg from '@/assets/case-studies/slashcure/find-doctors.webp';
+import doctorProfileImg from '@/assets/case-studies/slashcure/doctor-profile.webp';
+import findHospitalsImg from '@/assets/case-studies/slashcure/find-hospitals.webp';
+import hospitalPageImg from '@/assets/case-studies/slashcure/hospital-page.webp';
 // Built on the Ashhkaro case-study system; slashcure.css re-themes it and adds the web-specific pieces
 import '../ashhkaro/ashhkaro.css';
 import './slashcure.css';

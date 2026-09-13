@@ -1,5 +1,5 @@
 import SlashcureCaseStudy from './SlashcureCaseStudy';
-import heroImg from '@/assets/slashcure/hero.jpg';
+import heroImg from '@/assets/case-studies/slashcure/hero.jpg';
 
 const title = 'Slashcure — Groflex Case Study';
 const description =

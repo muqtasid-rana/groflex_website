@@ -1,5 +1,5 @@
 import AshhkaroCaseStudy from './AshhkaroCaseStudy';
-import heroImg from '@/assets/ashhkaro4.webp';
+import heroImg from '@/assets/case-studies/ashhkaro/hero.webp';
 
 const title = 'Ashhkaro — Groflex Case Study';
 const description =

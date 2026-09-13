@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
-import heroImg from '@/assets/ashhkaro4.webp';
-import launchImg from '@/assets/ashhkaro.webp';
-import screenHome from '@/assets/ashhkaro/screens/home.webp';
-import screenBrowse from '@/assets/ashhkaro/screens/browse.webp';
-import screenBusiness from '@/assets/ashhkaro/screens/business-details.webp';
-import screenAppointments from '@/assets/ashhkaro/screens/appointments.webp';
-import screenProperties from '@/assets/ashhkaro/screens/properties.webp';
-import screenSell from '@/assets/ashhkaro/screens/sell.webp';
-import screenPremium from '@/assets/ashhkaro/screens/premium.webp';
-import screenAi from '@/assets/ashhkaro/screens/ai.webp';
+import heroImg from '@/assets/case-studies/ashhkaro/hero.webp';
+import launchImg from '@/assets/case-studies/ashhkaro/launch.webp';
+import screenHome from '@/assets/case-studies/ashhkaro/screens/home.webp';
+import screenBrowse from '@/assets/case-studies/ashhkaro/screens/browse.webp';
+import screenBusiness from '@/assets/case-studies/ashhkaro/screens/business-details.webp';
+import screenAppointments from '@/assets/case-studies/ashhkaro/screens/appointments.webp';
+import screenProperties from '@/assets/case-studies/ashhkaro/screens/properties.webp';
+import screenSell from '@/assets/case-studies/ashhkaro/screens/sell.webp';
+import screenPremium from '@/assets/case-studies/ashhkaro/screens/premium.webp';
+import screenAi from '@/assets/case-studies/ashhkaro/screens/ai.webp';
 import './ashhkaro.css';
 
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.ashhkaro.ashhkaro';

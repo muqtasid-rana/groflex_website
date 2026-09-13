@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { navLinks, navCustomers, services } from '@/data/siteData';
 import Button from '@/components/Button/Button';
 import './Navbar.css';
-import logo from '@/assets/logo.webp';
+import logo from '@/assets/brand/logo.webp';
 
 const serviceItems = [...services.design, ...services.development];
 
