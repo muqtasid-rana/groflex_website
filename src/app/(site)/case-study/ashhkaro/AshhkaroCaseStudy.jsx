@@ -3,6 +3,14 @@ import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import heroImg from '@/assets/ashhkaro4.webp';
 import launchImg from '@/assets/ashhkaro.webp';
+import screenHome from '@/assets/ashhkaro/screens/home.webp';
+import screenBrowse from '@/assets/ashhkaro/screens/browse.webp';
+import screenBusiness from '@/assets/ashhkaro/screens/business-details.webp';
+import screenAppointments from '@/assets/ashhkaro/screens/appointments.webp';
+import screenProperties from '@/assets/ashhkaro/screens/properties.webp';
+import screenSell from '@/assets/ashhkaro/screens/sell.webp';
+import screenPremium from '@/assets/ashhkaro/screens/premium.webp';
+import screenAi from '@/assets/ashhkaro/screens/ai.webp';
 import './ashhkaro.css';
 
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.ashhkaro.ashhkaro';
@@ -95,27 +103,25 @@ const principles = [
     { num: '03', title: 'Show what’s coming', text: 'Upcoming verticals are visible but clearly marked “Live soon”, so people know what’s next without the clutter.' },
 ];
 
-// Add screenshots by importing them and setting `src`, e.g.
-// import bizHome from '@/assets/ashhkaro/business-home.webp';  →  { label: 'Home', src: bizHome }
 const screenGroups = [
     {
         name: 'Business Discovery',
         phase: 'Phase 01 · Live',
         screens: [
-            { label: 'Home', src: null },
-            { label: 'Browse', src: null },
-            { label: 'Business details', src: null },
-            { label: 'Booking', src: null },
+            { label: 'Home', src: screenHome },
+            { label: 'Browse', src: screenBrowse },
+            { label: 'Business details', src: screenBusiness },
+            { label: 'Appointments', src: screenAppointments },
         ],
     },
     {
-        name: 'Properties',
+        name: 'Properties and beyond',
         phase: 'Phase 02 · Live',
         screens: [
-            { label: 'Properties', src: null },
-            { label: 'Filters', src: null },
-            { label: 'Listing details', src: null },
-            { label: 'Contact', src: null },
+            { label: 'Properties', src: screenProperties },
+            { label: 'Seller mode', src: screenSell },
+            { label: 'Premium membership', src: screenPremium },
+            { label: 'Ashhkaro AI (preview)', src: screenAi },
         ],
     },
 ];
@@ -420,7 +426,7 @@ export default function AshhkaroCaseStudy() {
                     <div className="ak-intro">
                         <Eyebrow num="06">Product</Eyebrow>
                         <h2 className="ak-h2">Real screens. Real product.</h2>
-                        <p className="ak-body">A closer look at the two experiences live in the Android app today.</p>
+                        <p className="ak-body">Screens from the Android app today: the two live verticals, and the seller tools, membership and AI assistant built around them.</p>
                     </div>
 
                     {screenGroups.map((group) => (
