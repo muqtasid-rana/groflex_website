@@ -412,6 +412,162 @@ export const socialLinks = [
   { label: 'WhatsApp', href: 'https://wa.me/+923359528776', icon: 'fa-brands fa-whatsapp' },
 ];
 
+// ---- Pricing (/pricing) ----
+// Every price is kept in both currencies so the GBP figures stay round
+// instead of converted. 1 credit ≈ 4 production hours.
+export const pricing = {
+  pilot: {
+    credits: 8,
+    price: { usd: 750, gbp: 595 },
+    examples: ['A landing page, designed and built', 'A brand identity kit', '4 app screens'],
+  },
+
+  // Fixed-price builds. `example` links a tier to its case study.
+  systems: [
+    {
+      id: 'prototype',
+      name: 'Clickable Prototype',
+      price: { usd: 2500, gbp: 1950 },
+      timeline: '1–2 weeks',
+      description: 'Up to 15 designed screens in a clickable flow, ready for investors or user testing.',
+    },
+    {
+      id: 'system',
+      name: 'Business System',
+      price: { usd: 6000, gbp: 4700 },
+      timeline: '3–5 weeks',
+      description: 'Inventory, CRM, booking or reporting systems with user roles and an admin panel.',
+      example: { name: 'Inayat Motors', href: '/case-study/3', image: inayat },
+    },
+    {
+      id: 'saas',
+      name: 'SaaS / Web App MVP',
+      price: { usd: 9000, gbp: 7000 },
+      timeline: '4–6 weeks',
+      popular: true,
+      description: 'Sign-up and login, your core features, subscription billing and an admin panel.',
+      example: { name: 'Incorpo', href: '/case-study/incorpo', image: incorp },
+    },
+    {
+      id: 'mobile',
+      name: 'Mobile App',
+      price: { usd: 12000, gbp: 9400 },
+      timeline: '6–8 weeks',
+      description: 'One cross-platform app for iOS and Android, with its backend and store submission.',
+      example: { name: 'Ashhkaro', href: '/case-study/ashhkaro', image: ashhkaro },
+    },
+    {
+      id: 'platform',
+      name: 'Full Platform',
+      price: { usd: 18000, gbp: 14000 },
+      timeline: '8–12 weeks',
+      description: 'Web app, mobile app and admin panel, with multiple user types and third-party integrations.',
+      example: { name: 'Slashcure', href: '/case-study/slashcure', image: slashcure },
+    },
+  ],
+  systemsIncluded: ['White-label handover', 'Full source code ownership', 'Documentation', 'QA testing', '30 days post-launch support'],
+  appCare: { price: { usd: 500, gbp: 395 } },
+
+  packs: [
+    { credits: 10, price: { usd: 1300, gbp: 1000 } },
+    { credits: 25, price: { usd: 3000, gbp: 2350 } },
+  ],
+  packValidityDays: 90,
+
+  // What a credit buys. `credits` is the cost of one item; items marked
+  // `estimator` also appear in the monthly estimator.
+  creditMenu: {
+    Design: [
+      { label: 'Social post or ad set (3 sizes)', credits: 1, estimator: true },
+      { label: 'Carousel (up to 10 slides)', credits: 2, estimator: true },
+      { label: 'App screen design', credits: 2, estimator: true },
+      { label: 'Web page design', credits: 3, estimator: true },
+      { label: 'Pitch deck (15 slides)', credits: 6 },
+      { label: 'Logo (3 concepts)', credits: 6, estimator: true },
+      { label: 'Brand identity kit', credits: 15 },
+    ],
+    Development: [
+      { label: 'Dev task or bug fix', credits: 1, estimator: true },
+      { label: 'Email template, designed and built', credits: 2 },
+      { label: 'Web page build (WordPress, Webflow, Framer)', credits: 3 },
+      { label: 'Landing page, designed and built', credits: 8, estimator: true },
+      { label: '5-page website, designed and built', credits: 20 },
+      { label: 'Shopify store setup', credits: 25 },
+    ],
+    Growth: [
+      { label: 'Automation workflow (Zapier, Make, n8n)', credits: 6, estimator: true },
+      { label: 'Technical SEO audit', credits: 6 },
+    ],
+  },
+
+  plans: [
+    {
+      id: 'studio',
+      name: 'Studio',
+      price: { usd: 2400, gbp: 1900 },
+      credits: 20,
+      rollover: 5,
+      features: ['Shared design and dev team', '48-hour turnaround on small tasks', 'Slack and email support'],
+    },
+    {
+      id: 'growth',
+      name: 'Growth',
+      price: { usd: 4950, gbp: 3900 },
+      credits: 45,
+      rollover: 10,
+      popular: true,
+      features: ['Dedicated designer and developer', 'Project manager', '24–48 hour turnaround, priority queue'],
+    },
+    {
+      id: 'scale',
+      name: 'Scale',
+      price: { usd: 8900, gbp: 6900 },
+      credits: 90,
+      rollover: 20,
+      features: ['Dedicated team: PM, 2 designers, 2 developers, QA', 'Weekly check-in call', 'Fastest turnaround'],
+    },
+  ],
+  dedicatedTeam: { perPerson: { usd: 2200, gbp: 1750 } },
+
+  // Resale examples. Credit items are costed at the Growth rate; `systemId`
+  // items use that build's starting price.
+  margin: [
+    { label: 'Landing page', sell: { usd: 4000, gbp: 3200 }, credits: 8 },
+    { label: 'Brand identity kit', sell: { usd: 5000, gbp: 4000 }, credits: 15 },
+    { label: 'SaaS MVP', sell: { usd: 40000, gbp: 32000 }, systemId: 'saas' },
+  ],
+
+  included: [
+    { icon: 'fa-solid fa-tag', title: 'White-label', text: 'No Groflex branding anywhere. The work goes out as yours.' },
+    { icon: 'fa-solid fa-file-signature', title: 'NDA first', text: 'Signed before you share a single client detail.' },
+    { icon: 'fa-brands fa-slack', title: 'Your tools', text: 'We work inside your Slack, ClickUp, Jira or Asana.' },
+    { icon: 'fa-solid fa-folder-open', title: 'Source files', text: 'Figma files and code are yours on delivery.' },
+    { icon: 'fa-solid fa-user-shield', title: 'Invisible to clients', text: 'We never contact your client unless you ask us to.' },
+    { icon: 'fa-solid fa-rotate', title: 'Rollover and pause', text: 'Unused credits carry over. Pause a quiet month.' },
+  ],
+
+  steps: [
+    { title: 'Start', text: 'Begin with a pilot, a pack, a plan or a build quote.' },
+    { title: 'Brief', text: 'Drop the brief in your shared Slack channel.' },
+    { title: 'Delivery', text: 'Small tasks land in 24–48 hours, builds on a fixed timeline.' },
+    { title: 'Revise', text: 'Two revision rounds included on every deliverable.' },
+  ],
+
+  faq: [
+    { q: 'What is a credit?', a: 'A credit is a fixed unit of work, roughly four hours of senior design or development time. Every deliverable has a set credit cost, so you know the price before we start.' },
+    { q: 'What if we don’t like the pilot?', a: 'Then you don’t pay. There is no upfront payment for the pilot. You only pay once you’ve seen the work and liked it.' },
+    { q: 'How many revisions are included?', a: 'Two revision rounds on every deliverable. A change to the original brief counts as new work and is quoted in credits first.' },
+    { q: 'Can we get work faster?', a: 'Yes. Rush delivery in under 24 hours costs 1.5× the normal credits.' },
+    { q: 'What happens to unused credits?', a: 'On a monthly plan, unused credits roll over up to your plan’s limit. Credits from a pack stay valid for 90 days.' },
+    { q: 'Can we pause or cancel?', a: 'Plans are month to month. You can pause for a quiet month or cancel before your next billing date. Commit to three months and you get 10% off.' },
+    { q: 'How are systems and apps billed?', a: 'Each build gets a fixed quote within 48 hours, billed in milestones: 40% to start, 30% at the midpoint and 30% on delivery. Agencies on a monthly plan can also pay with credits at their plan rate.' },
+    { q: 'Will our clients know about Groflex?', a: 'No. We sign an NDA, deliver without our branding and never contact your clients unless you ask us to.' },
+    { q: 'Which time zones do you cover?', a: 'Our team overlaps at least four working hours with the UK and US Eastern time, so you get same-day replies.' },
+    { q: 'How do we pay?', a: 'By card or bank transfer. Plans and packs are paid upfront. The pilot is paid only after you approve the work.' },
+  ],
+};
+
+
 // ---- Tally.so Form Config (single source of truth for all audit CTAs) ----
 export const tallyFormConfig = {
   formId: '5BLG8d',
