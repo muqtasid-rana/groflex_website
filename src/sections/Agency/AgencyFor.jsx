@@ -3,7 +3,7 @@ export default function AgencyFor() {
     <section className="ah-for">
       {/* A band that is thick at both edges and tapers to a hairline in the centre */}
       <svg className="ah-divider" viewBox="0 0 1440 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <path d="M0 1 C400 2 560 8 720 8.2 C880 8 1040 2 1440 1 L1440 19 C1040 18 880 12 720 11.8 C560 12 400 18 0 19 Z" />
+        <path d="M0 0 C380 1 560 8.6 720 8.8 C880 8.6 1060 1 1440 0 L1440 20 C1060 19 880 11.4 720 11.2 C560 11.4 380 19 0 20 Z" />
       </svg>
       <div className="container">
         <p className="ah-for__statement">

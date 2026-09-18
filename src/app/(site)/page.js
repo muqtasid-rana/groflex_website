@@ -5,8 +5,13 @@ import AgencyWork from '@/sections/Agency/AgencyWork';
 import AgencyServices from '@/sections/Agency/AgencyServices';
 import AgencyVsFreelancers from '@/sections/Agency/AgencyVsFreelancers';
 import AgencyPricing from '@/sections/Agency/AgencyPricing';
+import AgencyBlog from '@/sections/Agency/AgencyBlog';
 import AgencyFaq from '@/sections/Agency/AgencyFaq';
+import { getAllBlogs } from '@/lib/blogs';
 import '@/sections/Agency/agency.css';
+
+// Re-rendered at most every 5 minutes, so new blog posts show up without a redeploy
+export const revalidate = 300;
 
 const title = 'Groflex — White-Label Design & Development Team for Agencies';
 const description =
@@ -20,7 +25,9 @@ export const metadata = {
 };
 
 // The founder-facing landing page now lives at /founders
-export default function HomePage() {
+export default async function HomePage() {
+  const blogs = await getAllBlogs().catch(() => []);
+
   return (
     <div className="ah">
       <AgencyHero />
@@ -31,6 +38,7 @@ export default function HomePage() {
       <AgencyVsFreelancers />
       {/* Team section (AgencyTeam) is hidden until real photos are ready */}
       <AgencyPricing />
+      <AgencyBlog blogs={blogs} />
       <AgencyFaq />
     </div>
   );

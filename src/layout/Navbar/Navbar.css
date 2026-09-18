@@ -22,8 +22,13 @@
     border-bottom: 1px solid var(--color-border-light);
 }
 
-.navbar--menu-open {
-    background-color: #ffffff;
+/* The mobile drawer is navy, so the bar above it matches. The blur has to go:
+   a backdrop-filter traps the fixed drawer inside the bar instead of the screen. */
+.navbar.navbar--menu-open {
+    background-color: var(--color-brand-navy);
+    border-bottom-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
 }
 
 /* Bar turns dark so it sits flush with the open dropdown panel */
@@ -71,24 +76,24 @@
     height: 36px;
 }
 
-/* White bars (scrolled, open mobile menu) need the original logo */
+/* The white scrolled bar needs the original logo */
 .navbar__logo--dark,
-.navbar--scrolled .navbar__logo--light,
-.navbar--menu-open .navbar__logo--light {
+.navbar--scrolled .navbar__logo--light {
     display: none;
 }
 
-.navbar--scrolled .navbar__logo--dark,
+.navbar--scrolled .navbar__logo--dark {
+    display: block;
+}
+
+/* An open dropdown or mobile drawer turns the bar navy again */
+.navbar--dropdown-open .navbar__logo--light,
+.navbar--menu-open .navbar__logo--light {
+    display: block;
+}
+
+.navbar--dropdown-open .navbar__logo--dark,
 .navbar--menu-open .navbar__logo--dark {
-    display: block;
-}
-
-/* An open dropdown turns the bar navy again */
-.navbar--dropdown-open .navbar__logo--light {
-    display: block;
-}
-
-.navbar--dropdown-open .navbar__logo--dark {
     display: none;
 }
 
@@ -333,9 +338,12 @@
     transform-origin: center;
 }
 
-.navbar--scrolled .navbar__toggle-bar,
-.navbar--menu-open .navbar__toggle-bar {
+.navbar--scrolled .navbar__toggle-bar {
     background: var(--color-text);
+}
+
+.navbar--menu-open .navbar__toggle-bar {
+    background: #ffffff;
 }
 
 .navbar__toggle.active .navbar__toggle-bar:nth-child(1) {
@@ -354,7 +362,7 @@
 .navbar__mobile-menu {
     position: fixed;
     inset: 0;
-    background: #ffffff;
+    background: var(--color-brand-navy);
     z-index: 1000;
     padding: 6rem var(--container-padding) var(--space-xl);
     display: flex;
@@ -380,14 +388,14 @@
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: var(--fw-semibold);
-    color: var(--color-text);
+    color: #ffffff;
     padding: var(--space-md) 0;
-    border-bottom: 1px solid var(--color-border-light);
+    border-bottom: 1px solid rgba(240, 32, 200, 0.3);
     transition: color var(--transition-fast);
 }
 
 .navbar__mobile-link:hover {
-    color: var(--color-primary);
+    color: var(--color-brand-magenta);
 }
 
 .navbar__mobile-trigger {
@@ -403,7 +411,7 @@
 }
 
 .navbar__mobile-trigger.is-open {
-    color: var(--color-primary);
+    color: var(--color-brand-magenta);
     border-bottom-color: transparent;
 }
 
@@ -411,7 +419,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-border-light);
+    border-bottom: 1px solid rgba(240, 32, 200, 0.3);
 }
 
 .navbar__mobile-sublink {
@@ -421,17 +429,17 @@
     padding: 0.6rem 0;
     font-size: var(--fs-body);
     font-weight: var(--fw-semibold);
-    color: var(--color-text-secondary);
+    color: rgba(245, 245, 255, 0.72);
 }
 
 .navbar__mobile-sublink i {
     width: 20px;
     text-align: center;
-    color: var(--color-primary);
+    color: var(--color-brand-magenta);
 }
 
 .navbar__mobile-sublink:hover {
-    color: var(--color-primary);
+    color: #ffffff;
 }
 
 .navbar__mobile-nav .button {

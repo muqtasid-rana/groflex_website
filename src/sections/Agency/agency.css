@@ -1,7 +1,7 @@
 /* =========================================
    AGENCY HOME (/)
    Brand rules: navy background, white + pink text, pink lines,
-   light-blue buttons with navy text. No gradients, shadows or glows.
+   light-blue buttons with white text. No gradients, shadows or glows.
    ========================================= */
 
 .ah {
@@ -65,7 +65,7 @@ body:has(.ah) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--dark {
 body:has(.ah) .navbar .btn--primary {
   background: var(--color-brand-blue);
   border-color: var(--color-brand-blue);
-  color: var(--color-brand-navy);
+  color: #ffffff;
   font-weight: var(--fw-bold);
 }
 
@@ -262,11 +262,11 @@ body:has(.ah) .footer {
 }
 
 /* Stretches edge to edge. Its height sets the thickness at the edges; the centre
-   is always about a fifth of that. */
+   is always about an eighth of that. */
 .ah-divider {
   display: block;
   width: 100%;
-  height: clamp(7px, 0.8vw, 11px);
+  height: clamp(12px, 1.4vw, 20px);
   margin-bottom: clamp(3rem, 6vw, 4.5rem);
 }
 
@@ -395,7 +395,7 @@ body:has(.ah) .footer {
 
 .ah-work .work-card__btn {
   background: var(--ah-blue);
-  color: var(--ah-navy);
+  color: #ffffff;
 }
 
 .ah-work .work-card:focus-visible {
@@ -604,7 +604,7 @@ body:has(.ah) .footer {
   border: 0;
   border-radius: 50%;
   background: var(--ah-blue);
-  color: var(--ah-navy);
+  color: #ffffff;
   cursor: pointer;
   transition: background-color var(--transition-fast);
 }
@@ -722,7 +722,7 @@ body:has(.ah) .footer {
   border: 0;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: var(--ah-blue);
-  color: var(--ah-navy);
+  color: #ffffff;
   font-family: var(--font-heading);
   text-align: left;
   cursor: pointer;
@@ -1330,5 +1330,124 @@ body:has(.ah) .footer {
     margin-top: 3.5rem;
     padding: 1.75rem 1.5rem;
     gap: 1.25rem;
+  }
+}
+
+/* ---- Blog ---- */
+.ah-blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-post {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1.5px solid var(--ah-outline);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--transition-fast);
+}
+
+.ah-post:hover {
+  border-color: var(--ah-pink);
+}
+
+.ah-post__img {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ah-raised);
+}
+
+.ah-post__img img {
+  object-fit: cover;
+}
+
+.ah-post__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-lg);
+}
+
+.ah-post__date {
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ah-pink);
+}
+
+.ah-post__title {
+  margin-top: var(--space-sm);
+  font-size: 1.15rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  color: var(--ah-text);
+}
+
+.ah-post__excerpt {
+  display: -webkit-box;
+  margin-top: var(--space-sm);
+  overflow: hidden;
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: var(--ah-muted);
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Sits at the bottom so the links line up across the row */
+.ah-post__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-bold);
+  color: var(--ah-pink);
+}
+
+.ah-post:hover .ah-post__more svg {
+  transform: translateX(3px);
+}
+
+.ah-post__more svg {
+  transition: transform var(--transition-fast);
+}
+
+@media (max-width: 1000px) {
+  .ah-blog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Two across leaves the third card alone, so hide it */
+  .ah-blog__grid li:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .ah-blog__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ah-blog__grid li:nth-child(3) {
+    display: block;
+  }
+
+  .ah-post__body {
+    padding: 1.5rem;
   }
 }
