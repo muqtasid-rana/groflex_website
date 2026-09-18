@@ -15,7 +15,7 @@ export default function Footer() {
                             <Image src={logoLight} alt="Groflex" className="footer__logo-img" />
                         </Link>
                         <p className="footer__desc">
-                            A premium software and design agency building world-class digital products for ambitious brands.
+                            A white-label design, development and marketing team for agencies. Your brand, our team.
                         </p>
                         <div className="footer__socials">
                             {socialLinks.map((link) => (

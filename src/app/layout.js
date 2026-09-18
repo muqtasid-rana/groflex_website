@@ -16,9 +16,9 @@ export const viewport = 'width=device-width, initial-scale=1';
 
 export const metadata = {
   metadataBase: new URL('https://www.groflex.co'),
-  title: 'Groflex — Software & Design Agency',
+  title: 'Groflex — White-Label Design & Development Team for Agencies',
   description:
-    'Groflex is a premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
+    'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
   icons: {
     // 4 KB instead of the 106 KB 500px original, which stays for Apple, Open Graph and JSON-LD
     icon: { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
@@ -28,9 +28,9 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Groflex — Software & Design Agency',
+    title: 'Groflex — White-Label Design & Development Team for Agencies',
     description:
-      'Groflex is a premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
+      'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
     type: 'website',
     url: 'https://www.groflex.co',
     siteName: 'Groflex',
@@ -45,9 +45,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Groflex — Software & Design Agency',
+    title: 'Groflex — White-Label Design & Development Team for Agencies',
     description:
-      'Premium software and design agency delivering world-class digital products for enterprise clients.',
+      'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
     images: ['/favicon.png'],
   },
 };
@@ -60,7 +60,7 @@ const jsonLd = {
   url: 'https://www.groflex.co',
   logo: 'https://www.groflex.co/favicon.png',
   description:
-    'Premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
+    'White-label design, development and marketing team for UK and US agencies.',
   email: 'muqtasid@groflex.co',
   telephone: '+923359528776',
   sameAs: [
