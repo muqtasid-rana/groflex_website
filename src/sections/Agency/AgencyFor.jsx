@@ -6,7 +6,6 @@ export default function AgencyFor() {
         <path d="M0 1 C400 2 560 8 720 8.2 C880 8 1040 2 1440 1 L1440 19 C1040 18 880 12 720 11.8 C560 12 400 18 0 19 Z" />
       </svg>
       <div className="container">
-        <p className="ah-eyebrow">Who it&apos;s for</p>
         <p className="ah-for__statement">
           Groflex is a white-label team for <em>design, development and marketing</em> agencies.
         </p>

@@ -8,6 +8,7 @@ import { navLinks, navCustomers, services } from '@/data/siteData';
 import Button from '@/components/Button/Button';
 import './Navbar.css';
 import logo from '@/assets/brand/logo.webp';
+import logoLight from '@/assets/brand/logo-light.webp';
 
 const serviceItems = [...services.design, ...services.development, ...services.growth];
 
@@ -188,7 +189,9 @@ export default function Navbar() {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }}>
-                    <Image className='navbar__logo' src={logo} width={80} height={80} alt="Groflex" priority />
+                    {/* White-text logo on dark bars; the original shows once the bar turns white */}
+                    <Image className='navbar__logo navbar__logo--light' src={logoLight} alt="Groflex" priority />
+                    <Image className='navbar__logo navbar__logo--dark' src={logo} width={80} height={80} alt="" aria-hidden="true" />
                 </Link>
                 <nav className="navbar__nav" ref={navRef}>
                     <ul className="navbar__list">

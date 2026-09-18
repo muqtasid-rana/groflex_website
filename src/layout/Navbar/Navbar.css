@@ -62,6 +62,36 @@
     /* Smaller when scrolled */
 }
 
+/* The white-text logo is shorter than the square original */
+.navbar__logo--light {
+    height: 44px;
+}
+
+.navbar--scrolled .navbar__logo--light {
+    height: 36px;
+}
+
+/* White bars (scrolled, open mobile menu) need the original logo */
+.navbar__logo--dark,
+.navbar--scrolled .navbar__logo--light,
+.navbar--menu-open .navbar__logo--light {
+    display: none;
+}
+
+.navbar--scrolled .navbar__logo--dark,
+.navbar--menu-open .navbar__logo--dark {
+    display: block;
+}
+
+/* An open dropdown turns the bar navy again */
+.navbar--dropdown-open .navbar__logo--light {
+    display: block;
+}
+
+.navbar--dropdown-open .navbar__logo--dark {
+    display: none;
+}
+
 .navbar__logo-dot {
     color: var(--color-primary);
 }

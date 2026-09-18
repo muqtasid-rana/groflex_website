@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import logoLight from '@/assets/brand/logo-light.webp';
 import { socialLinks, services } from '@/data/siteData';
 import SocialIcon from '@/components/SocialIcon/SocialIcon';
 import './Footer.css';
@@ -9,7 +11,9 @@ export default function Footer() {
             <div className="container">
                 <div className="footer__grid">
                     <div className="footer__brand">
-                        <Link href="/" className="footer__logo">Groflex</Link>
+                        <Link href="/" className="footer__logo">
+                            <Image src={logoLight} alt="Groflex" className="footer__logo-img" />
+                        </Link>
                         <p className="footer__desc">
                             A premium software and design agency building world-class digital products for ambitious brands.
                         </p>

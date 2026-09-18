@@ -53,6 +53,15 @@ body:has(.ah) .navbar--scrolled .navbar__toggle-bar {
   background: #ffffff;
 }
 
+/* The bar stays navy here, so keep the white-text logo */
+body:has(.ah) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--light {
+  display: block;
+}
+
+body:has(.ah) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--dark {
+  display: none;
+}
+
 body:has(.ah) .navbar .btn--primary {
   background: var(--color-brand-blue);
   border-color: var(--color-brand-blue);
@@ -1146,5 +1155,180 @@ body:has(.ah) .footer {
 @media (max-width: 900px) {
   .ah-hero__break {
     display: none;
+  }
+}
+
+/* ---- Phone spacing: more room between and inside sections ---- */
+@media (max-width: 760px) {
+  .ah .container {
+    padding: 0 24px;
+  }
+
+  .ah-section {
+    padding: 5.5rem 0;
+  }
+
+  .ah-head {
+    margin-bottom: 3rem;
+  }
+
+  .ah-head--split {
+    gap: var(--space-xl);
+  }
+
+  /* Hero */
+  .ah-hero {
+    padding: 8rem 0 3.5rem;
+  }
+
+  .ah-hero__cta {
+    margin-top: 2.5rem;
+  }
+
+  .ah-hero__note {
+    margin-top: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .ah-logos {
+    margin-top: 4rem;
+  }
+
+  .ah-logos__viewport {
+    margin-top: 1.5rem;
+  }
+
+  /* Statement */
+  .ah-for {
+    padding-bottom: 5.5rem;
+  }
+
+  .ah-divider {
+    margin-bottom: 4rem;
+  }
+
+  .ah-for__statement {
+    line-height: 1.2;
+  }
+
+  .ah-for__sub {
+    margin-top: 1.75rem;
+    line-height: 1.7;
+  }
+
+  /* How it works */
+  .ah-how {
+    padding-top: 5.5rem;
+  }
+
+  .ah-how__inner {
+    padding-bottom: 5.5rem;
+  }
+
+  .ah-steps {
+    gap: 5rem;
+  }
+
+  .ah-step__title {
+    margin-top: 0.75rem;
+  }
+
+  .ah-step__desc {
+    margin-top: 1rem;
+    line-height: 1.7;
+  }
+
+  .ah-step__cta {
+    margin-top: 1.75rem;
+  }
+
+  /* Case studies */
+  .ah-work .work-featured {
+    gap: 3rem;
+  }
+
+  /* Services */
+  .ah-services__group-title:not(:first-child) {
+    margin-top: 3.5rem;
+  }
+
+  .ah-service {
+    padding: 1.75rem 0;
+    gap: 1.25rem;
+  }
+
+  .ah-service__desc {
+    margin-top: 0.3rem;
+    line-height: 1.6;
+  }
+
+  /* Freelancers vs Groflex */
+  .ah-vs__art {
+    margin-bottom: 3.5rem;
+  }
+
+  .ah-vs__row {
+    padding: 1.25rem 0;
+    gap: 0.75rem;
+    line-height: 1.6;
+  }
+
+  /* Team */
+  .ah-team__track {
+    gap: 1.25rem;
+  }
+
+  /* Pricing */
+  .ah-pilot {
+    gap: 1.5rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .ah-pilot p {
+    margin-top: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .ah-tabs {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .ah-panel {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .ah-rows li {
+    padding: 1.25rem 0;
+  }
+
+  .ah-panel__foot {
+    margin-top: 2rem;
+    gap: 1.25rem;
+  }
+
+  .ah-plans {
+    gap: 1.75rem;
+  }
+
+  .ah-pricing__more {
+    margin-top: 2.5rem;
+  }
+
+  /* FAQ */
+  .ah-faq__item summary {
+    padding: 1.4rem 2.5rem 1.4rem 0;
+    line-height: 1.4;
+  }
+
+  .ah-faq__item p {
+    padding-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .ah-faq__cta {
+    margin-top: 3.5rem;
+    padding: 1.75rem 1.5rem;
+    gap: 1.25rem;
   }
 }

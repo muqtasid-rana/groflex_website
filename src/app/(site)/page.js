@@ -4,7 +4,6 @@ import HowItWorks from '@/sections/Agency/HowItWorks';
 import AgencyWork from '@/sections/Agency/AgencyWork';
 import AgencyServices from '@/sections/Agency/AgencyServices';
 import AgencyVsFreelancers from '@/sections/Agency/AgencyVsFreelancers';
-import AgencyTeam from '@/sections/Agency/AgencyTeam';
 import AgencyPricing from '@/sections/Agency/AgencyPricing';
 import AgencyFaq from '@/sections/Agency/AgencyFaq';
 import '@/sections/Agency/agency.css';
@@ -30,7 +29,7 @@ export default function HomePage() {
       <AgencyWork />
       <AgencyServices />
       <AgencyVsFreelancers />
-      <AgencyTeam />
+      {/* Team section (AgencyTeam) is hidden until real photos are ready */}
       <AgencyPricing />
       <AgencyFaq />
     </div>
