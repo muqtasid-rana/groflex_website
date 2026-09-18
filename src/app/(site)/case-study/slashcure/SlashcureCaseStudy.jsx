@@ -467,7 +467,7 @@ export default function SlashcureCaseStudy() {
                             </p>
                         </blockquote>
                         <figcaption className="sc-testimonial__author">
-                            <strong>Faheem Kamboh</strong>
+                            <strong>Founder</strong>
                             <span>Slashcure</span>
                         </figcaption>
                     </figure>
