@@ -23,8 +23,14 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogDetailPage({ params }) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const [blog, allBlogs] = await Promise.all([
+    getBlogBySlug(slug),
+    getAllBlogs().catch(() => []),
+  ]);
   if (!blog) notFound();
 
-  return <BlogContent blog={blog} />;
+  // Fetched here rather than in the browser so the page doesn't ship the Firestore SDK
+  const similarBlogs = allBlogs.filter((b) => b.slug !== slug).slice(0, 3);
+
+  return <BlogContent blog={blog} similarBlogs={similarBlogs} />;
 }

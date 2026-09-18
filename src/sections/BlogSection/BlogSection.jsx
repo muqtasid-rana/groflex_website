@@ -1,23 +1,12 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
-import { getAllBlogs } from '@/lib/blogs';
 import './BlogSection.css';
 
-export default function BlogSection() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getAllBlogs()
-      .then((data) => setBlogs(data))
-      .catch(() => setBlogs([]))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading || blogs.length === 0) return null;
+// Blogs are fetched on the server by the home page, so the section is in the first
+// HTML instead of popping in (and pushing everything below it) once Firestore loads
+export default function BlogSection({ blogs }) {
+  if (!blogs?.length) return null;
 
   return (
     <section id="blog" className="section blog-section">
@@ -44,7 +33,12 @@ export default function BlogSection() {
               <article key={blog.id} className="blog-section__card">
                 <div className="blog-section__card-img">
                   {blog.thumbnail ? (
-                    <img src={blog.thumbnail} alt={blog.title} />
+                    <Image
+                      src={blog.thumbnail}
+                      alt={blog.title}
+                      fill
+                      sizes="(max-width: 480px) 270px, (max-width: 768px) 300px, 360px"
+                    />
                   ) : (
                     <div className="blog-section__card-placeholder">
                       <i className="fa-solid fa-image"></i>
@@ -53,7 +47,7 @@ export default function BlogSection() {
                 </div>
                 <div className="blog-section__card-body">
                   {dateStr && <time className="blog-section__card-date">{dateStr}</time>}
-                  <h4 className="blog-section__card-title">{blog.title}</h4>
+                  <h3 className="blog-section__card-title">{blog.title}</h3>
                   {blog.metaDescription && (
                     <p className="blog-section__card-excerpt">{blog.metaDescription}</p>
                   )}

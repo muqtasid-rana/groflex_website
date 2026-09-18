@@ -164,6 +164,7 @@
 }
 
 /* Services panel */
+/* Twelve services, four columns: one row each for design, development and growth */
 .navbar__services-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));

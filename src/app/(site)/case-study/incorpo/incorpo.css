@@ -14,7 +14,6 @@
     --ak-ink-muted: #4b5565;
     --ak-line-light: #e2e6ee;
     --ak-line-light-strong: #c8cfdb;
-    --inc-hero-bg: #1e202c;
 }
 
 /* The lighter blue carries on graphite; small text on light bands needs Incorpo's deeper one */
@@ -36,31 +35,64 @@
 }
 
 /* ===========================
-   01 — HERO (laptop + phone mockup)
-   The mockup is cropped to start at the laptop. Pinned right at a share of the
-   width, the laptop stays clear of the text; the hero's ground is the
-   mockup's own backdrop colour so the image has no visible edge.
+   01 — HERO (Incorpo landing page)
+   The image's backdrop is a vertical blue → black → navy gradient, with the
+   product window on its right. It sits bottom-right at its natural shape,
+   capped at 1400px so the window starts clear of the text; only its empty
+   left side fades out. The hero's ground repeats the same gradient, measured
+   up from the bottom over the image's height (stops sampled off its left
+   edge), with the top blue carrying on above — so the image has no seam.
    =========================== */
 .ak-hero.inc-hero {
+    --inc-img-w: min(95vw, 1400px);
+    --inc-img-h: calc(var(--inc-img-w) * 1077 / 2305);
     min-height: 0;
-    background: var(--inc-hero-bg);
+    background: linear-gradient(to top,
+            #070052 0,
+            #050145 calc(var(--inc-img-h) * 0.1),
+            #03032e calc(var(--inc-img-h) * 0.25),
+            #000517 calc(var(--inc-img-h) * 0.4),
+            #010a1d calc(var(--inc-img-h) * 0.45),
+            #081a43 calc(var(--inc-img-h) * 0.55),
+            #12327a calc(var(--inc-img-h) * 0.7),
+            #1a4ab2 calc(var(--inc-img-h) * 0.85),
+            #2562e9 var(--inc-img-h));
 }
 
 .inc-hero .ak-hero__media {
-    inset: 3.5rem 0 auto auto;
-    width: min(72%, 1150px);
-    aspect-ratio: 1378 / 868;
-    max-height: calc(100% - 3.5rem);
+    inset: auto 0 0 auto;
+    width: var(--inc-img-w);
+    height: var(--inc-img-h);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 12%);
 }
 
 .inc-hero .ak-hero__img {
-    object-position: right center;
+    object-position: right bottom;
 }
 
+/* No colour wash: the image already matches the ground */
 .inc-hero .ak-hero__media::after {
-    background:
-        linear-gradient(90deg, var(--inc-hero-bg) 0%, rgba(30, 32, 44, 0) 22%),
-        linear-gradient(180deg, var(--inc-hero-bg) 0%, rgba(30, 32, 44, 0) 12%, rgba(30, 32, 44, 0) 80%, var(--inc-hero-bg) 100%);
+    background: none;
+}
+
+/* A soft shade across the very top, so the navbar's blue button doesn't vanish into the blue band */
+.inc-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 8, 30, 0.45) 0%, rgba(3, 8, 30, 0) 22%);
+    pointer-events: none;
+}
+
+.inc-hero .ak-hero__kicker {
+    color: #bcd4ff;
+}
+
+/* Two by two inside the text column, so the facts never run under the product window */
+.inc-hero .ak-hero__meta {
+    grid-template-columns: repeat(2, minmax(0, auto));
+    max-width: 27rem;
 }
 
 .inc-hero .ak-hero__title {
@@ -236,16 +268,26 @@
         flex-direction: column;
         align-items: stretch;
         padding-top: 4.75rem;
+        /* Blue behind the navbar to meet the image's top edge, navy under the text */
+        background: linear-gradient(180deg, #2562e9 0, #2562e9 4.75rem, #070052 4.75rem);
     }
 
     .inc-hero .ak-hero__media {
         position: relative;
         inset: auto;
         width: 100%;
+        height: auto;
+        aspect-ratio: 2 / 1;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .inc-hero .ak-hero__img {
+        object-position: right center;
     }
 
     .inc-hero .ak-hero__media::after {
-        background: linear-gradient(180deg, rgba(30, 32, 44, 0) 70%, var(--inc-hero-bg) 100%);
+        background: linear-gradient(180deg, rgba(7, 0, 82, 0) 60%, #070052 100%);
     }
 
     .inc-hero .ak-hero__inner {

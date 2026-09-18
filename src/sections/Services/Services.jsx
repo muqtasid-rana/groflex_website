@@ -44,6 +44,21 @@ export default function Services() {
                         ))}
                     </div>
                 </div>
+
+                <div className="services__group">
+                    <div className="services__group-header">
+                        <h3 className="services__group-title">
+                            <i className="fa-solid fa-chart-line services__group-icon"></i>
+                            Growth &amp; Operations
+                        </h3>
+                        <div className="services__group-line" />
+                    </div>
+                    <div className="services__grid">
+                        {services.growth.map((s, i) => (
+                            <ServiceCard key={s.id} {...s} index={i} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

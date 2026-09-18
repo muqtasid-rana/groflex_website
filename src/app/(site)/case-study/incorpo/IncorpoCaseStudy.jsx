@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import Browser from '@/components/CaseStudy/Browser';
 import LoopVideo from '@/components/CaseStudy/LoopVideo';
-import heroImg from '@/assets/case-studies/incorpo/hero.jpg';
+import heroImg from '@/assets/case-studies/incorpo/hero.webp';
 import jobImg from '@/assets/case-studies/incorpo/job.webp';
 import collectImg from '@/assets/case-studies/incorpo/collect.webp';
 import rankingsImg from '@/assets/case-studies/incorpo/rankings.webp';
@@ -265,7 +265,7 @@ export default function IncorpoCaseStudy() {
             {/* 01 — HERO */}
             <header className="ak-hero inc-hero">
                 <div className="ak-hero__media">
-                    <Image src={heroImg} alt="Incorpo on a laptop and a phone: hire, manage, train and track your whole team from one place" fill priority placeholder="blur" sizes="(max-width: 1100px) 100vw, 70vw" className="ak-hero__img" />
+                    <Image src={heroImg} alt="The Incorpo landing page: stop paying four systems, hire, manage, train and track your whole team from one place" fill priority placeholder="blur" sizes="100vw" className="ak-hero__img" />
                 </div>
                 <div className="container ak-hero__inner">
                     <Link href="/" className="ak-back">

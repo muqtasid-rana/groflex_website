@@ -1,14 +1,8 @@
 import Link from 'next/link';
-import { work } from '@/data/siteData';
+import { featuredWork as featured } from '@/data/siteData';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import FeaturedWork from '@/components/FeaturedWork/FeaturedWork';
 import './Portfolio.css';
-
-const featured = work.slice(0, 3).map((project) => (
-    project.homeImage
-        ? { ...project, image: project.homeImage, imagePosition: project.homeImagePosition }
-        : project
-));
 
 export default function Portfolio() {
     return (

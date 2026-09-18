@@ -3,6 +3,14 @@ import '@/styles/animations.css';
 import '@/styles/global.css';
 import { Analytics } from "@vercel/analytics/next";
 import Script from 'next/script';
+import { Plus_Jakarta_Sans, Nunito_Sans, Fraunces } from 'next/font/google';
+
+// Self-hosted by next/font: no render-blocking request to Google Fonts, and the
+// fallback fonts are metric-matched so text doesn't shift when the web font swaps in
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' });
+const nunito = Nunito_Sans({ subsets: ['latin'], variable: '--font-nunito' });
+// Only the gameplan uses Fraunces, so it's fetched on demand instead of preloaded everywhere
+const fraunces = Fraunces({ subsets: ['latin'], axes: ['opsz'], variable: '--font-fraunces', preload: false });
 
 export const viewport = 'width=device-width, initial-scale=1';
 
@@ -12,7 +20,8 @@ export const metadata = {
   description:
     'Groflex is a premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
   icons: {
-    icon: '/favicon.png',
+    // 4 KB instead of the 106 KB 500px original, which stays for Apple, Open Graph and JSON-LD
+    icon: { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
     apple: '/favicon.png',
   },
   alternates: {
@@ -75,16 +84,17 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${jakarta.variable} ${nunito.variable} ${fraunces.variable}`}>
       <head>
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-R5XNDZ1D7P" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Tally and gtag wait for the page to finish loading so they don't compete with hydration */}
+        <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-R5XNDZ1D7P" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -93,12 +103,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-R5XNDZ1D7P');
           `}
         </Script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&display=swap"
-          rel="stylesheet"
-        />
         {/* FontAwesome — deferred to avoid render-blocking */}
         <link
           rel="preload"

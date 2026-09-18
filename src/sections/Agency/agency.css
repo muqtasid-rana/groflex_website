@@ -1,0 +1,1150 @@
+/* =========================================
+   AGENCY HOME (/)
+   Brand rules: navy background, white + pink text, pink lines,
+   light-blue buttons with navy text. No gradients, shadows or glows.
+   ========================================= */
+
+.ah {
+  --ah-navy: var(--color-brand-navy);   /* #070052 */
+  --ah-raised: #0d0870;                 /* the one slightly brighter surface */
+  --ah-blue: var(--color-brand-blue);   /* #2B5CE6 */
+  --ah-blue-dark: #2350cf;
+  --ah-pink: var(--color-brand-magenta);/* #F020C8 */
+  --ah-text: var(--color-brand-light);  /* #F5F5FF */
+  --ah-muted: rgba(245, 245, 255, 0.72);
+  --ah-line: rgba(240, 32, 200, 0.35);
+  --ah-outline: rgba(245, 245, 255, 0.22);
+
+  background: var(--ah-navy);
+  color: var(--ah-text);
+  overflow-x: clip;
+}
+
+.ah em {
+  font-style: normal;
+  color: var(--ah-pink);
+}
+
+.ah section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ---- Site chrome while the agency home is on screen ---- */
+body:has(.ah) {
+  background: var(--color-brand-navy);
+}
+
+body:has(.ah) .navbar--scrolled {
+  background: var(--color-brand-navy);
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(240, 32, 200, 0.25);
+}
+
+body:has(.ah) .navbar--scrolled .navbar__link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body:has(.ah) .navbar .navbar__link:hover {
+  color: var(--color-brand-magenta);
+}
+
+body:has(.ah) .navbar--scrolled .navbar__toggle-bar {
+  background: #ffffff;
+}
+
+body:has(.ah) .navbar .btn--primary {
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: var(--color-brand-navy);
+  font-weight: var(--fw-bold);
+}
+
+body:has(.ah) .navbar .btn--primary:hover {
+  background: #2350cf;
+  border-color: #2350cf;
+}
+
+body:has(.ah) .footer {
+  background: var(--color-brand-navy);
+  border-top: 1px solid rgba(240, 32, 200, 0.3);
+}
+
+/* ---- Shared ---- */
+.ah-section {
+  padding: clamp(4.5rem, 9vw, 7rem) 0;
+}
+
+.ah-section--raised {
+  background: var(--ah-raised);
+}
+
+.ah-eyebrow {
+  margin-bottom: var(--space-md);
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ah-pink);
+}
+
+.ah-head {
+  max-width: 780px;
+  margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.ah-head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  max-width: none;
+  text-align: left;
+}
+
+.ah-head__title {
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ah-text);
+}
+
+.ah-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  color: var(--ah-pink);
+  text-decoration: none;
+}
+
+.ah-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ah :focus-visible {
+  outline: 2px solid var(--ah-pink);
+  outline-offset: 3px;
+}
+
+/* ---- 1. Hero ---- */
+.ah-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(7rem, 11vw, 8.5rem) 0 clamp(3rem, 6vw, 4rem);
+  text-align: center;
+}
+
+/* Wider than the other sections so the headline fits on two lines */
+.ah-hero .container {
+  max-width: 1320px;
+}
+
+.ah-hero__title {
+  margin: 0 auto;
+  font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--ah-text);
+}
+
+.ah-hero__cta {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+
+.ah-hero__note {
+  margin-top: var(--space-md);
+  color: var(--ah-muted);
+}
+
+.ah-hero__note strong {
+  color: var(--ah-text);
+}
+
+/* ---- Client logos (above the divider) ---- */
+.ah-logos {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.ah-logos__caption {
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+/* Logos fade out towards both edges instead of being cut off */
+.ah-logos__viewport {
+  --logo-gap: clamp(2.5rem, 5vw, 4rem);
+  margin-top: var(--space-lg);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+.ah-logos__track {
+  display: flex;
+  width: max-content;
+  animation: ah-marquee 40s linear infinite;
+}
+
+/* Four identical copies: moving right by one copy's width lands on an identical frame */
+@keyframes ah-marquee {
+  from { transform: translateX(-25%); }
+  to { transform: translateX(0); }
+}
+
+.ah-logos__viewport:hover .ah-logos__track {
+  animation-play-state: paused;
+}
+
+.ah-logos__list {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--logo-gap);
+  /* Same spacing across the join between copies */
+  padding: var(--space-xs) var(--logo-gap) var(--space-xs) 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Any colour logo becomes one flat grey: black, flipped to white, then faded */
+.ah-logos__img {
+  display: block;
+  width: auto;
+  height: calc(clamp(24px, 2.3vw, 32px) * var(--scale, 1));
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+}
+
+/* Without motion: one still, centred row */
+@media (prefers-reduced-motion: reduce) {
+  .ah-logos__viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .ah-logos__track {
+    width: auto;
+    animation: none;
+  }
+
+  .ah-logos__list {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .ah-logos__list[aria-hidden] {
+    display: none;
+  }
+}
+
+/* ---- 2. Who it's for ---- */
+.ah-for {
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+/* Stretches edge to edge. Its height sets the thickness at the edges; the centre
+   is always about a fifth of that. */
+.ah-divider {
+  display: block;
+  width: 100%;
+  height: clamp(7px, 0.8vw, 11px);
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.ah-divider path {
+  fill: var(--ah-pink);
+}
+
+.ah-for__statement {
+  max-width: 24ch;
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 4.4vw, 3.6rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ah-text);
+}
+
+.ah-for__sub {
+  max-width: 52ch;
+  margin-top: var(--space-lg);
+  font-size: var(--fs-body-lg);
+  color: var(--ah-muted);
+}
+
+/* ---- 3. How it works (scroll-drawn line) ---- */
+.ah-how {
+  padding-top: clamp(4rem, 8vw, 6rem);
+}
+
+.ah-how__inner {
+  position: relative;
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.ah-how__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.ah-how__line path {
+  fill: none;
+  stroke: var(--ah-pink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ah-how .ah-head,
+.ah-steps {
+  position: relative;
+  z-index: 1;
+}
+
+.ah-steps {
+  display: grid;
+  gap: clamp(5rem, 11vw, 8.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-step {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--space-2xl);
+}
+
+.ah-step--flip .ah-step__text {
+  order: 2;
+}
+
+.ah-step__text {
+  justify-self: center;
+  max-width: 440px;
+}
+
+.ah-step__art {
+  justify-self: center;
+  width: min(250px, 80%);
+  aspect-ratio: 1;
+}
+
+.ah-step__num {
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.1em;
+  color: var(--ah-pink);
+}
+
+.ah-step__title {
+  margin-top: var(--space-sm);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
+  color: var(--ah-text);
+}
+
+.ah-step__desc {
+  margin-top: var(--space-md);
+  color: var(--ah-muted);
+  font-size: var(--fs-body-lg);
+}
+
+.ah-step__cta {
+  margin-top: var(--space-lg);
+}
+
+/* ---- 4. Case studies ---- */
+.ah-work {
+  padding-top: 0;
+}
+
+.ah-work .work-card__name {
+  color: var(--ah-text);
+}
+
+.ah-work .work-card__category,
+.ah-work .work-card__desc {
+  color: var(--ah-muted);
+}
+
+.ah-work .work-card__btn {
+  background: var(--ah-blue);
+  color: var(--ah-navy);
+}
+
+.ah-work .work-card:focus-visible {
+  outline-color: var(--ah-pink);
+}
+
+/* ---- 5. Services ---- */
+/* Heading + 4 services per column, filled column by column. Shared rows keep
+   each service level with its neighbours in the other columns. */
+.ah-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto repeat(4, auto);
+  grid-auto-flow: column;
+  column-gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.ah-services__group-title {
+  padding-bottom: var(--space-md);
+  border-bottom: 1.5px solid var(--ah-pink);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ah-pink);
+}
+
+.ah-service {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--ah-line);
+}
+
+.ah-service__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid var(--ah-outline);
+  border-radius: 50%;
+  color: var(--ah-text);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.ah-service:hover .ah-service__icon {
+  border-color: var(--ah-pink);
+  color: var(--ah-pink);
+}
+
+/* On hover the icon redraws itself, like the process line */
+@media (prefers-reduced-motion: no-preference) {
+  .ah-service:hover .ah-service__icon svg > * {
+    animation: ah-icon-draw 700ms ease-out;
+  }
+}
+
+@keyframes ah-icon-draw {
+  from { stroke-dasharray: 120; stroke-dashoffset: 120; }
+  to { stroke-dasharray: 120; stroke-dashoffset: 0; }
+}
+
+.ah-service__title {
+  font-size: 1.05rem;
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+  transition: color var(--transition-fast);
+}
+
+.ah-service:hover .ah-service__title {
+  color: var(--ah-pink);
+}
+
+.ah-service__desc {
+  margin-top: 2px;
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+/* ---- 6. Freelancers vs Groflex ---- */
+.ah-vs__title {
+  max-width: 22ch;
+  margin: 0 auto;
+}
+
+.ah-vs__art {
+  max-width: 820px;
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+}
+
+.ah-vs__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ah-vs__art path {
+  fill: none;
+  stroke: var(--ah-pink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Draws the line as it scrolls into view where the browser supports it */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ah-vs__art path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: ah-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 50%;
+    }
+  }
+}
+
+@keyframes ah-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.ah-vs__art figcaption {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3%;
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ah-muted);
+}
+
+.ah-vs__art figcaption span:last-child {
+  color: var(--ah-pink);
+}
+
+.ah-vs__table {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.ah-vs__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--ah-line);
+}
+
+.ah-vs__row--head {
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ah-muted);
+  border-bottom: 1.5px solid var(--ah-pink);
+}
+
+.ah-vs__row--head span:last-child {
+  color: var(--ah-pink);
+}
+
+.ah-vs__them,
+.ah-vs__us {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.ah-vs__them {
+  color: var(--ah-muted);
+}
+
+.ah-vs__them svg {
+  flex: none;
+  margin-top: 3px;
+  color: rgba(245, 245, 255, 0.45);
+}
+
+.ah-vs__us {
+  color: var(--ah-text);
+  font-weight: var(--fw-semibold);
+}
+
+.ah-vs__us svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--ah-pink);
+}
+
+/* ---- 7. Team ---- */
+.ah-team__controls {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.ah-arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ah-blue);
+  color: var(--ah-navy);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.ah-arrow:hover {
+  background: var(--ah-blue-dark);
+}
+
+.ah-team__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3 * var(--space-lg)) / 4);
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.ah-team__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ah-member {
+  scroll-snap-align: start;
+}
+
+.ah-member__photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1.5px solid var(--ah-outline);
+  border-radius: var(--radius-lg);
+}
+
+.ah-member__photo img {
+  object-fit: cover;
+}
+
+.ah-member__initials {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border: 1.5px solid var(--ah-pink);
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: var(--fw-bold);
+  color: var(--ah-pink);
+}
+
+.ah-member__name {
+  margin-top: var(--space-md);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
+.ah-member__role {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+/* No name yet: the role becomes the card's title */
+.ah-member__photo + .ah-member__role {
+  margin-top: var(--space-md);
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
+/* ---- 8. Pricing ---- */
+.ah-pilot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
+  border: 1.5px solid var(--ah-pink);
+  border-radius: var(--radius-lg);
+}
+
+.ah-pilot__title {
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
+.ah-pilot p {
+  margin-top: var(--space-xs);
+  color: var(--ah-muted);
+}
+
+.ah-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: var(--space-md);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.ah-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 76px;
+  padding: var(--space-md) var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--ah-blue);
+  color: var(--ah-navy);
+  font-family: var(--font-heading);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.ah-tab:hover {
+  background: var(--ah-blue-dark);
+}
+
+.ah-tab.is-active {
+  min-height: 90px;
+  background: var(--ah-raised);
+  color: var(--ah-text);
+}
+
+.ah-tab__label {
+  font-size: 1.05rem;
+  font-weight: var(--fw-bold);
+}
+
+.ah-tab__sub {
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.ah-tab.is-active .ah-tab__sub {
+  color: var(--ah-pink);
+}
+
+.ah-panel {
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  background: var(--ah-raised);
+}
+
+.ah-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-rows li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--ah-line);
+}
+
+.ah-rows h4,
+.ah-plans h4 {
+  font-size: 1.05rem;
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
+.ah-rows p {
+  margin-top: 2px;
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+.ah-rows__meta {
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+  white-space: nowrap;
+}
+
+.ah-rows__price {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: var(--fw-extrabold);
+  color: var(--ah-text);
+  white-space: nowrap;
+}
+
+.ah-rows__price small {
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  color: var(--ah-muted);
+}
+
+.ah-rows__price--big {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+.ah-panel__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.ah-panel__foot p,
+.ah-panel__note {
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+.ah-panel__note {
+  margin: var(--space-md) 0 var(--space-lg);
+}
+
+.ah-panel__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.ah-panel__label {
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ah-pink);
+}
+
+.ah-packs,
+.ah-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-packs li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--ah-line);
+}
+
+.ah-packs strong {
+  flex: 1;
+  font-family: var(--font-heading);
+  color: var(--ah-text);
+}
+
+.ah-packs small {
+  font-size: var(--fs-caption);
+  color: var(--ah-muted);
+}
+
+.ah-menu li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--ah-line);
+  font-size: var(--fs-body-sm);
+}
+
+.ah-menu span {
+  color: var(--ah-muted);
+}
+
+.ah-menu strong {
+  font-family: var(--font-heading);
+  color: var(--ah-pink);
+  white-space: nowrap;
+}
+
+.ah-plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-plans > li {
+  position: relative;
+  padding: var(--space-lg);
+  border: 1.5px solid var(--ah-outline);
+  border-radius: var(--radius-md);
+}
+
+.ah-plans > li.is-popular {
+  border-color: var(--ah-pink);
+}
+
+.ah-plans__badge {
+  position: absolute;
+  top: -0.75rem;
+  left: var(--space-lg);
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: var(--ah-pink);
+  color: var(--ah-navy);
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+}
+
+.ah-plans .ah-rows__price {
+  margin-top: var(--space-xs);
+}
+
+.ah-plans__credits {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-body-sm);
+  color: var(--ah-pink);
+  font-weight: var(--fw-semibold);
+}
+
+.ah-checks {
+  display: grid;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-checks li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+.ah-checks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: var(--fw-bold);
+  color: var(--ah-pink);
+}
+
+.ah-checks--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  margin-top: 0;
+}
+
+.ah-pricing__more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+/* ---- 9. FAQ ---- */
+.ah-faq__inner {
+  max-width: 880px;
+}
+
+.ah-faq__item {
+  border-bottom: 1px solid var(--ah-line);
+}
+
+.ah-faq__item summary {
+  position: relative;
+  padding: var(--space-lg) 2.5rem var(--space-lg) 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: var(--fw-semibold);
+  color: var(--ah-text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ah-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.ah-faq__item summary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: var(--fw-regular);
+  color: var(--ah-pink);
+}
+
+.ah-faq__item[open] summary::after {
+  content: '−';
+}
+
+.ah-faq__item p {
+  padding-bottom: var(--space-lg);
+  color: var(--ah-muted);
+}
+
+.ah-faq__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding: var(--space-lg) var(--space-xl);
+  border: 1.5px solid var(--ah-pink);
+  border-radius: var(--radius-lg);
+  scroll-margin-top: 100px;
+}
+
+.ah-faq__cta p {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 1000px) {
+  .ah-services__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .ah-team__track {
+    grid-auto-columns: calc((100% - var(--space-lg)) / 2.3);
+  }
+
+  .ah-plans {
+    grid-template-columns: 1fr;
+  }
+
+  .ah-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ah-tab,
+  .ah-tab.is-active {
+    min-height: 72px;
+    border-radius: var(--radius-md);
+  }
+
+  .ah-tabs {
+    margin-bottom: var(--space-md);
+  }
+
+  .ah-panel {
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* ---- Phone ---- */
+@media (max-width: 760px) {
+  .ah .container {
+    padding: 0 16px;
+  }
+
+  /* Drawings sit in a narrow left column so the line runs beside the text */
+  .ah-step {
+    grid-template-columns: 84px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-lg);
+  }
+
+  .ah-step__art {
+    order: -1;
+    width: 84px;
+  }
+
+  .ah-step--flip .ah-step__text {
+    order: 0;
+  }
+
+  .ah-step__text {
+    justify-self: start;
+  }
+
+  .ah-steps {
+    gap: var(--space-3xl);
+  }
+
+  .ah-work {
+    padding-top: var(--space-2xl);
+  }
+
+  .ah-vs__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .ah-vs__row--head {
+    display: none;
+  }
+
+  .ah-team__track {
+    grid-auto-columns: 72%;
+  }
+
+  .ah-pilot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ah-pilot .btn {
+    width: 100%;
+  }
+
+  .ah-tabs {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  .ah-tab {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .ah-rows li {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-xs) var(--space-md);
+  }
+
+  .ah-rows li > div {
+    grid-column: 1 / -1;
+  }
+
+  .ah-panel__split,
+  .ah-checks--two {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The headline breaks before "without" only where both lines fit */
+@media (max-width: 900px) {
+  .ah-hero__break {
+    display: none;
+  }
+}

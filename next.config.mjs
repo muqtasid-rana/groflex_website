@@ -11,6 +11,14 @@ const nextConfig = {
     // Responsive image breakpoints
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    // Blog thumbnails uploaded through the admin editor
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/v0/b/groflexadmin.firebasestorage.app/**',
+      },
+    ],
   },
 
   // Incorpo's case study moved from the generic template to its own page
@@ -47,7 +55,7 @@ const nextConfig = {
       },
       {
         // Cache for public static files (favicon, etc.)
-        source: '/:path(favicon\\.png|robots\\.txt|sitemap\\.xml)',
+        source: '/:path(favicon\\.png|favicon-96\\.png|robots\\.txt|sitemap\\.xml)',
         headers: [
           {
             key: 'Cache-Control',

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function BlogList({ blogs }) {
   if (!blogs || blogs.length === 0) {
@@ -29,7 +30,12 @@ export default function BlogList({ blogs }) {
           <article key={blog.id} className="blog-card">
             <div className="blog-card__image">
               {blog.thumbnail ? (
-                <img src={blog.thumbnail} alt={blog.title} />
+                <Image
+                  src={blog.thumbnail}
+                  alt={blog.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                />
               ) : (
                 <div className="blog-card__placeholder">
                   <i className="fa-solid fa-image"></i>
@@ -38,7 +44,7 @@ export default function BlogList({ blogs }) {
             </div>
             <div className="blog-card__content">
               {dateStr && <time className="blog-card__date">{dateStr}</time>}
-              <h3 className="blog-card__title">{blog.title}</h3>
+              <h2 className="blog-card__title">{blog.title}</h2>
               {blog.metaDescription && (
                 <p className="blog-card__excerpt">{blog.metaDescription}</p>
               )}

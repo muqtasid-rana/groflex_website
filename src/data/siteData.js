@@ -11,16 +11,37 @@ import testolz from '@/assets/projects/testolz.webp';
 import ashhkaro from '@/assets/case-studies/ashhkaro/hero.webp';
 import ashhkaroIcon from '@/assets/case-studies/ashhkaro/icon.webp';
 import slashcure from '@/assets/case-studies/slashcure/landing.webp';
-import incorpoShowcase from '@/assets/case-studies/incorpo/hero.jpg';
+import incorpoShowcase from '@/assets/case-studies/incorpo/laptop-mockup.jpg';
 import incorpoLanding from '@/assets/case-studies/incorpo/landing-mockup.webp';
 import slashcureShowcase from '@/assets/case-studies/slashcure/hero.jpg';
 import slashcureLanding from '@/assets/case-studies/slashcure/landing-mockup.webp';
+import ashhkaroLogo from '@/assets/logos/ashhkaro.webp';
+import incorpoLogo from '@/assets/logos/incorpo.webp';
+import slashcureLogo from '@/assets/logos/slashcure.webp';
+import himavonLogo from '@/assets/logos/himavon.webp';
+import agenstackLogo from '@/assets/logos/agenstack.webp';
+import atlenoLogo from '@/assets/logos/atleno.webp';
+import PlateLogo from '@/sections/Agency/logos/PlateLogo';
+
+// Client logos in the home page hero. Use trimmed logos on a transparent
+// background (`logo`), or a vector component (`Svg`); the page turns them all
+// into one flat grey. `scale` evens out logos that look too heavy or too light
+// at the shared height.
+export const clientLogos = [
+  { name: 'Ashhkaro', logo: ashhkaroLogo },
+  { name: 'Incorpo', logo: incorpoLogo, scale: 0.8 },
+  { name: 'Slashcure', logo: slashcureLogo, scale: 1.25 },
+  { name: 'Plate', Svg: PlateLogo },
+  { name: 'Himavon', logo: himavonLogo, scale: 1.4 },
+  { name: 'Agenstack', logo: agenstackLogo, scale: 0.85 },
+  { name: 'Atleno', logo: atlenoLogo, scale: 1.3 },
+];
 
 // Links with `dropdown` open a mega-menu panel instead of navigating
 export const navLinks = [
   { label: 'Services', dropdown: 'services' },
   { label: 'Customers', dropdown: 'customers' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact Us', href: '#contact' },
 ];
 
@@ -112,6 +133,32 @@ export const services = {
       icon: 'fa-solid fa-gears',
       title: 'Software Development',
       description: 'Custom software solutions tailored to your business needs, with clean code, scalable architecture, and long-term support.',
+    },
+  ],
+  growth: [
+    {
+      id: 'g1',
+      icon: 'fa-solid fa-bullhorn',
+      title: 'Social Media Marketing',
+      description: 'Growing your audience with content calendars, paid campaigns and community management, measured against the numbers that matter to your business.',
+    },
+    {
+      id: 'g2',
+      icon: 'fa-solid fa-magnifying-glass-chart',
+      title: 'SEO',
+      description: 'Getting you found on Google, with technical fixes, content that ranks and reporting on the searches that bring customers in.',
+    },
+    {
+      id: 'g3',
+      icon: 'fa-solid fa-diagram-project',
+      title: 'Automation',
+      description: 'Taking repetitive work off your team, from lead follow-ups and reports to workflows that connect the tools you already use.',
+    },
+    {
+      id: 'g4',
+      icon: 'fa-solid fa-list-check',
+      title: 'Project Management',
+      description: 'A dedicated manager who plans the work, runs the timeline and keeps you updated, so every project ships on time without you chasing it.',
     },
   ],
 };
@@ -367,6 +414,13 @@ export const work = [
   })),
 ];
 
+// The three featured case studies, with their home-page cover pictures swapped in
+export const featuredWork = work.slice(0, 3).map((project) => (
+  project.homeImage
+    ? { ...project, image: project.homeImage, imagePosition: project.homeImagePosition }
+    : project
+));
+
 export const stats = [
   { id: 1, number: 20, suffix: '+', label: 'Projects Delivered' },
   { id: 2, number: 98, suffix: '%', label: 'Client Satisfaction' },
@@ -417,7 +471,7 @@ export const socialLinks = [
 // instead of converted. 1 credit ≈ 4 production hours.
 export const pricing = {
   pilot: {
-    credits: 8,
+    credits: 10,
     price: { usd: 750, gbp: 595 },
     examples: ['A landing page, designed and built', 'A brand identity kit', '4 app screens'],
   },
@@ -567,6 +621,18 @@ export const pricing = {
   ],
 };
 
+
+// ---- Team (home page carousel) ----
+// TODO: placeholders. Fill in real names and import a photo for `image`;
+// cards without a photo show the role's initials instead.
+export const team = [
+  { name: '', role: 'Design Lead', image: null },
+  { name: '', role: 'Engineering Lead', image: null },
+  { name: '', role: 'Project Manager', image: null },
+  { name: '', role: 'Mobile Developer', image: null },
+  { name: '', role: 'QA Engineer', image: null },
+  { name: '', role: 'Growth Lead', image: null },
+];
 
 // ---- Tally.so Form Config (single source of truth for all audit CTAs) ----
 export const tallyFormConfig = {

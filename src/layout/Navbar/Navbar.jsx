@@ -9,7 +9,7 @@ import Button from '@/components/Button/Button';
 import './Navbar.css';
 import logo from '@/assets/brand/logo.webp';
 
-const serviceItems = [...services.design, ...services.development];
+const serviceItems = [...services.design, ...services.development, ...services.growth];
 
 const mobileDropdownItems = {
     services: serviceItems.map((s) => ({ key: s.id, href: '#services', label: s.title, icon: s.icon })),

@@ -3,7 +3,7 @@
    Palette:
      navy   #070052   blue   #2B5CE6
      pink   #F020C8   off    #F5F5FF
-   Display serif: Fraunces (loaded in app/layout.js)
+   Display serif: Fraunces (loaded by next/font in app/layout.js)
    ============================================================ */
 :root {
   --gp-navy: #070052;
@@ -17,9 +17,9 @@
   --gp-ink: #0a0a2e;
   --gp-rule: rgba(7, 0, 82, 0.16);
   --gp-rule-soft: rgba(7, 0, 82, 0.08);
-  --gp-display: 'Fraunces', Georgia, serif;
-  --gp-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --gp-body: 'Nunito Sans', system-ui, sans-serif;
+  --gp-display: var(--font-fraunces), Georgia, serif;
+  --gp-sans: var(--font-jakarta), system-ui, sans-serif;
+  --gp-body: var(--font-nunito), system-ui, sans-serif;
 }
 
 .gp-root {

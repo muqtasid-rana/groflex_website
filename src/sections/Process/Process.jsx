@@ -1,49 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { stats, processSteps } from '@/data/siteData';
+import { useEffect, useRef } from 'react';
+import { processSteps } from '@/data/siteData';
 import SectionHeading from '@/components/SectionHeading/SectionHeading';
 import './Process.css';
-
-function Counter({ target, suffix = '' }) {
-    const [count, setCount] = useState(0);
-    const ref = useRef(null);
-    const hasAnimated = useRef(false);
-
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && !hasAnimated.current) {
-                        hasAnimated.current = true;
-                        const duration = 1500;
-                        const startTime = performance.now();
-
-                        const animate = (currentTime) => {
-                            const elapsed = currentTime - startTime;
-                            const progress = Math.min(elapsed / duration, 1);
-                            const eased = 1 - Math.pow(1 - progress, 3);
-                            setCount(Math.floor(eased * target));
-                            if (progress < 1) {
-                                requestAnimationFrame(animate);
-                            }
-                        };
-                        requestAnimationFrame(animate);
-                    }
-                });
-            },
-            { threshold: 0.5 }
-        );
-
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [target]);
-
-    return <span ref={ref}>{count}{suffix}</span>;
-}
 
 function useScrollReveal() {
     const ref = useRef(null);
@@ -106,22 +66,12 @@ export default function Process() {
                                     <div className="process__step-line" />
                                 )}
                             </div>
-                            <h4 className="process__step-title">{step.title}</h4>
+                            <h3 className="process__step-title">{step.title}</h3>
                             <p className="process__step-desc">{step.description}</p>
                         </div>
                     ))}
                 </div>
 
-                <div className="process__stats">
-                    {stats.map((stat) => (
-                        <div key={stat.id} className="process__stat">
-                            <span className="process__stat-number">
-                                <Counter target={stat.number} suffix={stat.suffix} />
-                            </span>
-                            <span className="process__stat-label">{stat.label}</span>
-                        </div>
-                    ))}
-                </div>
             </div>
         </section>
     );

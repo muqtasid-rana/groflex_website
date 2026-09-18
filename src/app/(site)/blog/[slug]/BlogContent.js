@@ -1,12 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getAllBlogs } from '@/lib/blogs';
+import Image from 'next/image';
 
-export default function BlogContent({ blog }) {
-  const [similarBlogs, setSimilarBlogs] = useState([]);
-
+export default function BlogContent({ blog, similarBlogs }) {
   const dateStr = blog.date
     ? new Date(blog.date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -15,12 +10,6 @@ export default function BlogContent({ blog }) {
     })
     : '';
 
-  useEffect(() => {
-    getAllBlogs().then((all) => {
-      const others = all.filter((b) => b.slug !== blog.slug).slice(0, 3);
-      setSimilarBlogs(others);
-    }).catch(() => { });
-  }, [blog.slug]);
   // Prevent text wrapping issues by replacing non-breaking spaces with regular spaces
   const sanitizedContent = blog.content ? blog.content.replace(/&nbsp;/g, ' ') : '';
 
@@ -36,7 +25,15 @@ export default function BlogContent({ blog }) {
         {/* Thumbnail */}
         {blog.thumbnail && (
           <div className="blog-detail__thumbnail">
-            <img src={blog.thumbnail} alt={blog.title} />
+            {/* width/height only set the placeholder ratio; CSS keeps the image's own aspect */}
+            <Image
+              src={blog.thumbnail}
+              alt={blog.title}
+              width={1200}
+              height={630}
+              sizes="(max-width: 900px) 100vw, 900px"
+              priority
+            />
           </div>
         )}
 
@@ -77,7 +74,12 @@ export default function BlogContent({ blog }) {
                 <Link key={b.id} href={`/blog/${b.slug}`} className="blog-detail__similar-card">
                   <div className="blog-detail__similar-img">
                     {b.thumbnail ? (
-                      <img src={b.thumbnail} alt={b.title} />
+                      <Image
+                        src={b.thumbnail}
+                        alt={b.title}
+                        fill
+                        sizes="(max-width: 700px) 100vw, 380px"
+                      />
                     ) : (
                       <div className="blog-detail__similar-placeholder">
                         <i className="fa-solid fa-image"></i>

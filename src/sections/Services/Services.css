@@ -69,7 +69,6 @@
     position: relative;
     z-index: 1;
 }
-
 .services__group-icon {
     margin-right: var(--space-sm);
     color: var(--color-brand-blue);

@@ -1,7 +1,6 @@
-'use client';
-
 import Link from 'next/link';
 import { socialLinks, services } from '@/data/siteData';
+import SocialIcon from '@/components/SocialIcon/SocialIcon';
 import './Footer.css';
 
 export default function Footer() {
@@ -17,7 +16,7 @@ export default function Footer() {
                         <div className="footer__socials">
                             {socialLinks.map((link) => (
                                 <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label={link.label}>
-                                    <i className={link.icon}></i>
+                                    <SocialIcon icon={link.icon} />
                                 </a>
                             ))}
                         </div>
