@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import Browser from '@/components/CaseStudy/Browser';
-import heroImg from '@/assets/case-studies/slashcure/hero.jpg';
+import heroImg from '@/assets/case-studies/slashcure/hero.webp';
 import findDoctorsImg from '@/assets/case-studies/slashcure/find-doctors.webp';
 import doctorProfileImg from '@/assets/case-studies/slashcure/doctor-profile.webp';
 import findHospitalsImg from '@/assets/case-studies/slashcure/find-hospitals.webp';

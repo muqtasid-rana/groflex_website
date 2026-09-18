@@ -28,7 +28,15 @@ export default function AgencyBlog({ blogs }) {
               <Link href={`/blog/${blog.slug}`} className="ah-post">
                 <div className="ah-post__img">
                   {blog.thumbnail && (
-                    <Image src={blog.thumbnail} alt="" fill sizes="(max-width: 760px) 100vw, (max-width: 1000px) 50vw, 360px" />
+                    <Image
+                      src={blog.thumbnail}
+                      alt=""
+                      fill
+                      sizes="(max-width: 760px) 100vw, 380px"
+                      // The local image resizer can't fetch from Firebase Storage (it
+                      // returns a 500), so in development load the original directly
+                      unoptimized={process.env.NODE_ENV === 'development'}
+                    />
                   )}
                 </div>
                 <div className="ah-post__body">
