@@ -103,7 +103,7 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p>
               To exercise any of these rights, contact us at{' '}
-              <a href="mailto:groflex.co@gmail.com">groflex.co@gmail.com</a>.
+              <a href="mailto:muqtasid@groflex.co">muqtasid@groflex.co</a>.
             </p>
           </section>
 
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
             <h2>11. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy or how we handle your information, contact us at{' '}
-              <a href="mailto:groflex.co@gmail.com">groflex.co@gmail.com</a> or call{' '}
+              <a href="mailto:muqtasid@groflex.co">muqtasid@groflex.co</a> or call{' '}
               <a href="tel:+923359528776">+92 335 9528776</a>.
             </p>
           </section>

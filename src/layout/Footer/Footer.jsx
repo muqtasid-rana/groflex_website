@@ -51,7 +51,7 @@ export default function Footer() {
                         <ul className="footer__links footer__links--contact">
                             <li>
                                 <i className="fa-solid fa-envelope"></i>
-                                <a href="mailto:groflex.co@gmail.com">groflex.co@gmail.com</a>
+                                <a href="mailto:muqtasid@groflex.co">muqtasid@groflex.co</a>
                             </li>
                             <li>
                                 <i className="fa-solid fa-phone"></i>

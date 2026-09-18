@@ -147,7 +147,7 @@ export default function TermsPage() {
             <h2>13. Contact Us</h2>
             <p>
               If you have any questions about these Terms, contact us at{' '}
-              <a href="mailto:groflex.co@gmail.com">groflex.co@gmail.com</a> or call{' '}
+              <a href="mailto:muqtasid@groflex.co">muqtasid@groflex.co</a> or call{' '}
               <a href="tel:+923359528776">+92 335 9528776</a>.
             </p>
           </section>

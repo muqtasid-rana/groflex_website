@@ -52,7 +52,7 @@ const jsonLd = {
   logo: 'https://www.groflex.co/favicon.png',
   description:
     'Premium software and design agency delivering world-class digital products, branding, and development solutions for enterprise clients.',
-  email: 'groflex.co@gmail.com',
+  email: 'muqtasid@groflex.co',
   telephone: '+923359528776',
   sameAs: [
     'https://instagram.com/groflex.co',

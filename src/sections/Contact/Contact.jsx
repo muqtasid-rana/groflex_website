@@ -67,7 +67,7 @@ export default function Contact() {
                                     <div className="contact__detail-icon"><i className="fa-solid fa-envelope"></i></div>
                                     <div>
                                         <span className="contact__detail-label">Email Us</span>
-                                        <a href="mailto:groflex.co@gmail.com" className="contact__detail-value">groflex.co@gmail.com</a>
+                                        <a href="mailto:muqtasid@groflex.co" className="contact__detail-value">muqtasid@groflex.co</a>
                                     </div>
                                 </div>
                                 <div className="contact__detail-item">
