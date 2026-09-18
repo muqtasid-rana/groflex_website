@@ -631,7 +631,6 @@ a.ah-logos__item {
 
   .ah-hire__close {
     margin-top: 3rem;
-    text-align: left;
   }
 }
 
@@ -1465,5 +1464,73 @@ a.ah-logos__item {
 
   .ah-post__body {
     padding: 1.5rem;
+  }
+}
+
+/* =========================================
+   MOTION
+   The hero plays on load with CSS alone. Everything tagged [data-reveal] waits
+   hidden until RevealObserver marks it [data-in] as it scrolls into view;
+   `--d` staggers neighbours. Hidden states only apply when scripts run and the
+   visitor hasn't asked for reduced motion, so content is never stuck invisible.
+   ========================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Page open: navbar, then headline, button and logos, all within a second */
+  body:has(.ah) .navbar {
+    animation: ah-drop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .ah-hero .ah-eyebrow,
+  .ah-hero__title,
+  .ah-hero__cta,
+  .ah-logos {
+    animation: ah-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .ah-hero__title { animation-delay: 80ms; }
+  .ah-hero__cta { animation-delay: 220ms; }
+  .ah-logos { animation-delay: 360ms; }
+
+  /* The divider under the hero draws outwards from the centre as the page opens */
+  .ah-divider {
+    transform-origin: center;
+    animation: ah-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) 450ms both;
+  }
+}
+
+@keyframes ah-grow {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+
+@keyframes ah-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes ah-drop {
+  from { opacity: 0; transform: translateY(-100%); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .ah [data-reveal] {
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--d, 0ms);
+  }
+
+  .ah [data-reveal]:not([data-in]) {
+    opacity: 0;
+  }
+
+  .ah [data-reveal='up']:not([data-in]) { transform: translateY(32px); }
+  .ah [data-reveal='right']:not([data-in]) { transform: translateX(64px); }
+  .ah [data-reveal='left']:not([data-in]) { transform: translateX(-64px); }
+
+  /* Services come in quicker, so the whole list lands in about half a second */
+  .ah .ah-service[data-reveal] {
+    transition-duration: 500ms;
   }
 }

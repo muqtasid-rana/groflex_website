@@ -251,7 +251,8 @@ export default function HowItWorks() {
           ))}
         </svg>
 
-        <header className="ah-head" ref={headRef}>
+        {/* Fade only: a slide would shift the heading the line is measured from */}
+        <header className="ah-head" ref={headRef} data-reveal="fade">
           <p className="ah-eyebrow">The process</p>
           <h2 className="ah-head__title">How it <em>works</em></h2>
         </header>
@@ -259,7 +260,7 @@ export default function HowItWorks() {
         <ol className="ah-steps">
           {steps.map((s, i) => (
             <li key={s.title} className={`ah-step ${i % 2 ? 'ah-step--flip' : ''}`}>
-              <div className="ah-step__text">
+              <div className="ah-step__text" data-reveal={i % 2 ? 'right' : 'left'}>
                 <span className="ah-step__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="ah-step__title">{s.title}</h3>
                 <p className="ah-step__desc">{s.text}</p>

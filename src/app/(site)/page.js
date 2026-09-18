@@ -7,6 +7,7 @@ import AgencyVsHiring from '@/sections/Agency/AgencyVsHiring';
 import AgencyPricing from '@/sections/Agency/AgencyPricing';
 import AgencyBlog from '@/sections/Agency/AgencyBlog';
 import AgencyFaq from '@/sections/Agency/AgencyFaq';
+import RevealObserver from '@/sections/Agency/RevealObserver';
 import { getAllBlogs } from '@/lib/blogs';
 import '@/sections/Agency/agency.css';
 
@@ -40,6 +41,7 @@ export default async function HomePage() {
       <AgencyPricing />
       <AgencyBlog blogs={blogs} />
       <AgencyFaq />
+      <RevealObserver />
     </div>
   );
 }

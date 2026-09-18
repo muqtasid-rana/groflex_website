@@ -12,7 +12,7 @@ export default function AgencyBlog({ blogs }) {
   return (
     <section id="blog" className="ah-section ah-blog">
       <div className="container">
-        <header className="ah-head ah-head--split">
+        <header className="ah-head ah-head--split" data-reveal="up">
           <div>
             <p className="ah-eyebrow">From the blog</p>
             <h2 className="ah-head__title">Latest <em>insights</em></h2>
@@ -23,8 +23,8 @@ export default function AgencyBlog({ blogs }) {
         </header>
 
         <ul className="ah-blog__grid">
-          {blogs.slice(0, 3).map((blog) => (
-            <li key={blog.id}>
+          {blogs.slice(0, 3).map((blog, i) => (
+            <li key={blog.id} data-reveal="up" style={{ '--d': `${i * 100}ms` }}>
               <Link href={`/blog/${blog.slug}`} className="ah-post">
                 <div className="ah-post__img">
                   {blog.thumbnail && (

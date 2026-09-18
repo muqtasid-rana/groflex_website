@@ -28,7 +28,7 @@ export default function AgencyServices() {
   return (
     <section id="services" className="ah-section ah-section--raised ah-services">
       <div className="container">
-        <header className="ah-head">
+        <header className="ah-head" data-reveal="up">
           <p className="ah-eyebrow">Our services</p>
           <h2 className="ah-head__title">Everything your clients ask for, <em>under your brand</em></h2>
         </header>
@@ -36,10 +36,11 @@ export default function AgencyServices() {
         {/* One grid for all three columns, filled column by column, so each
             row lines up across the groups */}
         <div className="ah-services__grid">
-          {groups.map((g) => [
-            <h3 key={g.key} className="ah-services__group-title">{g.title}</h3>,
-            ...services[g.key].map((s) => (
-              <div key={s.id} className="ah-service">
+          {groups.map((g, gi) => [
+            <h3 key={g.key} className="ah-services__group-title" data-reveal="up">{g.title}</h3>,
+            ...services[g.key].map((s, si) => (
+              // In from the left, one after another, fast
+              <div key={s.id} className="ah-service" data-reveal="left" style={{ '--d': `${(gi * 4 + si) * 50}ms` }}>
                 <span className="ah-service__icon">
                   <LineIcon name={serviceIcons[s.id]} size={24} />
                 </span>

@@ -21,14 +21,14 @@ export default function AgencyVsHiring() {
   return (
     <section className="ah-section ah-hire">
       <div className="container">
-        <header className="ah-head">
+        <header className="ah-head" data-reveal="up">
           <h2 className="ah-head__title">
             The three hires you <em>don&apos;t have to make.</em>
           </h2>
         </header>
 
         {/* Desktop: one table, roles across the top */}
-        <table className="ah-hire__table">
+        <table className="ah-hire__table" data-reveal="up" style={{ '--d': '120ms' }}>
           <thead>
             <tr>
               <td />
@@ -47,8 +47,8 @@ export default function AgencyVsHiring() {
 
         {/* Phones: one card per role */}
         <ul className="ah-hire__cards">
-          {roles.map((r) => (
-            <li key={r.title} className="ah-hire__card">
+          {roles.map((r, i) => (
+            <li key={r.title} className="ah-hire__card" data-reveal="up" style={{ '--d': `${i * 90}ms` }}>
               <h3>{r.title}</h3>
               <dl>
                 {rows.map((row) => (
@@ -62,7 +62,7 @@ export default function AgencyVsHiring() {
           ))}
         </ul>
 
-        <p className="ah-hire__close">
+        <p className="ah-hire__close" data-reveal="up">
           That&apos;s roughly <strong>$330,000 a year</strong> in fixed cost for three people you can only keep busy
           half the time. Groflex starts at <em>{usd(monthly)} a month</em>, {usd(monthly * 12)} a year, and in a quiet
           month you scale down instead of making payroll.

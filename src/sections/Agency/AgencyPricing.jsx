@@ -141,12 +141,12 @@ export default function AgencyPricing() {
   return (
     <section id="pricing" className="ah-section ah-pricing">
       <div className="container">
-        <header className="ah-head">
+        <header className="ah-head" data-reveal="up">
           <p className="ah-eyebrow">Pricing</p>
           <h2 className="ah-head__title">Our <em>pricing</em></h2>
         </header>
 
-        <div className="ah-pilot">
+        <div className="ah-pilot" data-reveal="up">
           <div>
             <h3 className="ah-pilot__title">
               Start with {aOrAn(pilot.credits)} {pilot.credits}-credit pilot. <em>$0 upfront.</em>
@@ -156,7 +156,7 @@ export default function AgencyPricing() {
           <Button variant="brand" size="lg" tallyConfig={tally}>Start your pilot</Button>
         </div>
 
-        <div className="ah-tabs" role="tablist" aria-label="Ways to work with us">
+        <div className="ah-tabs" data-reveal="up" style={{ '--d': '100ms' }} role="tablist" aria-label="Ways to work with us">
           {tabs.map((t, i) => (
             <button
               key={t.id}
@@ -176,7 +176,7 @@ export default function AgencyPricing() {
             </button>
           ))}
         </div>
-        <div className="ah-panel" role="tabpanel" id="ah-panel" aria-labelledby={`ah-tab-${active}`}>
+        <div className="ah-panel" data-reveal="up" style={{ '--d': '160ms' }} role="tabpanel" id="ah-panel" aria-labelledby={`ah-tab-${active}`}>
           <Panel />
         </div>
 
