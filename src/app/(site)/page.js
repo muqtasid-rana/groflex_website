@@ -3,7 +3,7 @@ import AgencyFor from '@/sections/Agency/AgencyFor';
 import HowItWorks from '@/sections/Agency/HowItWorks';
 import AgencyWork from '@/sections/Agency/AgencyWork';
 import AgencyServices from '@/sections/Agency/AgencyServices';
-import AgencyVsFreelancers from '@/sections/Agency/AgencyVsFreelancers';
+import AgencyVsHiring from '@/sections/Agency/AgencyVsHiring';
 import AgencyPricing from '@/sections/Agency/AgencyPricing';
 import AgencyBlog from '@/sections/Agency/AgencyBlog';
 import AgencyFaq from '@/sections/Agency/AgencyFaq';
@@ -35,7 +35,7 @@ export default async function HomePage() {
       <HowItWorks />
       <AgencyWork />
       <AgencyServices />
-      <AgencyVsFreelancers />
+      <AgencyVsHiring />
       {/* Team section (AgencyTeam) is hidden until real photos are ready */}
       <AgencyPricing />
       <AgencyBlog blogs={blogs} />

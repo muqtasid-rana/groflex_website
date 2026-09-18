@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Button from '@/components/Button/Button';
-import { pricing } from '@/data/siteData';
+import { pricing, aOrAn } from '@/data/siteData';
 
 const tally = { formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 };
 
@@ -91,7 +91,7 @@ export default function HowItWorks() {
     },
     {
       drawing: 'plane',
-      title: `Get a ${pilot.credits}-credit pilot. $0 upfront.`,
+      title: `Get ${aOrAn(pilot.credits)} ${pilot.credits}-credit pilot. $0 upfront.`,
       text: 'Pick a real client task, like a landing page, a brand kit or a set of app screens. We deliver it under your brand, inside your tools.',
     },
     {

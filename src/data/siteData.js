@@ -26,15 +26,16 @@ import PlateLogo from '@/sections/Agency/logos/PlateLogo';
 // Client logos in the home page hero. Use trimmed logos on a transparent
 // background (`logo`), or a vector component (`Svg`); the page turns them all
 // into one flat grey. `scale` evens out logos that look too heavy or too light
-// at the shared height.
+// at the shared height. `href` makes a logo clickable: a /path for our case
+// studies, a full URL for the client's own site (opens in a new tab).
 export const clientLogos = [
-  { name: 'Ashhkaro', logo: ashhkaroLogo },
-  { name: 'Incorpo', logo: incorpoLogo, scale: 0.8 },
-  { name: 'Slashcure', logo: slashcureLogo, scale: 1.25 },
-  { name: 'Plate', Svg: PlateLogo },
+  { name: 'Ashhkaro', logo: ashhkaroLogo, href: '/case-study/ashhkaro' },
+  { name: 'Incorpo', logo: incorpoLogo, scale: 0.8, href: '/case-study/incorpo' },
+  { name: 'Slashcure', logo: slashcureLogo, scale: 1.25, href: '/case-study/slashcure' },
+  { name: 'Plate', Svg: PlateLogo, href: 'https://play.google.com/store/apps/details?id=com.plateapp.plate' },
   { name: 'Himavon', logo: himavonLogo, scale: 1.4 },
   { name: 'Agenstack', logo: agenstackLogo, scale: 0.85 },
-  { name: 'Atleno', logo: atlenoLogo, scale: 1.3 },
+  { name: 'Atleno', logo: atlenoLogo, scale: 1.3, href: 'https://atleno.com' },
 ];
 
 // Links with `dropdown` open a mega-menu panel instead of navigating
@@ -469,9 +470,12 @@ export const socialLinks = [
 // ---- Pricing (/pricing) ----
 // Every price is kept in both currencies so the GBP figures stay round
 // instead of converted. 1 credit ≈ 4 production hours.
+// "a" or "an" before a number as spoken: an 8, an 11, an 18, an 80…; a 10, a 25
+export const aOrAn = (n) => (/^(8|11|18)/.test(String(n)) ? 'an' : 'a');
+
 export const pricing = {
   pilot: {
-    credits: 10,
+    credits: 8,
     price: { usd: 750, gbp: 595 },
     examples: ['A landing page, designed and built', 'A brand identity kit', '4 app screens'],
   },

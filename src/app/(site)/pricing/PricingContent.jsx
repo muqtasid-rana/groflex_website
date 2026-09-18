@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { pricing } from '@/data/siteData';
+import { pricing, aOrAn } from '@/data/siteData';
 import Button from '@/components/Button/Button';
 import CreditMenu from './CreditMenu';
 import CreditEstimator from './CreditEstimator';
@@ -100,7 +100,7 @@ export default function PricingContent() {
               <span className="pricing-eyebrow pricing-eyebrow--light">Start here</span>
               <h2 className="pricing-pilot__title">Try us on one real project.</h2>
               <p className="pricing-pilot__text">
-                An {pilot.credits}-credit pilot. <strong>No upfront payment.</strong> Only pay {money(pilot.price)} once
+                {aOrAn(pilot.credits) === 'an' ? 'An' : 'A'} {pilot.credits}-credit pilot. <strong>No upfront payment.</strong> Only pay {money(pilot.price)} once
                 you&apos;ve liked it.
               </p>
               <ul className="pricing-pilot__examples">

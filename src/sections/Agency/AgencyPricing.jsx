@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import LineIcon from '@/components/LineIcon/LineIcon';
-import { pricing } from '@/data/siteData';
+import { pricing, aOrAn } from '@/data/siteData';
 
 const tally = { formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 };
 const usd = (price) => `$${price.usd.toLocaleString('en-US')}`;
@@ -149,7 +149,7 @@ export default function AgencyPricing() {
         <div className="ah-pilot">
           <div>
             <h3 className="ah-pilot__title">
-              Start with a {pilot.credits}-credit pilot. <em>$0 upfront.</em>
+              Start with {aOrAn(pilot.credits)} {pilot.credits}-credit pilot. <em>$0 upfront.</em>
             </h3>
             <p>Pay {usd(pilot.price)} only once you&apos;ve seen the work and liked it.</p>
           </div>
