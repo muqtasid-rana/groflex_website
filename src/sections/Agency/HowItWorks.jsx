@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Button from '@/components/Button/Button';
-import { pricing, aOrAn } from '@/data/siteData';
+import { pricing, aOrAn, money } from '@/data/siteData';
 
 const tally = { formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 };
 
@@ -80,8 +80,10 @@ const connector = (x1, y1, x2, y2) => {
   return `M${x1} ${y1} C${x1} ${y1 + mid} ${x2} ${y2 - mid} ${x2} ${y2}`;
 };
 
-export default function HowItWorks() {
+// `currency` is 'gbp' on the UK page, so the pilot is priced in pounds there
+export default function HowItWorks({ currency = 'usd' }) {
   const { pilot } = pricing;
+  const zero = currency === 'gbp' ? '£0' : '$0';
   const steps = [
     {
       drawing: 'phone',
@@ -91,13 +93,13 @@ export default function HowItWorks() {
     },
     {
       drawing: 'plane',
-      title: `Get ${aOrAn(pilot.credits)} ${pilot.credits}-credit pilot. $0 upfront.`,
+      title: `Get ${aOrAn(pilot.credits)} ${pilot.credits}-credit pilot. ${zero} upfront.`,
       text: 'Pick a real client task, like a landing page, a brand kit or a set of app screens. We deliver it under your brand, inside your tools.',
     },
     {
       drawing: 'coin',
       title: 'Pay only if you like it',
-      text: `Happy with the work? Pay $${pilot.price.usd}. Not happy? You owe nothing. No contract, no card on file.`,
+      text: `Happy with the work? Pay ${money(pilot.price, currency)}. Not happy? You owe nothing. No contract, no card on file.`,
       cta: <Button variant="brand" size="md" tallyConfig={tally}>Start your pilot</Button>,
     },
     {

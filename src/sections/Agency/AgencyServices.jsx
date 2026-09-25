@@ -1,11 +1,6 @@
+import Link from 'next/link';
 import LineIcon, { serviceIcons } from '@/components/LineIcon/LineIcon';
 import { services } from '@/data/siteData';
-
-const groups = [
-  { key: 'design', title: 'Design' },
-  { key: 'development', title: 'Development' },
-  { key: 'growth', title: 'Marketing & Growth' },
-];
 
 // One-line versions for agency buyers; the longer descriptions in siteData
 // still serve the founders page and the footer.
@@ -24,31 +19,56 @@ const shortLines = {
   g4: 'One PM who keeps every job on time.',
 };
 
-export default function AgencyServices() {
+// The home page's three columns, each service linking to its own page
+const homeGroups = [
+  { key: 'design', title: 'Design' },
+  { key: 'development', title: 'Development' },
+  { key: 'growth', title: 'Marketing & Growth' },
+].map((g) => ({
+  title: g.title,
+  items: services[g.key].map((s) => ({ icon: serviceIcons[s.id], title: s.title, text: shortLines[s.id], href: s.href })),
+}));
+
+function ServiceRow({ item, delay }) {
+  const body = (
+    <>
+      <span className="ah-service__icon">
+        <LineIcon name={item.icon} size={24} />
+      </span>
+      <div>
+        <h4 className="ah-service__title">{item.title}</h4>
+        <p className="ah-service__desc">{item.text}</p>
+      </div>
+    </>
+  );
+  // In from the left, one after another, fast
+  const props = { className: 'ah-service', 'data-reveal': 'left', style: { '--d': `${delay}ms` } };
+  return item.href ? <Link href={item.href} {...props}>{body}</Link> : <div {...props}>{body}</div>;
+}
+
+// Three columns of four. The service pages pass their own `groups`;
+// `title` is [plain, pink].
+export default function AgencyServices({
+  groups = homeGroups,
+  eyebrow = 'White-label services',
+  title = ['Everything your clients ask for,', 'under your brand'],
+  id = 'services',
+}) {
   return (
-    <section id="services" className="ah-section ah-section--raised ah-services">
+    <section id={id} className="ah-section ah-section--raised ah-services">
       <div className="container">
         <header className="ah-head" data-reveal="up">
-          <p className="ah-eyebrow">White-label services</p>
-          <h2 className="ah-head__title">Everything your clients ask for, <em>under your brand</em></h2>
+          <p className="ah-eyebrow">{eyebrow}</p>
+          <h2 className="ah-head__title">{title[0]} <em>{title[1]}</em></h2>
         </header>
 
         {/* One grid for all three columns, filled column by column, so each
             row lines up across the groups */}
         <div className="ah-services__grid">
           {groups.map((g, gi) => [
-            <h3 key={g.key} className="ah-services__group-title" data-reveal="up">{g.title}</h3>,
-            ...services[g.key].map((s, si) => (
-              // In from the left, one after another, fast
-              <div key={s.id} className="ah-service" data-reveal="left" style={{ '--d': `${(gi * 4 + si) * 50}ms` }}>
-                <span className="ah-service__icon">
-                  <LineIcon name={serviceIcons[s.id]} size={24} />
-                </span>
-                <div>
-                  <h4 className="ah-service__title">{s.title}</h4>
-                  <p className="ah-service__desc">{shortLines[s.id]}</p>
-                </div>
-              </div>
+            <h3 key={g.title} className="ah-services__group-title" data-reveal="up">{g.title}</h3>,
+            ...g.items.map((item, si) => (
+              <ServiceRow key={item.title} item={item} delay={(gi * 4 + si) * 50} />
             )),
           ])}
         </div>

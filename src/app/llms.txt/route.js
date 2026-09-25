@@ -1,6 +1,7 @@
 import { pricing, services } from '@/data/siteData';
 import { getAllBlogs } from '@/lib/blogs';
 import { SITE_URL, ENTITY_DESCRIPTION } from '@/lib/seo';
+import { servicePages, marketPages } from '@/data/servicePages';
 
 // /llms.txt: a plain-text summary for AI assistants (llmstxt.org), built from
 // the same data as the site so prices and services never drift out of date.
@@ -47,10 +48,16 @@ export async function GET() {
     `- App care: from ${both(appCare.price)} a month.`,
     '- One credit is a fixed unit of work (about four hours of senior design or development time). Every deliverable has a set credit cost.',
     '',
+    '## Service pages',
+    '',
+    ...servicePages.map((p) => `- [${p.serviceType}](${SITE_URL}/${p.slug}): ${p.summary}`),
+    '',
     '## Pages',
     '',
     `- [Home](${SITE_URL}/): what Groflex does for agencies, how it works and FAQs`,
     `- [Pricing](${SITE_URL}/pricing): pilot, fixed-price builds, credit packs, monthly plans and the credit menu`,
+    `- [About](${SITE_URL}/about): who Groflex is, the founder and how we work`,
+    ...marketPages.map((p) => `- [${p.name}](${SITE_URL}/${p.slug}): ${p.lede}`),
     `- [Work](${SITE_URL}/work): case studies`,
     `- [Incorpo case study](${SITE_URL}/case-study/incorpo): HR SaaS platform`,
     `- [Slashcure case study](${SITE_URL}/case-study/slashcure): healthcare platform`,

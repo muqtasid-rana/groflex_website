@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logoLight from '@/assets/brand/logo-light.webp';
-import { socialLinks, services } from '@/data/siteData';
+import { socialLinks } from '@/data/siteData';
+import { servicePages, marketPages } from '@/data/servicePages';
 import SocialIcon from '@/components/SocialIcon/SocialIcon';
 import './Footer.css';
 
@@ -29,11 +30,8 @@ export default function Footer() {
                     <div className="footer__column">
                         <h4 className="footer__heading">Services</h4>
                         <ul className="footer__links">
-                            {services.design.slice(0, 3).map((s) => (
-                                <li key={s.id}><a href="/#services">{s.title}</a></li>
-                            ))}
-                            {services.development.slice(0, 2).map((s) => (
-                                <li key={s.id}><a href="/#services">{s.title}</a></li>
+                            {servicePages.map((p) => (
+                                <li key={p.slug}><Link href={`/${p.slug}`}>{p.name}</Link></li>
                             ))}
                         </ul>
                     </div>
@@ -41,10 +39,13 @@ export default function Footer() {
                     <div className="footer__column">
                         <h4 className="footer__heading">Company</h4>
                         <ul className="footer__links">
-                            <li><Link href="/pricing">Pricing</Link></li>
+                            <li><Link href="/about">About Us</Link></li>
                             <li><Link href="/work">Our Work</Link></li>
-                            <li><a href="/#process">Process</a></li>
+                            <li><Link href="/pricing">Pricing</Link></li>
                             <li><Link href="/blog">Blog</Link></li>
+                            {marketPages.map((p) => (
+                                <li key={p.slug}><Link href={`/${p.slug}`}>{p.name}</Link></li>
+                            ))}
                             <li><a href="/#contact">Contact</a></li>
                         </ul>
                     </div>

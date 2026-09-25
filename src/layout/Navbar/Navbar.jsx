@@ -13,7 +13,7 @@ import logoLight from '@/assets/brand/logo-light.webp';
 const serviceItems = [...services.design, ...services.development, ...services.growth];
 
 const mobileDropdownItems = {
-    services: serviceItems.map((s) => ({ key: s.id, href: '#services', label: s.title, icon: s.icon })),
+    services: serviceItems.map((s) => ({ key: s.id, href: s.href, label: s.title, icon: s.icon })),
     customers: navCustomers.map((c) => ({ key: c.id, href: c.href, label: c.name })),
 };
 
@@ -130,7 +130,7 @@ export default function Navbar() {
         <ul className="navbar__services-grid">
             {serviceItems.map((s) => (
                 <li key={s.id}>
-                    {renderLink('#services', 'navbar__service', (
+                    {renderLink(s.href, 'navbar__service', (
                         <>
                             <i className={`${s.icon} navbar__service-icon`} aria-hidden="true" />
                             <span>{s.title}</span>

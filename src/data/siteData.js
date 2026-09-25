@@ -83,28 +83,33 @@ export const navCustomers = [
   },
 ];
 
+// `href` is the service's own page (Project Management has none, so it points at the process)
 export const services = {
   design: [
     {
       id: 'd1',
+      href: '/white-label-web-design',
       icon: 'fa-solid fa-palette',
       title: 'UI/UX Design',
       description: 'Creating intuitive, user-centered interfaces that elevate your digital products and deliver exceptional experiences.',
     },
     {
       id: 'd2',
+      href: '/white-label-graphic-design',
       icon: 'fa-solid fa-bezier-curve',
       title: 'Brand Identity',
       description: 'Crafting visual identities and assets that define your brand and make it unforgettable in a crowded marketplace.',
     },
     {
       id: 'd3',
+      href: '/white-label-graphic-design',
       icon: 'fa-solid fa-pen-nib',
       title: 'Graphic Design',
       description: 'Designing compelling visuals from marketing materials to social media assets that captivate your audience.',
     },
     {
       id: 'd4',
+      href: '/white-label-web-design',
       icon: 'fa-solid fa-mobile-screen-button',
       title: 'App/Web Design',
       description: 'Designing mobile and web experiences that are intuitive, beautiful, and aligned with platform-specific guidelines.',
@@ -113,24 +118,28 @@ export const services = {
   development: [
     {
       id: 'v1',
+      href: '/white-label-web-development',
       icon: 'fa-solid fa-code',
       title: 'Web Development',
       description: 'Building fast, scalable web applications using modern frameworks and best practices.',
     },
     {
       id: 'v2',
+      href: '/white-label-app-development',
       icon: 'fa-solid fa-mobile-screen',
       title: 'Mobile Development',
       description: 'Native and cross-platform mobile apps that deliver seamless performance on every device.',
     },
     {
       id: 'v3',
+      href: '/white-label-app-development',
       icon: 'fa-solid fa-layer-group',
       title: 'SaaS Application',
       description: 'Custom SaaS platforms that scale with your business, featuring secure authentication, subscription management, and automated workflows.',
     },
     {
       id: 'v4',
+      href: '/white-label-web-development',
       icon: 'fa-solid fa-gears',
       title: 'Software Development',
       description: 'Custom software solutions tailored to your business needs, with clean code, scalable architecture, and long-term support.',
@@ -139,24 +148,28 @@ export const services = {
   growth: [
     {
       id: 'g1',
+      href: '/white-label-social-media-marketing',
       icon: 'fa-solid fa-bullhorn',
       title: 'Social Media Marketing',
       description: 'Growing your audience with content calendars, paid campaigns and community management, measured against the numbers that matter to your business.',
     },
     {
       id: 'g2',
+      href: '/white-label-seo',
       icon: 'fa-solid fa-magnifying-glass-chart',
       title: 'SEO',
       description: 'Getting you found on Google, with technical fixes, content that ranks and reporting on the searches that bring customers in.',
     },
     {
       id: 'g3',
+      href: '/white-label-automation',
       icon: 'fa-solid fa-diagram-project',
       title: 'Automation',
       description: 'Taking repetitive work off your team, from lead follow-ups and reports to workflows that connect the tools you already use.',
     },
     {
       id: 'g4',
+      href: '/#process',
       icon: 'fa-solid fa-list-check',
       title: 'Project Management',
       description: 'A dedicated manager who plans the work, runs the timeline and keeps you updated, so every project ships on time without you chasing it.',
@@ -473,6 +486,10 @@ export const socialLinks = [
 // "a" or "an" before a number as spoken: an 8, an 11, an 18, an 80…; a 10, a 25
 export const aOrAn = (n) => (/^(8|11|18)/.test(String(n)) ? 'an' : 'a');
 
+// A { usd, gbp } price as text in one currency: $2,400 or £1,900
+export const money = (price, currency = 'usd') =>
+  currency === 'gbp' ? `£${price.gbp.toLocaleString('en-GB')}` : `$${price.usd.toLocaleString('en-US')}`;
+
 export const pricing = {
   pilot: {
     credits: 8,
@@ -547,7 +564,7 @@ export const pricing = {
     Development: [
       { label: 'Dev task or bug fix', credits: 1, estimator: true },
       { label: 'Email template, designed and built', credits: 2 },
-      { label: 'Web page build (WordPress, Webflow, Framer)', credits: 3 },
+      { label: 'Web page build (WordPress or Next.js)', credits: 3 },
       { label: 'Landing page, designed and built', credits: 8, estimator: true },
       { label: '5-page website, designed and built', credits: 20 },
       { label: 'Shopify store setup', credits: 25 },

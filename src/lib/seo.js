@@ -197,3 +197,44 @@ export function pricingJsonLd() {
     },
   };
 }
+
+const COUNTRIES = {
+  gb: { '@type': 'Country', name: 'United Kingdom' },
+  us: { '@type': 'Country', name: 'United States' },
+};
+
+// One service or market landing page. `offers` are { name, price: { usd, gbp } }.
+export function serviceJsonLd({ name, serviceType, description, path, offers = [], currency = 'usd', countries = ['gb', 'us'] }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    serviceType,
+    description,
+    url: absoluteUrl(path),
+    provider: { '@id': ORG_ID },
+    areaServed: countries.map((c) => COUNTRIES[c]),
+    audience: { '@type': 'BusinessAudience', audienceType: 'Design, development and marketing agencies' },
+    ...(offers.length && {
+      offers: offers.map((o) => ({
+        '@type': 'Offer',
+        name: o.name,
+        price: o.price[currency],
+        priceCurrency: currency.toUpperCase(),
+        url: absoluteUrl(path),
+      })),
+    }),
+  };
+}
+
+export function aboutJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    url: absoluteUrl('/about'),
+    name: 'About Groflex',
+    description: ENTITY_DESCRIPTION,
+    mainEntity: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+  };
+}

@@ -53,12 +53,13 @@ export default function BlogContent({ blog, similarBlogs }) {
       <div className="blog-detail__cta">
         <div className="container">
           <div className="blog-detail__cta-inner">
-            <h2 className="blog-detail__cta-title">Transform your vision into a digital reality</h2>
+            <h2 className="blog-detail__cta-title">Need more hands for client work?</h2>
             <p className="blog-detail__cta-text">
-              Partner with a team that cares about your success as much as you do.
+              Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0
+              upfront, pay only if you like the work.
             </p>
-            <Link href="/gameplan" className="blog-detail__cta-btn">
-              Get your free GAMEPLAN
+            <Link href="/pricing" className="blog-detail__cta-btn">
+              See how the pilot works
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
