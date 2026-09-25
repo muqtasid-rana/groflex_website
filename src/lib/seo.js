@@ -57,6 +57,13 @@ export function organizationJsonLd() {
         disambiguatingDescription:
           'Groflex at groflex.co is a white-label agency partner. It is not related to the grofleX invoicing software or to other companies named Groflex.',
         slogan: 'Your white-label design and development team.',
+        founder: {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#founder`,
+          name: 'Muqtasid Rana',
+          jobTitle: 'Founder',
+          worksFor: { '@id': ORG_ID },
+        },
         email: 'muqtasid@groflex.co',
         telephone: '+923359528776',
         address: { '@type': 'PostalAddress', addressCountry: 'PK' },
