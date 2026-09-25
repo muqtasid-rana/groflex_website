@@ -60,8 +60,8 @@ export default function PricingContent() {
     <>
       <header className="pricing-hero">
         <div className="container">
-          <h1 className="pricing-hero__title">Pricing Plans</h1>
-          <p className="pricing-hero__lede">White-label design and development for agencies.</p>
+          <h1 className="pricing-hero__title">White-Label Pricing for Agencies</h1>
+          <p className="pricing-hero__lede">Design, development and marketing under your brand, for UK and US agencies.</p>
           <div className="pricing-currency" role="group" aria-label="Currency">
             {['usd', 'gbp'].map((c) => (
               <button

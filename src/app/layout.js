@@ -3,6 +3,8 @@ import '@/styles/animations.css';
 import '@/styles/global.css';
 import { Analytics } from "@vercel/analytics/next";
 import Script from 'next/script';
+import JsonLd from '@/components/JsonLd/JsonLd';
+import { SITE_URL, SITE_NAME, ENTITY_DESCRIPTION, DEFAULT_OG_IMAGE, organizationJsonLd } from '@/lib/seo';
 import { Plus_Jakarta_Sans, Nunito_Sans, Fraunces } from 'next/font/google';
 
 // Self-hosted by next/font: no render-blocking request to Google Fonts, and the
@@ -14,83 +16,30 @@ const fraunces = Fraunces({ subsets: ['latin'], axes: ['opsz'], variable: '--fon
 
 export const viewport = 'width=device-width, initial-scale=1';
 
+// Site-wide defaults only. There's deliberately no canonical here: a layout
+// canonical is inherited by every page that doesn't set one, which told Google
+// the blog, case studies and legal pages were copies of the home page.
+// Each page sets its own through pageMetadata().
 export const metadata = {
-  metadataBase: new URL('https://www.groflex.co'),
+  metadataBase: new URL(SITE_URL),
   title: 'Groflex — White-Label Design & Development Team for Agencies',
-  description:
-    'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
+  description: ENTITY_DESCRIPTION,
+  applicationName: SITE_NAME,
   icons: {
-    // 4 KB instead of the 106 KB 500px original, which stays for Apple, Open Graph and JSON-LD
+    // 4 KB instead of the 106 KB 500px original, which stays for Apple and JSON-LD
     icon: { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
     apple: '/favicon.png',
   },
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'Groflex — White-Label Design & Development Team for Agencies',
-    description:
-      'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
-    type: 'website',
-    url: 'https://www.groflex.co',
-    siteName: 'Groflex',
-    images: [
-      {
-        url: '/favicon.png',
-        width: 512,
-        height: 512,
-        alt: 'Groflex Logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Groflex — White-Label Design & Development Team for Agencies',
-    description:
-      'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.',
-    images: ['/favicon.png'],
-  },
-};
-
-// JSON-LD Structured Data for Google Knowledge Panel & rich results
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Groflex',
-  url: 'https://www.groflex.co',
-  logo: 'https://www.groflex.co/favicon.png',
-  description:
-    'White-label design, development and marketing team for UK and US agencies.',
-  email: 'muqtasid@groflex.co',
-  telephone: '+923359528776',
-  sameAs: [
-    'https://instagram.com/groflex.co',
-    'https://linkedin.com/company/groflex-co',
-    'https://wa.me/+923359528776',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'PK',
-  },
-  knowsAbout: [
-    'Web Design',
-    'Web Development',
-    'Mobile App Development',
-    'UI/UX Design',
-    'Branding',
-    'AI-powered Development',
-  ],
+  openGraph: { siteName: SITE_NAME, type: 'website', images: [DEFAULT_OG_IMAGE] },
+  twitter: { card: 'summary_large_image', images: [DEFAULT_OG_IMAGE.url] },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${jakarta.variable} ${nunito.variable} ${fraunces.variable}`}>
       <head>
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {/* Organization and WebSite structured data, for the knowledge panel and AI answers */}
+        <JsonLd data={organizationJsonLd()} />
         {/* Tally and gtag wait for the page to finish loading so they don't compete with hydration */}
         <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-R5XNDZ1D7P" strategy="lazyOnload" />

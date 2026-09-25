@@ -2,22 +2,16 @@ import { work } from '@/data/siteData';
 import FeaturedWork from '@/components/FeaturedWork/FeaturedWork';
 import WorkCard from '@/components/WorkCard/WorkCard';
 import CTA from '@/sections/CTA/CTA';
+import { pageMetadata } from '@/lib/seo';
 import './work.css';
 
-const title = 'Our Work — Groflex';
-const description =
-  'Case studies from Groflex: SaaS platforms, mobile apps and websites we have designed, built and shipped for founders and businesses.';
-
-export const metadata = {
-  title,
-  description,
-  alternates: { canonical: '/work' },
-  openGraph: {
-    title,
-    description,
-    images: [{ url: work[0].image.src, width: work[0].image.width, height: work[0].image.height, alt: work[0].name }],
-  },
-};
+export const metadata = pageMetadata({
+  title: 'Our Work — Groflex Case Studies',
+  description:
+    'Case studies from Groflex: SaaS platforms, mobile apps and websites we have designed, built and shipped, the same work we deliver white-label for agencies.',
+  path: '/work',
+  images: [{ url: work[0].image.src, width: work[0].image.width, height: work[0].image.height, alt: work[0].name }],
+});
 
 export default function WorkPage() {
   const featured = work.slice(0, 3);

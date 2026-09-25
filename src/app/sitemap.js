@@ -1,83 +1,43 @@
 import { getAllBlogs } from '@/lib/blogs';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://groflex.co';
+import { SITE_URL } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
+// Only pages we want ranked. /founders and the numbered case studies are
+// noindexed, and /gameplan is a founder tool, so they're left out.
+// Static pages carry no lastModified: stamping them with today's date on every
+// request taught search engines to ignore the dates, including the blog's real ones.
+const staticPages = [
+  { path: '', changeFrequency: 'weekly', priority: 1 },
+  { path: '/pricing', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/work', changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/case-study/incorpo', changeFrequency: 'yearly', priority: 0.7 },
+  { path: '/case-study/slashcure', changeFrequency: 'yearly', priority: 0.7 },
+  { path: '/case-study/ashhkaro', changeFrequency: 'yearly', priority: 0.7 },
+  { path: '/blog', changeFrequency: 'weekly', priority: 0.7 },
+  { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.2 },
+  { path: '/terms', changeFrequency: 'yearly', priority: 0.2 },
+];
+
 export default async function sitemap() {
-  // Static pages
-  const staticPages = [
-    {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${SITE_URL}/work`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/founders`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/pricing`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/gameplan`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/terms`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-  ];
-
-  // Case study pages
-  const caseStudyPages = [2, 3, 4, 5, 6, 'ashhkaro', 'slashcure', 'incorpo'].map((id) => ({
-    url: `${SITE_URL}/case-study/${id}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
-
-  // Blog pages from Firestore
   let blogPages = [];
   try {
     const blogs = await getAllBlogs();
-    blogPages = blogs.map((blog) => ({
-      url: `${SITE_URL}/blog/${blog.slug}`,
-      lastModified: blog.updatedAt ? new Date(blog.updatedAt) : new Date(blog.date || Date.now()),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    }));
+    blogPages = blogs.map((blog) => {
+      const changed = blog.updatedAt || blog.date || blog.createdAt;
+      return {
+        url: `${SITE_URL}/blog/${blog.slug}`,
+        ...(changed && { lastModified: new Date(changed) }),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      };
+    });
   } catch (e) {
     console.error('Sitemap: failed to fetch blogs', e);
   }
 
-  return [...staticPages, ...caseStudyPages, ...blogPages];
+  return [
+    ...staticPages.map(({ path, ...rest }) => ({ url: `${SITE_URL}${path}`, ...rest })),
+    ...blogPages,
+  ];
 }

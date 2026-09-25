@@ -155,8 +155,10 @@ body:has(.ah) .footer {
   max-width: 1320px;
 }
 
+/* A <p>, not the H1, so it sets the heading font itself */
 .ah-hero__title {
   margin: 0 auto;
+  font-family: var(--font-heading);
   font-size: clamp(2.6rem, 6.2vw, 5.4rem);
   font-weight: var(--fw-extrabold);
   line-height: 1.04;

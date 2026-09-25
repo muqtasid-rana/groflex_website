@@ -1,13 +1,11 @@
 import '../privacy-policy/legal.css';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Terms & Conditions — Groflex',
   description: 'The terms and conditions governing your use of the Groflex website and services.',
-  openGraph: {
-    title: 'Terms & Conditions — Groflex',
-    description: 'The terms and conditions governing your use of the Groflex website and services.',
-  },
-};
+  path: '/terms',
+});
 
 export default function TermsPage() {
   return (

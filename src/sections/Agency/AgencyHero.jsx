@@ -34,10 +34,11 @@ export default function AgencyHero() {
   return (
     <header className="ah-hero">
       <div className="container">
-        <p className="ah-eyebrow">White Label Team</p>
-        <h1 className="ah-hero__title">
+        {/* The H1 carries the search terms; the big line below is the visual headline */}
+        <h1 className="ah-eyebrow">White-label team for UK &amp; US agencies</h1>
+        <p className="ah-hero__title">
           Your extension to quality work<br className="ah-hero__break" /> without <em>increasing headcount</em>.
-        </h1>
+        </p>
 
         <div className="ah-hero__cta">
           <Button variant="brand" size="lg" tallyConfig={tally}>Start your pilot</Button>

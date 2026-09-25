@@ -29,7 +29,7 @@ export default function AgencyServices() {
     <section id="services" className="ah-section ah-section--raised ah-services">
       <div className="container">
         <header className="ah-head" data-reveal="up">
-          <p className="ah-eyebrow">Our services</p>
+          <p className="ah-eyebrow">White-label services</p>
           <h2 className="ah-head__title">Everything your clients ask for, <em>under your brand</em></h2>
         </header>
 

@@ -1,15 +1,13 @@
 import { getAllBlogs } from '@/lib/blogs';
 import BlogList from './BlogList';
+import { pageMetadata } from '@/lib/seo';
 import './blog.css';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Blog — Groflex',
   description: 'Insights, tutorials, and updates from the Groflex team on software development, design, and digital strategy.',
-  openGraph: {
-    title: 'Blog — Groflex',
-    description: 'Insights, tutorials, and updates from the Groflex team on software development, design, and digital strategy.',
-  },
-};
+  path: '/blog',
+});
 
 export const dynamic = 'force-dynamic';
 

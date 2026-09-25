@@ -254,7 +254,7 @@ export default function HowItWorks() {
         {/* Fade only: a slide would shift the heading the line is measured from */}
         <header className="ah-head" ref={headRef} data-reveal="fade">
           <p className="ah-eyebrow">The process</p>
-          <h2 className="ah-head__title">How it <em>works</em></h2>
+          <h2 className="ah-head__title">How our white-label service <em>works</em></h2>
         </header>
 
         <ol className="ah-steps">

@@ -143,7 +143,7 @@ export default function AgencyPricing() {
       <div className="container">
         <header className="ah-head" data-reveal="up">
           <p className="ah-eyebrow">Pricing</p>
-          <h2 className="ah-head__title">Our <em>pricing</em></h2>
+          <h2 className="ah-head__title">White-label <em>pricing</em></h2>
         </header>
 
         <div className="ah-pilot" data-reveal="up">

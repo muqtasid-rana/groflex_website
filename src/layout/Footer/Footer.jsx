@@ -15,7 +15,7 @@ export default function Footer() {
                             <Image src={logoLight} alt="Groflex" className="footer__logo-img" />
                         </Link>
                         <p className="footer__desc">
-                            A white-label design, development and marketing team for agencies. Your brand, our team.
+                            A white-label design, development and marketing team for UK and US agencies. Your brand, our team.
                         </p>
                         <div className="footer__socials">
                             {socialLinks.map((link) => (
@@ -41,7 +41,7 @@ export default function Footer() {
                     <div className="footer__column">
                         <h4 className="footer__heading">Company</h4>
                         <ul className="footer__links">
-                            <li><a href="/#about">About Us</a></li>
+                            <li><Link href="/pricing">Pricing</Link></li>
                             <li><Link href="/work">Our Work</Link></li>
                             <li><a href="/#process">Process</a></li>
                             <li><Link href="/blog">Blog</Link></li>

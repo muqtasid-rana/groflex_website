@@ -8,22 +8,21 @@ import AgencyPricing from '@/sections/Agency/AgencyPricing';
 import AgencyBlog from '@/sections/Agency/AgencyBlog';
 import AgencyFaq from '@/sections/Agency/AgencyFaq';
 import RevealObserver from '@/sections/Agency/RevealObserver';
+import JsonLd from '@/components/JsonLd/JsonLd';
 import { getAllBlogs } from '@/lib/blogs';
+import { pageMetadata, faqJsonLd } from '@/lib/seo';
+import { pricing } from '@/data/siteData';
 import '@/sections/Agency/agency.css';
 
 // Re-rendered at most every 5 minutes, so new blog posts show up without a redeploy
 export const revalidate = 300;
 
-const title = 'Groflex — White-Label Design & Development Team for Agencies';
-const description =
-  'Groflex is a white-label design, development and marketing team for agencies. Start with a pilot: $0 upfront, pay only if you like the work.';
-
-export const metadata = {
-  title,
-  description,
-  alternates: { canonical: '/' },
-  openGraph: { title, description },
-};
+export const metadata = pageMetadata({
+  title: 'Groflex — White-Label Design & Development Team for UK & US Agencies',
+  description:
+    'White-label web design, development, app and marketing team for UK and US agencies. Your brand, NDA, your tools. Start with a pilot: $0 upfront, pay only if you like the work.',
+  path: '/',
+});
 
 // The founder-facing landing page now lives at /founders
 export default async function HomePage() {
@@ -41,6 +40,8 @@ export default async function HomePage() {
       <AgencyPricing />
       <AgencyBlog blogs={blogs} />
       <AgencyFaq />
+      {/* Marked up here only; the same questions on /pricing stay plain */}
+      <JsonLd data={faqJsonLd(pricing.faq)} />
       <RevealObserver />
     </div>
   );

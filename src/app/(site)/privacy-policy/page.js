@@ -1,13 +1,11 @@
 import './legal.css';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy — Groflex',
   description: 'Learn how Groflex collects, uses, and protects your personal information.',
-  openGraph: {
-    title: 'Privacy Policy — Groflex',
-    description: 'Learn how Groflex collects, uses, and protects your personal information.',
-  },
-};
+  path: '/privacy-policy',
+});
 
 export default function PrivacyPolicyPage() {
   return (

@@ -1,12 +1,13 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://groflex.co';
+import { SITE_URL } from '@/lib/seo';
 
+// Search and AI crawlers are all welcome; only the admin panel and API are off limits
 export default function robots() {
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/admin/',
+        disallow: ['/admin/', '/api/'],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

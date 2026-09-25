@@ -10,8 +10,11 @@ export default function BlogContent({ blog, similarBlogs }) {
     })
     : '';
 
-  // Prevent text wrapping issues by replacing non-breaking spaces with regular spaces
-  const sanitizedContent = blog.content ? blog.content.replace(/&nbsp;/g, ' ') : '';
+  // Prevent text wrapping issues by replacing non-breaking spaces with regular spaces.
+  // The post title is the page's only H1, so any H1 written in the editor becomes an H2.
+  const sanitizedContent = blog.content
+    ? blog.content.replace(/&nbsp;/g, ' ').replace(/<(\/?)h1(?=[\s>])/gi, '<$1h2')
+    : '';
 
   return (
     <article className="blog-detail">
