@@ -26,7 +26,7 @@ export default function CreditEstimator({ plans, packs, money }) {
   } else if (!plan) {
     result = (
       <p>
-        <strong>{total} credits a month.</strong> That&apos;s beyond Scale. A Dedicated Team will cost you less.
+        <strong>{total} credits a month.</strong> That&apos;s beyond Scale. Let&apos;s talk about a custom plan.
       </p>
     );
   } else {

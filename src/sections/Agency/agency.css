@@ -753,7 +753,7 @@ a.ah-logos__item {
 
 .ah-tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: end;
   gap: var(--space-md);
   margin-top: clamp(2.5rem, 5vw, 3.5rem);

@@ -13,7 +13,6 @@ const tabs = [
   { id: 'systems', label: 'Systems & Apps', sub: 'from $2,500' },
   { id: 'packs', label: 'Credit Packs', sub: 'from $1,300' },
   { id: 'monthly', label: 'Monthly Plans', sub: 'from $2,400/mo' },
-  { id: 'team', label: 'Dedicated Team', sub: 'Custom' },
 ];
 
 function SystemsPanel() {
@@ -26,13 +25,13 @@ function SystemsPanel() {
               <h4>{s.name}</h4>
               <p>{s.description}</p>
             </div>
-            <span className="ah-rows__meta">{s.timeline}</span>
+            <span className="ah-rows__meta">{s.timeline} · {s.credits} cr</span>
             <span className="ah-rows__price"><small>from</small> {usd(s.price)}</span>
           </li>
         ))}
       </ul>
       <div className="ah-panel__foot">
-        <p>Fixed quote within 48 hours. Billed 40 / 30 / 30 by milestone.</p>
+        <p>Fixed quote within 48 hours. Billed 40 / 30 / 30, or paid with plan credits.</p>
         <Button variant="brand" size="md" tallyConfig={tally}>Get a fixed quote</Button>
       </div>
     </>
@@ -98,29 +97,7 @@ function MonthlyPanel() {
   );
 }
 
-function TeamPanel() {
-  return (
-    <div className="ah-panel__split">
-      <div>
-        <p className="ah-rows__price ah-rows__price--big">
-          <small>from</small> {usd(pricing.dedicatedTeam.perPerson)} <small>/ person / month</small>
-        </p>
-        <p className="ah-panel__note">
-          Full-time people who work only on your accounts, in your tools and your hours. Scale the team up or
-          down each month.
-        </p>
-        <Button variant="brand" size="md" tallyConfig={tally}>Talk to us</Button>
-      </div>
-      <ul className="ah-checks ah-checks--two">
-        {['UI/UX Designers', 'Graphic Designers', 'Web Developers', 'Mobile Developers', 'QA Engineers', 'Project Managers'].map((r) => (
-          <li key={r}>{r}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-const panels = { systems: SystemsPanel, packs: PacksPanel, monthly: MonthlyPanel, team: TeamPanel };
+const panels = { systems: SystemsPanel, packs: PacksPanel, monthly: MonthlyPanel };
 
 export default function AgencyPricing() {
   const [active, setActive] = useState('systems');

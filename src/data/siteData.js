@@ -503,6 +503,7 @@ export const pricing = {
       id: 'prototype',
       name: 'Clickable Prototype',
       price: { usd: 2500, gbp: 1950 },
+      credits: 20,
       timeline: '1–2 weeks',
       description: 'Up to 15 designed screens in a clickable flow, ready for investors or user testing.',
     },
@@ -510,6 +511,7 @@ export const pricing = {
       id: 'system',
       name: 'Business System',
       price: { usd: 6000, gbp: 4700 },
+      credits: 50,
       timeline: '3–5 weeks',
       description: 'Inventory, CRM, booking or reporting systems with user roles and an admin panel.',
       example: { name: 'Inayat Motors', href: '/case-study/3', image: inayat },
@@ -518,6 +520,7 @@ export const pricing = {
       id: 'saas',
       name: 'SaaS / Web App MVP',
       price: { usd: 9000, gbp: 7000 },
+      credits: 75,
       timeline: '4–6 weeks',
       popular: true,
       description: 'Sign-up and login, your core features, subscription billing and an admin panel.',
@@ -527,6 +530,7 @@ export const pricing = {
       id: 'mobile',
       name: 'Mobile App',
       price: { usd: 12000, gbp: 9400 },
+      credits: 100,
       timeline: '6–8 weeks',
       description: 'One cross-platform app for iOS and Android, with its backend and store submission.',
       example: { name: 'Ashhkaro', href: '/case-study/ashhkaro', image: ashhkaro },
@@ -535,6 +539,7 @@ export const pricing = {
       id: 'platform',
       name: 'Full Platform',
       price: { usd: 18000, gbp: 14000 },
+      credits: 150,
       timeline: '8–12 weeks',
       description: 'Web app, mobile app and admin panel, with multiple user types and third-party integrations.',
       example: { name: 'Slashcure', href: '/case-study/slashcure', image: slashcure },
@@ -602,6 +607,8 @@ export const pricing = {
       features: ['Dedicated team: PM, 2 designers, 2 developers, QA', 'Weekly check-in call', 'Fastest turnaround'],
     },
   ],
+  // Not sold on the site for now: we can't staff named full-time people yet.
+  // Quote it on a call if an agency asks.
   dedicatedTeam: { perPerson: { usd: 2200, gbp: 1750 } },
 
   // Resale examples. Credit items are costed at the Growth rate; `systemId`

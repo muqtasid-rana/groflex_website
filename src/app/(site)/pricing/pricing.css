@@ -2,14 +2,38 @@
    PRICING PAGE
    ========================================= */
 
+/* Same palette as the agency home page */
 .pricing {
+  --ahp-navy: var(--color-brand-navy);
+  --ahp-raised: #0d0870;
+  --ahp-blue: var(--color-brand-blue);
+  --ahp-pink: var(--color-brand-magenta);
+  --ahp-text: var(--color-brand-light);
+  --ahp-muted: rgba(245, 245, 255, 0.72);
+  --ahp-line: rgba(240, 32, 200, 0.35);
+  --ahp-outline: rgba(245, 245, 255, 0.22);
+  color: var(--ahp-text);
   --pricing-navbar: 66px;   /* scrolled navbar height */
   --pricing-subnav: 56px;
-  background: var(--color-bg);
+  background: var(--ahp-navy);
 }
 
 .pricing .container {
   max-width: 1120px;
+}
+
+
+/* Global styles colour headings dark, which the old light theme relied on */
+.pricing h1,
+.pricing h2,
+.pricing h3,
+.pricing h4,
+.pricing h5,
+.pricing h6,
+.pricing dt,
+.pricing dd,
+.pricing strong {
+  color: var(--ahp-text);
 }
 
 /* ---- Shared ---- */
@@ -19,12 +43,12 @@
 }
 
 .pricing-section--alt {
-  background: var(--color-surface);
+  background: var(--ahp-raised);
 }
 
 .pricing-section--dark {
   background: var(--color-brand-navy);
-  color: var(--color-text-on-dark);
+  color: var(--ahp-text);
 }
 
 .pricing-head {
@@ -37,12 +61,12 @@
   font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
-  color: var(--color-text);
+  color: var(--ahp-text);
 }
 
 .pricing-head__text {
   margin-top: var(--space-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-eyebrow {
@@ -53,18 +77,18 @@
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-primary);
+  color: var(--ahp-pink);
 }
 
 .pricing-eyebrow--light {
-  color: #a5b4fc;
+  color: var(--ahp-pink);
 }
 
 .pricing-note {
   margin-top: var(--space-lg);
   text-align: center;
   font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-badge {
@@ -96,7 +120,7 @@
 
 .pricing-hero__lede {
   margin-top: var(--space-sm);
-  color: var(--color-text-on-dark-muted);
+  color: var(--ahp-muted);
   font-size: var(--fs-body-lg);
 }
 
@@ -113,13 +137,14 @@
   border: 0;
   border-radius: var(--radius-full);
   background: transparent;
-  color: var(--color-text-on-dark-muted);
+  color: var(--ahp-muted);
   font-family: var(--font-heading);
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-semibold);
   cursor: pointer;
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
+
 
 .pricing-currency button.is-active {
   background: var(--color-white);
@@ -156,7 +181,7 @@
   display: block;
   padding: 0.45rem 1rem;
   border-radius: var(--radius-full);
-  color: var(--color-text-on-dark-muted);
+  color: var(--ahp-muted);
   font-family: var(--font-heading);
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-semibold);
@@ -170,7 +195,7 @@
 }
 
 .pricing-subnav a.is-active {
-  background: var(--color-brand-blue);
+  background: var(--ahp-blue);
   color: var(--color-white);
 }
 
@@ -182,8 +207,8 @@
   align-items: center;
   padding: clamp(1.75rem, 4vw, 3rem);
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--color-brand-blue), #4338ca);
-  box-shadow: 0 20px 60px rgba(43, 92, 230, 0.35);
+  background: var(--ahp-raised);
+  border: 1.5px solid var(--ahp-pink);
 }
 
 .pricing-pilot__title {
@@ -196,7 +221,7 @@
 .pricing-pilot__text {
   margin-top: var(--space-md);
   font-size: var(--fs-body-lg);
-  color: #e0e7ff;
+  color: var(--ahp-muted);
 }
 
 .pricing-pilot__text strong {
@@ -227,7 +252,7 @@
   gap: var(--space-xs);
   padding: var(--space-xl);
   border-radius: var(--radius-md);
-  background: rgba(7, 0, 82, 0.35);
+  background: rgba(245, 245, 255, 0.06);
   text-align: center;
 }
 
@@ -239,9 +264,19 @@
   color: var(--color-white);
 }
 
+/* Sits right under the big $0 */
+.pricing-pilot__label {
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ahp-pink);
+}
+
 .pricing-pilot__note {
   margin-bottom: var(--space-md);
-  color: #c7d2fe;
+  color: var(--ahp-muted);
   font-size: var(--fs-body-sm);
 }
 
@@ -251,21 +286,19 @@
   display: flex;
   flex-direction: column;
   padding: var(--space-xl) var(--space-lg);
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--ahp-outline);
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  background: var(--ahp-raised);
 }
 
 .pricing-card--popular {
-  border: 2px solid var(--color-primary);
-  box-shadow: var(--shadow-glow-primary), var(--shadow-card);
+  border: 2px solid var(--ahp-pink);
 }
 
 .pricing-card__name {
   font-size: var(--fs-h4);
   font-weight: var(--fw-bold);
-  color: var(--color-text);
+  color: var(--ahp-text);
 }
 
 .pricing-card__price {
@@ -273,25 +306,25 @@
   font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: var(--fw-extrabold);
-  color: var(--color-brand-navy);
+  color: var(--ahp-text);
 }
 
 .pricing-card__price small {
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-medium);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-card__meta {
   margin-top: var(--space-xs);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-card__text {
   margin-top: var(--space-md);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-secondary);
+  color: var(--ahp-muted);
 }
 
 .pricing-card__credits {
@@ -302,17 +335,17 @@
   margin-top: var(--space-md);
   padding: var(--space-md);
   border-radius: var(--radius-md);
-  background: var(--color-primary-soft);
+  background: rgba(43, 92, 230, 0.18);
 }
 
 .pricing-card__credits strong {
   font-family: var(--font-heading);
-  color: var(--color-brand-navy);
+  color: var(--ahp-text);
 }
 
 .pricing-card__credits span {
   font-size: var(--fs-body-sm);
-  color: var(--color-primary-dark);
+  color: var(--ahp-pink);
   font-weight: var(--fw-semibold);
 }
 
@@ -329,14 +362,14 @@
   position: relative;
   padding-left: 1.5rem;
   font-size: var(--fs-body-sm);
-  color: var(--color-text-secondary);
+  color: var(--ahp-muted);
 }
 
 .pricing-card__features li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  color: var(--ahp-pink);
   font-weight: var(--fw-bold);
 }
 
@@ -377,8 +410,8 @@
   margin-top: var(--space-lg);
   padding: var(--space-sm);
   border-radius: var(--radius-md);
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--ahp-navy);
+  color: var(--ahp-text);
   font-family: var(--font-heading);
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-semibold);
@@ -387,7 +420,7 @@
 }
 
 a.pricing-example:hover {
-  background: var(--color-bg-muted);
+  background: var(--ahp-raised);
 }
 
 .pricing-example span {
@@ -400,11 +433,11 @@ a.pricing-example:hover {
 .pricing-example small {
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-example i {
-  color: var(--color-primary);
+  color: var(--ahp-pink);
   font-size: var(--fs-caption);
 }
 
@@ -419,7 +452,7 @@ a.pricing-example:hover {
 .pricing-example--plain {
   justify-content: center;
   min-height: 56px;
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
   font-weight: var(--fw-medium);
   text-align: center;
 }
@@ -430,15 +463,15 @@ a.pricing-example:hover {
   margin-top: var(--space-xl);
   padding: var(--space-lg);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
-  border: 1px dashed var(--color-border);
+  background: var(--ahp-raised);
+  border: 1px dashed var(--ahp-line);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-secondary);
+  color: var(--ahp-muted);
   text-align: center;
 }
 
 .pricing-systems__footer strong {
-  color: var(--color-text);
+  color: var(--ahp-text);
 }
 
 /* ---- 3. Packs + credit menu ---- */
@@ -451,7 +484,7 @@ a.pricing-example:hover {
 
 .pricing-card--pack {
   text-align: center;
-  background: var(--color-bg);
+  background: var(--ahp-navy);
 }
 
 .credit-menu {
@@ -477,7 +510,7 @@ a.pricing-example:hover {
   display: flex;
   padding: 3px;
   border-radius: var(--radius-full);
-  background: var(--color-bg-alt);
+  background: var(--ahp-raised);
 }
 
 .credit-menu__tabs button {
@@ -485,7 +518,7 @@ a.pricing-example:hover {
   border: 0;
   border-radius: var(--radius-full);
   background: transparent;
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
   font-family: var(--font-heading);
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-semibold);
@@ -493,13 +526,12 @@ a.pricing-example:hover {
 }
 
 .credit-menu__tabs button.is-active {
-  background: var(--color-surface);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-xs);
+  background: var(--ahp-raised);
+  color: var(--ahp-pink);
 }
 
 .credit-menu__tabs button:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--ahp-pink);
 }
 
 .credit-menu__list {
@@ -513,27 +545,27 @@ a.pricing-example:hover {
   align-items: baseline;
   gap: var(--space-sm);
   padding: 0.7rem 0;
-  border-bottom: 1px solid var(--color-border-light);
-  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--ahp-line);
+  color: var(--ahp-muted);
 }
 
 .credit-menu__dots {
   flex: 1;
   min-width: 1rem;
-  border-bottom: 2px dotted var(--color-border);
+  border-bottom: 2px dotted var(--ahp-line);
   transform: translateY(-4px);
 }
 
 .credit-menu__list strong {
   font-family: var(--font-heading);
-  color: var(--color-primary);
+  color: var(--ahp-pink);
   white-space: nowrap;
 }
 
 .credit-menu__note {
   margin-top: var(--space-md);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 /* ---- 4. Monthly ---- */
@@ -552,7 +584,7 @@ a.pricing-example:hover {
   padding: var(--space-lg) var(--space-xl);
   border-radius: var(--radius-lg);
   background: var(--color-brand-navy);
-  color: var(--color-text-on-dark);
+  color: var(--ahp-text);
 }
 
 .pricing-dedicated > div {
@@ -566,7 +598,7 @@ a.pricing-example:hover {
 
 .pricing-dedicated p {
   font-size: var(--fs-body-sm);
-  color: var(--color-text-on-dark-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-dedicated .pricing-dedicated__price {
@@ -580,16 +612,15 @@ a.pricing-example:hover {
 .pricing-dedicated__price small {
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
-  color: var(--color-text-on-dark-muted);
+  color: var(--ahp-muted);
 }
 
 .estimator {
   margin-top: var(--space-3xl);
   padding: clamp(1.25rem, 3vw, 2rem);
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  box-shadow: var(--shadow-card);
+  background: var(--ahp-raised);
+  border: 1px solid var(--ahp-outline);
 }
 
 .estimator__title {
@@ -613,19 +644,19 @@ a.pricing-example:hover {
   justify-content: space-between;
   gap: var(--space-md);
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--ahp-line);
 }
 
 .estimator__label {
   display: flex;
   flex-direction: column;
   font-size: var(--fs-body-sm);
-  color: var(--color-text);
+  color: var(--ahp-text);
 }
 
 .estimator__label small {
   font-size: var(--fs-caption);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .estimator__stepper {
@@ -637,10 +668,10 @@ a.pricing-example:hover {
 .estimator__stepper button {
   width: 32px;
   height: 32px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--ahp-outline);
   border-radius: 50%;
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--ahp-raised);
+  color: var(--ahp-text);
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -648,8 +679,8 @@ a.pricing-example:hover {
 }
 
 .estimator__stepper button:hover:not(:disabled) {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--ahp-pink);
+  color: var(--ahp-pink);
 }
 
 .estimator__stepper button:disabled {
@@ -668,8 +699,8 @@ a.pricing-example:hover {
   margin-top: var(--space-lg);
   padding: var(--space-md) var(--space-lg);
   border-radius: var(--radius-md);
-  background: var(--color-primary-soft);
-  color: var(--color-brand-navy);
+  background: rgba(43, 92, 230, 0.18);
+  color: var(--ahp-text);
 }
 
 /* ---- 5. Margin ---- */
@@ -682,7 +713,7 @@ a.pricing-example:hover {
 .pricing-margin__card {
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  background: var(--color-bg);
+  background: var(--ahp-navy);
 }
 
 .pricing-margin__card h3 {
@@ -699,12 +730,12 @@ a.pricing-example:hover {
   justify-content: space-between;
   gap: var(--space-md);
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--ahp-line);
   font-size: var(--fs-body-sm);
 }
 
 .pricing-margin__card dt {
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 .pricing-margin__card dd {
@@ -720,12 +751,12 @@ a.pricing-example:hover {
 }
 
 .pricing-margin__keep dt {
-  color: var(--color-text);
+  color: var(--ahp-text);
   font-weight: var(--fw-semibold);
 }
 
 .pricing-margin__keep dd {
-  color: #059669;
+  color: #34d399;
   font-size: var(--fs-h4);
   font-weight: var(--fw-extrabold);
 }
@@ -740,8 +771,8 @@ a.pricing-example:hover {
 .pricing-included__item {
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
+  background: var(--ahp-raised);
+  border: 1px solid var(--ahp-outline);
 }
 
 .pricing-included__item i {
@@ -751,8 +782,8 @@ a.pricing-example:hover {
   height: 44px;
   margin-bottom: var(--space-md);
   border-radius: var(--radius-md);
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
+  background: rgba(43, 92, 230, 0.18);
+  color: var(--ahp-pink);
   font-size: 1.1rem;
 }
 
@@ -763,7 +794,7 @@ a.pricing-example:hover {
 .pricing-included__item p {
   margin-top: var(--space-xs);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 /* ---- 7. Steps ---- */
@@ -778,14 +809,14 @@ a.pricing-example:hover {
 
 .pricing-steps li {
   padding-top: var(--space-md);
-  border-top: 2px solid var(--color-primary);
+  border-top: 2px solid var(--ahp-pink);
 }
 
 .pricing-steps__num {
   font-family: var(--font-heading);
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
-  color: var(--color-primary);
+  color: var(--ahp-pink);
 }
 
 .pricing-steps h3 {
@@ -796,7 +827,7 @@ a.pricing-example:hover {
 .pricing-steps p {
   margin-top: var(--space-xs);
   font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
+  color: var(--ahp-muted);
 }
 
 /* ---- 8. FAQ ---- */
@@ -805,7 +836,7 @@ a.pricing-example:hover {
 }
 
 .pricing-faq__item {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--ahp-line);
 }
 
 .pricing-faq__item summary {
@@ -813,7 +844,7 @@ a.pricing-example:hover {
   padding: var(--space-md) 2rem var(--space-md) 0;
   font-family: var(--font-heading);
   font-weight: var(--fw-semibold);
-  color: var(--color-text);
+  color: var(--ahp-text);
   cursor: pointer;
   list-style: none;
 }
@@ -830,7 +861,7 @@ a.pricing-example:hover {
   transform: translateY(-50%);
   font-size: 1.4rem;
   font-weight: var(--fw-regular);
-  color: var(--color-primary);
+  color: var(--ahp-pink);
 }
 
 .pricing-faq__item[open] summary::after {
@@ -839,7 +870,7 @@ a.pricing-example:hover {
 
 .pricing-faq__item p {
   padding-bottom: var(--space-md);
-  color: var(--color-text-secondary);
+  color: var(--ahp-muted);
 }
 
 /* ---- 9. Final CTA ---- */
@@ -946,4 +977,53 @@ a.pricing-example:hover {
     flex-direction: column;
     gap: 0;
   }
+}
+
+/* ---- Site chrome, matching the agency home page ---- */
+body:has(.pricing) {
+  background: var(--color-brand-navy);
+}
+
+body:has(.pricing) .navbar--scrolled {
+  background: var(--color-brand-navy);
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(240, 32, 200, 0.25);
+}
+
+body:has(.pricing) .navbar--scrolled .navbar__link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body:has(.pricing) .navbar .navbar__link:hover {
+  color: var(--color-brand-magenta);
+}
+
+body:has(.pricing) .navbar--scrolled .navbar__toggle-bar {
+  background: #ffffff;
+}
+
+/* The bar stays navy, so keep the white-text logo */
+body:has(.pricing) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--light {
+  display: block;
+}
+
+body:has(.pricing) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--dark {
+  display: none;
+}
+
+body:has(.pricing) .navbar .btn--primary {
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: #ffffff;
+  font-weight: var(--fw-bold);
+}
+
+body:has(.pricing) .navbar .btn--primary:hover {
+  background: #2350cf;
+  border-color: #2350cf;
+}
+
+body:has(.pricing) .footer {
+  background: #03002a;
 }

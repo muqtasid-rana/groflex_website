@@ -54,7 +54,7 @@ export default function PricingContent() {
   // Growth's price per credit, used to cost the margin examples
   const growthRate = { usd: growth.price.usd / growth.credits, gbp: growth.price.gbp / growth.credits };
 
-  const { pilot, systems, systemsIncluded, appCare, packs, packValidityDays, plans, dedicatedTeam } = pricing;
+  const { pilot, systems, systemsIncluded, appCare, packs, packValidityDays, plans } = pricing;
 
   return (
     <>
@@ -100,17 +100,18 @@ export default function PricingContent() {
               <span className="pricing-eyebrow pricing-eyebrow--light">Start here</span>
               <h2 className="pricing-pilot__title">Try us on one real project.</h2>
               <p className="pricing-pilot__text">
-                {aOrAn(pilot.credits) === 'an' ? 'An' : 'A'} {pilot.credits}-credit pilot. <strong>No upfront payment.</strong> Only pay {money(pilot.price)} once
-                you&apos;ve liked it.
+                {aOrAn(pilot.credits) === 'an' ? 'An' : 'A'} {pilot.credits}-credit pilot on a real client task, delivered under your
+                brand. <strong>No card, no contract, no risk.</strong>
               </p>
               <ul className="pricing-pilot__examples">
                 {pilot.examples.map((e) => <li key={e}>{e}</li>)}
               </ul>
             </div>
             <div className="pricing-pilot__price">
-              <span className="pricing-pilot__amount">{money(pilot.price)}</span>
-              <span className="pricing-pilot__note">paid only after you approve</span>
-              <Button variant="white" size="lg" tallyConfig={tally}>Start your pilot</Button>
+              <span className="pricing-pilot__amount">{money({ usd: 0, gbp: 0 })}</span>
+              <span className="pricing-pilot__label">upfront</span>
+              <span className="pricing-pilot__note">Pay {money(pilot.price)} only when you like the work.</span>
+              <Button variant="brand" size="lg" tallyConfig={tally}>Start your pilot</Button>
             </div>
           </div>
         </div>
@@ -135,7 +136,9 @@ export default function PricingContent() {
                 <p className="pricing-card__price">
                   <small>from</small> {money(s.price)}
                 </p>
-                <p className="pricing-card__meta"><i className="fa-regular fa-clock" aria-hidden="true" /> {s.timeline}</p>
+                <p className="pricing-card__meta">
+                  <i className="fa-regular fa-clock" aria-hidden="true" /> {s.timeline} · {s.credits} credits
+                </p>
                 <p className="pricing-card__text">{s.description}</p>
                 {s.example ? (
                   <Link href={s.example.href} className="pricing-example">
@@ -149,7 +152,7 @@ export default function PricingContent() {
                 ) : (
                   <p className="pricing-example pricing-example--plain">Works as a pilot for bigger builds</p>
                 )}
-                <Button variant={s.popular ? 'primary' : 'secondary'} size="md" tallyConfig={tally} className="pricing-card__cta">
+                <Button variant="brand" size="md" tallyConfig={tally} className="pricing-card__cta">
                   Get a fixed quote
                 </Button>
               </article>
@@ -158,6 +161,10 @@ export default function PricingContent() {
 
           <div className="pricing-systems__footer">
             <p><strong>Every build includes:</strong> {systemsIncluded.join(' · ')}</p>
+            <p>
+              <strong>Already on a plan?</strong> Pay with credits at your plan rate, so a build never costs more
+              than its fixed price.
+            </p>
             <p>
               <strong>After launch:</strong> App Care from {money(appCare.price)}/month for hosting, updates, fixes and
               small features.
@@ -183,7 +190,7 @@ export default function PricingContent() {
                 <h3 className="pricing-card__name">{p.credits} credits</h3>
                 <p className="pricing-card__price">{money(p.price)}</p>
                 <p className="pricing-card__meta">{formatters[currency].format(p.price[currency] / p.credits)} per credit</p>
-                <Button variant="secondary" size="md" tallyConfig={tally} className="pricing-card__cta">
+                <Button variant="brand" size="md" tallyConfig={tally} className="pricing-card__cta">
                   Buy {p.credits} credits
                 </Button>
               </article>
@@ -221,22 +228,11 @@ export default function PricingContent() {
                   <li>Up to {p.rollover} credits roll over</li>
                   {p.features.map((f) => <li key={f}>{f}</li>)}
                 </ul>
-                <Button variant={p.popular ? 'primary' : 'secondary'} size="md" tallyConfig={tally} className="pricing-card__cta">
+                <Button variant="brand" size="md" tallyConfig={tally} className="pricing-card__cta">
                   Get {p.name}
                 </Button>
               </article>
             ))}
-          </div>
-
-          <div className="pricing-dedicated">
-            <div>
-              <h3>Dedicated Team</h3>
-              <p>Full-time designers, developers, QA and PMs working only on your accounts.</p>
-            </div>
-            <p className="pricing-dedicated__price">
-              from {money(dedicatedTeam.perPerson)} <small>/ person / month</small>
-            </p>
-            <Button variant="secondary" size="md" tallyConfig={tally}>Talk to us</Button>
           </div>
 
           <CreditEstimator plans={plans} packs={packs} money={money} />
@@ -333,7 +329,7 @@ export default function PricingContent() {
         <div className="container">
           <h2>Start with a pilot. Pay only if you like it.</h2>
           <div className="pricing-final__ctas">
-            <Button variant="white" size="lg" tallyConfig={tally}>Start your pilot</Button>
+            <Button variant="brand" size="lg" tallyConfig={tally}>Start your pilot</Button>
             <Button variant="ghost" size="lg" tallyConfig={tally} className="pricing-final__call">Book a call</Button>
           </div>
         </div>
