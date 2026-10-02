@@ -38,8 +38,34 @@ function SystemsPanel() {
   );
 }
 
+// A short mix of design and dev work, from small tasks up to full builds
+const pick = (list, labels) => labels.map((l) => list.find((m) => m.label === l));
+const systemItem = (id) => {
+  const s = pricing.systems.find((x) => x.id === id);
+  // App scope varies a lot, so builds show a starting figure, not a fixed one
+  return { label: s.name, credits: s.credits, from: true };
+};
+const creditExamples = [
+  {
+    title: 'Design',
+    items: pick(pricing.creditMenu.Design, [
+      'Social post or ad set (3 sizes)',
+      'App screen design',
+      'Web page design',
+      'Brand identity kit',
+    ]),
+  },
+  {
+    title: 'Development',
+    items: [
+      ...pick(pricing.creditMenu.Development, ['Landing page, designed and built', '5-page website, designed and built']),
+      systemItem('saas'),
+      systemItem('mobile'),
+    ],
+  },
+];
+
 function PacksPanel() {
-  const menu = Object.values(pricing.creditMenu).flat().slice(0, 8);
   return (
     <div className="ah-panel__split">
       <div>
@@ -57,14 +83,22 @@ function PacksPanel() {
       </div>
       <div>
         <p className="ah-panel__label">What a credit buys</p>
-        <ul className="ah-menu">
-          {menu.map((m) => (
-            <li key={m.label}>
-              <span>{m.label}</span>
-              <strong>{m.credits} cr</strong>
-            </li>
-          ))}
-        </ul>
+        {creditExamples.map((group) => (
+          <div key={group.title} className="ah-menu__group">
+            <p className="ah-menu__title">{group.title}</p>
+            <ul className="ah-menu">
+              {group.items.map((m) => (
+                <li key={m.label}>
+                  <span>{m.label}</span>
+                  <strong>{m.from && <small>from</small>} {m.credits} cr</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <p className="ah-panel__note">
+          Apps are scoped first. You get a fixed credit quote within 48 hours, before any work starts.
+        </p>
       </div>
     </div>
   );

@@ -937,6 +937,24 @@ a.ah-logos__item {
   white-space: nowrap;
 }
 
+.ah-menu strong small {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular, 400);
+  color: var(--ah-muted);
+}
+
+.ah-menu__group + .ah-menu__group {
+  margin-top: var(--space-lg);
+}
+
+.ah-menu__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-bold);
+  color: var(--ah-text);
+}
+
 .ah-plans {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
