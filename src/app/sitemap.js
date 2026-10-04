@@ -1,6 +1,6 @@
 import { getAllBlogs } from '@/lib/blogs';
 import { SITE_URL } from '@/lib/seo';
-import { servicePages, marketPages } from '@/data/servicePages';
+import { servicePages, marketPages, partnerPages } from '@/data/servicePages';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 const staticPages = [
   { path: '', changeFrequency: 'weekly', priority: 1 },
   ...servicePages.map((p) => ({ path: `/${p.slug}`, changeFrequency: 'monthly', priority: 0.9 })),
-  ...marketPages.map((p) => ({ path: `/${p.slug}`, changeFrequency: 'monthly', priority: 0.9 })),
+  ...[...marketPages, ...partnerPages].map((p) => ({ path: `/${p.slug}`, changeFrequency: 'monthly', priority: 0.9 })),
   { path: '/pricing', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/about', changeFrequency: 'yearly', priority: 0.6 },
   { path: '/work', changeFrequency: 'monthly', priority: 0.8 },

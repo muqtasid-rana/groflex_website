@@ -1,10 +1,12 @@
 import Button from '@/components/Button/Button';
+import WhatsAppButton from '@/components/Button/WhatsAppButton';
 import { pricing } from '@/data/siteData';
 
 const tally = { formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 };
 
-// Service pages pass their own questions and heading; `title` is [plain, pink]
-export default function AgencyFaq({ items = pricing.faq, title = ['Questions agencies', 'ask us'] }) {
+// Service pages pass their own questions and heading; `title` is [plain, pink].
+// With `chat` (a WhatsApp link) the call button opens that instead of Tally.
+export default function AgencyFaq({ items = pricing.faq, title = ['Questions agencies', 'ask us'], chat }) {
   return (
     <section className="ah-section ah-faq">
       <div className="container ah-faq__inner">
@@ -24,7 +26,9 @@ export default function AgencyFaq({ items = pricing.faq, title = ['Questions age
 
         <div id="contact" className="ah-faq__cta" data-reveal="up">
           <p>Still have a question? Ask us on a call.</p>
-          <Button variant="brand" size="md" tallyConfig={tally}>Book a call</Button>
+          {chat
+            ? <WhatsAppButton href={chat}>Book a call</WhatsAppButton>
+            : <Button variant="brand" size="md" tallyConfig={tally}>Book a call</Button>}
         </div>
       </div>
     </section>

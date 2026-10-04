@@ -201,6 +201,7 @@ export function pricingJsonLd() {
 const COUNTRIES = {
   gb: { '@type': 'Country', name: 'United Kingdom' },
   us: { '@type': 'Country', name: 'United States' },
+  pk: { '@type': 'Country', name: 'Pakistan' },
 };
 
 // One service or market landing page. `offers` are { name, price: { usd, gbp } }.

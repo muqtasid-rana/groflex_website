@@ -964,6 +964,60 @@ a.ah-logos__item {
   list-style: none;
 }
 
+/* The partner pages' floating WhatsApp button. Below the navbar's mobile
+   menu (z-index 1000+) so the open menu covers it. */
+.ah-fab {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  background: var(--ah-blue);
+  color: #fff;
+  font-size: 1.75rem;
+  transition: background 0.2s ease;
+}
+
+.ah-fab:hover {
+  background: var(--ah-blue-dark);
+}
+
+.ah-fab:focus-visible {
+  outline: 2px solid var(--ah-pink);
+  outline-offset: 3px;
+}
+
+/* The partner pages' two options, side by side */
+.ah-plans--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* An option card: the button sits at the bottom so both cards line up */
+.ah-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ah-option .ah-checks {
+  margin-bottom: var(--space-lg);
+}
+
+.ah-option__note {
+  margin-top: auto;
+  margin-bottom: var(--space-md);
+  font-size: var(--fs-body-sm);
+  color: var(--ah-muted);
+}
+
+.ah-option__note strong {
+  color: var(--ah-pink);
+}
+
 .ah-plans > li {
   position: relative;
   padding: var(--space-lg);

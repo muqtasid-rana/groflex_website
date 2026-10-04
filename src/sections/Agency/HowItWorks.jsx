@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Button from '@/components/Button/Button';
+import WhatsAppButton from '@/components/Button/WhatsAppButton';
 import { pricing, aOrAn, money } from '@/data/siteData';
 
 const tally = { formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 };
@@ -80,11 +81,21 @@ const connector = (x1, y1, x2, y2) => {
   return `M${x1} ${y1} C${x1} ${y1 + mid} ${x2} ${y2 - mid} ${x2} ${y2}`;
 };
 
-// `currency` is 'gbp' on the UK page, so the pilot is priced in pounds there
-export default function HowItWorks({ currency = 'usd' }) {
+// A step's `cta` from page data: a WhatsApp chat, a link when it has `href`,
+// else the Tally form
+const ctaButton = ({ label, href, whatsapp }) => {
+  if (whatsapp) return <WhatsAppButton href={href}>{label}</WhatsAppButton>;
+  if (href) return <Button variant="brand" size="md" href={href}>{label}</Button>;
+  return <Button variant="brand" size="md" tallyConfig={tally}>{label}</Button>;
+};
+
+// `currency` is 'gbp' on the UK page, so the pilot is priced in pounds there.
+// Pages that don't sell the pilot pass their own `steps` (same four drawings)
+// and `title` ([plain, pink]).
+export default function HowItWorks({ currency = 'usd', steps: customSteps, title = ['How our white-label service', 'works'] }) {
   const { pilot } = pricing;
   const zero = currency === 'gbp' ? '£0' : '$0';
-  const steps = [
+  const steps = customSteps ? customSteps.map((s) => ({ ...s, cta: s.cta && ctaButton(s.cta) })) : [
     {
       drawing: 'phone',
       title: 'Book a call',
@@ -256,7 +267,7 @@ export default function HowItWorks({ currency = 'usd' }) {
         {/* Fade only: a slide would shift the heading the line is measured from */}
         <header className="ah-head" ref={headRef} data-reveal="fade">
           <p className="ah-eyebrow">The process</p>
-          <h2 className="ah-head__title">How our white-label service <em>works</em></h2>
+          <h2 className="ah-head__title">{title[0]} <em>{title[1]}</em></h2>
         </header>
 
         <ol className="ah-steps">

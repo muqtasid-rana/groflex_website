@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { navLinks, navCustomers, services } from '@/data/siteData';
 import Button from '@/components/Button/Button';
+import WhatsAppButton from '@/components/Button/WhatsAppButton';
+import { partnerChats } from '@/data/partnerChats';
 import './Navbar.css';
 import logo from '@/assets/brand/logo.webp';
 import logoLight from '@/assets/brand/logo-light.webp';
@@ -26,6 +28,8 @@ export default function Navbar() {
     const navRef = useRef(null);
     const pathname = usePathname();
     const router = useRouter();
+    // On a partner page "Book Call" opens that page's WhatsApp chat
+    const chat = partnerChats[pathname?.slice(1)];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -238,9 +242,13 @@ export default function Navbar() {
                 </nav>
 
                 <div className="navbar__actions">
-                    <Button variant="primary" size="sm" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }}>
-                        Book Call
-                    </Button>
+                    {chat ? (
+                        <WhatsAppButton variant="primary" size="sm" href={chat}>Book Call</WhatsAppButton>
+                    ) : (
+                        <Button variant="primary" size="sm" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }}>
+                            Book Call
+                        </Button>
+                    )}
 
                     <button
                         className={`navbar__toggle ${mobileMenuOpen ? 'active' : ''}`}
@@ -293,9 +301,13 @@ export default function Navbar() {
                                 </div>
                             );
                         })}
-                        <Button variant="primary" size="md" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }} onClick={() => setMobileMenuOpen(false)}>
-                            Book Call
-                        </Button>
+                        {chat ? (
+                            <WhatsAppButton variant="primary" size="md" href={chat} onClick={() => setMobileMenuOpen(false)}>Book Call</WhatsAppButton>
+                        ) : (
+                            <Button variant="primary" size="md" tallyConfig={{ formId: 'kd5KV1', layout: 'modal', width: 676, autoClose: 2500 }} onClick={() => setMobileMenuOpen(false)}>
+                                Book Call
+                            </Button>
+                        )}
                     </nav>
                 </div>
             </div>

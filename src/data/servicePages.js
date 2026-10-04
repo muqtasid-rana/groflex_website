@@ -906,6 +906,135 @@ export const marketPages = [
   },
 ];
 
-export const landingPages = [...servicePages, ...marketPages];
+// ---- Partner pages ----
+// Same template as the market pages, but with their own two-option pricing
+// instead of the credit plans, so nothing here comes from `pricing`. Kept out
+// of `marketPages` so the footer and the About page stay UK/US only.
+export const partnerPages = [
+  {
+    slug: 'white-label-agency-pakistan',
+    kind: 'market',
+    partner: true,
+    country: 'pk',
+    name: 'For Pakistani agencies',
+    title: 'White-Label Development Partner for Pakistani Agencies & Freelancers — Groflex',
+    description: 'Say yes to every project. Groflex builds websites, apps and systems for Pakistani agencies and freelancers. Set your own price and deliver under your name, or refer the client and keep 20%.',
+    eyebrow: 'For Pakistani agencies & freelancers',
+    h1: ['Your white-label team,', 'for Pakistani agencies'],
+    lede: 'Your clients want websites, apps and systems. Say yes to every one of them. We build it, and you keep the client, the credit and the profit.',
+    cta: 'Let’s talk',
+    processFirst: true,
+    note: ['No fees to join.', 'Sell it yourself, or refer the client and keep 20%.'],
+    statement: ['Stop saying no to clients.', 'Start saying “yes, we can.”'],
+    sub: 'You bring the client and we build the work. Either you deliver it under your own name, or you hand the client to us and get paid for the introduction.',
+    pointsTitle: ['Built for', 'Pakistani agencies'],
+    points: [
+      {
+        title: 'Earn on every project',
+        text: 'Set your own price with the client and keep the margin, or refer them to us and take 20% of the project price. Either way, you get paid.',
+      },
+      {
+        title: 'Never turn work away',
+        text: 'A logo client wants a website? A website client wants an app? Say yes. Our designers, developers and QA team take it from there.',
+      },
+      {
+        title: 'Same time zone, same language',
+        text: 'We work Pakistani hours. Talk to us on WhatsApp or a call, in Urdu or English, with no waiting overnight for replies.',
+      },
+      {
+        title: 'Your client stays yours',
+        text: 'We sign an NDA before you share a single detail. We never contact your client, and there’s no Groflex branding anywhere in the work.',
+      },
+    ],
+    howTitle: ['How working with us', 'works'],
+    steps: [
+      {
+        drawing: 'phone',
+        title: 'Book a call',
+        text: 'Fifteen minutes on what you sell, who your clients are and which projects you’ve had to turn down.',
+        cta: { label: 'Book a call', chat: true },
+      },
+      {
+        drawing: 'plane',
+        title: 'Bring us a project',
+        text: 'Send the brief from any client, in Pakistan or abroad. We reply with a fixed partner price and a timeline before any work starts.',
+      },
+      {
+        drawing: 'coin',
+        title: 'Choose how you earn',
+        text: 'Sell it at your own price and deliver it as your work, or hand the client to us and keep 20% of the project price.',
+        cta: { label: 'See both options', href: '#pricing' },
+      },
+      {
+        drawing: 'growth',
+        title: 'Grow without hiring',
+        text: 'Take on bigger projects and more clients without hiring a single developer, with the same team and the same standards on every job.',
+      },
+    ],
+    options: [
+      {
+        badge: 'Keep your margin',
+        name: 'Option 1 · You run the client',
+        price: 'Your price',
+        per: 'you set it',
+        tagline: 'Your client. Your price. Your profit.',
+        checks: [
+          'You quote your client whatever you like',
+          'We agree a fixed partner price with you before work starts',
+          'We build it under your name, and you deliver it',
+          'NDA signed, no Groflex branding, no contact with your client',
+        ],
+        note: 'Partner price agreed per project',
+        cta: 'Discuss a project',
+      },
+      {
+        badge: 'Easiest money you’ll make',
+        name: 'Option 2 · Refer the client to us',
+        price: '20%',
+        per: 'of the project price',
+        tagline: 'Send the client. Keep 20%.',
+        checks: [
+          'Introduce us and we handle the calls, the proposal, the build and the support',
+          'You get 20% of the project price, paid as the client pays us',
+          'No managing, no chasing payments, no risk',
+          'Refer clients from Pakistan or anywhere in the world',
+        ],
+        note: ['A $5,000 app project =', '$1,000 for you'],
+        cta: 'Refer a client',
+        popular: true,
+      },
+    ],
+    optionsFoot: 'Can’t decide? Do both. Manage the clients you want to keep and pass us the ones you don’t.',
+    faqTitle: ['Questions Pakistani agencies', 'ask us'],
+    faq: [
+      {
+        q: 'I’m a solo freelancer, not an agency. Can I still work with you?',
+        a: 'Yes. This is built for one-person studios too: designers, marketers and freelancers on Fiverr and Upwork. If you have clients, you qualify.',
+      },
+      {
+        q: 'How is the partner price decided?',
+        a: 'Send us the brief and we reply with a fixed price and a timeline. You add your margin on top and quote your client. Nothing starts until you agree.',
+      },
+      {
+        q: 'When and how do I get my 20%?',
+        a: 'Every time the referred client pays us, we send you 20% of that payment within 7 days, by bank transfer in PKR or to Payoneer or Wise in USD.',
+      },
+      {
+        q: 'Will you take my client from me?',
+        a: 'No. On option 1 we sign an NDA, never contact your client and put no Groflex branding on the work. Your client only ever deals with you.',
+      },
+      {
+        q: 'Can I refer clients from outside Pakistan?',
+        a: 'Yes. UK, US, Gulf or anywhere else. The 20% is the same.',
+      },
+      {
+        q: 'What kind of projects can you build?',
+        a: 'Websites, web apps, mobile apps, dashboards, UI/UX, SEO, automation and more. If your client asks for it, send it over and we’ll tell you honestly whether it’s a fit.',
+      },
+    ],
+  },
+];
+
+export const landingPages = [...servicePages, ...marketPages, ...partnerPages];
 
 export const findLandingPage = (slug) => landingPages.find((p) => p.slug === slug);
