@@ -1327,6 +1327,11 @@ a.ah-logos__item {
     line-height: 1.7;
   }
 
+  /* The statement already ends in padding; don't stack a full section's on top */
+  .ah-for + .ah-section {
+    padding-top: 1.5rem;
+  }
+
   /* How it works */
   .ah-how {
     padding-top: 5.5rem;
@@ -1334,6 +1339,12 @@ a.ah-logos__item {
 
   .ah-how__inner {
     padding-bottom: 5.5rem;
+  }
+
+  /* ".ah .container" wipes the inner padding above, which the line's tail
+     normally fills. Without a tail, the last step needs room of its own. */
+  .ah-how--end {
+    padding-bottom: 4rem;
   }
 
   .ah-steps {

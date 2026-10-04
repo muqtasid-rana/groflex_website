@@ -21,9 +21,14 @@ const nextConfig = {
     ],
   },
 
-  // Incorpo's case study moved from the generic template to its own page
   async redirects() {
-    return [{ source: '/case-study/1', destination: '/case-study/incorpo', permanent: true }];
+    return [
+      // Incorpo's case study moved from the generic template to its own page
+      { source: '/case-study/1', destination: '/case-study/incorpo', permanent: true },
+      // Short link to share with Pakistani agencies. Temporary, so browsers
+      // don't cache it if /pakistan ever becomes a page of its own.
+      { source: '/pakistan', destination: '/white-label-agency-pakistan', permanent: false },
+    ];
   },
 
   // Cache headers for static assets

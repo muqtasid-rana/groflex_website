@@ -28,7 +28,7 @@ export default function MarketPage({ page }) {
   const chat = partnerChats[page.slug];
   // A step's `chat` button opens the WhatsApp chat
   const steps = page.steps?.map((s) => (s.cta?.chat ? { ...s, cta: { label: s.cta.label, href: chat, whatsapp: true } } : s));
-  const process = <HowItWorks currency={currency} steps={steps} title={page.howTitle} />;
+  const process = <HowItWorks currency={currency} steps={steps} title={page.howTitle} tail={!page.processFirst} />;
 
   return (
     <div className="ah">

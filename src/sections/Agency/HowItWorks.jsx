@@ -91,8 +91,9 @@ const ctaButton = ({ label, href, whatsapp }) => {
 
 // `currency` is 'gbp' on the UK page, so the pilot is priced in pounds there.
 // Pages that don't sell the pilot pass their own `steps` (same four drawings)
-// and `title` ([plain, pink]).
-export default function HowItWorks({ currency = 'usd', steps: customSteps, title = ['How our white-label service', 'works'] }) {
+// and `title` ([plain, pink]). `tail` runs the line on to the section's bottom
+// edge; turn it off when a section with another background follows.
+export default function HowItWorks({ currency = 'usd', steps: customSteps, title = ['How our white-label service', 'works'], tail = true }) {
   const { pilot } = pricing;
   const zero = currency === 'gbp' ? '£0' : '$0';
   const steps = customSteps ? customSteps.map((s) => ({ ...s, cta: s.cta && ctaButton(s.cta) })) : [
@@ -153,7 +154,7 @@ export default function HowItWorks({ currency = 'usd', steps: customSteps, title
     // Tail off towards the case studies. On phones the drawings sit in a left
     // column, so the tail stays in that column instead of crossing the text.
     const narrow = window.matchMedia('(max-width: 760px)').matches;
-    pieces.push(connector(x, y, narrow ? x : rb.width / 2, rb.height));
+    if (tail) pieces.push(connector(x, y, narrow ? x : rb.width / 2, rb.height));
     setLayout({ width: rb.width, height: rb.height, pieces });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -249,7 +250,7 @@ export default function HowItWorks({ currency = 'usd', steps: customSteps, title
   }, [layout]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section id="process" className="ah-how">
+    <section id="process" className={`ah-how ${tail ? '' : 'ah-how--end'}`}>
       <div className="container ah-how__inner" ref={rootRef}>
         <svg
           className="ah-how__line"
