@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
-import heroImg from '@/assets/case-studies/ashhkaro/hero.webp';
+import logoImg from '@/assets/case-studies/ashhkaro/icon.webp';
 import launchImg from '@/assets/case-studies/ashhkaro/launch.webp';
 import screenHome from '@/assets/case-studies/ashhkaro/screens/home.webp';
 import screenBrowse from '@/assets/case-studies/ashhkaro/screens/browse.webp';
@@ -12,6 +12,8 @@ import screenSell from '@/assets/case-studies/ashhkaro/screens/sell.webp';
 import screenPremium from '@/assets/case-studies/ashhkaro/screens/premium.webp';
 import screenAi from '@/assets/case-studies/ashhkaro/screens/ai.webp';
 import './ashhkaro.css';
+// The white-label pages' navy look, over every case study
+import '../case-study.css';
 
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.ashhkaro.ashhkaro';
 
@@ -253,40 +255,42 @@ function Phone({ label, src }) {
 /* ---------- Page ---------- */
 export default function AshhkaroCaseStudy() {
     return (
-        <article className="ak">
+        <article className="ak cs">
             {/* 01 — HERO */}
-            <header className="ak-hero">
-                <div className="ak-hero__media">
-                    <Image src={heroImg} alt="The Ashhkaro app on an iPhone, lit in red" fill priority placeholder="blur" sizes="100vw" className="ak-hero__img" />
-                </div>
-                <div className="container ak-hero__inner">
-                    <Link href="/" className="ak-back">
-                        <Icon name="arrowLeft" size={16} /> Back to home
-                    </Link>
-                    <p className="ak-hero__kicker">Case study · Mobile product</p>
-                    <h1 className="ak-hero__title">Ashhkaro</h1>
-                    <p className="ak-hero__lede">Building the foundation of an all-in-one platform for Pakistan.</p>
-                    <p className="ak-hero__desc">
-                        One app for finding businesses, properties, services and, over time, much more. Groflex took
-                        Ashhkaro from an ambitious idea to a working product: product thinking, UX, engineering and a
-                        live release on Google Play.
-                    </p>
-                    <div className="ak-hero__actions">
-                        <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
-                            <Icon name="play" size={18} /> View on Google Play
-                        </a>
-                        <a href="#vision" className="ak-btn ak-btn--ghost">
-                            Read the story <Icon name="arrowDown" size={16} />
-                        </a>
+            <header className="ak-hero cs-hero">
+                <div className="container cs-hero__grid">
+                    <div className="ak-hero__inner">
+                        <Link href="/" className="ak-back">
+                            <Icon name="arrowLeft" size={16} /> Back to home
+                        </Link>
+                        <p className="ak-hero__kicker">Case study · Mobile product</p>
+                        <h1 className="ak-hero__title">Ashhkaro</h1>
+                        <p className="ak-hero__lede">Building the foundation of an all-in-one platform for Pakistan.</p>
+                        <p className="ak-hero__desc">
+                            One app for finding businesses, properties, services and, over time, much more. Groflex took
+                            Ashhkaro from an ambitious idea to a working product: product thinking, UX, engineering and a
+                            live release on Google Play.
+                        </p>
+                        <div className="ak-hero__actions">
+                            <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
+                                <Icon name="play" size={18} /> View on Google Play
+                            </a>
+                            <a href="#vision" className="ak-btn ak-btn--ghost">
+                                Read the story <Icon name="arrowDown" size={16} />
+                            </a>
+                        </div>
+                        <dl className="ak-hero__meta">
+                            {heroMeta.map((m) => (
+                                <div key={m.label}>
+                                    <dt>{m.label}</dt>
+                                    <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
-                    <dl className="ak-hero__meta">
-                        {heroMeta.map((m) => (
-                            <div key={m.label}>
-                                <dt>{m.label}</dt>
-                                <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
-                            </div>
-                        ))}
-                    </dl>
+                    <div className="cs-hero__media">
+                        <Image src={logoImg} alt="The Ashhkaro logo" fill priority placeholder="blur" sizes="(max-width: 900px) 100vw, 55vw" className="cs-hero__img" />
+                    </div>
                 </div>
             </header>
 
@@ -479,20 +483,22 @@ export default function AshhkaroCaseStudy() {
 
             {/* 08 — LAUNCH */}
             <section className="ak-launch">
-                <div className="ak-launch__media">
-                    <Image src={launchImg} alt="Ashhkaro home screen on a phone standing on a lit plinth" fill placeholder="blur" sizes="100vw" className="ak-launch__img" />
-                </div>
                 <div className="container ak-launch__inner">
-                    <div className="ak-launch__text">
-                        <Eyebrow num="08">Launch</Eyebrow>
-                        <h2 className="ak-h2">From concept to Google Play.</h2>
-                        <p className="ak-body">
-                            The first two phases are live. People can find businesses and properties today, and the
-                            foundation is in place for everything that comes next.
-                        </p>
-                        <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
-                            <Icon name="play" size={18} /> View on Google Play
-                        </a>
+                    <div className="cs-split">
+                        <div className="ak-launch__text">
+                            <Eyebrow num="08">Launch</Eyebrow>
+                            <h2 className="ak-h2">From concept to Google Play.</h2>
+                            <p className="ak-body">
+                                The first two phases are live. People can find businesses and properties today, and the
+                                foundation is in place for everything that comes next.
+                            </p>
+                            <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
+                                <Icon name="play" size={18} /> View on Google Play
+                            </a>
+                        </div>
+                        <div className="cs-frame">
+                            <Image src={launchImg} alt="Ashhkaro home screen on a phone standing on a lit plinth" fill placeholder="blur" sizes="(max-width: 900px) 100vw, 50vw" className="cs-frame__img" />
+                        </div>
                     </div>
                     <dl className="ak-stats">
                         {launchStats.map((s) => (

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import Browser from '@/components/CaseStudy/Browser';
-import heroImg from '@/assets/case-studies/slashcure/hero.webp';
+import coverImg from '@/assets/case-studies/slashcure/landing-mockup.webp';
 import findDoctorsImg from '@/assets/case-studies/slashcure/find-doctors.webp';
 import doctorProfileImg from '@/assets/case-studies/slashcure/doctor-profile.webp';
 import findHospitalsImg from '@/assets/case-studies/slashcure/find-hospitals.webp';
@@ -10,6 +10,8 @@ import hospitalPageImg from '@/assets/case-studies/slashcure/hospital-page.webp'
 // Built on the Ashhkaro case-study system; slashcure.css re-themes it and adds the web-specific pieces
 import '../ashhkaro/ashhkaro.css';
 import './slashcure.css';
+// The white-label pages' navy look, over every case study
+import '../case-study.css';
 
 const SITE_URL = 'https://slashcure.com';
 
@@ -197,40 +199,42 @@ function NetworkDiagram() {
 /* ---------- Page ---------- */
 export default function SlashcureCaseStudy() {
     return (
-        <article className="ak sc">
+        <article className="ak sc cs">
             {/* 01 — HERO */}
-            <header className="ak-hero sc-hero">
-                <div className="ak-hero__media">
-                    <Image src={heroImg} alt="Slashcure open on a laptop: find verified doctors near you" fill priority placeholder="blur" sizes="100vw" className="ak-hero__img" />
-                </div>
-                <div className="container ak-hero__inner">
-                    <Link href="/" className="ak-back">
-                        <Icon name="arrowLeft" size={16} /> Back to home
-                    </Link>
-                    <p className="ak-hero__kicker">Case study · Healthcare platform</p>
-                    <h1 className="ak-hero__title">Slashcure</h1>
-                    <p className="ak-hero__lede">One platform for Pakistan&apos;s patients, doctors and hospitals.</p>
-                    <p className="ak-hero__desc">
-                        A lifetime health record that patients carry on a QR code, connected to verified doctors
-                        and live hospital pages. Groflex designed, built and shipped the whole platform, and kept it
-                        growing week after week.
-                    </p>
-                    <div className="ak-hero__actions">
-                        <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
-                            Visit slashcure.com <Icon name="external" size={16} />
-                        </a>
-                        <a href="#idea" className="ak-btn ak-btn--ghost">
-                            Read the story <Icon name="arrowDown" size={16} />
-                        </a>
+            <header className="ak-hero cs-hero">
+                <div className="container cs-hero__grid">
+                    <div className="ak-hero__inner">
+                        <Link href="/" className="ak-back">
+                            <Icon name="arrowLeft" size={16} /> Back to home
+                        </Link>
+                        <p className="ak-hero__kicker">Case study · Healthcare platform</p>
+                        <h1 className="ak-hero__title">Slashcure</h1>
+                        <p className="ak-hero__lede">One platform for Pakistan&apos;s patients, doctors and hospitals.</p>
+                        <p className="ak-hero__desc">
+                            A lifetime health record that patients carry on a QR code, connected to verified doctors
+                            and live hospital pages. Groflex designed, built and shipped the whole platform, and kept it
+                            growing week after week.
+                        </p>
+                        <div className="ak-hero__actions">
+                            <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
+                                Visit slashcure.com <Icon name="external" size={16} />
+                            </a>
+                            <a href="#idea" className="ak-btn ak-btn--ghost">
+                                Read the story <Icon name="arrowDown" size={16} />
+                            </a>
+                        </div>
+                        <dl className="ak-hero__meta">
+                            {heroMeta.map((m) => (
+                                <div key={m.label}>
+                                    <dt>{m.label}</dt>
+                                    <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
-                    <dl className="ak-hero__meta">
-                        {heroMeta.map((m) => (
-                            <div key={m.label}>
-                                <dt>{m.label}</dt>
-                                <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
-                            </div>
-                        ))}
-                    </dl>
+                    <div className="cs-hero__media">
+                        <Image src={coverImg} alt="The Slashcure landing page: find, book and stay connected with expert doctors near you" fill priority placeholder="blur" sizes="(max-width: 900px) 100vw, 55vw" className="cs-hero__img" />
+                    </div>
                 </div>
             </header>
 

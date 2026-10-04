@@ -1,0 +1,316 @@
+/* ===========================
+   CASE STUDIES IN THE WHITE-LABEL LOOK
+   Loaded after ashhkaro.css and each study's own sheet. Re-themes the shared
+   case-study system (.ak) in the agency pages' brand: navy ground with one
+   slightly brighter surface, white and pink text, pink lines, blue buttons
+   with white text. No gradients, shadows or glows.
+   =========================== */
+article.ak.cs {
+    --cs-navy: var(--color-brand-navy);   /* #070052 */
+    --cs-raised: #0d0870;
+    --cs-blue: var(--color-brand-blue);   /* #2B5CE6 */
+    --cs-blue-dark: #2350cf;
+    --cs-pink: var(--color-brand-magenta);/* #F020C8 */
+    --cs-text: var(--color-brand-light);  /* #F5F5FF */
+    --cs-muted: rgba(245, 245, 255, 0.72);
+    --cs-faint: rgba(245, 245, 255, 0.5);
+    --cs-outline: rgba(245, 245, 255, 0.22);
+    --cs-hairline: rgba(245, 245, 255, 0.12);
+
+    /* The shared system's tokens: accent → pink, every band → navy or raised,
+       and the "light band" ink turned light, since no band is light any more */
+    --ak-red: var(--cs-pink);
+    --ak-red-deep: var(--cs-blue-dark);
+    --ak-dark: var(--cs-navy);
+    --ak-graphite: var(--cs-navy);
+    --ak-light: var(--cs-raised);
+    --ak-on-dark: var(--cs-text);
+    --ak-on-dark-muted: var(--cs-muted);
+    --ak-on-dark-faint: var(--cs-faint);
+    --ak-line-dark: var(--cs-hairline);
+    --ak-line-dark-strong: var(--cs-outline);
+    --ak-ink: var(--cs-text);
+    --ak-ink-muted: var(--cs-muted);
+    --ak-line-light: var(--cs-hairline);
+    --ak-line-light-strong: var(--cs-outline);
+
+    background: var(--cs-navy);
+    color: var(--cs-text);
+}
+
+/* ---- Site chrome, matching the white-label pages ---- */
+body:has(.ak.cs) {
+    background: var(--color-brand-navy);
+}
+
+body:has(.ak.cs) .navbar--scrolled {
+    background: var(--color-brand-navy);
+    backdrop-filter: none;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(240, 32, 200, 0.25);
+}
+
+body:has(.ak.cs) .navbar--scrolled .navbar__link {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+body:has(.ak.cs) .navbar .navbar__link:hover {
+    color: var(--color-brand-magenta);
+}
+
+body:has(.ak.cs) .navbar--scrolled .navbar__toggle-bar {
+    background: #ffffff;
+}
+
+/* The bar stays navy, so keep the white-text logo */
+body:has(.ak.cs) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--light {
+    display: block;
+}
+
+body:has(.ak.cs) .navbar--scrolled:not(.navbar--menu-open) .navbar__logo--dark {
+    display: none;
+}
+
+body:has(.ak.cs) .navbar .btn--primary {
+    background: var(--color-brand-blue);
+    border-color: var(--color-brand-blue);
+    color: #ffffff;
+    font-weight: var(--fw-bold);
+}
+
+body:has(.ak.cs) .navbar .btn--primary:hover {
+    background: #2350cf;
+    border-color: #2350cf;
+}
+
+body:has(.ak.cs) .footer {
+    background: #03002a;
+}
+
+/* The studies set a darker accent on their light bands and in the closing band */
+.ak.cs .ak-band--light,
+.ak.cs .ak-closing {
+    --ak-red: var(--cs-pink);
+}
+
+.ak.cs .ak-closing,
+.ak.cs .ak-product,
+.ak.cs .ak-launch {
+    background: var(--cs-navy);
+}
+
+/* ---------- Type ---------- */
+.ak.cs .ak-eyebrow,
+.ak.cs .ak-band--light .ak-eyebrow {
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.18em;
+    color: var(--cs-pink);
+}
+
+.ak.cs .ak-eyebrow__num {
+    color: inherit;
+}
+
+.ak.cs .ak-h2 {
+    font-weight: var(--fw-extrabold);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.ak.cs .ak-statement {
+    color: var(--cs-muted);
+}
+
+.ak.cs .ak-statement em {
+    color: var(--cs-pink);
+}
+
+.ak.cs .ak-quote {
+    color: var(--cs-text);
+}
+
+.ak.cs .ak-cta__title span {
+    color: var(--cs-pink);
+}
+
+/* ---------- Buttons: blue with white text ---------- */
+.ak.cs .ak-btn--red {
+    background: var(--cs-blue);
+    color: #fff;
+}
+
+.ak.cs .ak-btn--red:hover {
+    background: var(--cs-blue-dark);
+}
+
+.ak.cs .ak-btn--ghost {
+    border-color: var(--cs-outline);
+    color: var(--cs-text);
+}
+
+.ak.cs .ak-btn--ghost:hover {
+    border-color: var(--cs-text);
+}
+
+/* ---------- No gradients, shadows or glows ---------- */
+.ak.cs .ak-live-dot,
+.ak.cs .is-done .ak-track__marker,
+.ak.cs .is-live .ak-track__marker {
+    box-shadow: none;
+}
+
+.ak.cs .ak-eco__core,
+.ak.cs .ak-converge__app {
+    filter: none;
+}
+
+.ak.cs .ak-eco__core,
+.ak.cs.inc .ak-eco__core,
+.ak.cs.sc .ak-eco__core,
+.ak.cs .ak-converge__app {
+    fill: var(--cs-blue);
+}
+
+.ak.cs .ak-stack__row:not(:last-child) .ak-stack__cells::after {
+    background: var(--cs-outline);
+}
+
+.ak.cs .ak-phone {
+    background: #05003a;
+    border: 1px solid var(--cs-outline);
+    box-shadow: none;
+}
+
+.ak.cs .cs-browser,
+.ak.cs .ak-band--light .cs-browser {
+    border: 1px solid var(--cs-outline);
+    box-shadow: none;
+}
+
+/* The converge diagram's pills were white cards on a light band */
+.ak.cs .ak-converge__pill {
+    fill: var(--cs-navy);
+    stroke: var(--cs-outline);
+}
+
+.ak.cs .ak-converge__pill-text {
+    fill: var(--cs-text);
+}
+
+.ak.cs .ak-converge__path {
+    stroke: var(--cs-pink);
+    stroke-opacity: 0.6;
+}
+
+.ak.cs .ak-converge__joint {
+    fill: var(--cs-pink);
+}
+
+/* Screens framed on the raised band keep a hairline, not a white card edge */
+.ak.cs .inc-step__thumb {
+    border-color: var(--cs-outline);
+}
+
+/* ===========================
+   HERO: text left, picture right
+   =========================== */
+.ak.cs .ak-hero.cs-hero {
+    display: block;
+    min-height: 0;
+    padding-block: clamp(8rem, 12vw, 10rem) clamp(4.5rem, 9vw, 7rem);
+    background: var(--cs-navy);
+}
+
+.cs-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: center;
+}
+
+.ak.cs .ak-hero__kicker {
+    font-weight: var(--fw-bold);
+    color: var(--cs-pink);
+}
+
+.ak.cs .ak-hero__title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+}
+
+.ak.cs .ak-hero__desc {
+    max-width: 32rem;
+}
+
+.ak.cs .ak-hero__actions {
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Two by two, inside the text column */
+.ak.cs .ak-hero__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 30rem;
+    border-top-color: var(--cs-pink);
+}
+
+.ak.cs .ak-hero__meta dt {
+    color: var(--cs-faint);
+}
+
+/* A framed picture: the hero's on the right, and the launch photo. Ashhkaro's
+   square logo tile is centred, so the 3:2 frame trims only empty red. */
+.cs-hero__media,
+.cs-frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 1px solid var(--cs-outline);
+    border-radius: var(--radius-lg);
+    background: var(--cs-raised);
+}
+
+.cs-hero__img,
+.cs-frame__img {
+    object-fit: cover;
+}
+
+/* Incorpo's and Slashcure's covers are their landing pages in a frame of
+   their own; show all of it */
+.ak.cs.inc .cs-hero__media,
+.ak.cs.sc .cs-hero__media {
+    aspect-ratio: 1440 / 1024;
+}
+
+/* ===========================
+   LAUNCH (Ashhkaro): text left, photo right, stats below
+   =========================== */
+.ak.cs .ak-launch {
+    padding-block: var(--ak-pad);
+}
+
+.cs-split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+}
+
+.ak.cs .ak-launch__text {
+    min-height: 0;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 900px) {
+    .cs-hero__grid,
+    .cs-split {
+        grid-template-columns: 1fr;
+    }
+
+    .ak.cs .ak-hero.cs-hero {
+        padding-block: 7.5rem 4.5rem;
+    }
+}

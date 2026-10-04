@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Button from '@/components/Button/Button';
 import Browser from '@/components/CaseStudy/Browser';
 import LoopVideo from '@/components/CaseStudy/LoopVideo';
-import heroImg from '@/assets/case-studies/incorpo/hero.webp';
+import coverImg from '@/assets/case-studies/incorpo/landing-mockup.webp';
 import jobImg from '@/assets/case-studies/incorpo/job.webp';
 import collectImg from '@/assets/case-studies/incorpo/collect.webp';
 import rankingsImg from '@/assets/case-studies/incorpo/rankings.webp';
@@ -16,6 +16,8 @@ import stepRunTheDayImg from '@/assets/case-studies/incorpo/step-run-the-day.web
 // Built on the Ashhkaro case-study system; incorpo.css re-themes it in Incorpo's blue
 import '../ashhkaro/ashhkaro.css';
 import './incorpo.css';
+// The white-label pages' navy look, over every case study
+import '../case-study.css';
 
 const SITE_URL = 'https://incorpohrms.com';
 const VIDEO_DIR = '/case-studies/incorpo';
@@ -261,40 +263,42 @@ function LoopDiagram() {
 /* ---------- Page ---------- */
 export default function IncorpoCaseStudy() {
     return (
-        <article className="ak inc">
+        <article className="ak inc cs">
             {/* 01 — HERO */}
-            <header className="ak-hero inc-hero">
-                <div className="ak-hero__media">
-                    <Image src={heroImg} alt="The Incorpo landing page: stop paying four systems, hire, manage, train and track your whole team from one place" fill priority placeholder="blur" sizes="100vw" className="ak-hero__img" />
-                </div>
-                <div className="container ak-hero__inner">
-                    <Link href="/" className="ak-back">
-                        <Icon name="arrowLeft" size={16} /> Back to home
-                    </Link>
-                    <p className="ak-hero__kicker">Case study · HR platform</p>
-                    <h1 className="ak-hero__title">Incorpo</h1>
-                    <p className="ak-hero__lede">Stop paying four systems.</p>
-                    <p className="ak-hero__desc">
-                        Hiring, employees, attendance, payroll, performance and training on one employee record.
-                        Groflex designed and engineered the platform, from the AI that reads every CV to the payslip
-                        at the end of the month.
-                    </p>
-                    <div className="ak-hero__actions">
-                        <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
-                            Visit incorpohrms.com <Icon name="external" size={16} />
-                        </a>
-                        <a href="#problem" className="ak-btn ak-btn--ghost">
-                            Read the story <Icon name="arrowDown" size={16} />
-                        </a>
+            <header className="ak-hero cs-hero">
+                <div className="container cs-hero__grid">
+                    <div className="ak-hero__inner">
+                        <Link href="/" className="ak-back">
+                            <Icon name="arrowLeft" size={16} /> Back to home
+                        </Link>
+                        <p className="ak-hero__kicker">Case study · HR platform</p>
+                        <h1 className="ak-hero__title">Incorpo</h1>
+                        <p className="ak-hero__lede">Stop paying four systems.</p>
+                        <p className="ak-hero__desc">
+                            Hiring, employees, attendance, payroll, performance and training on one employee record.
+                            Groflex designed and engineered the platform, from the AI that reads every CV to the payslip
+                            at the end of the month.
+                        </p>
+                        <div className="ak-hero__actions">
+                            <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="ak-btn ak-btn--red">
+                                Visit incorpohrms.com <Icon name="external" size={16} />
+                            </a>
+                            <a href="#problem" className="ak-btn ak-btn--ghost">
+                                Read the story <Icon name="arrowDown" size={16} />
+                            </a>
+                        </div>
+                        <dl className="ak-hero__meta">
+                            {heroMeta.map((m) => (
+                                <div key={m.label}>
+                                    <dt>{m.label}</dt>
+                                    <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
-                    <dl className="ak-hero__meta">
-                        {heroMeta.map((m) => (
-                            <div key={m.label}>
-                                <dt>{m.label}</dt>
-                                <dd>{m.live && <span className="ak-live-dot" />}{m.value}</dd>
-                            </div>
-                        ))}
-                    </dl>
+                    <div className="cs-hero__media">
+                        <Image src={coverImg} alt="The Incorpo landing page: stop paying four systems, hire, manage, train and track your whole team from one place" fill priority placeholder="blur" sizes="(max-width: 900px) 100vw, 55vw" className="cs-hero__img" />
+                    </div>
                 </div>
             </header>
 
