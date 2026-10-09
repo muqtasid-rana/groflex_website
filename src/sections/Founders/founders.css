@@ -1,0 +1,354 @@
+/* =========================================
+   FOUNDERS (/founders)
+   Runs on the agency home's tokens and rules (agency.css): navy, white + pink
+   text, pink lines, blue buttons. No gradients, shadows or glows. These are
+   only the layouts the home page doesn't have.
+   ========================================= */
+
+/* ---- Hero: pitch on the left, work scrolling on the right ---- */
+.fh-hero {
+  padding-top: clamp(6.5rem, 9vw, 7.5rem);
+  text-align: left;
+}
+
+/* The logo strip under both halves stays centred, as on the home page */
+.fh-hero .ah-logos {
+  text-align: center;
+}
+
+.fh-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* The home's headline, sized for half the width */
+.fh-hero .ah-hero__title {
+  margin: 0;
+  font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.fh-hero .ah-hero__lede {
+  max-width: 46ch;
+  margin-left: 0;
+}
+
+/* ---- Hero gallery ---- */
+.fh-gallery {
+  --fh-gap: 20px;
+  position: relative;
+}
+
+/* Two columns, faded out at the top and bottom edges */
+.fh-gallery__viewport {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--fh-gap);
+  height: clamp(520px, 74vh, 700px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+
+.fh-col {
+  min-width: 0;
+}
+
+.fh-track {
+  display: flex;
+  flex-direction: column;
+  animation: fh-up 70s linear infinite;
+}
+
+.fh-col--down .fh-track {
+  animation-name: fh-down;
+  animation-duration: 80s;
+}
+
+/* Hover, keyboard focus or the pause button stop both columns */
+.fh-gallery:hover .fh-track,
+.fh-gallery:focus-within .fh-track,
+.fh-gallery[data-paused] .fh-track {
+  animation-play-state: paused;
+}
+
+/* Two identical lists: moving by half the track lands on an identical frame */
+@keyframes fh-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes fh-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fh-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fh-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.fh-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fh-gap);
+  /* Same spacing across the join between the copies */
+  margin: 0;
+  padding: 0 0 var(--fh-gap);
+  list-style: none;
+}
+
+.fh-card {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border: 1.5px solid var(--ah-outline);
+  border-radius: var(--radius-lg);
+  background: var(--ah-raised);
+  transition: border-color var(--transition-fast);
+}
+
+.fh-card img {
+  object-fit: cover;
+  object-position: var(--pos);
+}
+
+.fh-card:hover,
+.fh-card:focus-visible {
+  border-color: var(--ah-pink);
+}
+
+.fh-card:focus-visible {
+  outline-offset: -4px;
+}
+
+/* The project's name, shown on hover or focus on a solid navy chip */
+.fh-card__label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--ah-navy);
+  color: var(--ah-text);
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.fh-card:hover .fh-card__label,
+.fh-card:focus-visible .fh-card__label {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sits outside the faded viewport so it's always fully visible */
+.fh-pause {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1.5px solid var(--ah-outline);
+  border-radius: 50%;
+  background: var(--ah-navy);
+  color: var(--ah-text);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.fh-pause:hover {
+  border-color: var(--ah-pink);
+  color: var(--ah-pink);
+}
+
+/* ---- Tablet and phone: text first, then the work in two rows ---- */
+@media (max-width: 900px) {
+  .fh-hero {
+    text-align: center;
+  }
+
+  .fh-hero__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 7vw, 3.5rem);
+  }
+
+  .fh-hero .ah-hero__title {
+    max-width: 16ch;
+    margin: 0 auto;
+  }
+
+  .fh-hero .ah-hero__lede {
+    margin-left: auto;
+  }
+
+  /* Edge to edge, past the container's padding */
+  .fh-gallery {
+    --fh-gap: 12px;
+    margin-inline: calc(50% - 50vw);
+    padding-bottom: 52px;
+  }
+
+  .fh-gallery__viewport {
+    grid-template-columns: none;
+    height: auto;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .fh-col {
+    overflow: hidden;
+  }
+
+  .fh-track {
+    flex-direction: row;
+    width: max-content;
+    animation-name: fh-left;
+    animation-duration: 55s;
+  }
+
+  .fh-col--down .fh-track {
+    animation-name: fh-right;
+    animation-duration: 65s;
+  }
+
+  .fh-list {
+    flex-direction: row;
+    padding: 0 var(--fh-gap) 0 0;
+  }
+
+  /* Height is fixed; each card's width follows its shape */
+  .fh-card {
+    flex: none;
+    height: clamp(150px, 34vw, 210px);
+  }
+
+  .fh-pause {
+    right: 16px;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .fh-hero {
+    padding-top: 7.5rem;
+  }
+}
+
+/* Without motion: still columns on desktop, swipeable rows on phones */
+@media (prefers-reduced-motion: reduce) {
+  .fh-track {
+    animation: none;
+  }
+
+  .fh-pause,
+  .fh-list[aria-hidden] {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 900px) {
+  .fh-col {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .fh-col::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fh-gallery {
+    padding-bottom: 0;
+  }
+
+  .fh-list {
+    padding-left: 16px;
+  }
+}
+
+/* The gallery rises in with the rest of the hero */
+@media (prefers-reduced-motion: no-preference) {
+  .fh-gallery {
+    animation: ah-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+  }
+}
+
+/* ---- Comparison: the hiring table with two columns ---- */
+.fd-compare .ah-hire__table thead th.is-us {
+  color: var(--ah-pink);
+}
+
+.fd-compare .ah-hire__table tbody td {
+  font-size: 1.15rem;
+}
+
+.fd-compare .ah-hire__table td.is-them {
+  color: var(--ah-muted);
+  font-weight: var(--fw-semibold);
+}
+
+.fd-compare .ah-hire__table td.is-us {
+  color: var(--ah-text);
+}
+
+/* ---- Testimonials: three quotes under pink rules ---- */
+.fd-quotes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fd-quote {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding-top: var(--space-lg);
+  border-top: 1.5px solid var(--ah-pink);
+}
+
+.fd-quote blockquote {
+  flex: 1;
+  margin: 0;
+}
+
+.fd-quote blockquote p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+  color: var(--ah-text);
+}
+
+.fd-quote figcaption {
+  margin-top: var(--space-lg);
+  font-size: var(--fs-body-sm);
+}
+
+@media (max-width: 900px) {
+  .fd-quotes__grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin: 0 auto;
+    gap: 2.5rem;
+  }
+}
