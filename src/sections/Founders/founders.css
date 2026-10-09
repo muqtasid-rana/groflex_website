@@ -68,10 +68,9 @@
   animation-duration: 80s;
 }
 
-/* Hover, keyboard focus or the pause button stop both columns */
+/* Hover or keyboard focus stops both columns */
 .fh-gallery:hover .fh-track,
-.fh-gallery:focus-within .fh-track,
-.fh-gallery[data-paused] .fh-track {
+.fh-gallery:focus-within .fh-track {
   animation-play-state: paused;
 }
 
@@ -154,30 +153,6 @@
   transform: none;
 }
 
-/* Sits outside the faded viewport so it's always fully visible */
-.fh-pause {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1.5px solid var(--ah-outline);
-  border-radius: 50%;
-  background: var(--ah-navy);
-  color: var(--ah-text);
-  cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
-}
-
-.fh-pause:hover {
-  border-color: var(--ah-pink);
-  color: var(--ah-pink);
-}
-
 /* ---- Tablet and phone: text first, then the work in two rows ---- */
 @media (max-width: 900px) {
   .fh-hero {
@@ -202,7 +177,6 @@
   .fh-gallery {
     --fh-gap: 12px;
     margin-inline: calc(50% - 50vw);
-    padding-bottom: 52px;
   }
 
   .fh-gallery__viewport {
@@ -238,11 +212,6 @@
     flex: none;
     height: clamp(150px, 34vw, 210px);
   }
-
-  .fh-pause {
-    right: 16px;
-    bottom: 0;
-  }
 }
 
 @media (max-width: 760px) {
@@ -257,7 +226,6 @@
     animation: none;
   }
 
-  .fh-pause,
   .fh-list[aria-hidden] {
     display: none;
   }
@@ -273,10 +241,6 @@
     display: none;
   }
 
-  .fh-gallery {
-    padding-bottom: 0;
-  }
-
   .fh-list {
     padding-left: 16px;
   }
@@ -287,6 +251,17 @@
   .fh-gallery {
     animation: ah-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
   }
+}
+
+/* ---- Spacing between sections ----
+   Two navy sections in a row would stack both paddings into one tall empty
+   band. The lower one keeps only a little, so the gap is about one section's
+   padding. Where the background changes (the raised services band) both stay. */
+.fd-page .ah-how,
+.fd-page .fd-quotes,
+.fd-page .ah-blog,
+.fd-page .ah-faq {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* ---- Comparison: the hiring table with two columns ---- */

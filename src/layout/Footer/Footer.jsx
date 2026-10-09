@@ -6,7 +6,60 @@ import { servicePages, marketPages } from '@/data/servicePages';
 import SocialIcon from '@/components/SocialIcon/SocialIcon';
 import './Footer.css';
 
-export default function Footer() {
+// What the brand blurb and link columns say. The agency pages get the white-label
+// pitch; /founders gets its own, pointing at sections on that page.
+const variants = {
+    agency: {
+        desc: 'A white-label design, development and marketing team for UK and US agencies. Your brand, our team.',
+        columns: [
+            { title: 'Services', links: servicePages.map((p) => ({ label: p.name, href: `/${p.slug}` })) },
+            {
+                title: 'Company',
+                links: [
+                    { label: 'About Us', href: '/about' },
+                    { label: 'Our Work', href: '/work' },
+                    { label: 'Pricing', href: '/pricing' },
+                    { label: 'Blog', href: '/blog' },
+                    ...marketPages.map((p) => ({ label: p.name, href: `/${p.slug}` })),
+                    { label: 'Contact', href: '/#contact' },
+                ],
+            },
+        ],
+    },
+    founders: {
+        desc: 'Design, web and app development for founders. From idea to a live product, at a fixed price and on a fixed timeline.',
+        columns: [
+            {
+                title: 'Case Studies',
+                links: [
+                    { label: 'Incorpo', href: '/case-study/incorpo' },
+                    { label: 'Ashhkaro', href: '/case-study/ashhkaro' },
+                    { label: 'Slashcure', href: '/case-study/slashcure' },
+                    { label: 'Inayat Motors', href: '/case-study/3' },
+                    { label: 'All work', href: '/work' },
+                ],
+            },
+            {
+                title: 'Explore',
+                links: [
+                    { label: 'How we work', href: '#process' },
+                    { label: 'What we build', href: '#services' },
+                    { label: 'Blog', href: '/blog' },
+                    { label: 'Contact', href: '#contact' },
+                ],
+            },
+        ],
+    },
+};
+
+// Pages use next/link; hashes and the home page's #contact are plain anchors
+const FooterLink = ({ href, label }) => (
+    href.includes('#') ? <a href={href}>{label}</a> : <Link href={href}>{label}</Link>
+);
+
+export default function Footer({ variant = 'agency' }) {
+    const { desc, columns } = variants[variant];
+
     return (
         <footer className="footer">
             <div className="container">
@@ -15,9 +68,7 @@ export default function Footer() {
                         <Link href="/" className="footer__logo">
                             <Image src={logoLight} alt="Groflex" className="footer__logo-img" />
                         </Link>
-                        <p className="footer__desc">
-                            A white-label design, development and marketing team for UK and US agencies. Your brand, our team.
-                        </p>
+                        <p className="footer__desc">{desc}</p>
                         <div className="footer__socials">
                             {socialLinks.map((link) => (
                                 <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label={link.label}>
@@ -27,28 +78,14 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="footer__column">
-                        <h4 className="footer__heading">Services</h4>
-                        <ul className="footer__links">
-                            {servicePages.map((p) => (
-                                <li key={p.slug}><Link href={`/${p.slug}`}>{p.name}</Link></li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div className="footer__column">
-                        <h4 className="footer__heading">Company</h4>
-                        <ul className="footer__links">
-                            <li><Link href="/about">About Us</Link></li>
-                            <li><Link href="/work">Our Work</Link></li>
-                            <li><Link href="/pricing">Pricing</Link></li>
-                            <li><Link href="/blog">Blog</Link></li>
-                            {marketPages.map((p) => (
-                                <li key={p.slug}><Link href={`/${p.slug}`}>{p.name}</Link></li>
-                            ))}
-                            <li><a href="/#contact">Contact</a></li>
-                        </ul>
-                    </div>
+                    {columns.map((col) => (
+                        <div key={col.title} className="footer__column">
+                            <h4 className="footer__heading">{col.title}</h4>
+                            <ul className="footer__links">
+                                {col.links.map((l) => <li key={l.label}><FooterLink {...l} /></li>)}
+                            </ul>
+                        </div>
+                    ))}
 
                     <div className="footer__column">
                         <h4 className="footer__heading">Get in Touch</h4>

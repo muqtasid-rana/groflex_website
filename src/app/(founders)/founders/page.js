@@ -32,7 +32,7 @@ export default async function FoundersPage() {
   const blogs = await getAllBlogs().catch(() => []);
 
   return (
-    <div className="ah">
+    <div className="ah fd-page">
       <FoundersHero />
       <AgencyFor statement={statement} sub={statementSub} />
       <HowItWorks steps={steps} title={['How we build', 'your product']} />
@@ -47,7 +47,7 @@ export default async function FoundersPage() {
       <AgencyBlog blogs={blogs} />
       <AgencyFaq items={faq} title={['Questions founders', 'ask us']} />
       <RevealObserver />
-      <WhatsAppFab href={whatsappChat} label="Talk to us directly" />
+      <WhatsAppFab href={whatsappChat} />
     </div>
   );
 }
