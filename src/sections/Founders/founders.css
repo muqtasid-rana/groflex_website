@@ -27,6 +27,7 @@
 .fh-hero .ah-hero__title {
   margin: 0;
   font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+  font-weight: var(--fw-semibold);
   line-height: 1.06;
   text-wrap: balance;
 }
