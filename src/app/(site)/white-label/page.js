@@ -21,11 +21,11 @@ export const metadata = pageMetadata({
   title: 'Groflex — White-Label Design & Development Team for UK & US Agencies',
   description:
     'White-label web design, development, app and marketing team for UK and US agencies. Your brand, NDA, your tools. Start with a pilot: $0 upfront, pay only if you like the work.',
-  path: '/',
+  path: '/white-label',
 });
 
-// The founder-facing landing page now lives at /founders
-export default async function HomePage() {
+// The agency pitch. The home page is the founders page.
+export default async function WhiteLabelPage() {
   const blogs = await getAllBlogs().catch(() => []);
 
   return (

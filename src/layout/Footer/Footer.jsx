@@ -7,7 +7,7 @@ import SocialIcon from '@/components/SocialIcon/SocialIcon';
 import './Footer.css';
 
 // What the brand blurb and link columns say. The agency pages get the white-label
-// pitch; /founders gets its own, pointing at sections on that page.
+// pitch; the founders home page gets its own, pointing at sections on that page.
 const variants = {
     agency: {
         desc: 'A white-label design, development and marketing team for UK and US agencies. Your brand, our team.',
@@ -21,7 +21,7 @@ const variants = {
                     { label: 'Pricing', href: '/pricing' },
                     { label: 'Blog', href: '/blog' },
                     ...marketPages.map((p) => ({ label: p.name, href: `/${p.slug}` })),
-                    { label: 'Contact', href: '/#contact' },
+                    { label: 'Contact', href: '/white-label#contact' },
                 ],
             },
         ],
@@ -52,12 +52,12 @@ const variants = {
     },
 };
 
-// Pages use next/link; hashes and the home page's #contact are plain anchors
+// Pages use next/link; hashes and /white-label#contact are plain anchors
 const FooterLink = ({ href, label }) => (
     href.includes('#') ? <a href={href}>{label}</a> : <Link href={href}>{label}</Link>
 );
 
-export default function Footer({ variant = 'agency' }) {
+export default function Footer({ variant = 'agency', home = '/' }) {
     const { desc, columns } = variants[variant];
 
     return (
@@ -65,7 +65,7 @@ export default function Footer({ variant = 'agency' }) {
             <div className="container">
                 <div className="footer__grid">
                     <div className="footer__brand">
-                        <Link href="/" className="footer__logo">
+                        <Link href={home} className="footer__logo">
                             <Image src={logoLight} alt="Groflex" className="footer__logo-img" />
                         </Link>
                         <p className="footer__desc">{desc}</p>

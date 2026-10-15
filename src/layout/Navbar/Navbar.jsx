@@ -19,7 +19,9 @@ const mobileDropdownItems = {
     customers: navCustomers.map((c) => ({ key: c.id, href: c.href, label: c.name })),
 };
 
-export default function Navbar() {
+// `home` is the page the logo and hash links (#contact) lead to: / for the
+// founders home, /white-label for the agency pages
+export default function Navbar({ home = '/' }) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -80,25 +82,25 @@ export default function Navbar() {
 
     const handleNavClick = useCallback((e, href) => {
         if (href === '#') {
-            if (pathname !== '/') {
+            if (pathname !== home) {
                 e.preventDefault();
-                router.push('/');
+                router.push(home);
             }
             return;
         }
 
         if (href.startsWith('#')) {
             const hash = href;
-            if (pathname !== '/') {
+            if (pathname !== home) {
                 e.preventDefault();
-                router.push('/');
+                router.push(home);
                 setTimeout(() => {
                     const el = document.querySelector(hash);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             }
         }
-    }, [pathname, router]);
+    }, [pathname, router, home]);
 
     const closeMobileMenu = () => {
         setMobileMenuOpen(false);
@@ -187,8 +189,8 @@ export default function Navbar() {
     return (
         <header className={headerClassName}>
             <div className="container navbar__container">
-                <Link href="/" onClick={(e) => {
-                    if (pathname === '/') {
+                <Link href={home} onClick={(e) => {
+                    if (pathname === home) {
                         e.preventDefault();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }

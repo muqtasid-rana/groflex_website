@@ -169,7 +169,7 @@ export const services = {
     },
     {
       id: 'g4',
-      href: '/#process',
+      href: '/white-label#process',
       icon: 'fa-solid fa-list-check',
       title: 'Project Management',
       description: 'A dedicated manager who plans the work, runs the timeline and keeps you updated, so every project ships on time without you chasing it.',

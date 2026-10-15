@@ -54,7 +54,8 @@ export async function GET() {
     '',
     '## Pages',
     '',
-    `- [Home](${SITE_URL}/): what Groflex does for agencies, how it works and FAQs`,
+    `- [Home](${SITE_URL}/): design, web and app development for founders at a fixed price`,
+    `- [White-label for agencies](${SITE_URL}/white-label): what Groflex does for agencies, how it works and FAQs`,
     `- [Pricing](${SITE_URL}/pricing): pilot, fixed-price builds, credit packs, monthly plans and the credit menu`,
     `- [About](${SITE_URL}/about): who Groflex is, the founder and how we work`,
     ...marketPages.map((p) => `- [${p.name}](${SITE_URL}/${p.slug}): ${p.lede}`),
@@ -69,7 +70,7 @@ export async function GET() {
     '## Contact',
     '',
     '- Email: muqtasid@groflex.co',
-    `- Start a pilot or book a call: ${SITE_URL}/#contact`,
+    `- Start a pilot or book a call: ${SITE_URL}/white-label#contact`,
     '',
   ];
 

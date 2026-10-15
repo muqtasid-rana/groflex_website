@@ -4,12 +4,13 @@ import { servicePages, marketPages, partnerPages } from '@/data/servicePages';
 
 export const dynamic = 'force-dynamic';
 
-// Only pages we want ranked. /founders and the numbered case studies are
-// noindexed, and /gameplan is a founder tool, so they're left out.
+// Only pages we want ranked. The numbered case studies are noindexed, and
+// /gameplan is a founder tool, so they're left out.
 // Static pages carry no lastModified: stamping them with today's date on every
 // request taught search engines to ignore the dates, including the blog's real ones.
 const staticPages = [
   { path: '', changeFrequency: 'weekly', priority: 1 },
+  { path: '/white-label', changeFrequency: 'weekly', priority: 1 },
   ...servicePages.map((p) => ({ path: `/${p.slug}`, changeFrequency: 'monthly', priority: 0.9 })),
   ...[...marketPages, ...partnerPages].map((p) => ({ path: `/${p.slug}`, changeFrequency: 'monthly', priority: 0.9 })),
   { path: '/pricing', changeFrequency: 'monthly', priority: 0.9 },

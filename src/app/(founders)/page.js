@@ -18,17 +18,16 @@ import '@/sections/Founders/founders.css';
 // Re-rendered at most every 5 minutes, so new blog posts show up without a redeploy
 export const revalidate = 300;
 
-// The founder-facing page, in the agency home's design. Noindexed so it
-// doesn't compete with the agency home or blur what Groflex is in search.
+// The home page, for founders building an app, SaaS or website. The agency
+// pitch lives at /white-label.
 export const metadata = pageMetadata({
-  title: 'Groflex for Founders — Apps, SaaS and Websites at a Fixed Price',
+  title: 'Groflex — Apps, SaaS and Websites for Founders at a Fixed Price',
   description:
     'Design, web and app development for founders. A fixed quote in 48 hours, a fixed timeline, and you own all the code.',
-  path: '/founders',
-  noindex: true,
+  path: '/',
 });
 
-export default async function FoundersPage() {
+export default async function HomePage() {
   const blogs = await getAllBlogs().catch(() => []);
 
   return (

@@ -14,7 +14,7 @@ export default function RelatedServices({ slugs, eyebrow = 'More services', titl
             <p className="ah-eyebrow">{eyebrow}</p>
             <h2 className="ah-head__title">{title[0]} <em>{title[1]}</em></h2>
           </div>
-          <Link href="/#services" className="ah-link">
+          <Link href="/white-label#services" className="ah-link">
             All services <LineIcon name="arrowRight" size={18} />
           </Link>
         </header>
