@@ -3,7 +3,7 @@ import FeaturedWork from '@/components/FeaturedWork/FeaturedWork';
 import LineIcon from '@/components/LineIcon/LineIcon';
 import { featuredWork } from '@/data/siteData';
 
-export default function AgencyWork() {
+export default function AgencyWork({ projects = featuredWork }) {
   return (
     <section id="work" className="ah-section ah-work">
       <div className="container">
@@ -17,7 +17,7 @@ export default function AgencyWork() {
           </Link>
         </header>
         <div data-reveal="up" style={{ '--d': '120ms' }}>
-          <FeaturedWork projects={featuredWork} />
+          <FeaturedWork projects={projects} />
         </div>
       </div>
     </section>

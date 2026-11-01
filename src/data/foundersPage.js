@@ -3,7 +3,7 @@
 // Same sections and style as the agency home; this is the founder copy.
 // ============================================================
 
-import { services, pricing } from '@/data/siteData';
+import { services, pricing, withoutAshhkaro } from '@/data/siteData';
 import { serviceIcons } from '@/components/LineIcon/LineIcon';
 import { whatsappLink } from '@/data/partnerChats';
 
@@ -20,6 +20,7 @@ import inayat from '@/assets/projects/inayat-motors.webp';
 import pocketWatcher from '@/assets/projects/pocket-watcher.webp';
 import testolz from '@/assets/projects/testolz.webp';
 import hybrid from '@/assets/projects/hybrid-mediaworks.webp';
+import rpm from '@/assets/projects/rpm-dynamics.webp';
 
 // ---- WhatsApp button: the main number from the footer ----
 export const whatsappChat = whatsappLink(
@@ -51,6 +52,15 @@ export const heroGallery = [
     { image: ashhkaroSell, alt: 'Ashhkaro start-selling screen', name: 'Ashhkaro', href: '/case-study/ashhkaro', ...phone },
     { image: hybrid, alt: 'Hybrid MediaWorks website', name: 'Hybrid MediaWorks', href: '/case-study/2', ratio: '1080 / 955' },
   ],
+];
+
+// groflex.co/ without Ashhkaro. RPM Dynamics joins the shorter column, so the
+// list stays taller than the viewport and the loop never shows a gap.
+const [liveLeft, liveRight] = heroGallery.map(withoutAshhkaro);
+
+export const liveHeroGallery = [
+  [...liveLeft, { image: rpm, alt: 'RPM Dynamics website', name: 'RPM Dynamics', href: '/case-study/5', ratio: '16 / 9' }],
+  liveRight,
 ];
 
 // ---- Statement under the hero: [plain, pink, plain] ----

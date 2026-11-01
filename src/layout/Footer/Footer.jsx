@@ -57,8 +57,10 @@ const FooterLink = ({ href, label }) => (
     href.includes('#') ? <a href={href}>{label}</a> : <Link href={href}>{label}</Link>
 );
 
-export default function Footer({ variant = 'agency', home = '/' }) {
-    const { desc, columns } = variants[variant];
+// `hideLink` drops the link with that label from the columns
+export default function Footer({ variant = 'agency', home = '/', hideLink }) {
+    const { desc, columns: allColumns } = variants[variant];
+    const columns = allColumns.map((col) => ({ ...col, links: col.links.filter((l) => l.label !== hideLink) }));
 
     return (
         <footer className="footer">

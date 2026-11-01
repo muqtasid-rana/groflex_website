@@ -26,7 +26,7 @@ function ClientLogo({ client, decorative }) {
 }
 
 // The sliding row of client logos under a hero: on the home page and every service page
-export default function ClientLogos() {
+export default function ClientLogos({ clients = clientLogos }) {
   return (
     <div className="ah-logos">
       <p className="ah-logos__caption">Trusted by teams building real products</p>
@@ -36,7 +36,7 @@ export default function ClientLogos() {
         <div className="ah-logos__track">
           {Array.from({ length: 4 }, (_, copy) => (
             <ul key={copy} className="ah-logos__list" aria-hidden={copy > 0 ? 'true' : undefined}>
-              {clientLogos.map((c) => (
+              {clients.map((c) => (
                 <li key={c.name} style={{ '--scale': c.scale ?? 1 }}>
                   <ClientLogo client={c} decorative={copy > 0} />
                 </li>

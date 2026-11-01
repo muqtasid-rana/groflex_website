@@ -14,14 +14,16 @@ import logoLight from '@/assets/brand/logo-light.webp';
 
 const serviceItems = [...services.design, ...services.development, ...services.growth];
 
-const mobileDropdownItems = {
-    services: serviceItems.map((s) => ({ key: s.id, href: s.href, label: s.title, icon: s.icon })),
-    customers: navCustomers.map((c) => ({ key: c.id, href: c.href, label: c.name })),
-};
+const mobileServiceItems = serviceItems.map((s) => ({ key: s.id, href: s.href, label: s.title, icon: s.icon }));
 
 // `home` is the page the logo and hash links (#contact) lead to: / for the
-// founders home, /white-label for the agency pages
-export default function Navbar({ home = '/' }) {
+// founders home, /white-label for the agency pages. `customers` fills the
+// Customers dropdown.
+export default function Navbar({ home = '/', customers = navCustomers }) {
+    const mobileDropdownItems = {
+        services: mobileServiceItems,
+        customers: customers.map((c) => ({ key: c.id, href: c.href, label: c.name })),
+    };
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -149,7 +151,7 @@ export default function Navbar({ home = '/' }) {
 
     const renderCustomersPanel = () => (
         <ul className="navbar__customers-grid">
-            {navCustomers.map((c) => (
+            {customers.map((c) => (
                 <li key={c.id}>
                     {renderLink(c.href, 'navbar__customer', (
                         <>

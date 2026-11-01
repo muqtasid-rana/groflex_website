@@ -428,12 +428,18 @@ export const work = [
   })),
 ];
 
+// Drops Ashhkaro from a list of named items. groflex.co/ doesn't show it; /home still does.
+export const withoutAshhkaro = (items) => items.filter((item) => item.name !== 'Ashhkaro');
+
 // The three featured case studies, with their home-page cover pictures swapped in
 export const featuredWork = work.slice(0, 3).map((project) => (
   project.homeImage
     ? { ...project, image: project.homeImage, imagePosition: project.homeImagePosition }
     : project
 ));
+
+// The same three tiles for groflex.co/, with Inayat Motors in Ashhkaro's place
+export const liveFeaturedWork = [...withoutAshhkaro(featuredWork), work.find((project) => project.id === '3')];
 
 export const stats = [
   { id: 1, number: 20, suffix: '+', label: 'Projects Delivered' },
