@@ -34,7 +34,7 @@ export default function Hero() {
                     </p> */}
 
                     <div className="hero__ctas animate-in animate-in-delay-3">
-                        <Link href="/case-study/ashhkaro" className="btn btn--primary btn--lg hero__cta-btn">
+                        <Link href="/case-study/ashhkaro012" className="btn btn--primary btn--lg hero__cta-btn">
                             View Case Study
                         </Link>
                         <p className="hero__cta-subline">

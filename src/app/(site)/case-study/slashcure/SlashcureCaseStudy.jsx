@@ -8,7 +8,7 @@ import doctorProfileImg from '@/assets/case-studies/slashcure/doctor-profile.web
 import findHospitalsImg from '@/assets/case-studies/slashcure/find-hospitals.webp';
 import hospitalPageImg from '@/assets/case-studies/slashcure/hospital-page.webp';
 // Built on the Ashhkaro case-study system; slashcure.css re-themes it and adds the web-specific pieces
-import '../ashhkaro/ashhkaro.css';
+import '../ashhkaro012/ashhkaro.css';
 import './slashcure.css';
 // The white-label pages' navy look, over every case study
 import '../case-study.css';

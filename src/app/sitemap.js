@@ -18,7 +18,7 @@ const staticPages = [
   { path: '/work', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/case-study/incorpo', changeFrequency: 'yearly', priority: 0.7 },
   { path: '/case-study/slashcure', changeFrequency: 'yearly', priority: 0.7 },
-  { path: '/case-study/ashhkaro', changeFrequency: 'yearly', priority: 0.7 },
+  { path: '/case-study/ashhkaro012', changeFrequency: 'yearly', priority: 0.7 },
   { path: '/blog', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/privacy-policy', changeFrequency: 'yearly', priority: 0.2 },
   { path: '/terms', changeFrequency: 'yearly', priority: 0.2 },

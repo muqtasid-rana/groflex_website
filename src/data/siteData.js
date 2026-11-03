@@ -29,7 +29,7 @@ import PlateLogo from '@/sections/Agency/logos/PlateLogo';
 // at the shared height. `href` makes a logo clickable: a /path for our case
 // studies, a full URL for the client's own site (opens in a new tab).
 export const clientLogos = [
-  { name: 'Ashhkaro', logo: ashhkaroLogo, href: '/case-study/ashhkaro' },
+  { name: 'Ashhkaro', logo: ashhkaroLogo, href: '/case-study/ashhkaro012' },
   { name: 'Incorpo', logo: incorpoLogo, scale: 0.8, href: '/case-study/incorpo' },
   { name: 'Slashcure', logo: slashcureLogo, scale: 1.25, href: '/case-study/slashcure' },
   { name: 'Plate', Svg: PlateLogo, href: 'https://play.google.com/store/apps/details?id=com.plateapp.plate' },
@@ -55,7 +55,7 @@ export const navCustomers = [
     logo: null,
     image: ashhkaro,
     description: 'Taking an all-in-one platform for Pakistan from vision to a live Android app.',
-    href: '/case-study/ashhkaro',
+    href: '/case-study/ashhkaro012',
   },
   {
     id: 'slashcure',
@@ -400,7 +400,7 @@ export const work = [
     imagePosition: '75% 50%',
     homeImage: ashhkaroIcon,
     homeImagePosition: '50% 50%',
-    href: '/case-study/ashhkaro',
+    href: '/case-study/ashhkaro012',
     color: '#1a0303',
   },
   {
@@ -539,7 +539,7 @@ export const pricing = {
       credits: 100,
       timeline: '6–8 weeks',
       description: 'One cross-platform app for iOS and Android, with its backend and store submission.',
-      example: { name: 'Ashhkaro', href: '/case-study/ashhkaro', image: ashhkaro },
+      example: { name: 'Ashhkaro', href: '/case-study/ashhkaro012', image: ashhkaro },
     },
     {
       id: 'platform',

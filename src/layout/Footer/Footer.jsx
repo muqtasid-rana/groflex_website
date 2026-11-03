@@ -33,7 +33,7 @@ const variants = {
                 title: 'Case Studies',
                 links: [
                     { label: 'Incorpo', href: '/case-study/incorpo' },
-                    { label: 'Ashhkaro', href: '/case-study/ashhkaro' },
+                    { label: 'Ashhkaro', href: '/case-study/ashhkaro012' },
                     { label: 'Slashcure', href: '/case-study/slashcure' },
                     { label: 'Inayat Motors', href: '/case-study/3' },
                     { label: 'All work', href: '/work' },

@@ -14,7 +14,7 @@ import stepAppointHrImg from '@/assets/case-studies/incorpo/step-appoint-hr.webp
 import stepDepartmentsImg from '@/assets/case-studies/incorpo/step-departments.webp';
 import stepRunTheDayImg from '@/assets/case-studies/incorpo/step-run-the-day.webp';
 // Built on the Ashhkaro case-study system; incorpo.css re-themes it in Incorpo's blue
-import '../ashhkaro/ashhkaro.css';
+import '../ashhkaro012/ashhkaro.css';
 import './incorpo.css';
 // The white-label pages' navy look, over every case study
 import '../case-study.css';

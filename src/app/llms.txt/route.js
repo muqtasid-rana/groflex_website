@@ -62,7 +62,7 @@ export async function GET() {
     `- [Work](${SITE_URL}/work): case studies`,
     `- [Incorpo case study](${SITE_URL}/case-study/incorpo): HR SaaS platform`,
     `- [Slashcure case study](${SITE_URL}/case-study/slashcure): healthcare platform`,
-    `- [Ashhkaro case study](${SITE_URL}/case-study/ashhkaro): Android super-app`,
+    `- [Ashhkaro case study](${SITE_URL}/case-study/ashhkaro012): Android super-app`,
     '',
     ...(blogs.length
       ? ['## Blog', '', ...blogs.map((b) => `- [${b.title}](${SITE_URL}/blog/${b.slug})`), '']

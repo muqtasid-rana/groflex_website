@@ -10,7 +10,7 @@ const description =
 export const metadata = pageMetadata({
   title,
   description,
-  path: '/case-study/ashhkaro',
+  path: '/case-study/ashhkaro012',
   images: [{ url: heroImg.src, width: heroImg.width, height: heroImg.height, alt: 'Ashhkaro app' }],
 });
 
@@ -21,7 +21,7 @@ export default function AshhkaroRoute() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Our Work', path: '/work' },
-          { name: 'Ashhkaro', path: '/case-study/ashhkaro' },
+          { name: 'Ashhkaro', path: '/case-study/ashhkaro012' },
         ])}
       />
     </>

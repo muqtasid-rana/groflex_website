@@ -37,19 +37,19 @@ const phone = { ratio: '3 / 4', pos: '50% 0%' };
 export const heroGallery = [
   [
     { image: incorpoLanding, alt: 'Incorpo HR platform landing page', name: 'Incorpo', href: '/case-study/incorpo', ratio: '1440 / 1024' },
-    { image: ashhkaroHome, alt: 'Ashhkaro app home screen', name: 'Ashhkaro', href: '/case-study/ashhkaro', ...phone },
+    { image: ashhkaroHome, alt: 'Ashhkaro app home screen', name: 'Ashhkaro', href: '/case-study/ashhkaro012', ...phone },
     { image: inayat, alt: 'Inayat Motors management system on laptop, tablet and phone', name: 'Inayat Motors', href: '/case-study/3', ratio: '4 / 3' },
     { image: slashcureDoctors, alt: 'Slashcure find-a-doctor page', name: 'Slashcure', href: '/case-study/slashcure', ratio: '999 / 650', pos: '0% 0%' },
-    { image: ashhkaroProperties, alt: 'Ashhkaro property search screen', name: 'Ashhkaro', href: '/case-study/ashhkaro', ...phone },
+    { image: ashhkaroProperties, alt: 'Ashhkaro property search screen', name: 'Ashhkaro', href: '/case-study/ashhkaro012', ...phone },
     { image: pocketWatcher, alt: 'Pocket Watcher personal finance website', name: 'Pocket Watcher', href: '/case-study/4', ratio: '1080 / 881' },
   ],
   [
-    { image: ashhkaroLaunch, alt: 'Ashhkaro app launch visual', name: 'Ashhkaro', href: '/case-study/ashhkaro', ratio: '3 / 2' },
+    { image: ashhkaroLaunch, alt: 'Ashhkaro app launch visual', name: 'Ashhkaro', href: '/case-study/ashhkaro012', ratio: '3 / 2' },
     { image: incorpoLaptop, alt: 'Incorpo dashboard on a laptop and phone', name: 'Incorpo', href: '/case-study/incorpo', ratio: '1378 / 868' },
-    { image: ashhkaroBrowse, alt: 'Ashhkaro business browsing screen', name: 'Ashhkaro', href: '/case-study/ashhkaro', ...phone },
+    { image: ashhkaroBrowse, alt: 'Ashhkaro business browsing screen', name: 'Ashhkaro', href: '/case-study/ashhkaro012', ...phone },
     { image: slashcureLanding, alt: 'Slashcure healthcare platform landing page', name: 'Slashcure', href: '/case-study/slashcure', ratio: '1440 / 1024' },
     { image: testolz, alt: 'Testolz website on desktop and mobile', name: 'Testolz', href: '/case-study/6', ratio: '900 / 878' },
-    { image: ashhkaroSell, alt: 'Ashhkaro start-selling screen', name: 'Ashhkaro', href: '/case-study/ashhkaro', ...phone },
+    { image: ashhkaroSell, alt: 'Ashhkaro start-selling screen', name: 'Ashhkaro', href: '/case-study/ashhkaro012', ...phone },
     { image: hybrid, alt: 'Hybrid MediaWorks website', name: 'Hybrid MediaWorks', href: '/case-study/2', ratio: '1080 / 955' },
   ],
 ];
